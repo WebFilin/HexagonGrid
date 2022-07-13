@@ -14,7 +14,7 @@ function MainHexagons() {
 
   React.useEffect(() => {
     //кординаты и линии расположения хексов
-    const hexes = [];
+    const hexesPositions = [];
 
     //  Стороны хекс контейнера
     const axisZ = L - 1;
@@ -23,7 +23,7 @@ function MainHexagons() {
 
     //  Расчитываем противоположную сторону
     const oppositeWidth = SIDE * Math.sqrt(3);
-    const oppositeCounter = SIDE * 2;
+    const oppositeContour = SIDE * 2;
 
     for (let horizontalLine = 0; horizontalLine < axisY; horizontalLine++) {
       for (let verticalLine = 0; verticalLine < axisX; verticalLine++) {
@@ -40,10 +40,10 @@ function MainHexagons() {
           const xCord =
             verticalLine * oppositeWidth + (horizontalLine * oppositeWidth) / 2;
           const yCord =
-            (horizontalLine * oppositeCounter * 3) / 4 + oppositeCounter / 2;
+            (horizontalLine * oppositeContour * 3) / 4 + oppositeContour / 2;
 
-          hexes.push({
-            id: hexes.length,
+          hexesPositions.push({
+            id: hexesPositions.length,
             horizontal: horizontalLine,
             vertical: verticalLine,
             x: Math.trunc(xCord),
@@ -52,8 +52,8 @@ function MainHexagons() {
         }
       }
     }
-
-    setCordHexagons(hexes);
+    console.log(hexesPositions);
+    setCordHexagons(hexesPositions);
   }, [L, M, N, SIDE]);
 
   return (

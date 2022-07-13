@@ -13,6 +13,7 @@ function MainHexagons({ arrCordinatsHex }) {
           // rotate(30deg)
 
           <g
+            key={elem.id}
             transform={`translate( ${elem.x},${elem.y}) `}
             className={style.hex}
           >
