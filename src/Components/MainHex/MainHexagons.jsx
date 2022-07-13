@@ -10,7 +10,7 @@ function MainHexagons() {
   let L = 3;
   let M = 5;
   let N = 7;
-  let SIDE = 100;
+  const SIDE = 100;
 
   React.useEffect(() => {
     //кординаты и линии расположения хексов
@@ -52,7 +52,6 @@ function MainHexagons() {
         }
       }
     }
-    console.log(hexesPositions);
     setCordHexagons(hexesPositions);
   }, [L, M, N, SIDE]);
 

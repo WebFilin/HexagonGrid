@@ -3,21 +3,51 @@ import React from "react";
 import style from "./drowSvgArea.modules.scss";
 
 function MainHexagons({ arrCordinatsHex }) {
-  // размеры блока
-  const pointsHex = "100,0 50,-87 -50,-87 -100,-0 -50,87 50,87";
+  const [widthSvg, setWidthSvg] = React.useState(null);
+  const [heightSvg, setHeightSvg] = React.useState(null);
+
+  //  Динамически Управляем размером viewBox в svg
+  React.useEffect(() => {
+    if (arrCordinatsHex.length > 0) {
+      let heightSvg = arrCordinatsHex[arrCordinatsHex.length - 1].x;
+      let widthSvg = arrCordinatsHex[arrCordinatsHex.length - 1].y;
+
+      setWidthSvg(widthSvg);
+      setHeightSvg(heightSvg);
+
+      console.log(heightSvg);
+      console.log(widthSvg);
+    }
+  }, [arrCordinatsHex]);
+
+  function handlerClick(eventTarget) {
+    console.log(eventTarget.target);
+  }
 
   return (
     <div className={style.wrapper}>
-      <svg viewBox="0 0 1000 1000" width="200" height="400">
+      <svg
+        viewBox={`0 0 ${widthSvg} ${heightSvg}`}
+        width="150%"
+        height="150%"
+        fill="gray"
+        stroke="black"
+        fillOpacity="0.3"
+      >
         {arrCordinatsHex.map((elem) => (
-          // rotate(30deg)
-
           <g
             key={elem.id}
-            transform={`translate( ${elem.x},${elem.y}) `}
-            className={style.hex}
+            cursor={"pointer"}
+            transform={`translate(${elem.x}, ${elem.y})`}
+            onClick={(eventTarget) => {
+              handlerClick(eventTarget);
+            }}
           >
-            <polygon points={pointsHex}></polygon>
+            <polygon
+              transform="rotate(30)"
+              points="100,0 50,-87 -50,-87 -100,-0 -50,87 50,87"
+            />
+            <text>{elem.id}</text>
           </g>
         ))}
       </svg>

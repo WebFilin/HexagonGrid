@@ -1,4 +1,4 @@
-import "./App.css";
+import "./app.modules.scss";
 import MainHexagons from "../Components/MainHex/MainHexagons";
 
 function App() {
