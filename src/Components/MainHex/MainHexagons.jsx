@@ -9,7 +9,7 @@ function MainHexagons() {
   // Переменные размера области гексагонов - передать пропсами ограничение до 30
   let L = 10;
   let M = 10;
-  let N = 1;
+  let N = 10;
   const SIDE = 100;
 
   React.useEffect(() => {

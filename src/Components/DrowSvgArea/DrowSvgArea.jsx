@@ -4,14 +4,15 @@ import style from "./drowSvgArea.modules.scss";
 
 function MainHexagons({ arrCordinatsHex }) {
   const svgBox = React.useRef(null);
-  const [viewBoxSize, setViewBoxSize] = React.useState("");
+  const [viewBoxSize, setViewBoxSize] = React.useState(null);
 
-  let polygonStyle = {
-    fill: "gray",
+  //   const [colorHex, setColorHex] = React.useState("gray");
+
+  let hexStyle = {
     stroke: "black",
     fillOpacity: "0.3",
     cursor: "pointer",
-
+    fill: "gray",
     //  передача значения обьектом
     textPos: "middle",
     fontSize: "40",
@@ -25,7 +26,14 @@ function MainHexagons({ arrCordinatsHex }) {
     setViewBoxSize(boxSize);
   }, [arrCordinatsHex]);
 
+  const sizeBox =
+    viewBoxSize !== null
+      ? `${viewBoxSize.x} ${viewBoxSize.y} ${viewBoxSize.width} ${viewBoxSize.height}`
+      : "0 0 0 0";
+
   function handlerClick(evClick) {
+    evClick.target.style.fill = "red";
+
     console.log(evClick.target);
   }
 
@@ -33,27 +41,28 @@ function MainHexagons({ arrCordinatsHex }) {
     <div className={style.wrapper}>
       <svg
         ref={svgBox}
-        viewBox={`${viewBoxSize.x} ${viewBoxSize.y} ${viewBoxSize.width} ${viewBoxSize.height}`}
+        viewBox={sizeBox}
         style={{ border: "1px solid #333333" }}
-        width="200%"
-        height="200%"
+        width="250%"
+        height="250%"
         preserveAspectRatio="xMinYMax meet"
       >
         {/* Выводим хексы, смещаем их по сетке координат */}
         {arrCordinatsHex.map((elem) => (
           <g key={elem.id} transform={`translate(${elem.x}, ${elem.y})`}>
             <polygon
-              style={polygonStyle}
-              transform={polygonStyle.rotate}
-              points={polygonStyle.points}
+              style={hexStyle}
+              //   fill="gray"
+              transform={hexStyle.rotate}
+              points={hexStyle.points}
               onClick={(evClick) => {
                 handlerClick(evClick);
               }}
-            />
+            ></polygon>
             <text
-              text-anchor={polygonStyle.textPos}
-              dominant-baseline={polygonStyle.textPos}
-              fontSize={polygonStyle.fontSize}
+              textAnchor={hexStyle.textPos}
+              dominantBaseline={hexStyle.textPos}
+              fontSize={hexStyle.fontSize}
             >
               {elem.id}
             </text>
