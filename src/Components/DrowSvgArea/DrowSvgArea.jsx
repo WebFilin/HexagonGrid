@@ -2,20 +2,19 @@ import React from "react";
 
 import style from "./drowSvgArea.modules.scss";
 
-function MainHexagons({ arrCordinatsHex }) {
+function MainHexagons({ arrCordinatsHex, getHex }) {
   const svgBox = React.useRef(null);
   const [viewBoxSize, setViewBoxSize] = React.useState(null);
-
-  //   const [colorHex, setColorHex] = React.useState("gray");
 
   let hexStyle = {
     stroke: "black",
     fillOpacity: "0.3",
     cursor: "pointer",
     fill: "gray",
-    //  передача значения обьектом
+
+    //  передача свойства через значение обьекта
     textPos: "middle",
-    fontSize: "40",
+    fontSize: "30",
     rotate: "rotate(30)",
     points: "100,0 50,-87 -50,-87 -100,-0 -50,87 50,87",
   };
@@ -31,32 +30,28 @@ function MainHexagons({ arrCordinatsHex }) {
       ? `${viewBoxSize.x} ${viewBoxSize.y} ${viewBoxSize.width} ${viewBoxSize.height}`
       : "0 0 0 0";
 
-  function handlerClick(evClick) {
-    evClick.target.style.fill = "red";
-
-    console.log(evClick.target);
-  }
-
   return (
     <div className={style.wrapper}>
       <svg
         ref={svgBox}
         viewBox={sizeBox}
         style={{ border: "1px solid #333333" }}
-        width="250%"
-        height="250%"
+        width="200%"
+        height="200%"
         preserveAspectRatio="xMinYMax meet"
       >
         {/* Выводим хексы, смещаем их по сетке координат */}
         {arrCordinatsHex.map((elem) => (
           <g key={elem.id} transform={`translate(${elem.x}, ${elem.y})`}>
             <polygon
+              hexid={elem.id}
+              vertical={elem.vertical}
+              horizontal={elem.horizontal}
               style={hexStyle}
-              //   fill="gray"
               transform={hexStyle.rotate}
               points={hexStyle.points}
               onClick={(evClick) => {
-                handlerClick(evClick);
+                getHex(evClick);
               }}
             ></polygon>
             <text
