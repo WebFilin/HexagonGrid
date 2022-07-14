@@ -6,10 +6,10 @@ import DrowSvgArea from "../DrowSvgArea/DrowSvgArea";
 function MainHexagons() {
   const [cordHexagons, setCordHexagons] = React.useState([]);
 
-  // Переменные размера области видимости - передать пропсами ограничение до 30
-  let L = 3;
-  let M = 5;
-  let N = 7;
+  // Переменные размера области гексагонов - передать пропсами ограничение до 30
+  let L = 30;
+  let M = 10;
+  let N = 10;
   const SIDE = 100;
 
   React.useEffect(() => {
@@ -36,7 +36,7 @@ function MainHexagons() {
             verticalLine >= axisZ - horizontalLine &&
             verticalLine < axisX - (axisZ + 1 - axisY + horizontalLine))
         ) {
-          // Кординаты точек начала гексов
+          // Кординаты точек начала хексов
           const xCord =
             verticalLine * oppositeWidth + (horizontalLine * oppositeWidth) / 2;
           const yCord =
@@ -52,6 +52,9 @@ function MainHexagons() {
         }
       }
     }
+
+    //  console.log(hexesPositions)
+
     setCordHexagons(hexesPositions);
   }, [L, M, N, SIDE]);
 

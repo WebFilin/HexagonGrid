@@ -3,51 +3,50 @@ import React from "react";
 import style from "./drowSvgArea.modules.scss";
 
 function MainHexagons({ arrCordinatsHex }) {
-  const [widthSvg, setWidthSvg] = React.useState(null);
-  const [heightSvg, setHeightSvg] = React.useState(null);
+  const svgBox = React.useRef(null);
+  const [viewBoxSize, setViewBoxSize] = React.useState("");
 
-  //  Динамически Управляем размером viewBox в svg
+  //  Динамически управляем размером viewBox в svg
   React.useEffect(() => {
-    if (arrCordinatsHex.length > 0) {
-      let heightSvg = arrCordinatsHex[arrCordinatsHex.length - 1].x;
-      let widthSvg = arrCordinatsHex[arrCordinatsHex.length - 1].y;
+    const boxSize = svgBox.current.getBBox();
+    setViewBoxSize(boxSize);
 
-      setWidthSvg(widthSvg);
-      setHeightSvg(heightSvg);
-
-      console.log(heightSvg);
-      console.log(widthSvg);
-    }
+    console.log(boxSize);
   }, [arrCordinatsHex]);
 
-  function handlerClick(eventTarget) {
-    console.log(eventTarget.target);
+  function handlerClick(eventClick) {
+    console.log(eventClick.target);
   }
 
   return (
     <div className={style.wrapper}>
       <svg
-        viewBox={`0 0 ${widthSvg} ${heightSvg}`}
-        width="150%"
-        height="150%"
-        fill="gray"
-        stroke="black"
-        fillOpacity="0.3"
+        ref={svgBox}
+        viewBox={`${viewBoxSize.x} ${viewBoxSize.y} ${viewBoxSize.width} ${viewBoxSize.height}`}
+        style={{ border: "1px solid #333333" }}
+        width="200%"
+        height="200%"
+        preserveAspectRatio="xMinYMax meet"
       >
         {arrCordinatsHex.map((elem) => (
           <g
             key={elem.id}
-            cursor={"pointer"}
             transform={`translate(${elem.x}, ${elem.y})`}
-            onClick={(eventTarget) => {
-              handlerClick(eventTarget);
-            }}
+            fill="gray"
+            stroke="black"
+            fillOpacity="0.3"
           >
             <polygon
+              cursor={"pointer"}
+              onClick={(eventClick) => {
+                handlerClick(eventClick);
+              }}
               transform="rotate(30)"
               points="100,0 50,-87 -50,-87 -100,-0 -50,87 50,87"
             />
-            <text>{elem.id}</text>
+            <text x="-15" y="15" fontSize="40">
+              {elem.id}
+            </text>
           </g>
         ))}
       </svg>
