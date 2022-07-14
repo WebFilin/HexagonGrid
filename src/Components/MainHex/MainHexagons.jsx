@@ -7,9 +7,9 @@ function MainHexagons() {
   const [cordHexagons, setCordHexagons] = React.useState([]);
 
   // Переменные размера области гексагонов - передать пропсами ограничение до 30
-  let L = 30;
+  let L = 10;
   let M = 10;
-  let N = 10;
+  let N = 1;
   const SIDE = 100;
 
   React.useEffect(() => {
@@ -52,8 +52,6 @@ function MainHexagons() {
         }
       }
     }
-
-    //  console.log(hexesPositions)
 
     setCordHexagons(hexesPositions);
   }, [L, M, N, SIDE]);

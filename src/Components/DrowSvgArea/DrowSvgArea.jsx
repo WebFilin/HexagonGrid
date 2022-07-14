@@ -6,16 +6,27 @@ function MainHexagons({ arrCordinatsHex }) {
   const svgBox = React.useRef(null);
   const [viewBoxSize, setViewBoxSize] = React.useState("");
 
+  let polygonStyle = {
+    fill: "gray",
+    stroke: "black",
+    fillOpacity: "0.3",
+    cursor: "pointer",
+
+    //  передача значения обьектом
+    textPos: "middle",
+    fontSize: "40",
+    rotate: "rotate(30)",
+    points: "100,0 50,-87 -50,-87 -100,-0 -50,87 50,87",
+  };
+
   //  Динамически управляем размером viewBox в svg
   React.useEffect(() => {
     const boxSize = svgBox.current.getBBox();
     setViewBoxSize(boxSize);
-
-    console.log(boxSize);
   }, [arrCordinatsHex]);
 
-  function handlerClick(eventClick) {
-    console.log(eventClick.target);
+  function handlerClick(evClick) {
+    console.log(evClick.target);
   }
 
   return (
@@ -28,23 +39,22 @@ function MainHexagons({ arrCordinatsHex }) {
         height="200%"
         preserveAspectRatio="xMinYMax meet"
       >
+        {/* Выводим хексы, смещаем их по сетке координат */}
         {arrCordinatsHex.map((elem) => (
-          <g
-            key={elem.id}
-            transform={`translate(${elem.x}, ${elem.y})`}
-            fill="gray"
-            stroke="black"
-            fillOpacity="0.3"
-          >
+          <g key={elem.id} transform={`translate(${elem.x}, ${elem.y})`}>
             <polygon
-              cursor={"pointer"}
-              onClick={(eventClick) => {
-                handlerClick(eventClick);
+              style={polygonStyle}
+              transform={polygonStyle.rotate}
+              points={polygonStyle.points}
+              onClick={(evClick) => {
+                handlerClick(evClick);
               }}
-              transform="rotate(30)"
-              points="100,0 50,-87 -50,-87 -100,-0 -50,87 50,87"
             />
-            <text x="-15" y="15" fontSize="40">
+            <text
+              text-anchor={polygonStyle.textPos}
+              dominant-baseline={polygonStyle.textPos}
+              fontSize={polygonStyle.fontSize}
+            >
               {elem.id}
             </text>
           </g>
