@@ -1,0 +1,13 @@
+.hex {
+  stroke: black;
+  fill: gray;
+  fill-opacity: 0.3;
+  transform: rotate(30deg);
+  cursor: pointer;
+}
+
+.hex_txt {
+  font-size: 50px;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}

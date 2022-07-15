@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./drowSvgArea.modules.scss";
+import style from "./drowSvgArea.module.scss";
 import hexCordinate from "../../state/hexCordinate";
 import { observer } from "mobx-react-lite";
 import { toJS } from "mobx";
@@ -27,11 +27,9 @@ const MainHexagons = observer(() => {
   return (
     <div className={style.wrapper}>
       <svg
+        className={style.body}
         ref={svgBox}
         viewBox={sizeBox}
-        style={{ border: "1px solid #333333" }}
-        width="200%"
-        height="200%"
         preserveAspectRatio="xMinYMax meet"
       >
         {/* Выводим хексы, смещаем их по сетке координат */}
