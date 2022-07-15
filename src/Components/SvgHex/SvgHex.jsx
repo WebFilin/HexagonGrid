@@ -4,7 +4,19 @@ function SvgHex({ id, x, y, vertical, horizontal }) {
   //   Выбираем хекс передаем в mobx
   function handlerClick(evElem) {
     const hex = evElem.target;
-    hexCordinate.getHex(hex);
+    hexCordinate.getHexGroup(hex);
+    setColorAndNum(hex);
+  }
+
+  function randomColor() {
+    return "#" + parseInt(Math.random() * 0xffffff).toString(16);
+  }
+
+  function setColorAndNum(elem) {
+    //  elem.style.fill = "yellowgreen";
+
+    elem.style.fill = randomColor();
+    elem.style.fillOpacity = 0.8;
   }
 
   let hexStyle = {
