@@ -7,6 +7,7 @@ function App() {
     <div className="wrapper">
       <main>
         <MainHexagons />
+        <DrowSvgArea />
       </main>
     </div>
   );

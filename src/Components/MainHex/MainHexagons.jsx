@@ -1,8 +1,4 @@
 import React from "react";
-import style from "./mainHexagons.modules.scss";
-
-import DrowSvgArea from "../DrowSvgArea/DrowSvgArea";
-import CheckHexNeighbours from "../CheckHexNeighbours/CheckHexNeighbours";
 
 import hexCordinate from "../../state/hexCordinate";
 
@@ -58,10 +54,6 @@ function MainHexagons() {
     hexCordinate.getArrCoordinates(hexesPositions);
   }, [L, M, N, SIDE]);
 
-  return (
-    <div className={style.wrapper}>
-      <DrowSvgArea />
-    </div>
-  );
+  return <></>;
 }
 export default MainHexagons;
