@@ -8,20 +8,14 @@ const Domain = observer(() => {
   const hexsDomain = toJS(hexCordinate.arrHexGroup);
 
   React.useEffect(() => {
-    // Создаем одномерный массив
-    const arrHexsDomain = hexsDomain.flat();
-    
-    if (hexs) {
-      hexs.filter((elemHex, index) => {
-        arrHexsDomain.map((elemDomen) => {
-          if (Number(elemHex.id) === elemDomen.id) {
-            elemHex.style.fill = hexs[0].style.fill;
-          } else {
-            elemHex.style.fill = hexs[index].style.fill;
-          }
-        });
-      });
-    }
+
+   
+
+    console.log(hexsDomain);
+
+
+
+
   }, [hexs, hexsDomain]);
 
   return <></>;

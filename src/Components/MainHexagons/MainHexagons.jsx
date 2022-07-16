@@ -4,10 +4,10 @@ import hexCordinate from "../../state/hexCordinate";
 
 function MainHexagons() {
   // !Переменные размера области гексагонов - передать пропсами ограничение до 30
-  let L = 3;
-  let M = 3;
-  let N = 3;
-  const SIDE = 100;
+  let L = 2;
+  let M = 2;
+  let N = 2;
+  const sideOfset = 100;
 
   React.useEffect(() => {
     //кординаты и линии расположения хексов
@@ -19,8 +19,8 @@ function MainHexagons() {
     const axisX = L + N - 1;
 
     //  Расчитываем противоположную сторону
-    const oppositeWidth = SIDE * Math.sqrt(3);
-    const oppositeContour = SIDE * 2;
+    const oppositeWidth = sideOfset * Math.sqrt(3);
+    const oppositeContour = sideOfset * 2;
 
     //  Отрисовываем область решетки
     for (let horizontalLine = 0; horizontalLine < axisY; horizontalLine++) {
@@ -52,7 +52,7 @@ function MainHexagons() {
     }
 
     hexCordinate.getArrCoordinates(hexesPositions);
-  }, [L, M, N, SIDE]);
+  }, [L, M, N, sideOfset]);
 
   return <></>;
 }

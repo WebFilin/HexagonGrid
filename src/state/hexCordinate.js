@@ -22,15 +22,7 @@ class hexCordinate {
 
   //   Находим элементы - соседи хекса
   getHexGroup(hexGroup) {
-    this.arrHexGroup.push(hexGroup);
-  }
-
-  addHexInGrop(hex) {
-    this.arrHexObj.push(hex);
-  }
-
-  removeHexInGrop(hex) {
-    this.arrHexObj.pop(hex);
+    this.arrHexGroup = hexGroup;
   }
 }
 

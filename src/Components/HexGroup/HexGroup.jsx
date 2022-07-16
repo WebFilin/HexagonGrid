@@ -10,9 +10,6 @@ const HexGroup = observer(() => {
   //   Выбранный хекс
   const hex = hexCordinate.hexObj;
 
-  // Стейт для соседий хекса
-  let arrHexObj = hexCordinate.arrHexObj;
-
   // Ищем соседий хекса
   React.useEffect(() => {
     if (hex) {
@@ -33,23 +30,6 @@ const HexGroup = observer(() => {
       hexCordinate.getHexGroup(result);
     }
   }, [arrCoordinates, hex]);
-
-  React.useEffect(() => {
-    function randomColor() {
-      return "#" + parseInt(Math.random() * 0xffffff).toString(16);
-    }
-
-    if (hex) {
-      if (arrHexObj.includes(hex)) {
-        hex.style.fill = "gray";
-        hex.style.fillOpacity = 0.3;
-        hexCordinate.removeHexInGrop(hex);
-      } else {
-        hex.style.fill = randomColor();
-        hexCordinate.addHexInGrop(hex);
-      }
-    }
-  }, [hex, arrHexObj]);
 
   return <></>;
 });
