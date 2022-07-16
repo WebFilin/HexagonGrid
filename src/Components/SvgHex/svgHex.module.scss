@@ -4,6 +4,11 @@
   fill-opacity: 0.3;
   transform: rotate(30deg);
   cursor: pointer;
+
+  &:hover {
+    fill: yellowgreen;
+    fill-opacity: 0.5;
+  }
 }
 
 .hex_txt {

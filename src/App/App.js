@@ -1,6 +1,8 @@
 import style from "./app.module.scss";
 import MainHexagons from "../Components/MainHexagons/MainHexagons";
 import DrowSvgArea from "../Components/DrowSvgArea/DrowSvgArea";
+import HexGroup from "../Components/HexGroup/HexGroup";
+import Domain from "../Components/Domain/Domain";
 
 function App() {
   return (
@@ -8,11 +10,14 @@ function App() {
       <header className={style.header} />
 
       <main className={style.body}>
-        <MainHexagons />
         <DrowSvgArea />
       </main>
 
       <footer className={style.footer} />
+
+      <MainHexagons />
+      <HexGroup />
+      <Domain />
     </div>
   );
 }

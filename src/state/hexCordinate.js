@@ -1,39 +1,36 @@
-import { makeAutoObservable, toJS } from "mobx";
+import { makeAutoObservable } from "mobx";
 
 class hexCordinate {
-  hexObj = null;
+  arrHexObj = [];
   arrCoordinates = [];
-  hexGroup = null;
+  arrHexGroup = [];
+  hexObj = "";
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  getHexGroup(checkHex) {
-    this.hexVert = Number(checkHex.getAttribute("vertical"));
-    this.hexHoriz = Number(checkHex.getAttribute("horizontal"));
-
-    this.result = this.arrCoordinates.filter((elem) => {
-      return (
-        (elem.horizontal === this.hexHoriz - 1 &&
-          elem.vertical === this.hexVert) ||
-        (elem.horizontal === this.hexHoriz - 1 &&
-          elem.vertical === this.hexVert + 1) ||
-        (elem.vertical === this.hexVert + 1 &&
-          elem.horizontal === this.hexHoriz) ||
-        (elem.horizontal === this.hexHoriz + 1 &&
-          elem.vertical === this.hexVert) ||
-        (elem.horizontal === this.hexHoriz + 1 &&
-          elem.vertical === this.hexVert - 1) ||
-        (elem.vertical === this.hexVert - 1 &&
-          elem.horizontal === this.hexHoriz)
-      );
-    });
-
-    this.hexGroup = this.result;
-  }
+  //   Массив коррдинат хексов
   getArrCoordinates(arrCord) {
     this.arrCoordinates = arrCord;
+  }
+
+  //   Получаем хекс клика
+  getHex(checkHex) {
+    this.hexObj = checkHex;
+  }
+
+  //   Находим элементы - соседи хекса
+  getHexGroup(hexGroup) {
+    this.arrHexGroup.push(hexGroup);
+  }
+
+  addHexInGrop(hex) {
+    this.arrHexObj.push(hex);
+  }
+
+  removeHexInGrop(hex) {
+    this.arrHexObj.pop(hex);
   }
 }
 
