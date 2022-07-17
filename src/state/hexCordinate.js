@@ -4,6 +4,7 @@ class hexCordinate {
   arrCoordinates = [];
   peakAndGroup = null;
   hexObj = null;
+  arrDomains = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -24,8 +25,14 @@ class hexCordinate {
     this.peakAndGroup = hexGroup;
   }
 
-  addHexInDomen(hexDomain) {
-    console.log(hexDomain);
+  createDomen(hexDomain) {
+    this.arrDomains.push(hexDomain);
+  }
+
+  addSubDomain(objCord) {
+    //  console.log(objCord);
+   // this.arrDomains[index].bodyDomain[0].group.push(objCord)
+   //  console.log(this.arrDomains);
   }
 }
 

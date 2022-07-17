@@ -18,6 +18,7 @@ const HexGroup = observer(() => {
 
       let elemCordGrid = [];
 
+      // Ищем соседий выбранного узла
       let result = arrCoordinates.filter((elem) => {
         return (
           (elem.horizontal === hexHoriz - 1 && elem.vertical === hexVert) ||
@@ -32,7 +33,7 @@ const HexGroup = observer(() => {
       // Обрезаем лишние данные кординат для отрисовки
       result.map((elem) => {
         let objCord = {
-          id: elem.id,
+          id: Number( elem.id),
           horizontal: elem.horizontal,
           vertical: elem.vertical,
         };
