@@ -1,11 +1,11 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-
+import { toJS } from "mobx";
 import hexCordinate from "../../state/hexCordinate";
 
 const HexGroup = observer(() => {
   // массив координат
-  const arrCoordinates = hexCordinate.arrCoordinates;
+  const arrCoordinates = toJS(hexCordinate.arrCoordinates);
 
   //   Выбранный хекс
   const hex = hexCordinate.hexObj;
@@ -15,6 +15,8 @@ const HexGroup = observer(() => {
     if (hex) {
       const hexVert = Number(hex.getAttribute("vertical"));
       const hexHoriz = Number(hex.getAttribute("horizontal"));
+
+      let elemCordGrid = [];
 
       let result = arrCoordinates.filter((elem) => {
         return (
@@ -27,7 +29,16 @@ const HexGroup = observer(() => {
         );
       });
 
-      hexCordinate.getHexGroup(result);
+      result.map((elem) => {
+        let objCord = {
+          id: elem.id,
+          horizontal: elem.horizontal,
+          vertical: elem.vertical,
+        };
+        elemCordGrid.push(objCord);
+      });
+
+      hexCordinate.getHexGroup(elemCordGrid);
     }
   }, [arrCoordinates, hex]);
 

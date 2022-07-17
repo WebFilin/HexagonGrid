@@ -1,10 +1,9 @@
 import { makeAutoObservable } from "mobx";
 
 class hexCordinate {
-  arrHexObj = [];
   arrCoordinates = [];
-  arrHexGroup = [];
-  hexObj = "";
+  hexGroup = [];
+  hexObj = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -22,7 +21,11 @@ class hexCordinate {
 
   //   Находим элементы - соседи хекса
   getHexGroup(hexGroup) {
-    this.arrHexGroup = hexGroup;
+    this.hexGroup = hexGroup;
+  }
+
+  addHexInDomen(hexDomain) {
+    console.log(hexDomain);
   }
 }
 

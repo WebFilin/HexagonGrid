@@ -4,19 +4,20 @@ import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 
 const Domain = observer(() => {
-  const hexs = toJS(hexCordinate.arrHexObj);
-  const hexsDomain = toJS(hexCordinate.arrHexGroup);
+  const hex = toJS(hexCordinate.hexObj);
+  const hexGroup = toJS(hexCordinate.hexGroup);
 
   React.useEffect(() => {
+    let peakNeighbours = {};
+    if (hex && hexGroup) {
+      // console.log(hexGroup);
+      // console.log(hex.id);
 
-   
+      // peakNeighbours = { [hex.id]: hexGroup };
 
-    console.log(hexsDomain);
-
-
-
-
-  }, [hexs, hexsDomain]);
+      // console.log(peakNeighbours);
+    }
+  }, [hex, hexGroup]);
 
   return <></>;
 });
