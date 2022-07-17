@@ -33,9 +33,7 @@ const HexGroup = observer(() => {
       // Обрезаем лишние данные кординат для отрисовки
       result.map((elem) => {
         let objCord = {
-          id: Number( elem.id),
-          horizontal: elem.horizontal,
-          vertical: elem.vertical,
+          id: Number(elem.id),
         };
         elemCordGrid.push(objCord);
       });

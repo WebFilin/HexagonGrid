@@ -6,38 +6,40 @@ import { observer } from "mobx-react-lite";
 const Domain = observer(() => {
   const hex = toJS(hexCordinate.hexObj);
 
-  //   let peak = { hexId: Number(hex.id), group: elemCordGrid };
-
   //  Обработчик первоначального клика
   React.useEffect(() => {
     const peakAndGroup = toJS(hexCordinate.peakAndGroup);
-    const domains = toJS(hexCordinate.arrDomains);
+    const mainDomains = toJS(hexCordinate.arrDomains);
 
     if (hex && peakAndGroup) {
+      // Первоначальный вызов
+      if (mainDomains.length > 0) {
+        //   checkHex(mainDomains);
+        createDomen();
+      } else {
+        createDomen();
+      }
+
+      console.log(peakAndGroup);
+    }
+
+    function createDomen() {
       const colorGroup = (hex.style.fill = randomColor());
-
-      const objDomain = { idDomain: colorGroup, bodyDomain: [peakAndGroup] };
-
+      const objDomain = {
+        idDomain: colorGroup,
+        hexId: [],
+        groupCord: [],
+      };
       hexCordinate.createDomen(objDomain);
+      hexCordinate.addSubDomain(peakAndGroup);
+    }
 
-      checkHex(domains);
+    console.log(mainDomains);
+
+    function checkHex(arrDomains) {
+      const hexId = Number(hex.id);
     }
   }, [hex]);
-
-  function checkHex(domanGrup) {
-    const hexId = Number(hex.id);
-
-   //  Получаем цвет группы
-    let color = hexCordinate.arrDomains[0].idDomain;
-
-    domanGrup.map((elem) => {
-      const neighbours = elem.bodyDomain[0].group;
-      const checkID = neighbours.find((elemID) => elemID.id === hexId);
-      if (checkID) {
-        hex.style.fill = color;
-      }
-    });
-  }
 
   function randomColor() {
     return (

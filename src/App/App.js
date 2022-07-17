@@ -1,7 +1,7 @@
 import style from "./app.module.scss";
 import MainHexagons from "../Components/MainHexagons/MainHexagons";
 import DrowSvgArea from "../Components/DrowSvgArea/DrowSvgArea";
-import HexGroup from "../Components/HexGroup/HexGroup";
+import GetHexGroup from "../Components/GetHexGroup/GetHexGroup";
 import Domain from "../Components/Domain/Domain";
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
       <footer className={style.footer} />
 
       <MainHexagons />
-      <HexGroup />
+      <GetHexGroup />
       <Domain />
     </div>
   );

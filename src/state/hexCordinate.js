@@ -29,10 +29,12 @@ class hexCordinate {
     this.arrDomains.push(hexDomain);
   }
 
-  addSubDomain(objCord) {
-    //  console.log(objCord);
-   // this.arrDomains[index].bodyDomain[0].group.push(objCord)
-   //  console.log(this.arrDomains);
+  addSubDomain(peakAndGroup) {
+    this.arrDomains[0].hexId.push(peakAndGroup.hexId);
+    this.arrDomains[0].groupCord.push(...peakAndGroup.group);
+    console.log(this.arrDomains);
+    console.log(peakAndGroup.hexId);
+    // console.log(this.arrDomains)
   }
 }
 
