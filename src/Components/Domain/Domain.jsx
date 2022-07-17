@@ -5,19 +5,14 @@ import { observer } from "mobx-react-lite";
 
 const Domain = observer(() => {
   const hex = toJS(hexCordinate.hexObj);
-  const hexGroup = toJS(hexCordinate.hexGroup);
 
   React.useEffect(() => {
-    let peakNeighbours = {};
-    if (hex && hexGroup) {
-      // console.log(hexGroup);
-      // console.log(hex.id);
+    const peakAndGroup = toJS(hexCordinate.peakAndGroup);
 
-      // peakNeighbours = { [hex.id]: hexGroup };
-
-      // console.log(peakNeighbours);
+    if (hex && peakAndGroup) {
+      console.log(peakAndGroup);
     }
-  }, [hex, hexGroup]);
+  }, [hex]);
 
   return <></>;
 });

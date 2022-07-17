@@ -2,7 +2,7 @@ import { makeAutoObservable } from "mobx";
 
 class hexCordinate {
   arrCoordinates = [];
-  hexGroup = [];
+  peakAndGroup = null;
   hexObj = null;
 
   constructor() {
@@ -21,7 +21,7 @@ class hexCordinate {
 
   //   Находим элементы - соседи хекса
   getHexGroup(hexGroup) {
-    this.hexGroup = hexGroup;
+    this.peakAndGroup = hexGroup;
   }
 
   addHexInDomen(hexDomain) {

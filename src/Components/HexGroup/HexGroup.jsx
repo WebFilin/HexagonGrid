@@ -29,6 +29,7 @@ const HexGroup = observer(() => {
         );
       });
 
+      // Обрезаем лишние данные кординат для отрисовки
       result.map((elem) => {
         let objCord = {
           id: elem.id,
@@ -38,7 +39,10 @@ const HexGroup = observer(() => {
         elemCordGrid.push(objCord);
       });
 
-      hexCordinate.getHexGroup(elemCordGrid);
+      // Составляем узел графа
+      let peak = { hexId: Number(hex.id), group: elemCordGrid };
+
+      hexCordinate.getHexGroup(peak);
     }
   }, [arrCoordinates, hex]);
 
