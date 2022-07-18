@@ -14,39 +14,51 @@ const Domain = observer(() => {
     if (hex && peakAndGroup) {
       const hexID = Number(hex.id);
 
-      // Первоначальный вызов
-      if (mainDomains.length === 0) {
-        createDomen();
-      } else {
-        checkIdInGroup(hexID);
+      if (hex) {
+        // console.log(hexID)
+        // console.log(peakAndGroup.group)
       }
+
+      mainDomains.map((domains) => {
+        hex.style.fill = "green";
+      //   const groupID = peakAndGroup.group;
+
+      //   const groupNode = domains.groupCord;
+
+        hexCordinate.addSubDomain(peakAndGroup);
+
+        //   Находим группу координат домена
+        //   console.log(groupNode);
+
+        // Группа кординат хекса
+        //   console.log(groupID);
+      });
     }
 
     function checkIdInGroup(hexID) {
       // console.log(hexID);
 
-      mainDomains.map((elem, index) => {
+      mainDomains.map((elem) => {
         const groupHex = elem.groupCord;
         const colorDomain = elem.idDomain;
+
+        //   console.log(elem);
 
         if (groupHex.includes(hexID)) {
           console.log("В группе");
           hex.style.fill = `${colorDomain}`;
 
-          hexCordinate.addSubDomain(peakAndGroup,index);
+          hexCordinate.addSubDomain(peakAndGroup);
 
-         //  console.log("Стейт доменов");
-         //  console.log(mainDomains[0].groupCord);
+          //  console.log("Стейт доменов");
+          //  console.log(mainDomains[0].groupCord);
         } else {
-          //  createDomen();
           console.log("Нужно создать новый домен");
         }
       });
     }
 
-// console.log(mainDomains)
-
-    function createDomen() {
+    function createDomen(index) {
       const colorGroup = (hex.style.fill = randomColor());
       const objDomain = {
         idDomain: colorGroup,
@@ -56,7 +68,8 @@ const Domain = observer(() => {
       hexCordinate.createDomen(objDomain);
       hexCordinate.addSubDomain(peakAndGroup);
     }
- 
+
+    //  console.log(mainDomains);
   }, [hex]);
 
   function randomColor() {
