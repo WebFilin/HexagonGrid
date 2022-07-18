@@ -32,9 +32,8 @@ class hexCordinate {
   addSubDomain(peakAndGroup) {
     this.arrDomains[0].hexId.push(peakAndGroup.hexId);
     this.arrDomains[0].groupCord.push(...peakAndGroup.group);
-    console.log(this.arrDomains);
-    console.log(peakAndGroup.hexId);
-    // console.log(this.arrDomains)
+    //  console.log(peakAndGroup.hexId);
+    //  console.log(this.arrDomains);
   }
 }
 

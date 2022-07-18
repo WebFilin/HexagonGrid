@@ -11,12 +11,12 @@ const HexGroup = observer(() => {
   const hex = hexCordinate.hexObj;
 
   // Ищем соседий хекса
-  React.useEffect(() => {
+  React.useMemo(() => {
     if (hex) {
       const hexVert = Number(hex.getAttribute("vertical"));
       const hexHoriz = Number(hex.getAttribute("horizontal"));
 
-      let elemCordGrid = [];
+      let elemHexagonGrid = [];
 
       // Ищем соседий выбранного узла
       let result = arrCoordinates.filter((elem) => {
@@ -30,16 +30,14 @@ const HexGroup = observer(() => {
         );
       });
 
-      // Обрезаем лишние данные кординат для отрисовки
+      // Обрезаем лишние данные для составления узла с зависимостями по ID
       result.map((elem) => {
-        let objCord = {
-          id: Number(elem.id),
-        };
-        elemCordGrid.push(objCord);
+        let objCord = Number(elem.id);
+        elemHexagonGrid.push(objCord);
       });
 
       // Составляем узел графа
-      let peak = { hexId: Number(hex.id), group: elemCordGrid };
+      let peak = { hexId: Number(hex.id), group: elemHexagonGrid };
 
       hexCordinate.getHexGroup(peak);
     }

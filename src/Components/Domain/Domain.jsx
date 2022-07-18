@@ -20,7 +20,7 @@ const Domain = observer(() => {
         createDomen();
       }
 
-      console.log(peakAndGroup);
+      // console.log(peakAndGroup);
     }
 
     function createDomen() {
@@ -34,7 +34,7 @@ const Domain = observer(() => {
       hexCordinate.addSubDomain(peakAndGroup);
     }
 
-    console.log(mainDomains);
+     console.log(mainDomains);
 
     function checkHex(arrDomains) {
       const hexId = Number(hex.id);
