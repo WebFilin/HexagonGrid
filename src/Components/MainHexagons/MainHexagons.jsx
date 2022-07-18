@@ -9,7 +9,7 @@ function MainHexagons() {
   let N = 3;
   const sideOfset = 100;
 
-  React.useEffect(() => {
+  React.useMemo(() => {
     //кординаты и линии расположения хексов
     const hexesPositions = [];
 
