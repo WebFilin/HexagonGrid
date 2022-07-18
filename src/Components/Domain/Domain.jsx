@@ -12,16 +12,39 @@ const Domain = observer(() => {
     const mainDomains = toJS(hexCordinate.arrDomains);
 
     if (hex && peakAndGroup) {
+      const hexID = Number(hex.id);
+
       // Первоначальный вызов
-      if (mainDomains.length > 0) {
-        //   checkHex(mainDomains);
+      if (mainDomains.length === 0) {
         createDomen();
       } else {
-        createDomen();
+        checkIdInGroup(hexID);
       }
-
-      // console.log(peakAndGroup);
     }
+
+    function checkIdInGroup(hexID) {
+      // console.log(hexID);
+
+      mainDomains.map((elem, index) => {
+        const groupHex = elem.groupCord;
+        const colorDomain = elem.idDomain;
+
+        if (groupHex.includes(hexID)) {
+          console.log("В группе");
+          hex.style.fill = `${colorDomain}`;
+
+          hexCordinate.addSubDomain(peakAndGroup,index);
+
+         //  console.log("Стейт доменов");
+         //  console.log(mainDomains[0].groupCord);
+        } else {
+          //  createDomen();
+          console.log("Нужно создать новый домен");
+        }
+      });
+    }
+
+// console.log(mainDomains)
 
     function createDomen() {
       const colorGroup = (hex.style.fill = randomColor());
@@ -33,12 +56,7 @@ const Domain = observer(() => {
       hexCordinate.createDomen(objDomain);
       hexCordinate.addSubDomain(peakAndGroup);
     }
-
-     console.log(mainDomains);
-
-    function checkHex(arrDomains) {
-      const hexId = Number(hex.id);
-    }
+ 
   }, [hex]);
 
   function randomColor() {

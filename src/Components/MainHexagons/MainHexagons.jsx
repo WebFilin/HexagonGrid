@@ -4,9 +4,9 @@ import hexCordinate from "../../state/hexCordinate";
 
 function MainHexagons() {
   // !Переменные размера области гексагонов - передать пропсами ограничение до 30
-  let L = 3;
-  let M = 3;
-  let N = 3;
+  let L = 5;
+  let M = 5;
+  let N = 5;
   const sideOfset = 100;
 
   React.useMemo(() => {

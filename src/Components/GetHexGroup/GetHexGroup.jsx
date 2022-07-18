@@ -32,8 +32,8 @@ const HexGroup = observer(() => {
 
       // Обрезаем лишние данные для составления узла с зависимостями по ID
       result.map((elem) => {
-        let objCord = Number(elem.id);
-        elemHexagonGrid.push(objCord);
+        let hexIdGroup = Number(elem.id);
+        elemHexagonGrid.push(hexIdGroup);
       });
 
       // Составляем узел графа

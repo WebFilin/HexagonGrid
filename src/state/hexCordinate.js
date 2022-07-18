@@ -5,6 +5,7 @@ class hexCordinate {
   peakAndGroup = null;
   hexObj = null;
   arrDomains = [];
+  uniquIdHex = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -29,11 +30,14 @@ class hexCordinate {
     this.arrDomains.push(hexDomain);
   }
 
+  //   Добавляем ID состоявляющие домен, сортируем на уникальность
   addSubDomain(peakAndGroup) {
+    this.uniquIdHex.push(...peakAndGroup.group);
+
     this.arrDomains[0].hexId.push(peakAndGroup.hexId);
-    this.arrDomains[0].groupCord.push(...peakAndGroup.group);
-    //  console.log(peakAndGroup.hexId);
-    //  console.log(this.arrDomains);
+    this.arrDomains[0].groupCord = [...new Set(this.uniquIdHex)];
+
+    //  console.log(this.arrDomains[0].groupCord);
   }
 }
 
