@@ -5,16 +5,16 @@ class hexCordinate {
   peakAndGroup = null;
   hexObj = null;
   arrDomains = [
-    {
-      idDomain: "red",
-      hexId: [],
-      groupCord: [45, 80, 90],
-    },
-    {
-      idDomain: "green",
-      hexId: [],
-      groupCord: [21, 22, 29, 31, 38, 39],
-    },
+    //  {
+    //    idDomain: "red",
+    //    hexId: [],
+    //    groupCord: [45, 80, 90],
+    //  },
+    //  {
+    //    idDomain: "green",
+    //    hexId: [],
+    //    groupCord: [21, 22, 29, 31, 38, 39],
+    //  },
   ];
 
   constructor() {

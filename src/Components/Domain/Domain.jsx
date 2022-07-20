@@ -13,31 +13,35 @@ const Domain = observer(() => {
 
     if (hex) {
       const colorGroup = (hex.style.fill = randomColor());
+      const nodeID = peakAndGroup.group;
+      const hexID = Number(hex.id);
+
       const objDomain = {
         idDomain: colorGroup,
         hexId: [],
         groupCord: [],
       };
 
-      const hexID = Number(hex.id);
+      if (mainDomains.length === 0) {
+        hexCordinate.createDomen(objDomain);
+        hexCordinate.addSubDomain(nodeID, 0, hexID);
+      }
 
       mainDomains.map((domain, index) => {
         const domainNode = domain.groupCord;
-        const nodeID = peakAndGroup.group;
+        const colorDomain = mainDomains[index].idDomain;
 
         const intersect = domainNode.includes(hexID);
 
         if (intersect) {
-          hexCordinate.addSubDomain(nodeID, index, hexID );
-          console.log("Найден домен " + index);
-        } else {
-          console.log("Нужно создать домен");
+          hex.style.fill = colorDomain;
+
+          hexCordinate.addSubDomain(nodeID, index, hexID);
         }
 
-        // console.log(intersect)
-
-        console.log(domain);
       });
+
+      console.log(mainDomains);
     }
 
     function createDomen(index) {
