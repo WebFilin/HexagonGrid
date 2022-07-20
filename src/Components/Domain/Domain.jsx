@@ -11,62 +11,44 @@ const Domain = observer(() => {
     const peakAndGroup = toJS(hexCordinate.peakAndGroup);
     const mainDomains = toJS(hexCordinate.arrDomains);
 
-    if (hex && peakAndGroup) {
-      const hexID = Number(hex.id);
-
-      if (hex) {
-        // console.log(hexID)
-        // console.log(peakAndGroup.group)
-      }
-
-      mainDomains.map((domains) => {
-        hex.style.fill = "green";
-      //   const groupID = peakAndGroup.group;
-
-      //   const groupNode = domains.groupCord;
-
-        hexCordinate.addSubDomain(peakAndGroup);
-
-        //   Находим группу координат домена
-        //   console.log(groupNode);
-
-        // Группа кординат хекса
-        //   console.log(groupID);
-      });
-    }
-
-    function checkIdInGroup(hexID) {
-      // console.log(hexID);
-
-      mainDomains.map((elem) => {
-        const groupHex = elem.groupCord;
-        const colorDomain = elem.idDomain;
-
-        //   console.log(elem);
-
-        if (groupHex.includes(hexID)) {
-          console.log("В группе");
-          hex.style.fill = `${colorDomain}`;
-
-          hexCordinate.addSubDomain(peakAndGroup);
-
-          //  console.log("Стейт доменов");
-          //  console.log(mainDomains[0].groupCord);
-        } else {
-          console.log("Нужно создать новый домен");
-        }
-      });
-    }
-
-    function createDomen(index) {
+    if (hex) {
       const colorGroup = (hex.style.fill = randomColor());
       const objDomain = {
         idDomain: colorGroup,
         hexId: [],
         groupCord: [],
       };
-      hexCordinate.createDomen(objDomain);
-      hexCordinate.addSubDomain(peakAndGroup);
+
+      const hexID = Number(hex.id);
+
+      mainDomains.map((domain, index) => {
+        const domainNode = domain.groupCord;
+        const nodeID = peakAndGroup.group;
+
+        const intersect = domainNode.includes(hexID);
+
+        if (intersect) {
+          hexCordinate.addSubDomain(nodeID, index, hexID );
+          console.log("Найден домен " + index);
+        } else {
+          console.log("Нужно создать домен");
+        }
+
+        // console.log(intersect)
+
+        console.log(domain);
+      });
+    }
+
+    function createDomen(index) {
+      // const colorGroup = (hex.style.fill = randomColor());
+      // const objDomain = {
+      //   idDomain: colorGroup,
+      //   hexId: [],
+      //   groupCord: [],
+      // };
+      // hexCordinate.createDomen(objDomain);
+      // hexCordinate.addSubDomain(peakAndGroup);
     }
 
     //  console.log(mainDomains);

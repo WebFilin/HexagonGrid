@@ -8,12 +8,12 @@ class hexCordinate {
     {
       idDomain: "red",
       hexId: [],
-      groupCord: [21, 22, 29, 31, 38, 39],
+      groupCord: [45, 80, 90],
     },
     {
       idDomain: "green",
       hexId: [],
-      groupCord: [40, 50, 60],
+      groupCord: [21, 22, 29, 31, 38, 39],
     },
   ];
 
@@ -41,18 +41,11 @@ class hexCordinate {
   }
 
   //   Добавляем ID состоявляющие домен, сортируем на уникальность
-  addSubDomain(peakAndGroup) {
-    //  console.log("Индекс элемента ");
-    //  console.log(this.arrDomains[index]);
+  addSubDomain(nodeId, index, hexID) {
+    const oldState = this.arrDomains[index].groupCord;
 
-    const oldState = this.arrDomains[0].groupCord;
-    const newState = peakAndGroup.group;
-
-    this.arrDomains[0].hexId.push(peakAndGroup.hexId);
-    //  this.arrDomains[0].groupCord = [...new Set(this.uniquIdHex)];
-    this.arrDomains[0].groupCord = [...new Set([...oldState, ...newState])];
-
-    console.log(this.arrDomains[0].groupCord);
+    this.arrDomains[index].hexId.push(hexID);
+    this.arrDomains[index].groupCord = [...new Set([...oldState, ...nodeId])];
   }
 }
 
