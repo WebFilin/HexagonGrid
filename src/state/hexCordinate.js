@@ -2,20 +2,12 @@ import { makeAutoObservable } from "mobx";
 
 class hexCordinate {
   arrCoordinates = [];
-  peakAndGroup = null;
+  peakAndGroup = {
+    hexId: null,
+    group: null,
+  };
   hexObj = null;
-  arrDomains = [
-   //  {
-   //    idDomain: "red",
-   //    hexId: [],
-   //    groupCord: [45, 80, 90],
-   //  },
-   //  {
-   //    idDomain: "green",
-   //    hexId: [30],
-   //    groupCord: [21, 22, 29, 31, 38, 39],
-   //  },
-  ];
+  arrDomains = [];
 
   constructor() {
     makeAutoObservable(this);

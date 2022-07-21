@@ -1,6 +1,6 @@
 import React from "react";
 import hexCordinate from "../../state/hexCordinate";
-import { toJS, values } from "mobx";
+import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 
 const Domain = observer(() => {
@@ -19,53 +19,37 @@ const Domain = observer(() => {
       // Структура одной группы в стеке
       const objDomain = {
         idDomain: colorGroup,
-        hexId: [],
-        groupCord: [],
+        hexId: [hexID],
+        groupCord: [...nodeID],
       };
+
+      console.log(objDomain);
 
       // Стартовая запись обьекта в стек групп
       if (mainDomains.length === 0) {
         hexCordinate.createDomen(objDomain);
-        hexCordinate.addSubDomain(nodeID, 0, hexID);
       }
 
+      // Ищем пересечения
       const intersectIndex = mainDomains.findIndex((domain) => {
         return domain.groupCord.includes(hexID);
       });
 
+      console.log(intersectIndex);
+
+      // Если есть добавляем данные в группу c ID
       if (intersectIndex !== -1) {
-        console.log("Добавить данные в существующий");
-        console.log(intersectIndex);
         const colorDomain = mainDomains[intersectIndex].idDomain;
         hex.style.fill = colorDomain;
         hexCordinate.addSubDomain(nodeID, intersectIndex, hexID);
+
+        console.log("найдено пересечение");
+
+        //   Если нет создаем новый домен
       } else {
-        console.log("Создать домен");
+        //   hexCordinate.creatDomen(objDomain);
+        hexCordinate.createDomen(objDomain);
       }
-
-      // Проходимся по общему стеку групп
-      // mainDomains.forEach((domain, index) => {
-      //   const domainNode = domain.groupCord;
-      //   const colorDomain = mainDomains[index].idDomain;
-
-      //   //  Сортируем на наличие пересечений ID элемента клика
-      //   const intersect = domainNode.includes(hexID);
-
-      //   //   Есть включение добавляем ID, и окружающие узлы в группу по индексу  в стеке групп
-      //   if (intersect) {
-      //     //  console.log("Найдено пересечение " + index);
-      //     hex.style.fill = colorDomain;
-      //     hexCordinate.addSubDomain(nodeID, index, hexID);
-
-      //     //  Нету создаем новую запись в общем стейте набиваем ее значениями
-      //   } else {
-      //     console.log(intersect);
-      //     //  console.log("НЕТ ПЕРЕСЕЧЕНИЯ НОВЫЙ ДОМЕН " + index);
-      //     hexCordinate.createDomen(objDomain);
-      //     hexCordinate.addSubDomain(nodeID, index, hexID);
-      //   }
-      // });
-
       console.log(mainDomains);
     }
   }, [hex]);
