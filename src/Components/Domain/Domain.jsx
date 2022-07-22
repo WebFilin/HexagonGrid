@@ -15,8 +15,7 @@ const Domain = observer(() => {
       const colorGroup = (hex.style.fill = randomColor());
       const nodeID = peakAndGroup.group;
       const hexID = Number(hex.id);
-
-      console.log(hex);
+      const valueHex = Number(hex.getAttribute("value"));
 
       // Прозрачность заливки хекса
       hex.style.fillOpacity = "0.8";
@@ -31,16 +30,49 @@ const Domain = observer(() => {
         groupCord: [...nodeID],
       };
 
-      // Если есть добавляем данные в группу c ID
-      if (intersectIndex !== -1) {
-        const colorDomain = mainDomains[intersectIndex].idDomain;
-        hex.style.fill = colorDomain;
-        hexCordinate.addSubDomain(nodeID, intersectIndex, hexID);
+      if (valueHex === 1) {
+        // Если есть добавляем данные в группу c ID
+        if (intersectIndex !== -1) {
+          const colorDomain = mainDomains[intersectIndex].idDomain;
+          hex.style.fill = colorDomain;
+          hexCordinate.addSubDomain(nodeID, intersectIndex, hexID);
+        }
+
+        //   Если нет создаем новый домен
+        else {
+          hexCordinate.createDomen(objDomain);
+        }
+      } else {
+        mainDomains.forEach((elem, index) => {
+          if (elem.hexId.includes(hexID)) {
+            const indexArrCord = elem.groupCord.findIndex((id) => {
+              return id === hexID;
+            });
+
+            const indexArrHexId = elem.hexId.findIndex((id) => {
+              return id === hexID;
+            });
+
+            // console.log("ID " + hexID);
+
+            // console.log("В массиве ID " + indexArrHexId);
+
+            // console.log("В массиве координат " + indexArrCord);
+
+            hex.style = null;
+            hexCordinate.removeHexFromDomain(
+              index,
+              indexArrHexId,
+              indexArrCord
+            );
+          }
+        });
       }
-      //   Если нет создаем новый домен
-      else {
-        hexCordinate.createDomen(objDomain);
-      }
+
+      // Удаляем элемент из группы при повторном клике
+
+      //
+      console.log(mainDomains);
     }
   }, [hex]);
 

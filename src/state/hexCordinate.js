@@ -18,7 +18,7 @@ class hexCordinate {
   //   Получаем хекс клика
   getHex(checkHex) {
     this.hexObj = checkHex;
-    console.log(this.hexObj)
+    //  console.log(this.hexObj);
   }
 
   //   Находим элементы - соседи хекса
@@ -36,11 +36,17 @@ class hexCordinate {
     this.arrDomains[index].hexId.push(hexID);
     this.arrDomains[index].groupCord = [...new Set([...oldState, ...nodeId])];
   }
+
   // Ищем пересечения в домене по ID
   checkElemInDomain(hexID) {
     return this.arrDomains.findIndex((domain) => {
       return domain.groupCord.includes(hexID);
     });
+  }
+
+  removeHexFromDomain(index, indexArrHexId, indexArrCord) {
+    this.arrDomains[index].hexId.splice(indexArrHexId, 1);
+    this.arrDomains[index].groupCord.splice(indexArrCord, 1);
   }
 }
 

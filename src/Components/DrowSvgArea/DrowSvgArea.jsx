@@ -14,7 +14,7 @@ const MainHexagons = observer(() => {
 
   //  Динамически управляем размером viewBox в svg
   React.useEffect(() => {
-   //  console.log(svgBox.current.children);
+    //  console.log(svgBox.current.children);
     const boxSize = svgBox.current.getBBox();
     setViewBoxSize(boxSize);
   }, [arrCordinatsHex.length]);
