@@ -16,6 +16,12 @@ const Domain = observer(() => {
       const nodeID = peakAndGroup.group;
       const hexID = Number(hex.id);
 
+      // Прозрачность заливки хекса
+      hex.style.fillOpacity = "0.8";
+
+      // Ищем пересечения в домене по ID
+      const intersectIndex = hexCordinate.checkElemInDomain(hexID);
+
       // Структура одной группы в стеке
       const objDomain = {
         idDomain: colorGroup,
@@ -23,34 +29,16 @@ const Domain = observer(() => {
         groupCord: [...nodeID],
       };
 
-      console.log(objDomain);
-
-      // Стартовая запись обьекта в стек групп
-      if (mainDomains.length === 0) {
-        hexCordinate.createDomen(objDomain);
-      }
-
-      // Ищем пересечения
-      const intersectIndex = mainDomains.findIndex((domain) => {
-        return domain.groupCord.includes(hexID);
-      });
-
-      console.log(intersectIndex);
-
       // Если есть добавляем данные в группу c ID
       if (intersectIndex !== -1) {
         const colorDomain = mainDomains[intersectIndex].idDomain;
         hex.style.fill = colorDomain;
         hexCordinate.addSubDomain(nodeID, intersectIndex, hexID);
 
-        console.log("найдено пересечение");
-
         //   Если нет создаем новый домен
       } else {
-        //   hexCordinate.creatDomen(objDomain);
         hexCordinate.createDomen(objDomain);
       }
-      console.log(mainDomains);
     }
   }, [hex]);
 

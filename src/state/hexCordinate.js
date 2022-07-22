@@ -2,10 +2,7 @@ import { makeAutoObservable } from "mobx";
 
 class hexCordinate {
   arrCoordinates = [];
-  peakAndGroup = {
-    hexId: null,
-    group: null,
-  };
+  peakAndGroup = {};
   hexObj = null;
   arrDomains = [];
 
@@ -32,12 +29,16 @@ class hexCordinate {
     this.arrDomains.push(hexDomain);
   }
 
+  // Ищем пересечения в домене по ID
+  checkElemInDomain(hexID) {
+    return this.arrDomains.findIndex((domain) => {
+      return domain.groupCord.includes(hexID);
+    });
+  }
+
   //   Добавляем ID состоявляющие домен, сортируем на уникальность
   addSubDomain(nodeId, index, hexID) {
-    console.log(index);
-
     const oldState = this.arrDomains[index].groupCord;
-
     this.arrDomains[index].hexId.push(hexID);
     this.arrDomains[index].groupCord = [...new Set([...oldState, ...nodeId])];
   }
