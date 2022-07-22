@@ -14,11 +14,12 @@ const MainHexagons = observer(() => {
 
   //  Динамически управляем размером viewBox в svg
   React.useEffect(() => {
+   //  console.log(svgBox.current.children);
     const boxSize = svgBox.current.getBBox();
     setViewBoxSize(boxSize);
   }, [arrCordinatsHex.length]);
 
-  //   Динамическое управление облатсью видимости
+  //   Динамическое управление облатсью видимости SVG
   const sizeBox =
     viewBoxSize !== null
       ? `${viewBoxSize.x} ${viewBoxSize.y} ${viewBoxSize.width} ${viewBoxSize.height}`
@@ -26,12 +27,7 @@ const MainHexagons = observer(() => {
 
   return (
     <div className={style.wrapper}>
-      <svg
-        className={style.body}
-        ref={svgBox}
-        viewBox={sizeBox}
-        preserveAspectRatio="xMinYMax meet"
-      >
+      <svg className={style.body} ref={svgBox} viewBox={sizeBox}>
         {/* Выводим хексы, смещаем их по сетке координат */}
         {arrCordinatsHex.map((elem) => (
           <SvgHex

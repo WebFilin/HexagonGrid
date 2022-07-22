@@ -16,6 +16,8 @@ const Domain = observer(() => {
       const nodeID = peakAndGroup.group;
       const hexID = Number(hex.id);
 
+      console.log(hex);
+
       // Прозрачность заливки хекса
       hex.style.fillOpacity = "0.8";
 
@@ -34,9 +36,9 @@ const Domain = observer(() => {
         const colorDomain = mainDomains[intersectIndex].idDomain;
         hex.style.fill = colorDomain;
         hexCordinate.addSubDomain(nodeID, intersectIndex, hexID);
-
-        //   Если нет создаем новый домен
-      } else {
+      }
+      //   Если нет создаем новый домен
+      else {
         hexCordinate.createDomen(objDomain);
       }
     }
