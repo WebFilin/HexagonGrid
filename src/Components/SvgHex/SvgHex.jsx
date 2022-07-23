@@ -14,13 +14,17 @@ function SvgHex({ id, x, y, vertical, horizontal }) {
     hexEl.current = hex;
   }
 
+  //  Меняем атрибут value и текст хекса
   React.useEffect(() => {
-    if (hexEl.current) {
+    const hex = hexEl.current;
+    if (hex) {
+      const hexTxt = hex.parentNode.lastChild;
       isClick ? setValue(1) : setValue(0);
+      hexTxt.textContent = value;
     }
 
     hexCordinate.getHex(hexEl.current);
-  }, [isClick, hexEl]);
+  }, [isClick, hexEl, value]);
 
   return (
     <>
@@ -28,6 +32,7 @@ function SvgHex({ id, x, y, vertical, horizontal }) {
         <polygon
           className={style.hex}
           id={id}
+          value={value}
           vertical={vertical}
           horizontal={horizontal}
           points="100,0 50,-87 -50,-87 -100,-0 -50,87 50,87"

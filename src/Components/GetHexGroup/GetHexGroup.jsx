@@ -9,7 +9,6 @@ const HexGroup = observer(() => {
 
   //   Выбранный хекс
   const hex = hexCordinate.hexObj;
-
   // Ищем соседий хекса
   React.useMemo(() => {
     if (hex) {

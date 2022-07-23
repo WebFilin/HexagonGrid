@@ -18,7 +18,9 @@ class hexCordinate {
 
   //   Получаем хекс клика
   getHex(checkHex) {
-    this.hexObj = checkHex;
+    if (checkHex) {
+      this.hexObj = checkHex;
+    }
   }
 
   //   Находим элементы - соседи хекса
@@ -54,8 +56,8 @@ class hexCordinate {
     this.svgArea = area;
   }
 
-  setHexValue(value){
-   this.hexValueTxt = value
+  setHexValue(value) {
+    this.hexValueTxt = value;
   }
 }
 
