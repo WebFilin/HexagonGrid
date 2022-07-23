@@ -47,7 +47,6 @@ const Domain = observer(() => {
       else {
         removeHex();
       }
-
       function removeHex() {
         mainDomains.forEach((elem, index) => {
           if (elem.hexId.includes(hexID)) {

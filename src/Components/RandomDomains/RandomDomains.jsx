@@ -9,29 +9,26 @@ const RandomDomains = observer(() => {
 
   React.useEffect(() => {
     const arrHexs = Array.from(collectionsHexs);
+    const ratio = 0.5;
 
     arrHexs.forEach((elem) => {
+      elem.style.fillOpacity = "0.8";
       const hexs = Array.from(elem.children);
 
-      hexs.forEach((poligon) => {
-        //   poligon.style.fill = "red";
-      });
+      console.log( hexs[1])
 
-      // console.log(hexs);
+      Math.random() <= ratio
+        ? (hexs[0].style.fill = "")
+        : (hexs[0].style.fill = "red");
     });
-
-    //  console.log(arrHexs);
   }, [collectionsHexs]);
 
-  const min = 0.01;
-  const max = 0.99 * 10;
-
-  const randomizer = (min, max) => {
-    let rand = min + Math.random() * (max + 1 - min);
-    return Math.floor(rand);
-  };
-
-  console.log(randomizer(min, max));
+  function randomColor() {
+    return (
+      "#" +
+      (Math.random().toString(16) + "000000").substring(2, 8).toUpperCase()
+    );
+  }
 
   return <div></div>;
 });

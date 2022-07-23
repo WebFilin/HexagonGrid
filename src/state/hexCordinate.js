@@ -19,7 +19,6 @@ class hexCordinate {
   //   Получаем хекс клика
   getHex(checkHex) {
     this.hexObj = checkHex;
-    //  console.log(this.hexObj);
   }
 
   //   Находим элементы - соседи хекса
@@ -53,6 +52,10 @@ class hexCordinate {
   //   Получаем все отрисованные хексы
   getSvgArea(area) {
     this.svgArea = area;
+  }
+
+  setHexValue(value){
+   this.hexValueTxt = value
   }
 }
 
