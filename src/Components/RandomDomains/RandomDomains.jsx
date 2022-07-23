@@ -6,22 +6,27 @@ import hexCordinate from "../../state/hexCordinate";
 const RandomDomains = observer(() => {
   // Все отрисованные хексы
   const collectionsHexs = toJS(hexCordinate.svgArea);
+  const ratio = 0.5;
 
   React.useEffect(() => {
     const arrHexs = Array.from(collectionsHexs);
-    const ratio = 0.5;
-
     arrHexs.forEach((elem) => {
-      elem.style.fillOpacity = "0.8";
       const hexs = Array.from(elem.children);
-
-      console.log( hexs[1])
-
-      Math.random() <= ratio
-        ? (hexs[0].style.fill = "")
-        : (hexs[0].style.fill = "red");
+      Math.random() <= ratio ? splitDomains(hexs) : mergerDomains(hexs);
     });
   }, [collectionsHexs]);
+
+  function splitDomains(hexs) {
+    hexs[0].style.fill = "";
+    hexs[1].textContent = null;
+  }
+
+  function mergerDomains(hexs) {
+    hexs[0].style.fillOpacity = "0.8";
+    hexs[0].style.fill = "red";
+    //  hexs[1].textContent = "1";
+    console.log(hexs[0].id);
+  }
 
   function randomColor() {
     return (
