@@ -5,6 +5,7 @@ class hexCordinate {
   peakAndGroup = {};
   hexObj = null;
   arrDomains = [];
+  svgArea = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -47,6 +48,11 @@ class hexCordinate {
   removeHexFromDomain(index, indexArrHexId, indexArrCord) {
     this.arrDomains[index].hexId.splice(indexArrHexId, 1);
     this.arrDomains[index].groupCord.splice(indexArrCord, 1);
+  }
+
+  //   Получаем все отрисованные хексы
+  getSvgArea(area) {
+    this.svgArea = area;
   }
 }
 

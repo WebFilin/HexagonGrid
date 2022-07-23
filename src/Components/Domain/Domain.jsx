@@ -16,8 +16,6 @@ const Domain = observer(() => {
       const nodeID = peakAndGroup.group;
       const hexID = Number(hex.id);
       const valueHex = Number(hex.getAttribute("value"));
-
-      // Прозрачность заливки хекса
       hex.style.fillOpacity = "0.8";
 
       // Ищем пересечения в домене по ID
@@ -30,8 +28,9 @@ const Domain = observer(() => {
         groupCord: [...nodeID],
       };
 
+      // Если элемент кликнут в первый раз
       if (valueHex === 1) {
-        // Если есть добавляем данные в группу c ID
+        // Если есть пересечение добавляем данные в группу c ID
         if (intersectIndex !== -1) {
           const colorDomain = mainDomains[intersectIndex].idDomain;
           hex.style.fill = colorDomain;
@@ -42,7 +41,14 @@ const Domain = observer(() => {
         else {
           hexCordinate.createDomen(objDomain);
         }
-      } else {
+      }
+
+      // Удаляем элемент из группы при повторном клике
+      else {
+        removeHex();
+      }
+
+      function removeHex() {
         mainDomains.forEach((elem, index) => {
           if (elem.hexId.includes(hexID)) {
             const indexArrCord = elem.groupCord.findIndex((id) => {
@@ -52,13 +58,6 @@ const Domain = observer(() => {
             const indexArrHexId = elem.hexId.findIndex((id) => {
               return id === hexID;
             });
-
-            // console.log("ID " + hexID);
-
-            // console.log("В массиве ID " + indexArrHexId);
-
-            // console.log("В массиве координат " + indexArrCord);
-
             hex.style = null;
             hexCordinate.removeHexFromDomain(
               index,
@@ -68,11 +67,6 @@ const Domain = observer(() => {
           }
         });
       }
-
-      // Удаляем элемент из группы при повторном клике
-
-      //
-      console.log(mainDomains);
     }
   }, [hex]);
 

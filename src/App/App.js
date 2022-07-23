@@ -3,6 +3,7 @@ import MainHexagons from "../Components/MainHexagons/MainHexagons";
 import DrowSvgArea from "../Components/DrowSvgArea/DrowSvgArea";
 import GetHexGroup from "../Components/GetHexGroup/GetHexGroup";
 import Domain from "../Components/Domain/Domain";
+import RandomDomains from "../Components/RandomDomains/RandomDomains";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <MainHexagons />
       <GetHexGroup />
       <Domain />
+      <RandomDomains />
     </div>
   );
 }
