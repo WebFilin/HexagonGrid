@@ -5,48 +5,34 @@ import hexCordinate from "../../state/hexCordinate";
 
 const RandomDomains = observer(() => {
   const isRandom = hexCordinate.isRandom;
+
+  const peakAndGroup = toJS(hexCordinate.peakAndGroup);
+  const colorGroup = hexCordinate.randomColor();
+  const ratio = 0.5;
+
   React.useEffect(() => {
     const collectionsHexs = toJS(hexCordinate.svgArea);
-    //  const mainDomains = toJS(hexCordinate.arrDomains);
-    //  const peakAndGroup = toJS(hexCordinate.peakAndGroup);
-    const colorGroup = hexCordinate.randomColor();
-    const ratio = 0.5;
     const arrHexs = Array.from(collectionsHexs);
-
     arrHexs.forEach((elem) => {
       const hexs = Array.from(elem.children);
       const hex = hexs[0];
       const hexTxt = hexs[1];
-      hex.style = { fill: "", fillOpacity: "0.3" };
+      // Сброс стилей хексов
+      hex.style = { fill: null, fillOpacity: 0.3 };
+      // hexTxt.textContent = 0;
 
       if (Math.random() <= ratio) {
-        autoJoin(hex, hexTxt);
-      } else {
-        splitDomains(hex, hexTxt);
+        checkHex(hex, hexTxt);
       }
     });
-
-    function autoJoin(hex, hexTxt) {
-      hex.style.fill = "red";
-      hex.style.fillOpacity = 0.8;
-      hexCordinate.getHexAutoCheckObj(hex);
-      //  hexTxt.textContent = 1;
-      const peakAndGroup = toJS(hexCordinate.peakAndGroup);
-
-      console.log(peakAndGroup);
-    }
-
-    function splitDomains(hex, hexTxt) {
-      // hexs[1].textContent = 0;
-    }
   }, [isRandom]);
 
-  //   function randomColor() {
-  //     return (
-  //       "#" +
-  //       (Math.random().toString(16) + "000000").substring(2, 8).toUpperCase()
-  //     );
-  //   }
+  function checkHex(hex, hexTxt) {
+    hex.style.fillOpacity = "0.8";
+    hex.style.fill = colorGroup;
+    //   hexTxt.textContent = 1;
+    hexCordinate.getHexAutoCheckObj(hex);
+  }
 
   return <div></div>;
 });

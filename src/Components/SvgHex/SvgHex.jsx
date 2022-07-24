@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./svgHex.module.scss";
 import hexCordinate from "../../state/hexCordinate";
+import { action } from "mobx";
 
 function SvgHex({ id, x, y, vertical, horizontal }) {
   const [isClick, setIsClick] = React.useState(false);
@@ -36,9 +37,9 @@ function SvgHex({ id, x, y, vertical, horizontal }) {
           vertical={vertical}
           horizontal={horizontal}
           points="100,0 50,-87 -50,-87 -100,-0 -50,87 50,87"
-          onClick={(evHex) => {
+          onClick={action((evHex) => {
             handlerClick(evHex);
-          }}
+          })}
         ></polygon>
         <text className={style.hex_txt}>
           {id} : {value}
