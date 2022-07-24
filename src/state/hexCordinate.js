@@ -6,6 +6,7 @@ class hexCordinate {
   hexObj = null;
   arrDomains = [];
   svgArea = [];
+  hexAutoCheckObj = null;
   isRandom = false;
 
   constructor() {
@@ -53,6 +54,10 @@ class hexCordinate {
   //   Получаем все отрисованные хексы
   getSvgArea(area) {
     this.svgArea = area;
+  }
+
+  getHexAutoCheckObj(hexObj) {
+    this.hexAutoCheckObj = hexObj;
   }
 
   setHexValue(value) {

@@ -7,8 +7,8 @@ const HexGroup = observer(() => {
   // массив координат
   const arrCoordinates = toJS(hexCordinate.arrCoordinates);
 
-  //   Выбранный хекс
-  const hex = hexCordinate.hexObj;
+  //   Выбранный хекс получаем или при клике или рандомом
+  const hex = hexCordinate.hexObj || hexCordinate.hexAutoCheckObj;
   // Ищем соседий хекса
   React.useMemo(() => {
     if (hex) {

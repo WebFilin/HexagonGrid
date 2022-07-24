@@ -20,7 +20,6 @@ const RandomDomains = observer(() => {
       hex.style = { fill: "", fillOpacity: "0.3" };
 
       if (Math.random() <= ratio) {
-         hexCordinate.getHex(hex);
         autoJoin(hex, hexTxt);
       } else {
         splitDomains(hex, hexTxt);
@@ -30,6 +29,7 @@ const RandomDomains = observer(() => {
     function autoJoin(hex, hexTxt) {
       hex.style.fill = "red";
       hex.style.fillOpacity = 0.8;
+      hexCordinate.getHexAutoCheckObj(hex);
       //  hexTxt.textContent = 1;
       const peakAndGroup = toJS(hexCordinate.peakAndGroup);
 
