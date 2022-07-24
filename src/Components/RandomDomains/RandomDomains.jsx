@@ -3,14 +3,17 @@ import { observer } from "mobx-react-lite";
 import React from "react";
 import hexCordinate from "../../state/hexCordinate";
 
-const RandomDomains = observer(({ isRandom }) => {
+const RandomDomains = observer(() => {
+  const isRandom = hexCordinate.isRandom;
   React.useEffect(() => {
     const collectionsHexs = toJS(hexCordinate.svgArea);
     const mainDomains = toJS(hexCordinate.arrDomains);
     const peakAndGroup = toJS(hexCordinate.peakAndGroup);
-
+    const colorGroup = randomColor();
     const ratio = 0.5;
     const arrHexs = Array.from(collectionsHexs);
+
+    console.log(isRandom);
 
     arrHexs.forEach((elem) => {
       const hexs = Array.from(elem.children);
@@ -21,19 +24,30 @@ const RandomDomains = observer(({ isRandom }) => {
       // hexs[0].style.fillOpacity = "0.3";
       // hexs[0].style.fill = "";
       // hexs[1].textContent = 0;
+
+      console.log(hexs)
     }
 
     function mergerDomains(hexs) {
-      const hex = hexs[0];
-      hex.style.fill = "";
-      hexCordinate.getHex(hex);
-      if (hex) {
-        const nodeID = peakAndGroup.group;
+      // const hex = hexs[0];
+      // const hexID = Number(hex.id);
+      // Ищем пересечения
+      // hexCordinate.getHex(hex);
+      // Получаем группы пересечений
+      const nodeID = peakAndGroup.group;
 
-        //   console.log(nodeID);
+      if (nodeID) {
+        // Структура одной группы в стеке
+      //   const objDomain = {
+      //     idDomain: colorGroup,
+      //     hexId: [hexID],
+      //     groupCord: [...nodeID],
+      //   };
 
-        hexs[0].style.fillOpacity = "0.8";
-        hexs[0].style.fill = "red";
+        //   console.log(objDomain);
+
+      //   hexs[0].style.fillOpacity = "0.8";
+      //   hexs[0].style.fill = "red";
         //   hexs[1].textContent = 1;
       }
     }

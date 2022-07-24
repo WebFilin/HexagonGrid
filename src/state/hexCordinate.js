@@ -6,6 +6,7 @@ class hexCordinate {
   hexObj = null;
   arrDomains = [];
   svgArea = [];
+  isRandom = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -58,6 +59,10 @@ class hexCordinate {
 
   setHexValue(value) {
     this.hexValueTxt = value;
+  }
+
+  handlerBtnRandom() {
+    this.isRandom = !this.isRandom;
   }
 }
 

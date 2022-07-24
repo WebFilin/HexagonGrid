@@ -17,7 +17,7 @@ const Domain = observer(() => {
       const hexID = Number(hex.id);
       const valueHex = Number(hex.getAttribute("value"));
       hex.style.fillOpacity = "0.8";
-      hex.style.fill = colorGroup;
+
       // Ищем пересечения в домене по ID
       const intersectIndex = hexCordinate.checkElemInDomain(hexID);
 

@@ -5,16 +5,13 @@ import DrowSvgArea from "../Components/DrowSvgArea/DrowSvgArea";
 import GetHexGroup from "../Components/GetHexGroup/GetHexGroup";
 import Domain from "../Components/Domain/Domain";
 import RandomDomains from "../Components/RandomDomains/RandomDomains";
+import BtnRandom from "../Components/Buttons/BtnRandom/BtnRandom";
 
 function App() {
-  const [isRandomDomain, setIsRandomDomain] = React.useState(false);
-
   return (
     <div className={style.wrapper}>
       <header className={style.header}>
-        <button onClick={() => setIsRandomDomain(!isRandomDomain)}>
-          Рандом
-        </button>
+        <BtnRandom />
       </header>
 
       <main className={style.body}>
@@ -26,7 +23,7 @@ function App() {
       <MainHexagons />
       <GetHexGroup />
       <Domain />
-      <RandomDomains isRandom={isRandomDomain} />
+      <RandomDomains />
     </div>
   );
 }
