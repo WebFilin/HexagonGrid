@@ -19,9 +19,7 @@ class hexCordinate {
 
   //   Получаем хекс клика
   getHex(checkHex) {
-    if (checkHex) {
-      this.hexObj = checkHex;
-    }
+    this.hexObj = checkHex;
   }
 
   //   Находим элементы - соседи хекса
