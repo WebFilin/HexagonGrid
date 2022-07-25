@@ -3,7 +3,7 @@ import React from "react";
 import { toJS } from "mobx";
 import hexCordinate from "../../state/hexCordinate";
 
-const HexGroup = observer(() => {
+const GetHexGroup = observer(() => {
   // массив координат
   const arrCoordinates = toJS(hexCordinate.arrCoordinates);
 
@@ -14,8 +14,6 @@ const HexGroup = observer(() => {
     if (hex) {
       const hexVert = Number(hex.getAttribute("vertical"));
       const hexHoriz = Number(hex.getAttribute("horizontal"));
-
-      const elemHexagonGrid = [];
 
       // Ищем соседий выбранного узла
       const result = arrCoordinates.filter((elem) => {
@@ -30,9 +28,8 @@ const HexGroup = observer(() => {
       });
 
       // Обрезаем лишние данные для составления узла с зависимостями по ID
-      result.map((elem) => {
-        const hexIdGroup = Number(elem.id);
-        elemHexagonGrid.push(hexIdGroup);
+      const elemHexagonGrid = result.map((elem) => {
+        return Number(elem.id);
       });
 
       // Составляем узел графа
@@ -45,4 +42,4 @@ const HexGroup = observer(() => {
   return <></>;
 });
 
-export default HexGroup;
+export default GetHexGroup;
