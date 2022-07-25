@@ -28,18 +28,20 @@ const RandomDomains = observer(() => {
   }, [isRandom]);
 
   React.useEffect(() => {
-    const elemHexagonGrid = [];
-
     // массив координат
     const arrCoordinates = toJS(hexCordinate.arrCoordinates);
-    const nodeCordID = [];
+    const elemHexagonGrid = [];
+    const colorGroup = hexCordinate.randomColor();
+    //  обьект кординато вокруг узла
+    const nodeCord = [];
 
-    arrElem.forEach((elem) => {
-      elem.style.fill = "green";
+    arrElem.forEach((elemHex) => {
+      elemHex.style.fill = colorGroup;
       //    elem.style.fillOpacity = 0.8;
-      const hexVert = Number(elem.getAttribute("vertical"));
-      const hexHoriz = Number(elem.getAttribute("horizontal"));
-      const hexID = Number(elem.id);
+      const hexVert = Number(elemHex.getAttribute("vertical"));
+      const hexHoriz = Number(elemHex.getAttribute("horizontal"));
+      const hexID = Number(elemHex.id);
+
       // Ищем соседий выбранного узла
       const result = arrCoordinates.filter((elem) => {
         return (
@@ -52,21 +54,15 @@ const RandomDomains = observer(() => {
         );
       });
 
-      // Обрезаем лишние данные для составления узла с зависимостями по ID
-      result.map((elem) => {
-        const hexIdGroup = Number(elem.id);
-        elemHexagonGrid.push(hexIdGroup);
+      const idHexGroup = result.map((elem) => {
+        return elem.id;
       });
 
       // Составляем узел графа
-      const peak = {
-        hexId: hexID,
-        group: Array.from(new Set(elemHexagonGrid)),
-      };
-      nodeCordID.push(peak);
-    });
+      const peak = { hexId: hexID, group: idHexGroup };
 
-   console.log(nodeCordID)
+      console.log(peak);
+    });
   }, [arrElem]);
 
   return <div></div>;
