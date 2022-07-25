@@ -7,7 +7,7 @@ const RandomDomains = observer(() => {
   const isRandom = hexCordinate.isRandom;
   const ratio = 0.5;
 
-  //   Массив элементов DOM в рандоме
+  //   Массив элементов DOM
   const arrElem = [];
 
   React.useEffect(() => {
@@ -28,15 +28,16 @@ const RandomDomains = observer(() => {
   }, [isRandom]);
 
   React.useEffect(() => {
-    // массив координат
+    // массив координат всей сетки
     const arrCoordinates = toJS(hexCordinate.arrCoordinates);
-    const elemHexagonGrid = [];
     const colorGroup = hexCordinate.randomColor();
-    //  обьект кординато вокруг узла
+
+    //  обьект кординат вокруг узла
     const nodeCord = [];
 
+    //  Ищем соседий элементов
     arrElem.forEach((elemHex) => {
-      elemHex.style.fill = colorGroup;
+      // elemHex.style.fill = colorGroup;
       //    elem.style.fillOpacity = 0.8;
       const hexVert = Number(elemHex.getAttribute("vertical"));
       const hexHoriz = Number(elemHex.getAttribute("horizontal"));
@@ -59,9 +60,24 @@ const RandomDomains = observer(() => {
       });
 
       // Составляем узел графа
-      const peak = { hexId: hexID, group: idHexGroup };
+      const peak = { id: hexID, group: [...idHexGroup] };
+      nodeCord.push(peak);
+    });
 
-      console.log(peak);
+    arrElem.forEach((elemHex) => {
+      const hexID = Number(elemHex.id);
+      nodeCord.forEach((elem) => {
+        const cordGroup = elem.group;
+        if (cordGroup.includes(elem.id)) {
+          elemHex.style.fill = "green";
+          console.log("Группа");
+          console.log(hexID);
+        } else {
+          elemHex.style.fill = "red";
+          console.log("Отдельный элемент");
+          console.log(hexID);
+        }
+      });
     });
   }, [arrElem]);
 

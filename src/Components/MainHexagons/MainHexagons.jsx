@@ -14,7 +14,7 @@ function MainHexagons() {
     const hexesPositions = [];
 
     //  Стороны хекс контейнера
-    const axisZ = L - 1;
+    const axisQ = L - 1;
     const axisY = L + M - 1;
     const axisX = L + N - 1;
 
@@ -26,13 +26,13 @@ function MainHexagons() {
     for (let horizontalLine = 0; horizontalLine < axisY; horizontalLine++) {
       for (let verticalLine = 0; verticalLine < axisX; verticalLine++) {
         if (
-          (horizontalLine < axisZ &&
-            verticalLine >= axisZ - horizontalLine &&
-            verticalLine < axisX - (axisZ + 1 - axisY + horizontalLine)) ||
-          (horizontalLine >= axisZ && horizontalLine < M) ||
+          (horizontalLine < axisQ &&
+            verticalLine >= axisQ - horizontalLine &&
+            verticalLine < axisX - (axisQ + 1 - axisY + horizontalLine)) ||
+          (horizontalLine >= axisQ && horizontalLine < M) ||
           (horizontalLine >= M &&
-            verticalLine >= axisZ - horizontalLine &&
-            verticalLine < axisX - (axisZ + 1 - axisY + horizontalLine))
+            verticalLine >= axisQ - horizontalLine &&
+            verticalLine < axisX - (axisQ + 1 - axisY + horizontalLine))
         ) {
           // Кординаты точек центра хексов
           const xCord =
