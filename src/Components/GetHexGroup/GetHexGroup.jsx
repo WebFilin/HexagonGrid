@@ -8,17 +8,17 @@ const HexGroup = observer(() => {
   const arrCoordinates = toJS(hexCordinate.arrCoordinates);
 
   //   Выбранный хекс получаем или при клике или рандомом
-  const hex = hexCordinate.hexObj || hexCordinate.hexAutoCheckObj;
+  const hex = hexCordinate.hexObj;
   // Ищем соседий хекса
   React.useMemo(() => {
     if (hex) {
       const hexVert = Number(hex.getAttribute("vertical"));
       const hexHoriz = Number(hex.getAttribute("horizontal"));
 
-      let elemHexagonGrid = [];
+      const elemHexagonGrid = [];
 
       // Ищем соседий выбранного узла
-      let result = arrCoordinates.filter((elem) => {
+      const result = arrCoordinates.filter((elem) => {
         return (
           (elem.horizontal === hexHoriz - 1 && elem.vertical === hexVert) ||
           (elem.horizontal === hexHoriz - 1 && elem.vertical === hexVert + 1) ||
@@ -31,12 +31,12 @@ const HexGroup = observer(() => {
 
       // Обрезаем лишние данные для составления узла с зависимостями по ID
       result.map((elem) => {
-        let hexIdGroup = Number(elem.id);
+        const hexIdGroup = Number(elem.id);
         elemHexagonGrid.push(hexIdGroup);
       });
 
       // Составляем узел графа
-      let peak = { hexId: Number(hex.id), group: elemHexagonGrid };
+      const peak = { hexId: Number(hex.id), group: elemHexagonGrid };
 
       hexCordinate.getHexGroup(peak);
     }

@@ -6,7 +6,6 @@ class hexCordinate {
   hexObj = null;
   arrDomains = [];
   svgArea = [];
-  hexAutoCheckObj = null;
   isRandom = false;
 
   constructor() {

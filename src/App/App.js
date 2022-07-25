@@ -8,16 +8,13 @@ import RandomDomains from "../Components/RandomDomains/RandomDomains";
 import BtnRandom from "../Components/Buttons/BtnRandom/BtnRandom";
 
 function App() {
-  const ratio = 0.5;
-
   return (
     <div className={style.wrapper}>
-      <header className={style.header}>
-        <BtnRandom />
-      </header>
+      <header className={style.header}></header>
 
       <main className={style.body}>
         <DrowSvgArea />
+        <BtnRandom />
       </main>
 
       <footer className={style.footer} />
