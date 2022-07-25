@@ -18,6 +18,8 @@ function SvgHex({ id, x, y, vertical, horizontal }) {
   //  Меняем атрибут value и текст хекса
   React.useEffect(() => {
     const hex = hexEl.current;
+
+  
     if (hex) {
       const hexTxt = hex.parentNode.lastChild;
       isClick ? setValue(1) : setValue(0);

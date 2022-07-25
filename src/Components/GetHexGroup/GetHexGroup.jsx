@@ -4,13 +4,14 @@ import { toJS } from "mobx";
 import hexCordinate from "../../state/hexCordinate";
 
 const GetHexGroup = observer(() => {
-  // массив координат
-  const arrCoordinates = toJS(hexCordinate.arrCoordinates);
-
   //   Выбранный хекс получаем или при клике или рандомом
   const hex = hexCordinate.hexObj;
+
   // Ищем соседий хекса
   React.useMemo(() => {
+    // массив всех координат
+    const arrCoordinates = toJS(hexCordinate.arrCoordinates);
+
     if (hex) {
       const hexVert = Number(hex.getAttribute("vertical"));
       const hexHoriz = Number(hex.getAttribute("horizontal"));
@@ -37,7 +38,7 @@ const GetHexGroup = observer(() => {
 
       hexCordinate.getHexGroup(peak);
     }
-  }, [arrCoordinates, hex]);
+  }, [hex]);
 
   return <></>;
 });

@@ -28,6 +28,14 @@ const RandomDomains = observer(() => {
   }, [isRandom]);
 
   React.useEffect(() => {
+    arrElem.forEach((elem) => {
+      console.log(elem);
+
+      hexCordinate.getHex(elem);
+    });
+
+    // hexCordinate.getHex( arrElem);
+
     // массив координат всей сетки
     const arrCoordinates = toJS(hexCordinate.arrCoordinates);
     const colorGroup = hexCordinate.randomColor();
@@ -64,21 +72,21 @@ const RandomDomains = observer(() => {
       nodeCord.push(peak);
     });
 
-    arrElem.forEach((elemHex) => {
-      const hexID = Number(elemHex.id);
-      nodeCord.forEach((elem) => {
-        const cordGroup = elem.group;
-        if (cordGroup.includes(elem.id)) {
-          elemHex.style.fill = "green";
-          console.log("Группа");
-          console.log(hexID);
-        } else {
-          elemHex.style.fill = "red";
-          console.log("Отдельный элемент");
-          console.log(hexID);
-        }
-      });
-    });
+    //  arrElem.forEach((elemHex) => {
+    //    const hexID = Number(elemHex.id);
+    //    nodeCord.forEach((elem) => {
+    //      const cordGroup = elem.group;
+    //      if (cordGroup.includes(elem.id)) {
+    //        elemHex.style.fill = "green";
+    //        console.log("Группа");
+    //        console.log(hexID);
+    //      } else {
+    //        elemHex.style.fill = "red";
+    //        console.log("Отдельный элемент");
+    //        console.log(hexID);
+    //      }
+    //    });
+    //  });
   }, [arrElem]);
 
   return <div></div>;
