@@ -7,7 +7,7 @@ class hexCordinate {
   arrDomains = [];
   svgArea = [];
   isRandom = false;
-
+ 
   constructor() {
     makeAutoObservable(this);
   }
@@ -19,7 +19,12 @@ class hexCordinate {
 
   //   Получаем хекс клика
   getHex(checkHex) {
+    //  console.log(checkHex);
     this.hexObj = checkHex;
+  }
+
+  getHexRandom(arrElem) {
+    this.arrHexRandom = arrElem;
   }
 
   //   Находим элементы - соседи хекса

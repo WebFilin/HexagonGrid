@@ -23,7 +23,7 @@ const Domain = observer(() => {
       // Ищем пересечения в домене по ID
       const intersectIndex = hexCordinate.checkElemInDomain(hexID);
 
-      // Структура одной группы в стеке
+      // Структура одной группы в стеке доменов
       const objDomain = {
         idDomain: colorGroup,
         hexId: [hexID],
@@ -49,8 +49,6 @@ const Domain = observer(() => {
       else {
         removeHex();
       }
-
-     
 
       function removeHex() {
         mainDomains.forEach((elem, index) => {

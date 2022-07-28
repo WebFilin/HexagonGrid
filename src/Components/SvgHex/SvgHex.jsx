@@ -9,8 +9,8 @@ function SvgHex({ id, x, y, vertical, horizontal }) {
   const hexEl = React.useRef();
 
   //   Выбираем хекс передаем в mobx
-  function handlerClick(evElem) {
-    const hex = evElem.target;
+  function handlerClick(evHex) {
+    const hex = evHex.target;
     setIsClick(!isClick);
     hexEl.current = hex;
   }
@@ -19,15 +19,14 @@ function SvgHex({ id, x, y, vertical, horizontal }) {
   React.useEffect(() => {
     const hex = hexEl.current;
 
-  
     if (hex) {
       const hexTxt = hex.parentNode.lastChild;
       isClick ? setValue(1) : setValue(0);
       hexTxt.textContent = value;
     }
 
-    hexCordinate.getHex(hexEl.current);
-  }, [isClick, hexEl, value]);
+    hexCordinate.getHex(hex);
+  }, [isClick, value]);
 
   return (
     <>

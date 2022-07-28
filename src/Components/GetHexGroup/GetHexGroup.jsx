@@ -5,7 +5,7 @@ import hexCordinate from "../../state/hexCordinate";
 
 const GetHexGroup = observer(() => {
   //   Выбранный хекс получаем или при клике или рандомом
-  const hex = hexCordinate.hexObj;
+  let hex = toJS(hexCordinate.hexObj);
 
   // Ищем соседий хекса
   React.useMemo(() => {

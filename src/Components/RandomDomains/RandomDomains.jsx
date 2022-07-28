@@ -10,6 +10,9 @@ const RandomDomains = observer(() => {
   //   Массив элементов DOM
   const arrElem = [];
 
+  //  обьект кординат вокруг узла
+  const nodeCord = [];
+
   React.useEffect(() => {
     const collectionsHexs = toJS(hexCordinate.svgArea);
     const arrHexs = Array.from(collectionsHexs);
@@ -19,39 +22,23 @@ const RandomDomains = observer(() => {
 
       // Сброс стилей хексов
       hexGroup[0].style = { fill: null, fillOpacity: 0.3 };
-      // hexs[1].textContent = 0;
-
+      // hexGroup[1].textContent = 0;
       if (Math.random() <= ratio) {
         arrElem.push(hexGroup[0]);
       }
     });
-  }, [isRandom]);
+  }, [isRandom, arrElem]);
 
   React.useEffect(() => {
-    arrElem.forEach((elem) => {
-      console.log(elem);
-
-      hexCordinate.getHex(elem);
-    });
-
-    // hexCordinate.getHex( arrElem);
-
     // массив координат всей сетки
     const arrCoordinates = toJS(hexCordinate.arrCoordinates);
-    const colorGroup = hexCordinate.randomColor();
 
-    //  обьект кординат вокруг узла
-    const nodeCord = [];
-
-    //  Ищем соседий элементов
     arrElem.forEach((elemHex) => {
-      // elemHex.style.fill = colorGroup;
-      //    elem.style.fillOpacity = 0.8;
       const hexVert = Number(elemHex.getAttribute("vertical"));
       const hexHoriz = Number(elemHex.getAttribute("horizontal"));
       const hexID = Number(elemHex.id);
 
-      // Ищем соседий выбранного узла
+      //  Ищем соседий элементов
       const result = arrCoordinates.filter((elem) => {
         return (
           (elem.horizontal === hexHoriz - 1 && elem.vertical === hexVert) ||
@@ -63,31 +50,79 @@ const RandomDomains = observer(() => {
         );
       });
 
-      const idHexGroup = result.map((elem) => {
+      const nodeID = result.map((elem) => {
         return elem.id;
       });
 
-      // Составляем узел графа
-      const peak = { id: hexID, group: [...idHexGroup] };
+      const peak = { id: hexID, group: nodeID };
       nodeCord.push(peak);
     });
+  }, [arrElem, nodeCord]);
 
-    //  arrElem.forEach((elemHex) => {
-    //    const hexID = Number(elemHex.id);
-    //    nodeCord.forEach((elem) => {
-    //      const cordGroup = elem.group;
-    //      if (cordGroup.includes(elem.id)) {
-    //        elemHex.style.fill = "green";
-    //        console.log("Группа");
-    //        console.log(hexID);
-    //      } else {
-    //        elemHex.style.fill = "red";
-    //        console.log("Отдельный элемент");
-    //        console.log(hexID);
-    //      }
-    //    });
-    //  });
-  }, [arrElem]);
+  React.useEffect(() => {
+    const mainDomains = toJS(hexCordinate.arrDomains);
+    arrElem.forEach((el) => {
+      el.style.fill = "red";
+    });
+
+    let domainsArr = [];
+
+    arrElem.forEach((hex, index) => {
+      const colorGroup = hexCordinate.randomColor();
+      const hexID = Number(hex.id);
+      const nodeID = nodeCord[index].group;
+      // console.log(hexID);
+      // console.log(nodeID);
+
+      const intersectIndex = intesect(hexID);
+
+      // console.log(hexID);
+      // console.log("Индекс пересечения " + intersectIndex);
+
+      const objDomain = {
+        idDomain: colorGroup,
+        id: [hexID],
+        hexs: [hex],
+        groupCord: [...nodeID],
+      };
+
+      if (intersectIndex !== -1) {
+        addSubDomain(hex, nodeID, intersectIndex, hexID);
+      } else {
+        createDomen(objDomain);
+      }
+    });
+
+    //  Ищем пересечения в узлах, возврашаем индекс домена в общем стейте
+    function intesect(hexID) {
+      return domainsArr.findIndex((domain) => {
+        return domain.groupCord.includes(hexID);
+      });
+    }
+
+    //  Создаем новый домен
+    function createDomen(objDomain) {
+      domainsArr.push(objDomain);
+      console.log(objDomain.id);
+      console.log(objDomain.groupCord);
+    }
+
+    //  Создаем субдомен
+    function addSubDomain(hex, nodeID, index, hexID) {
+      const colorDomain = domainsArr[index].idDomain;
+      const oldState = domainsArr[index].groupCord;
+      domainsArr[index].hexs.push(hex);
+      domainsArr[index].id.push(hexID);
+      domainsArr[index].groupCord = [...new Set([...oldState, ...nodeID])];
+
+      domainsArr[index].hexs.forEach((elem) => {
+        elem.style.fill = colorDomain;
+        elem.style.fillOpacity = 0.8;
+      });
+    }
+
+    console.log(domainsArr);
+  }, [arrElem, nodeCord]);
 
   return <div></div>;
 });
