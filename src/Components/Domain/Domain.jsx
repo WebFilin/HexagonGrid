@@ -15,7 +15,7 @@ const Domain = observer(() => {
     if (hex) {
       const hexID = Number(hex.id);
       const valueHex = Number(hex.getAttribute("value"));
-      hex.style.fillOpacity = "0.8";
+      hex.style.fillOpacity = 0.8;
       hex.style.fill = colorGroup;
 
       // Ищем пересечения в домене по ID
@@ -48,11 +48,14 @@ const Domain = observer(() => {
       // Удаляем элемент из группы при повторном клике
       function removeHex() {
         mainDomains.forEach((elem, index) => {
-          if (elem.hexId.includes(hexID)) {
+          const hexInNode = elem.groupCord.includes(hexID);
+
+          if (hexInNode) {
             const indexArrCord = elem.groupCord.findIndex((id) => {
               return id === hexID;
             });
             hex.style = null;
+            hex.style.fillOpacity = 0.3;
             hexCordinate.removeHexFromDomain(index, indexArrCord);
           }
         });
