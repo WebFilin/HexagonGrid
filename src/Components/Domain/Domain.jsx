@@ -15,6 +15,7 @@ const Domain = observer(() => {
     if (hex) {
       const hexID = Number(hex.id);
       const valueHex = Number(hex.getAttribute("value"));
+      const nodeID = peakAndGroup.group;
       hex.style.fillOpacity = 0.8;
       hex.style.fill = colorGroup;
 
@@ -24,7 +25,8 @@ const Domain = observer(() => {
       // Структура одной группы в стеке доменов
       const objDomain = {
         idDomain: colorGroup,
-        groupCord: [...peakAndGroup],
+        hexs: [hexID],
+        groupCord: [...nodeID],
       };
 
       // Если элемент кликнут в первый раз
@@ -36,7 +38,7 @@ const Domain = observer(() => {
           if (intersectIndex !== -1) {
             const colorDomain = mainDomains[intersectIndex].idDomain;
             hex.style.fill = colorDomain;
-            hexCordinate.addSubDomain(peakAndGroup, intersectIndex, hexID);
+            hexCordinate.addSubDomain(nodeID, intersectIndex, hexID);
           }
           //   Если нет создаем новый домен
           else {
@@ -54,9 +56,17 @@ const Domain = observer(() => {
             const indexArrCord = elem.groupCord.findIndex((id) => {
               return id === hexID;
             });
+
+            const indexArrHexId = elem.hexId.findIndex((id) => {
+              return id === hexID;
+            });
             hex.style = null;
             hex.style.fillOpacity = 0.3;
-            hexCordinate.removeHexFromDomain(index, indexArrCord);
+            hexCordinate.removeHexFromDomain(
+              index,
+              indexArrCord,
+              indexArrHexId
+            );
           }
         });
       }

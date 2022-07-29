@@ -46,13 +46,12 @@ const RandomDomains = observer(() => {
   }, [arrElem, nodeCord]);
 
   React.useEffect(() => {
-    arrElem.forEach((el) => {
-      el.style.fill = "red";
-    });
-
     let domainsArr = [];
 
     arrElem.forEach((hex, index) => {
+      // ! Времянка
+      hex.style.fill = "red";
+
       const colorGroup = hexCordinate.randomColor();
       const hexID = Number(hex.id);
       const nodeID = nodeCord[index].group;

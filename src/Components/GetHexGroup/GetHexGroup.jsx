@@ -12,12 +12,14 @@ const GetHexGroup = observer(() => {
     if (hex) {
       const hexVert = Number(hex.getAttribute("vertical"));
       const hexHoriz = Number(hex.getAttribute("horizontal"));
+      const hexID = Number(hex.id);
 
       // Ищем соседий выбранного узла
       const elemHexagonGrid = hexCordinate.getNeighborsHex(hexVert, hexHoriz);
 
       // Составляем узел графа
-      hexCordinate.getHexGroup(elemHexagonGrid);
+      const peak = { id: hexID, group: elemHexagonGrid };
+      hexCordinate.getHexGroup(peak);
     }
   }, [hex]);
 

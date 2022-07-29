@@ -4,9 +4,9 @@ import hexCordinate from "../../state/hexCordinate";
 
 function MainHexagons() {
   // !Переменные размера области гексагонов - передать пропсами ограничение до 30
-  let L = 10;
-  let M = 10;
-  let N = 10;
+  let L = 5;
+  let M = 5;
+  let N = 5;
   const sideOfset = 100;
 
   React.useMemo(() => {
@@ -23,27 +23,27 @@ function MainHexagons() {
     const oppositeContour = sideOfset * 2;
 
     //  Отрисовываем область решетки
-    for (let horizontalLine = 0; horizontalLine < axisY; horizontalLine++) {
-      for (let verticalLine = 0; verticalLine < axisX; verticalLine++) {
+    for (let horizontal = 0; horizontal < axisY; horizontal++) {
+      for (let vertical = 0; vertical < axisX; vertical++) {
         if (
-          (horizontalLine < axisQ &&
-            verticalLine >= axisQ - horizontalLine &&
-            verticalLine < axisX - (axisQ + 1 - axisY + horizontalLine)) ||
-          (horizontalLine >= axisQ && horizontalLine < M) ||
-          (horizontalLine >= M &&
-            verticalLine >= axisQ - horizontalLine &&
-            verticalLine < axisX - (axisQ + 1 - axisY + horizontalLine))
+          (horizontal < axisQ &&
+            vertical >= axisQ - horizontal &&
+            vertical < axisX - (axisQ + 1 - axisY + horizontal)) ||
+          (horizontal >= axisQ && horizontal < M) ||
+          (horizontal >= M &&
+            vertical >= axisQ - horizontal &&
+            vertical < axisX - (axisQ + 1 - axisY + horizontal))
         ) {
           // Кординаты точек центра хексов
           const xCord =
-            verticalLine * oppositeWidth + (horizontalLine * oppositeWidth) / 2;
+            vertical * oppositeWidth + (horizontal * oppositeWidth) / 2;
           const yCord =
-            (horizontalLine * oppositeContour * 3) / 4 + oppositeContour / 2;
+            (horizontal * oppositeContour * 3) / 4 + oppositeContour / 2;
 
           hexesPositions.push({
             id: hexesPositions.length,
-            horizontal: horizontalLine,
-            vertical: verticalLine,
+            horizontal: horizontal,
+            vertical: vertical,
             x: Math.trunc(xCord),
             y: Math.trunc(yCord),
           });
