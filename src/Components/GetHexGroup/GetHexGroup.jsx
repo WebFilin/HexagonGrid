@@ -10,31 +10,17 @@ const GetHexGroup = observer(() => {
   // Ищем соседий хекса
   React.useMemo(() => {
     // массив всех координат
-    const arrCoordinates = toJS(hexCordinate.arrCoordinates);
 
     if (hex) {
       const hexVert = Number(hex.getAttribute("vertical"));
       const hexHoriz = Number(hex.getAttribute("horizontal"));
+      const hexID = Number(hex.id);
 
       // Ищем соседий выбранного узла
-      const result = arrCoordinates.filter((elem) => {
-        return (
-          (elem.horizontal === hexHoriz - 1 && elem.vertical === hexVert) ||
-          (elem.horizontal === hexHoriz - 1 && elem.vertical === hexVert + 1) ||
-          (elem.vertical === hexVert + 1 && elem.horizontal === hexHoriz) ||
-          (elem.horizontal === hexHoriz + 1 && elem.vertical === hexVert) ||
-          (elem.horizontal === hexHoriz + 1 && elem.vertical === hexVert - 1) ||
-          (elem.vertical === hexVert - 1 && elem.horizontal === hexHoriz)
-        );
-      });
-
-      // Обрезаем лишние данные для составления узла с зависимостями по ID
-      const elemHexagonGrid = result.map((elem) => {
-        return Number(elem.id);
-      });
+      const elemHexagonGrid = hexCordinate.getNeighborsHex(hexVert, hexHoriz);
 
       // Составляем узел графа
-      const peak = { hexId: Number(hex.id), group: elemHexagonGrid };
+      const peak = { hexId: hexID, group: elemHexagonGrid };
 
       hexCordinate.getHexGroup(peak);
     }

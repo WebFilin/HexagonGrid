@@ -54,7 +54,7 @@ const RandomDomains = observer(() => {
 
       const nodeID = hexCordinate.getNeighborsHex(hexVert, hexHoriz);
 
-      console.log(nodeID);
+      // console.log(nodeID);
 
       // const nodeID = neighborsHex.map((elem) => {
 
