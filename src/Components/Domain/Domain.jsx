@@ -13,7 +13,7 @@ const Domain = observer(() => {
     const colorGroup = hexCordinate.randomColor();
 
     if (hex) {
-      const nodeID = peakAndGroup.group;
+      const nodeID = peakAndGroup;
 
       const hexID = Number(hex.id);
       const valueHex = Number(hex.getAttribute("value"));

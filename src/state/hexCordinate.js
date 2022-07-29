@@ -71,6 +71,7 @@ class hexCordinate {
     this.isRandom = !this.isRandom;
   }
 
+  //   Поиск соседий хекса
   getNeighborsHex(hexVert, hexHoriz) {
     const result = this.arrCoordinates.filter((elem) => {
       return (
@@ -83,6 +84,7 @@ class hexCordinate {
       );
     });
 
+    //  Отсекаем лишние формируем обьект c ID соседних узлов
     const nodeID = result.map((elem) => {
       return elem.id;
     });

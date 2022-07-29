@@ -30,43 +30,19 @@ const RandomDomains = observer(() => {
   }, [isRandom, arrElem]);
 
   React.useEffect(() => {
-    // массив координат всей сетки
-    const arrCoordinates = toJS(hexCordinate.arrCoordinates);
-
     arrElem.forEach((elemHex) => {
       const hexVert = Number(elemHex.getAttribute("vertical"));
       const hexHoriz = Number(elemHex.getAttribute("horizontal"));
       const hexID = Number(elemHex.id);
 
       //  Ищем соседий элементов
-      // const result = arrCoordinates.filter((elem) => {
-      //   return (
-      //     (elem.horizontal === hexHoriz - 1 && elem.vertical === hexVert) ||
-      //     (elem.horizontal === hexHoriz - 1 && elem.vertical === hexVert + 1) ||
-      //     (elem.vertical === hexVert + 1 && elem.horizontal === hexHoriz) ||
-      //     (elem.horizontal === hexHoriz + 1 && elem.vertical === hexVert) ||
-      //     (elem.horizontal === hexHoriz + 1 && elem.vertical === hexVert - 1) ||
-      //     (elem.vertical === hexVert - 1 && elem.horizontal === hexHoriz)
-      //   );
-      // });
-
-      // const neighborsHex = hexCordinate.getNeighborsHex(hexVert, hexHoriz);
-
       const nodeID = hexCordinate.getNeighborsHex(hexVert, hexHoriz);
-
-      // console.log(nodeID);
-
-      // const nodeID = neighborsHex.map((elem) => {
-
-      //    console.log(toJS(elem.id))
-      //   return elem.id;
-      // });
 
       const peak = { id: hexID, group: nodeID };
       nodeCord.push(peak);
     });
 
-    //  console.log(nodeCord);
+    console.log(nodeCord);
   }, [arrElem, nodeCord]);
 
   React.useEffect(() => {
