@@ -36,9 +36,8 @@ class hexCordinate {
   }
 
   //   Добавляем ID состоявляющие домен, сортируем на уникальность
-  addSubDomain(nodeId, index, hexID) {
+  addSubDomain(nodeId, index) {
     const oldState = this.arrDomains[index].groupCord;
-    this.arrDomains[index].hexId.push(hexID);
     this.arrDomains[index].groupCord = [...new Set([...oldState, ...nodeId])];
   }
 
@@ -49,8 +48,7 @@ class hexCordinate {
     });
   }
 
-  removeHexFromDomain(index, indexArrHexId, indexArrCord) {
-    this.arrDomains[index].hexId.splice(indexArrHexId, 1);
+  removeHexFromDomain(index, indexArrCord) {
     this.arrDomains[index].groupCord.splice(indexArrCord, 1);
   }
 

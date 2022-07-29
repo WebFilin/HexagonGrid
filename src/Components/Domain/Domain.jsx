@@ -13,8 +13,6 @@ const Domain = observer(() => {
     const colorGroup = hexCordinate.randomColor();
 
     if (hex) {
-      const nodeID = peakAndGroup;
-
       const hexID = Number(hex.id);
       const valueHex = Number(hex.getAttribute("value"));
       hex.style.fillOpacity = "0.8";
@@ -26,46 +24,36 @@ const Domain = observer(() => {
       // Структура одной группы в стеке доменов
       const objDomain = {
         idDomain: colorGroup,
-        hexId: [hexID],
-        groupCord: [...nodeID],
+        groupCord: [...peakAndGroup],
       };
 
       // Если элемент кликнут в первый раз
-      if (valueHex === 1) {
-        // Если есть пересечение добавляем данные в группу c ID
-        if (intersectIndex !== -1) {
-          const colorDomain = mainDomains[intersectIndex].idDomain;
-          hex.style.fill = colorDomain;
-          hexCordinate.addSubDomain(nodeID, intersectIndex, hexID);
-        }
+      valueHex === 1 ? checkDomain(intersectIndex) : removeHex();
 
-        //   Если нет создаем новый домен
-        else {
-          hexCordinate.createDomen(objDomain);
+      function checkDomain(intersectIndex) {
+        if (valueHex === 1) {
+          // Если есть пересечение добавляем данные в группу c ID
+          if (intersectIndex !== -1) {
+            const colorDomain = mainDomains[intersectIndex].idDomain;
+            hex.style.fill = colorDomain;
+            hexCordinate.addSubDomain(peakAndGroup, intersectIndex, hexID);
+          }
+          //   Если нет создаем новый домен
+          else {
+            hexCordinate.createDomen(objDomain);
+          }
         }
       }
 
       // Удаляем элемент из группы при повторном клике
-      else {
-        removeHex();
-      }
-
       function removeHex() {
         mainDomains.forEach((elem, index) => {
           if (elem.hexId.includes(hexID)) {
             const indexArrCord = elem.groupCord.findIndex((id) => {
               return id === hexID;
             });
-
-            const indexArrHexId = elem.hexId.findIndex((id) => {
-              return id === hexID;
-            });
             hex.style = null;
-            hexCordinate.removeHexFromDomain(
-              index,
-              indexArrHexId,
-              indexArrCord
-            );
+            hexCordinate.removeHexFromDomain(index, indexArrCord);
           }
         });
       }
