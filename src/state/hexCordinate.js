@@ -7,7 +7,7 @@ class hexCordinate {
   arrDomains = [];
   svgArea = [];
   isRandom = false;
- 
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -19,7 +19,6 @@ class hexCordinate {
 
   //   Получаем хекс клика
   getHex(checkHex) {
-    //  console.log(checkHex);
     this.hexObj = checkHex;
   }
 
@@ -70,6 +69,25 @@ class hexCordinate {
 
   handlerBtnRandom() {
     this.isRandom = !this.isRandom;
+  }
+
+  getNeighborsHex(hexVert, hexHoriz) {
+    const result = this.arrCoordinates.filter((elem) => {
+      return (
+        (elem.horizontal === hexHoriz - 1 && elem.vertical === hexVert) ||
+        (elem.horizontal === hexHoriz - 1 && elem.vertical === hexVert + 1) ||
+        (elem.vertical === hexVert + 1 && elem.horizontal === hexHoriz) ||
+        (elem.horizontal === hexHoriz + 1 && elem.vertical === hexVert) ||
+        (elem.horizontal === hexHoriz + 1 && elem.vertical === hexVert - 1) ||
+        (elem.vertical === hexVert - 1 && elem.horizontal === hexHoriz)
+      );
+    });
+
+    const nodeID = result.map((elem) => {
+      return elem.id;
+    });
+
+    return nodeID;
   }
 
   randomColor() {
