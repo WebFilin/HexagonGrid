@@ -11,6 +11,10 @@ input[type="number"]:focus {
   -moz-appearance: textfield;
 }
 
+input {
+  outline: none;
+}
+
 .wrapper {
   width: 100vw;
   height: 100vh;
