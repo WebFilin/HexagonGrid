@@ -5,7 +5,6 @@ import hexCordinate from "../../state/hexCordinate";
 
 const RandomDomains = observer(() => {
   const isRandom = hexCordinate.isRandom;
-  const ratio = 0.5;
 
   //   Массив элементов DOM
   const arrElem = [];
@@ -14,6 +13,7 @@ const RandomDomains = observer(() => {
   const nodeCord = [];
 
   React.useEffect(() => {
+    const ratio = toJS(hexCordinate.randomRatio);
     const collectionsHexs = toJS(hexCordinate.svgArea);
     const arrHexs = Array.from(collectionsHexs);
 

@@ -4,7 +4,6 @@ import style from "./InputSizeSide.module.scss";
 
 function InputSizeSide({ title, value, onChange }) {
   const [valueInput, setValueInput] = React.useState(value);
-  const [activeValue, setActiveValue] = React.useState(false);
 
   function inputHandler(ev) {
     const input = Number(ev.target.value);
@@ -16,7 +15,6 @@ function InputSizeSide({ title, value, onChange }) {
   }
 
   const increment = () => {
-    setActiveValue(true);
     if (valueInput > 0 && valueInput < 30) {
       return setValueInput((currentValue) => currentValue + 1);
     } else {
@@ -25,7 +23,6 @@ function InputSizeSide({ title, value, onChange }) {
   };
 
   const decrement = () => {
-    setActiveValue(true);
     if (valueInput > 0 && valueInput < 30) {
       return setValueInput((currentValue) => currentValue - 1);
     } else {
@@ -48,14 +45,10 @@ function InputSizeSide({ title, value, onChange }) {
         </button>
         <input
           className={style.quantity}
-          type="text"
+          type="number"
           placeholder={value}
-          value={activeValue ? valueInput : null}
           onChange={(ev) => {
             action(inputHandler(ev));
-          }}
-          onClick={() => {
-            setValueInput("");
           }}
         />
         <button className={style.bt_plus} onClick={action(increment)}>

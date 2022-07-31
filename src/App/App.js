@@ -5,19 +5,20 @@ import DrowSvgArea from "../Components/DrowSvgArea/DrowSvgArea";
 import GetHexGroup from "../Components/GetHexGroup/GetHexGroup";
 import Domain from "../Components/Domain/Domain";
 import RandomDomains from "../Components/RandomDomains/RandomDomains";
-import BtnRandom from "../Components/ControlsElem/BtnRandom/BtnRandom";
-import SetHexSideSize from "../Components/HexSideSize/SetHrexSideSize";
+import BtnRandom from "../Components/ControlsElem/RandomDomainInput/RandomDomainInput";
+import SetHexSideSize from "../Components/HexSideSize/SetHexSideSize";
 
 function App() {
   return (
     <div className={style.wrapper}>
-      <header className={style.header}>
-        <BtnRandom />
-      </header>
+      <header className={style.header}></header>
 
       <main className={style.body}>
         <DrowSvgArea />
-        <SetHexSideSize />
+        <div className={style.controls}>
+          <SetHexSideSize />
+          <BtnRandom />
+        </div>
       </main>
 
       <footer className={style.footer} />

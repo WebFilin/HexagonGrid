@@ -8,6 +8,7 @@ class hexCordinate {
   svgArea = [];
   isRandom = false;
   isCreateMainhex = false;
+  randomRatio = 0;
   hexSideSize = {
     L: 3,
     M: 5,
@@ -27,8 +28,6 @@ class hexCordinate {
 
   handlerCreateHex() {
     this.isCreateMainhex = !this.isCreateMainhex;
-
-    console.log(this.isCreateMainhex)
   }
 
   //   Массив коррдинат хексов
@@ -86,7 +85,8 @@ class hexCordinate {
     this.hexValueTxt = value;
   }
 
-  handlerBtnRandom() {
+  handlerBtnRandom(ratio) {
+    this.randomRatio = ratio;
     this.isRandom = !this.isRandom;
   }
 
