@@ -24,16 +24,16 @@ const RandomDomains = observer(() => {
       hexGroup[0].style = { fill: null, fillOpacity: 0.3 };
       hexGroup[1].textContent = null;
       if (Math.random() <= ratio) {
-        arrElem.push(hexGroup[0]);
+        arrElem.push(hexGroup);
       }
     });
   }, [isRandom, arrElem]);
 
   React.useEffect(() => {
     arrElem.forEach((elemHex) => {
-      const hexVert = Number(elemHex.getAttribute("vertical"));
-      const hexHoriz = Number(elemHex.getAttribute("horizontal"));
-      const hexID = Number(elemHex.id);
+      const hexVert = Number(elemHex[0].getAttribute("vertical"));
+      const hexHoriz = Number(elemHex[0].getAttribute("horizontal"));
+      const hexID = Number(elemHex[0].id);
 
       //  Ищем соседий элементов
       const nodeID = hexCordinate.getNeighborsHex(hexVert, hexHoriz);
@@ -41,25 +41,16 @@ const RandomDomains = observer(() => {
       const peak = { id: hexID, group: nodeID };
       nodeCord.push(peak);
     });
-
-    //  console.log(nodeCord);
   }, [arrElem, nodeCord]);
 
   React.useEffect(() => {
-    arrElem.forEach((el) => {
-      el.style.fill = "red";
-    });
-
     let domainsArr = [];
 
     arrElem.forEach((hex, index) => {
       const colorGroup = hexCordinate.randomColor();
-      const hexID = Number(hex.id);
+      const hexID = Number(hex[0].id);
       const nodeID = nodeCord[index].group;
       const intersectIndex = intesect(hexID);
-
-      // console.log(hexID);
-      // console.log("Индекс пересечения " + intersectIndex);
 
       const objDomain = {
         idDomain: colorGroup,
@@ -97,12 +88,11 @@ const RandomDomains = observer(() => {
       domainsArr[index].id.push(hexID);
 
       domainsArr[index].hexs.forEach((elem) => {
-        elem.style.fill = colorDomain;
-        elem.style.fillOpacity = 0.8;
+        elem[0].style.fill = colorDomain;
+        elem[0].style.fillOpacity = 0.8;
+        elem[1].textContent = 1;
       });
     }
-
-    //   console.log(domainsArr);
   }, [arrElem, nodeCord]);
 
   return <div></div>;
