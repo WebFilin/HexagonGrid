@@ -4,9 +4,7 @@ import { observer } from "mobx-react-lite";
 import hexCordinate from "../../state/hexCordinate";
 
 const MainHexagons = observer(() => {
-
-const createMainHex = hexCordinate.isCreateMainhex
-console.log(createMainHex )
+  const createMainHex = hexCordinate.isCreateMainhex;
 
   React.useEffect(() => {
     //кординаты и линии расположения хексов
