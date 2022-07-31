@@ -27,10 +27,17 @@
   font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-.title {
+.text {
   margin-top: 5px;
   color: grey;
   font-weight: lighter;
+}
+
+.title {
+  margin-bottom: 5px;
+  font-weight: normal;
+  font-size: 18px;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 .btn_auto {

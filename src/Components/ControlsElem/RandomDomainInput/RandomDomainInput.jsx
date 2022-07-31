@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./randomDomain.module.scss";
+import style from "./randomDomainInput.module.scss";
 import hexCordinate from "../../../state/hexCordinate";
 import { action } from "mobx";
 
@@ -16,6 +16,7 @@ function RandomDomain() {
   }
   return (
     <div className={style.wrapper}>
+      <h5 className={style.title}>Автозаполнение</h5>
       <div className={style.body}>
         <input
           className={style.input}
@@ -32,7 +33,7 @@ function RandomDomain() {
           АВТО
         </button>
       </div>
-      <h5 className={style.title}>От 0.01 до 0.99</h5>
+      <h5 className={style.text}>От 0.01 до 0.99</h5>
     </div>
   );
 }
