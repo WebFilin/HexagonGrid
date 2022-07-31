@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./setHexSizeSide.module.scss";
 import { action } from "mobx";
-import InputSizeSide from "./InputSizeSide/InputSizeSide";
+import InputSizeSide from "../ControlsElem/InputSizeSide/InputSizeSide";
 import hexCordinate from "../../state/hexCordinate";
 
 function SetHexSideSize() {

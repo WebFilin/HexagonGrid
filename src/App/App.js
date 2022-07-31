@@ -5,7 +5,7 @@ import DrowSvgArea from "../Components/DrowSvgArea/DrowSvgArea";
 import GetHexGroup from "../Components/GetHexGroup/GetHexGroup";
 import Domain from "../Components/Domain/Domain";
 import RandomDomains from "../Components/RandomDomains/RandomDomains";
-import BtnRandom from "../Components/Buttons/BtnRandom/BtnRandom";
+import BtnRandom from "../Components/ControlsElem/BtnRandom/BtnRandom";
 import SetHexSideSize from "../Components/HexSideSize/SetHrexSideSize";
 
 function App() {
