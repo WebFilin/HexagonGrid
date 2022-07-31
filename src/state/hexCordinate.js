@@ -7,13 +7,22 @@ class hexCordinate {
   arrDomains = [];
   svgArea = [];
   isRandom = false;
-  hexSideSize = {};
+  hexSideSize = {
+    L: 3,
+    M: 5,
+    N: 7,
+  };
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  getHexSideSize() {}
+  //   Управляем сторонами общей сетки
+  getHexSideSize(axisL, axisM, axisN) {
+    this.hexSideSize.L = axisL;
+    this.hexSideSize.M = axisM;
+    this.hexSideSize.N = axisN;
+  }
 
   //   Массив коррдинат хексов
   getArrCoordinates(arrCord) {

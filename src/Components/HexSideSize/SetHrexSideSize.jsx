@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./setHexSizeSide.module.scss";
 import InputSizeSide from "./InputSizeSide/InputSizeSide";
+import hexCordinate from "../../state/hexCordinate";
 
 function SetHexSideSize() {
   const [valueL, setValueL] = React.useState(3);
@@ -19,13 +20,9 @@ function SetHexSideSize() {
     setValueN(value);
   };
 
-  let sideOfset = {
-    L: valueL,
-    M: valueM,
-    N: valueN,
-  };
-
-  console.log(sideOfset);
+  React.useEffect(() => {
+    hexCordinate.getHexSideSize(valueL, valueM, valueN);
+  }, [valueL, valueM, valueN]);
 
   return (
     <div className={style.wrapper}>
