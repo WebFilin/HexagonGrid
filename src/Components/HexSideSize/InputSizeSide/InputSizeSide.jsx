@@ -1,4 +1,5 @@
-import React, { useCallback } from "react";
+import React from "react";
+import { action } from "mobx";
 import style from "./InputSizeSide.module.scss";
 
 function InputSizeSide({ title, value, onChange }) {
@@ -37,7 +38,7 @@ function InputSizeSide({ title, value, onChange }) {
     <div className={style.wrapper}>
       <h3 className={style.title}>{title}</h3>
       <div className={style.body}>
-        <button className={style.bt_minus} onClick={decrement}>
+        <button className={style.bt_minus} onClick={action(decrement)}>
           <svg viewBox="0 0 24 24">
             <line x1="5" y1="12" x2="19" y2="12"></line>
           </svg>
@@ -45,16 +46,12 @@ function InputSizeSide({ title, value, onChange }) {
         <input
           className={style.quantity}
           type="text"
-          //  placeholder={value}
-          value={valueInput}
+          placeholder={value}
           onChange={(ev) => {
-            inputHandler(ev);
-          }}
-          onClick={() => {
-            // setValueInput(0);
+            action(inputHandler(ev));
           }}
         />
-        <button className={style.bt_plus} onClick={increment}>
+        <button className={style.bt_plus} onClick={action(increment)}>
           <svg viewBox="0 0 24 24">
             <line x1="12" y1="5" x2="12" y2="19"></line>
             <line x1="5" y1="12" x2="19" y2="12"></line>

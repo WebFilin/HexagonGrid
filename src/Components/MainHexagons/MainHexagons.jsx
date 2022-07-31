@@ -4,16 +4,20 @@ import { observer } from "mobx-react-lite";
 import hexCordinate from "../../state/hexCordinate";
 
 const MainHexagons = observer(() => {
-  // Размеры сетки из инпутов
-  const ofsetSide = toJS(hexCordinate.hexSideSize);
-  const L = ofsetSide.L;
-  const M = ofsetSide.M;
-  const N = ofsetSide.N;
+
+const createMainHex = hexCordinate.isCreateMainhex
+console.log(createMainHex )
 
   React.useEffect(() => {
     //кординаты и линии расположения хексов
     const hexesPositions = [];
     const sideOfset = 100;
+
+    // Размеры сетки из инпутов
+    const ofsetSide = toJS(hexCordinate.hexSideSize);
+    const L = ofsetSide.L;
+    const M = ofsetSide.M;
+    const N = ofsetSide.N;
 
     //  Стороны хекс контейнера
     const axisQ = L - 1;
@@ -54,7 +58,7 @@ const MainHexagons = observer(() => {
     }
 
     hexCordinate.getArrCoordinates(hexesPositions);
-  }, [L, M, N]);
+  }, [createMainHex]);
 
   return <></>;
 });

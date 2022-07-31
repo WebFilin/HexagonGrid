@@ -1,5 +1,6 @@
 import React from "react";
 import style from "./setHexSizeSide.module.scss";
+import { action } from "mobx";
 import InputSizeSide from "./InputSizeSide/InputSizeSide";
 import hexCordinate from "../../state/hexCordinate";
 
@@ -29,6 +30,13 @@ function SetHexSideSize() {
       <InputSizeSide title="L" value={valueL} onChange={handlerValueL} />
       <InputSizeSide title="M" value={valueM} onChange={handlerValueM} />
       <InputSizeSide title="N" value={valueN} onChange={handlerValueN} />
+
+      <button
+        className={style.btnCalc}
+        onClick={action(() => hexCordinate.handlerCreateHex())}
+      >
+        СОЗДАТЬ
+      </button>
     </div>
   );
 }

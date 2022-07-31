@@ -7,6 +7,7 @@ class hexCordinate {
   arrDomains = [];
   svgArea = [];
   isRandom = false;
+  isCreateMainhex = false;
   hexSideSize = {
     L: 3,
     M: 5,
@@ -22,6 +23,12 @@ class hexCordinate {
     this.hexSideSize.L = axisL;
     this.hexSideSize.M = axisM;
     this.hexSideSize.N = axisN;
+  }
+
+  handlerCreateHex() {
+    this.isCreateMainhex = !this.isCreateMainhex;
+
+    console.log(this.isCreateMainhex)
   }
 
   //   Массив коррдинат хексов
