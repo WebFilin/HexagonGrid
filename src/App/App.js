@@ -6,15 +6,18 @@ import GetHexGroup from "../Components/GetHexGroup/GetHexGroup";
 import Domain from "../Components/Domain/Domain";
 import RandomDomains from "../Components/RandomDomains/RandomDomains";
 import BtnRandom from "../Components/Buttons/BtnRandom/BtnRandom";
+import SetHexSideSize from "../Components/HexSideSize/SetHrexSideSize";
 
 function App() {
   return (
     <div className={style.wrapper}>
-      <header className={style.header}></header>
+      <header className={style.header}>
+        <BtnRandom />
+      </header>
 
       <main className={style.body}>
         <DrowSvgArea />
-        <BtnRandom />
+        <SetHexSideSize />
       </main>
 
       <footer className={style.footer} />

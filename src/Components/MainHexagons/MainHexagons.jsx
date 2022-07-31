@@ -4,14 +4,14 @@ import hexCordinate from "../../state/hexCordinate";
 
 function MainHexagons() {
   // !Переменные размера области гексагонов - передать пропсами ограничение до 30
-  let L = 5;
-  let M = 5;
-  let N = 5;
-  const sideOfset = 100;
+  let L = 2;
+  let M = 2;
+  let N = 2;
 
   React.useMemo(() => {
     //кординаты и линии расположения хексов
     const hexesPositions = [];
+    const sideOfset = 100;
 
     //  Стороны хекс контейнера
     const axisQ = L - 1;
@@ -52,7 +52,7 @@ function MainHexagons() {
     }
 
     hexCordinate.getArrCoordinates(hexesPositions);
-  }, [L, M, N, sideOfset]);
+  }, [L, M, N]);
 
   return <></>;
 }

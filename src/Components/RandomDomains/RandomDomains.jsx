@@ -42,20 +42,21 @@ const RandomDomains = observer(() => {
       nodeCord.push(peak);
     });
 
-    console.log(nodeCord);
+    //  console.log(nodeCord);
   }, [arrElem, nodeCord]);
 
   React.useEffect(() => {
+    arrElem.forEach((el) => {
+      el.style.fill = "red";
+    });
+
     let domainsArr = [];
 
     arrElem.forEach((hex, index) => {
-      // ! Времянка
-      hex.style.fill = "red";
-
       const colorGroup = hexCordinate.randomColor();
       const hexID = Number(hex.id);
       const nodeID = nodeCord[index].group;
-      // const intersectIndex = intesect(hexID);
+      const intersectIndex = intesect(hexID);
 
       // console.log(hexID);
       // console.log("Индекс пересечения " + intersectIndex);
@@ -67,41 +68,41 @@ const RandomDomains = observer(() => {
         groupCord: [...nodeID],
       };
 
-      // if (intersectIndex !== -1) {
-      //   addSubDomain(hex, nodeID, intersectIndex, hexID);
-      // } else {
-      //   createDomen(objDomain);
-      // }
-      //  });
-
-      //  Ищем пересечения в узлах, возврашаем индекс домена в общем стейте
-      //  function intesect(hexID) {
-      //    return domainsArr.findIndex((domain) => {
-      //      return domain.groupCord.includes(hexID);
-      //    });
-      //  }
-
-      //  Создаем новый домен
-      //  function createDomen(objDomain) {
-      //    domainsArr.push(objDomain);
-      //  }
-
-      //  Создаем субдомен
-      //  function addSubDomain(hex, nodeID, index, hexID) {
-      //    const colorDomain = domainsArr[index].idDomain;
-      //    const oldState = domainsArr[index].groupCord;
-
-      //    domainsArr[index].groupCord = [...new Set([...oldState, ...nodeID])];
-      //    domainsArr[index].hexs.push(hex);
-      //    domainsArr[index].id.push(hexID);
-
-      //    domainsArr[index].hexs.forEach((elem) => {
-      //      elem.style.fill = colorDomain;
-      //      elem.style.fillOpacity = 0.8;
+      if (intersectIndex !== -1) {
+        addSubDomain(hex, nodeID, intersectIndex, hexID);
+      } else {
+        createDomen(objDomain);
+      }
     });
-    //  }
 
-    //  console.log(domainsArr);
+    //  Ищем пересечения в узлах, возврашаем индекс домена в общем стейте
+    function intesect(hexID) {
+      return domainsArr.findIndex((domain) => {
+        return domain.groupCord.includes(hexID);
+      });
+    }
+
+    //  Создаем новый домен
+    function createDomen(objDomain) {
+      domainsArr.push(objDomain);
+    }
+
+    //  Создаем субдомен
+    function addSubDomain(hex, nodeID, index, hexID) {
+      const colorDomain = domainsArr[index].idDomain;
+      const oldState = domainsArr[index].groupCord;
+
+      domainsArr[index].groupCord = [...new Set([...oldState, ...nodeID])];
+      domainsArr[index].hexs.push(hex);
+      domainsArr[index].id.push(hexID);
+
+      domainsArr[index].hexs.forEach((elem) => {
+        elem.style.fill = colorDomain;
+        elem.style.fillOpacity = 0.8;
+      });
+    }
+
+    //   console.log(domainsArr);
   }, [arrElem, nodeCord]);
 
   return <div></div>;

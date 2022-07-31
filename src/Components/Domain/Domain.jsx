@@ -25,7 +25,7 @@ const Domain = observer(() => {
       // Структура одной группы в стеке доменов
       const objDomain = {
         idDomain: colorGroup,
-        hexs: [hexID],
+        hexsID: [hexID],
         groupCord: [...nodeID],
       };
 
@@ -50,6 +50,9 @@ const Domain = observer(() => {
       // Удаляем элемент из группы при повторном клике
       function removeHex() {
         mainDomains.forEach((elem, index) => {
+          hex.style = null;
+          hex.style.fillOpacity = 0.3;
+
           const hexInNode = elem.groupCord.includes(hexID);
 
           if (hexInNode) {
@@ -57,11 +60,10 @@ const Domain = observer(() => {
               return id === hexID;
             });
 
-            const indexArrHexId = elem.hexId.findIndex((id) => {
+            const indexArrHexId = elem.hexsID.findIndex((id) => {
               return id === hexID;
             });
-            hex.style = null;
-            hex.style.fillOpacity = 0.3;
+
             hexCordinate.removeHexFromDomain(
               index,
               indexArrCord,
