@@ -12,6 +12,9 @@ const RandomDomains = observer(() => {
   //  обьект кординат вокруг узла
   const nodeCord = [];
 
+  // ID узла
+  const nodeElemID = [];
+
   React.useEffect(() => {
     const ratio = toJS(hexCordinate.randomRatio);
     const collectionsHexs = toJS(hexCordinate.svgArea);
@@ -22,7 +25,7 @@ const RandomDomains = observer(() => {
 
       // Сброс стилей хексов
       hexGroup[0].style = { fill: null, fillOpacity: 0.3 };
-      // hexGroup[1].textContent = null;
+      hexGroup[1].textContent = null;
       if (Math.random() <= ratio) {
         arrElem.push(hexGroup);
       }
@@ -40,8 +43,30 @@ const RandomDomains = observer(() => {
 
       const peak = { id: hexID, group: nodeID };
       nodeCord.push(peak);
+      nodeElemID.push(hexID);
+
+      // elemHex[0].style.fill = "red";
     });
-  }, [arrElem, nodeCord]);
+  }, [arrElem, nodeCord, nodeElemID]);
+
+  React.useEffect(() => {
+    //  const arrResult = [];
+    //  function createDomains() {
+    //    const colorGroup = hexCordinate.randomColor();
+    //    const result = nodeElemID.filter((x) =>
+    //      nodeCord.some((elem) => elem.group.includes(x))
+    //    );
+    //    const objDomain = {
+    //      idDomain: colorGroup,
+    //      groupId: [...result],
+    //    };
+    //    arrResult.push(objDomain);
+    //  }
+    //  createDomains();
+    //  console.log(arrResult);
+    //  console.log(nodeElemID);
+    //  console.log(nodeCord);
+  }, [nodeCord, nodeElemID]);
 
   React.useEffect(() => {
     let domainsArr = [];

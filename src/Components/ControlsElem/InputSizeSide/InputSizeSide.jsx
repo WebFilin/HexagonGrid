@@ -56,9 +56,9 @@ function InputSizeSide({ title, value, onChange, text, inc, dec, min, max }) {
           type="number"
           value={value}
           onChange={(ev) => {
-            action(inputHandler(ev));
+            inputHandler(ev);
           }}
-          onClick={inputClear}
+          onClick={ action(inputClear)}
         />
         <button className={style.bt_plus} onClick={action(increment)}>
           <svg viewBox="0 0 24 24">

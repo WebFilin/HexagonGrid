@@ -22,7 +22,6 @@ function App() {
       </main>
 
       <footer className={style.footer} />
-
       <MainHexagons />
       <GetHexGroup />
       <Domain />
