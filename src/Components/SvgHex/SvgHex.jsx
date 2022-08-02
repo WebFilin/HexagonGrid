@@ -44,6 +44,7 @@ function SvgHex({ id, x, y, vertical, horizontal }) {
         ></polygon>
         <text className={style.hex_txt}>
           {/* {id} : {value} */}
+          {id}
 
           {value}
         </text>

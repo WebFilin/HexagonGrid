@@ -27,12 +27,39 @@ function SetHexSideSize() {
 
   return (
     <div className={style.wrapper}>
-      <InputSizeSide title="L" value={valueL} onChange={handlerValueL} />
-      <InputSizeSide title="M" value={valueM} onChange={handlerValueM} />
-      <InputSizeSide title="N" value={valueN} onChange={handlerValueN} />
+      <InputSizeSide
+        title="L"
+        value={valueL}
+        onChange={handlerValueL}
+        text="От 0 до 30"
+        inc={1}
+        dec={1}
+        min={0}
+        max={30}
+      />
+      <InputSizeSide
+        title="M"
+        value={valueM}
+        onChange={handlerValueM}
+        text="От 0 до 30"
+        inc={1}
+        dec={1}
+        min={0}
+        max={29}
+      />
+      <InputSizeSide
+        title="N"
+        value={valueN}
+        onChange={handlerValueN}
+        text="От 0 до 30"
+        inc={1}
+        dec={1}
+        min={0}
+        max={29}
+      />
 
       <button
-        className={style.btnCalc}
+        className={style.btn_calc}
         onClick={action(() => hexCordinate.handlerCreateHex())}
       >
         СОЗДАТЬ

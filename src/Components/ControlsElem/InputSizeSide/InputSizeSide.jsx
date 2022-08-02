@@ -2,33 +2,41 @@ import React from "react";
 import { action } from "mobx";
 import style from "./InputSizeSide.module.scss";
 
-function InputSizeSide({ title, value, onChange }) {
+function InputSizeSide({ title, value, onChange, text, inc, dec, min, max }) {
   const [valueInput, setValueInput] = React.useState(value);
+  const [isValid, setIsValid] = React.useState(true);
 
   function inputHandler(ev) {
     const input = Number(ev.target.value);
-    if (input >= 0 && input <= 30) {
-      setValueInput(input);
+    if (input >= min && input <= max) {
+      setIsValid(true);
+      return setValueInput(input);
     } else {
-      alert("Вне диапазона");
+      setIsValid(false);
     }
   }
 
-  const increment = () => {
-    if (valueInput > 0 && valueInput < 30) {
-      return setValueInput((currentValue) => currentValue + 1);
+  function increment() {
+    if (valueInput < max) {
+      setIsValid(true);
+      return setValueInput((currentValue) => currentValue + inc);
     } else {
-      return alert("Вне диапазона");
+      setIsValid(false);
     }
-  };
+  }
 
-  const decrement = () => {
-    if (valueInput > 0 && valueInput < 30) {
-      return setValueInput((currentValue) => currentValue - 1);
+  function decrement() {
+    if (valueInput > min) {
+      setIsValid(true);
+      return setValueInput((currentValue) => currentValue - dec);
     } else {
-      return alert("Вне диапазона");
+      setIsValid(false);
     }
-  };
+  }
+
+  function inputClear() {
+    return setValueInput("");
+  }
 
   React.useEffect(() => {
     onChange(valueInput);
@@ -46,10 +54,11 @@ function InputSizeSide({ title, value, onChange }) {
         <input
           className={style.quantity}
           type="number"
-          placeholder={value}
+          value={value}
           onChange={(ev) => {
             action(inputHandler(ev));
           }}
+          onClick={inputClear}
         />
         <button className={style.bt_plus} onClick={action(increment)}>
           <svg viewBox="0 0 24 24">
@@ -58,7 +67,9 @@ function InputSizeSide({ title, value, onChange }) {
           </svg>
         </button>
       </div>
-      <h5 className={style.text}>От 1 до 30</h5>
+      <h5 className={isValid ? style.text : style.text_error}>
+        {isValid ? text : "Вне диапазона"}
+      </h5>
     </div>
   );
 }

@@ -5,8 +5,8 @@ import DrowSvgArea from "../Components/DrowSvgArea/DrowSvgArea";
 import GetHexGroup from "../Components/GetHexGroup/GetHexGroup";
 import Domain from "../Components/Domain/Domain";
 import RandomDomains from "../Components/RandomDomains/RandomDomains";
-import BtnRandom from "../Components/ControlsElem/RandomDomainInput/RandomDomainInput";
 import SetHexSideSize from "../Components/HexSideSize/SetHexSideSize";
+import RandomChange from "../Components/ControlsElem/RandomChange/RandomChange";
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
         <DrowSvgArea />
         <div className={style.controls}>
           <SetHexSideSize />
-          <BtnRandom />
+          <RandomChange />
         </div>
       </main>
 

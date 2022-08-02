@@ -1,15 +1,17 @@
 .wrapper {
-  padding: 0px 10px;
-  width: 50vw;
+  margin-left: 63px;
+}
 
+.body {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 }
 
 .btn_calc {
   color: #bfe2ff;
   padding: 9px;
+  margin-left: 20px;
   border-radius: 10px;
   border: 3px solid #bfe2ff;
   background: #337ab7;

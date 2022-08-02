@@ -22,7 +22,7 @@ const RandomDomains = observer(() => {
 
       // Сброс стилей хексов
       hexGroup[0].style = { fill: null, fillOpacity: 0.3 };
-      hexGroup[1].textContent = null;
+      // hexGroup[1].textContent = null;
       if (Math.random() <= ratio) {
         arrElem.push(hexGroup);
       }

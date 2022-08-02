@@ -48,7 +48,6 @@
 
 .title {
   font-weight: normal;
-  margin-left: -85%;
   margin-bottom: -5px;
 }
 
@@ -57,6 +56,11 @@
   svg {
     @extend %svg-styles;
   }
+}
+
+.text_error {
+  margin-top: -5px;
+  color: red;
 }
 
 .quantity {
