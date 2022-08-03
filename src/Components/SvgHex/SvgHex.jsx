@@ -5,7 +5,7 @@ import { action } from "mobx";
 
 function SvgHex({ id, x, y, vertical, horizontal }) {
   const [isClick, setIsClick] = React.useState(false);
-  const [value, setValue] = React.useState(null);
+  const [value, setValue] = React.useState(0);
   const hexEl = React.useRef();
 
   //   Выбираем хекс передаем в mobx
@@ -21,8 +21,8 @@ function SvgHex({ id, x, y, vertical, horizontal }) {
 
     if (hex) {
       const hexTxt = hex.parentNode.lastChild;
-      isClick ? setValue(1) : setValue(null);
-      hexTxt.textContent = value;
+      isClick ? setValue(1) : setValue(0);
+      hexTxt.textContent = isClick ? value : null;
     }
 
     hexCordinate.getHex(hex);
@@ -43,7 +43,6 @@ function SvgHex({ id, x, y, vertical, horizontal }) {
           })}
         ></polygon>
         <text className={style.hex_txt}>
-          {/* {id} : {value} */}
           {/* {id} */}
 
           {value}

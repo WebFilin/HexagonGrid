@@ -25,7 +25,7 @@ const RandomDomains = observer(() => {
 
       // Сброс стилей хексов
       hexGroup[0].style = { fill: null, fillOpacity: 0.3 };
-      hexGroup[1].textContent = null;
+      // hexGroup[1].textContent = null;
       if (Math.random() <= ratio) {
         arrElem.push(hexGroup);
       }
@@ -41,84 +41,43 @@ const RandomDomains = observer(() => {
       //  Ищем соседий элементов
       const nodeID = hexCordinate.getNeighborsHex(hexVert, hexHoriz);
 
-      const peak = { id: hexID, group: nodeID };
-      nodeCord.push(peak);
+      // const peak = { id: hexID, group: nodeID };
+      nodeCord.push(nodeID);
       nodeElemID.push(hexID);
 
-      // elemHex[0].style.fill = "red";
+      elemHex[0].style.fill = "red";
     });
   }, [arrElem, nodeCord, nodeElemID]);
 
   React.useEffect(() => {
-    //  const arrResult = [];
-    //  function createDomains() {
-    //    const colorGroup = hexCordinate.randomColor();
-    //    const result = nodeElemID.filter((x) =>
-    //      nodeCord.some((elem) => elem.group.includes(x))
-    //    );
-    //    const objDomain = {
-    //      idDomain: colorGroup,
-    //      groupId: [...result],
-    //    };
-    //    arrResult.push(objDomain);
-    //  }
-    //  createDomains();
-    //  console.log(arrResult);
-    //  console.log(nodeElemID);
-    //  console.log(nodeCord);
+    const arrResult = [];
+
+   //  nodeCord.forEach((node) => {
+   //    nodeElemID.forEach((id) => {
+   //      const intersect = node.includes(id);
+
+   //      if (intersect) {
+       
+   //       arrResult.push(id)
+   //       // nodeCord.pop()
+
+
+   //       //  console.log(id);
+   //      }
+   //    });
+   //  });
+
+   //  console.log(arrResult);
+
+    //  let intersection = nodeElemID.filter((id) =>
+    //    nodeCord.some((group) => group.includes(id))
+    //  );
+
+    //  console.log(intersection);
+
+    // console.log(nodeCord)
+    // console.log(nodeElemID)
   }, [nodeCord, nodeElemID]);
-
-  React.useEffect(() => {
-    let domainsArr = [];
-
-    arrElem.forEach((hex, index) => {
-      const colorGroup = hexCordinate.randomColor();
-      const hexID = Number(hex[0].id);
-      const nodeID = nodeCord[index].group;
-      const intersectIndex = intesect(hexID);
-
-      const objDomain = {
-        idDomain: colorGroup,
-        id: [hexID],
-        hexs: [hex],
-        groupCord: [...nodeID],
-      };
-
-      if (intersectIndex !== -1) {
-        addSubDomain(hex, nodeID, intersectIndex, hexID);
-      } else {
-        createDomen(objDomain);
-      }
-    });
-
-    //  Ищем пересечения в узлах, возврашаем индекс домена в общем стейте
-    function intesect(hexID) {
-      return domainsArr.findIndex((domain) => {
-        return domain.groupCord.includes(hexID);
-      });
-    }
-
-    //  Создаем новый домен
-    function createDomen(objDomain) {
-      domainsArr.push(objDomain);
-    }
-
-    //  Создаем субдомен
-    function addSubDomain(hex, nodeID, index, hexID) {
-      const colorDomain = domainsArr[index].idDomain;
-      const oldState = domainsArr[index].groupCord;
-
-      domainsArr[index].groupCord = [...new Set([...oldState, ...nodeID])];
-      domainsArr[index].hexs.push(hex);
-      domainsArr[index].id.push(hexID);
-
-      domainsArr[index].hexs.forEach((elem) => {
-        elem[0].style.fill = colorDomain;
-        elem[0].style.fillOpacity = 0.8;
-        elem[1].textContent = 1;
-      });
-    }
-  }, [arrElem, nodeCord]);
 
   return <div></div>;
 });
