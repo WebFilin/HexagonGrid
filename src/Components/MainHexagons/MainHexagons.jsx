@@ -13,13 +13,9 @@ const MainHexagons = observer(() => {
 
     // Размеры сетки из инпутов
     const ofsetSide = toJS(hexCordinate.hexSideSize);
-    //  const L = ofsetSide.L;
-    //  const M = ofsetSide.M;
-    //  const N = ofsetSide.N;
-
-    const L = 3;
-    const M = 3;
-    const N = 3;
+    const L = ofsetSide.L;
+    const M = ofsetSide.M;
+    const N = ofsetSide.N;
 
     //  Стороны хекс контейнера
     const axisQ = L - 1;

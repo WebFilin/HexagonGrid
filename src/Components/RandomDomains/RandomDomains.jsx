@@ -21,63 +21,87 @@ const RandomDomains = observer(() => {
     const arrHexs = Array.from(collectionsHexs);
 
     arrHexs.forEach((elem) => {
-      const hexGroup = Array.from(elem.children);
+      const hex = elem.firstChild;
+      const hexTxt = elem.lastChild;
 
       // Сброс стилей хексов
-      hexGroup[0].style = { fill: null, fillOpacity: 0.3 };
-      // hexGroup[1].textContent = null;
+      hex.style = { fill: null, fillOpacity: 0.3 };
+      hexTxt.textContent = null;
+
       if (Math.random() <= ratio) {
-        arrElem.push(hexGroup);
+        hexTxt.textContent = 1;
+        arrElem.push(hex);
       }
     });
   }, [isRandom, arrElem]);
 
   React.useEffect(() => {
     arrElem.forEach((elemHex) => {
-      const hexVert = Number(elemHex[0].getAttribute("vertical"));
-      const hexHoriz = Number(elemHex[0].getAttribute("horizontal"));
-      const hexID = Number(elemHex[0].id);
+      const hexVert = Number(elemHex.getAttribute("vertical"));
+      const hexHoriz = Number(elemHex.getAttribute("horizontal"));
+      const hexID = Number(elemHex.id);
 
       //  Ищем соседий элементов
       const nodeID = hexCordinate.getNeighborsHex(hexVert, hexHoriz);
 
-      // const peak = { id: hexID, group: nodeID };
-      nodeCord.push(nodeID);
+      const peak = { id: hexID, group: nodeID };
+      nodeCord.push(peak);
       nodeElemID.push(hexID);
-
-      elemHex[0].style.fill = "red";
     });
   }, [arrElem, nodeCord, nodeElemID]);
 
   React.useEffect(() => {
-    const arrResult = [];
+    let domainsArr = [];
 
-   //  nodeCord.forEach((node) => {
-   //    nodeElemID.forEach((id) => {
-   //      const intersect = node.includes(id);
+    arrElem.forEach((hex, index) => {
+      const colorGroup = hexCordinate.randomColor();
+      const hexID = Number(hex.id);
+      const nodeID = nodeCord[index].group;
 
-   //      if (intersect) {
-       
-   //       arrResult.push(id)
-   //       // nodeCord.pop()
+      const intersectIndex = intesect(hexID);
 
+      const objDomain = {
+        idDomain: colorGroup,
+        id: [hexID],
+        hexs: [hex],
+        groupCord: [...nodeID],
+      };
 
-   //       //  console.log(id);
-   //      }
-   //    });
-   //  });
+      if (intersectIndex !== -1) {
+        addSubDomain(hex, nodeID, intersectIndex, hexID);
+      } else {
+        createDomen(objDomain);
+      }
+    });
 
-   //  console.log(arrResult);
+    //  Ищем пересечения в узлах, возврашаем индекс домена в общем стейте
+    function intesect(hexID) {
+      return domainsArr.findIndex((domain) => {
+        return domain.groupCord.includes(hexID);
+      });
+    }
 
-    //  let intersection = nodeElemID.filter((id) =>
-    //    nodeCord.some((group) => group.includes(id))
-    //  );
+    //  Создаем новый домен
+    function createDomen(objDomain) {
+      domainsArr.push(objDomain);
+    }
 
-    //  console.log(intersection);
+    //  Создаем субдомен
+    function addSubDomain(hex, nodeID, index, hexID) {
+      const colorDomain = domainsArr[index].idDomain;
+      const oldState = domainsArr[index].groupCord;
 
-    // console.log(nodeCord)
-    // console.log(nodeElemID)
-  }, [nodeCord, nodeElemID]);
+      domainsArr[index].groupCord = [...new Set([...oldState, ...nodeID])];
+      domainsArr[index].hexs.push(hex);
+      domainsArr[index].id.push(hexID);
+
+      domainsArr[index].hexs.forEach((elem) => {
+        elem.style.fill = colorDomain;
+        elem.style.fillOpacity = 0.8;
+        elem.textContent = 1;
+      });
+    }
+  }, [arrElem, nodeCord]);
 
   return <div></div>;
 });

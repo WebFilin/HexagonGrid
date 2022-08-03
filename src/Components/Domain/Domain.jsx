@@ -12,8 +12,6 @@ const Domain = observer(() => {
     const mainDomains = toJS(hexCordinate.arrDomains);
     const colorGroup = hexCordinate.randomColor();
 
-    console.log(mainDomains )
-
     if (hex) {
       const hexID = Number(hex.id);
       const valueHex = Number(hex.getAttribute("value"));
@@ -31,11 +29,7 @@ const Domain = observer(() => {
         groupCord: [...nodeID],
       };
 
-      // Если элемент кликнут в первый раз
-      valueHex === 1 ? checkDomain(intersectIndex) : removeHex();
-
       function checkDomain(intersectIndex) {
-        //   if (valueHex === 1) {
         // Если есть пересечение добавляем данные в группу c ID
         if (intersectIndex !== -1) {
           const colorDomain = mainDomains[intersectIndex].idDomain;
@@ -46,13 +40,13 @@ const Domain = observer(() => {
         else {
           hexCordinate.createDomen(objDomain);
         }
-        //   }
       }
 
       // Удаляем элемент из группы при повторном клике
       function removeHex() {
         hex.style.fill = "";
         hex.style.fillOpacity = 0.3;
+
         mainDomains.forEach((elem, index) => {
           const hexInNode = elem.groupCord.includes(hexID);
 
@@ -72,11 +66,9 @@ const Domain = observer(() => {
             );
           }
         });
-
-        console.log(hex);
       }
-      // checkDomain(intersectIndex);
-      // removeHex();
+      // Если элемент кликнут в первый раз
+      valueHex === 1 ? checkDomain(intersectIndex) : removeHex();
     }
   }, [hex]);
 

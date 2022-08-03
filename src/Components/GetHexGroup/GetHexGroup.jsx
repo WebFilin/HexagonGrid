@@ -8,7 +8,7 @@ const GetHexGroup = observer(() => {
   let hex = toJS(hexCordinate.hexObj);
 
   // Ищем соседий хекса
-  React.useMemo(() => {
+  React.useEffect(() => {
     if (hex) {
       const hexVert = Number(hex.getAttribute("vertical"));
       const hexHoriz = Number(hex.getAttribute("horizontal"));
