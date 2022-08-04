@@ -68,7 +68,9 @@ const Domain = observer(() => {
         });
       }
       // Если элемент кликнут в первый раз
-      valueHex === 1 ? checkDomain(intersectIndex) : removeHex();
+      // valueHex === 1 ? checkDomain(intersectIndex) : removeHex();
+
+      checkDomain(intersectIndex);
     }
   }, [hex]);
 

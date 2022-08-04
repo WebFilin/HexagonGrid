@@ -13,7 +13,7 @@ const RandomDomains = observer(() => {
   const nodeCord = [];
 
   // ID узла
-  const nodeElemID = [];
+  //   const nodeElemID = [];
 
   React.useEffect(() => {
     const ratio = toJS(hexCordinate.randomRatio);
@@ -29,7 +29,7 @@ const RandomDomains = observer(() => {
       hexTxt.textContent = null;
 
       if (Math.random() <= ratio) {
-        hexTxt.textContent = 1;
+        hexTxt.textContent = hex.id;
         arrElem.push(hex);
       }
     });
@@ -40,67 +40,20 @@ const RandomDomains = observer(() => {
       const hexVert = Number(elemHex.getAttribute("vertical"));
       const hexHoriz = Number(elemHex.getAttribute("horizontal"));
       const hexID = Number(elemHex.id);
+      elemHex.style.fill = "red";
 
       //  Ищем соседий элементов
       const nodeID = hexCordinate.getNeighborsHex(hexVert, hexHoriz);
 
       const peak = { id: hexID, group: nodeID };
       nodeCord.push(peak);
-      nodeElemID.push(hexID);
+      // nodeElemID.push(hexID);
     });
-  }, [arrElem, nodeCord, nodeElemID]);
+  }, [arrElem, nodeCord]);
 
   React.useEffect(() => {
     let domainsArr = [];
-
-    arrElem.forEach((hex, index) => {
-      const colorGroup = hexCordinate.randomColor();
-      const hexID = Number(hex.id);
-      const nodeID = nodeCord[index].group;
-
-      const intersectIndex = intesect(hexID);
-
-      const objDomain = {
-        idDomain: colorGroup,
-        id: [hexID],
-        hexs: [hex],
-        groupCord: [...nodeID],
-      };
-
-      if (intersectIndex !== -1) {
-        addSubDomain(hex, nodeID, intersectIndex, hexID);
-      } else {
-        createDomen(objDomain);
-      }
-    });
-
-    //  Ищем пересечения в узлах, возврашаем индекс домена в общем стейте
-    function intesect(hexID) {
-      return domainsArr.findIndex((domain) => {
-        return domain.groupCord.includes(hexID);
-      });
-    }
-
-    //  Создаем новый домен
-    function createDomen(objDomain) {
-      domainsArr.push(objDomain);
-    }
-
-    //  Создаем субдомен
-    function addSubDomain(hex, nodeID, index, hexID) {
-      const colorDomain = domainsArr[index].idDomain;
-      const oldState = domainsArr[index].groupCord;
-
-      domainsArr[index].groupCord = [...new Set([...oldState, ...nodeID])];
-      domainsArr[index].hexs.push(hex);
-      domainsArr[index].id.push(hexID);
-
-      domainsArr[index].hexs.forEach((elem) => {
-        elem.style.fill = colorDomain;
-        elem.style.fillOpacity = 0.8;
-        elem.textContent = 1;
-      });
-    }
+    const colorGroup = hexCordinate.randomColor();
   }, [arrElem, nodeCord]);
 
   return <div></div>;
