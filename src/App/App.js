@@ -7,17 +7,19 @@ import Domain from "../Components/Domain/Domain";
 import RandomDomains from "../Components/RandomDomains/RandomDomains";
 import SetHexSideSize from "../Components/HexSideSize/SetHexSideSize";
 import RandomChange from "../Components/ControlsElem/RandomChange/RandomChange";
+import InfoTable from "../Components/InfoTable/InfoTable";
 
 function App() {
   return (
     <div className={style.wrapper}>
-      <header className={style.header}></header>
+      <header className={style.header}> </header>
 
       <main className={style.body}>
         <DrowSvgArea />
         <div className={style.controls}>
           <SetHexSideSize />
           <RandomChange />
+          <InfoTable />
         </div>
       </main>
 

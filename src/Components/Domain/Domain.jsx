@@ -15,7 +15,7 @@ const Domain = observer(() => {
     if (hex) {
       const hexID = Number(hex.id);
       const valueHex = Number(hex.getAttribute("value"));
-      const nodeID = peakAndGroup.group;
+      const relationships = peakAndGroup.group;
       hex.style.fillOpacity = 0.8;
       hex.style.fill = colorGroup;
 
@@ -26,7 +26,7 @@ const Domain = observer(() => {
       const objDomain = {
         idDomain: colorGroup,
         hexsID: [hexID],
-        groupCord: [...nodeID],
+        groupCord: [...relationships],
       };
 
       function checkDomain(intersectIndex) {
@@ -34,7 +34,7 @@ const Domain = observer(() => {
         if (intersectIndex !== -1) {
           const colorDomain = mainDomains[intersectIndex].idDomain;
           hex.style.fill = colorDomain;
-          hexCordinate.addSubDomain(nodeID, intersectIndex, hexID);
+          hexCordinate.addSubDomain(relationships, intersectIndex, hexID);
         }
         //   Если нет создаем новый домен
         else {

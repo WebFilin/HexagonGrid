@@ -9,12 +9,6 @@ const RandomDomains = observer(() => {
   //   Массив элементов DOM
   const arrElem = [];
 
-  //  обьект кординат вокруг узла
-  const nodeCord = [];
-
-  // ID узла
-  //   const nodeElemID = [];
-
   React.useEffect(() => {
     const ratio = toJS(hexCordinate.randomRatio);
     const collectionsHexs = toJS(hexCordinate.svgArea);
@@ -26,16 +20,23 @@ const RandomDomains = observer(() => {
 
       // Сброс стилей хексов
       hex.style = { fill: null, fillOpacity: 0.3 };
-      hexTxt.textContent = null;
+      // hexTxt.textContent = null;
 
       if (Math.random() <= ratio) {
-        hexTxt.textContent = hex.id;
+        //   hexTxt.textContent = hex.id;
         arrElem.push(hex);
       }
     });
   }, [isRandom, arrElem]);
 
   React.useEffect(() => {
+    //  обьект кординат вокруг узла
+    const nodeRelationships = [];
+
+    // ID узла
+    const vertexID = [];
+    const colorGroup = hexCordinate.randomColor();
+
     arrElem.forEach((elemHex) => {
       const hexVert = Number(elemHex.getAttribute("vertical"));
       const hexHoriz = Number(elemHex.getAttribute("horizontal"));
@@ -43,18 +44,15 @@ const RandomDomains = observer(() => {
       elemHex.style.fill = "red";
 
       //  Ищем соседий элементов
-      const nodeID = hexCordinate.getNeighborsHex(hexVert, hexHoriz);
+      const relationships = hexCordinate.getNeighborsHex(hexVert, hexHoriz);
 
-      const peak = { id: hexID, group: nodeID };
-      nodeCord.push(peak);
-      // nodeElemID.push(hexID);
+      nodeRelationships.push(relationships);
+      vertexID.push(hexID);
     });
-  }, [arrElem, nodeCord]);
 
-  React.useEffect(() => {
-    let domainsArr = [];
-    const colorGroup = hexCordinate.randomColor();
-  }, [arrElem, nodeCord]);
+    console.log(nodeRelationships);
+    console.log(vertexID);
+  }, [arrElem]);
 
   return <div></div>;
 });
