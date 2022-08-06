@@ -30,12 +30,13 @@ const RandomDomains = observer(() => {
   }, [isRandom, arrElem]);
 
   React.useEffect(() => {
-    //  обьект кординат вокруг узла
-    const nodeRelationships = [];
-
     // ID узла
-    const vertexID = [];
-    const colorGroup = hexCordinate.randomColor();
+    const vertex = [];
+
+    const arrHexID = [];
+
+    //  Стек ребер графа
+    const relationships = [];
 
     arrElem.forEach((elemHex) => {
       const hexVert = Number(elemHex.getAttribute("vertical"));
@@ -44,15 +45,65 @@ const RandomDomains = observer(() => {
       elemHex.style.fill = "red";
 
       //  Ищем соседий элементов
-      const relationships = hexCordinate.getNeighborsHex(hexVert, hexHoriz);
+      const neighborsHexID = hexCordinate.getNeighborsHex(hexVert, hexHoriz);
 
-      nodeRelationships.push(relationships);
-      vertexID.push(hexID);
+      const peack = { id: hexID, group: [...neighborsHexID] };
+
+      vertex.push(peack);
+      arrHexID.push(hexID);
+
+      checkEdges(hexID);
     });
 
-    console.log(nodeRelationships);
-    console.log(vertexID);
-  }, [arrElem]);
+    //  Получаем ребра графа
+    function checkEdges(hexID) {
+      vertex.forEach((elem) => {
+        if (elem.group.includes(hexID)) {
+          relationships.push([elem.id, hexID]);
+        }
+      });
+    }
+
+    //  Строим матрицу смежности
+    const matrix = getMatrix(arrHexID, relationships);
+
+    function getMatrix(nodes, edges) {
+      const matrix = [];
+
+      nodes.forEach(() => {
+        const row = [];
+
+        nodes.forEach(() => {
+          row.push(0);
+        });
+        matrix.push(row);
+      });
+
+      for (const [a, b] of edges) {
+        // console.log( matrix[a][b])
+
+        //   console.log([a, b]);
+        //   console.log(edges);
+        //   console.log(matrix);
+
+        //    matrix[a][b] = 1;
+        //    matrix[b][a] = 1;
+
+        if (matrix[(a, b)]) {
+          matrix[a][b] = 1;
+          matrix[b][a] = 1;
+        }
+      }
+
+      // console.log(matrix);
+      return matrix;
+    }
+
+    console.log(matrix);
+
+    //  console.log(relationships);
+    //  console.log(arrHexID);
+  }, [arrElem, isRandom]);
 
   return <div></div>;
 });

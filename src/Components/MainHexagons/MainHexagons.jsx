@@ -17,9 +17,9 @@ const MainHexagons = observer(() => {
     //  const M = ofsetSide.M;
     //  const N = ofsetSide.N;
 
-    const L = 3;
-    const M = 3;
-    const N = 3;
+    const L = 2;
+    const M = 2;
+    const N = 2;
 
     //  Стороны хекс контейнера
     const axisQ = L - 1;
