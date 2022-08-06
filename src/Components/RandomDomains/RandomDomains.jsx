@@ -5,13 +5,13 @@ import hexCordinate from "../../state/hexCordinate";
 
 const RandomDomains = observer(() => {
   const isRandom = hexCordinate.isRandom;
-
+  const collectionsHexs = toJS(hexCordinate.svgArea);
   //   Массив элементов DOM
   const arrElem = [];
 
   React.useEffect(() => {
     const ratio = toJS(hexCordinate.randomRatio);
-    const collectionsHexs = toJS(hexCordinate.svgArea);
+
     const arrHexs = Array.from(collectionsHexs);
 
     arrHexs.forEach((elem) => {
@@ -27,7 +27,7 @@ const RandomDomains = observer(() => {
         arrElem.push(hex);
       }
     });
-  }, [isRandom, arrElem]);
+  }, [isRandom, arrElem, collectionsHexs]);
 
   React.useEffect(() => {
     // ID узла
@@ -65,45 +65,35 @@ const RandomDomains = observer(() => {
     }
 
     //  Строим матрицу смежности
-    const matrix = getMatrix(arrHexID, relationships);
+    const matrix = getMatrix(relationships);
 
-    function getMatrix(nodes, edges) {
+    function getMatrix(edges) {
+      // Матрица смежности
       const matrix = [];
 
-      nodes.forEach(() => {
+      // Максимальная длинна матрицы
+      const maxLength = collectionsHexs.length;
+
+      for (let i = 0; i < maxLength; i++) {
         const row = [];
 
-        nodes.forEach(() => {
+        for (let j = 0; j < maxLength; j++) {
           row.push(0);
-        });
-        matrix.push(row);
-      });
-
-      for (const [a, b] of edges) {
-        // console.log( matrix[a][b])
-
-        //   console.log([a, b]);
-        //   console.log(edges);
-        //   console.log(matrix);
-
-        //    matrix[a][b] = 1;
-        //    matrix[b][a] = 1;
-
-        if (matrix[(a, b)]) {
-          matrix[a][b] = 1;
-          matrix[b][a] = 1;
         }
+        matrix.push(row);
       }
 
-      // console.log(matrix);
+      // Заполняем матрицу на пересечениях
+      for (const [a, b] of edges) {
+        matrix[a][b] = 1;
+        matrix[b][a] = 1;
+      }
+
       return matrix;
     }
 
     console.log(matrix);
-
-    //  console.log(relationships);
-    //  console.log(arrHexID);
-  }, [arrElem, isRandom]);
+  }, [arrElem, collectionsHexs]);
 
   return <div></div>;
 });
