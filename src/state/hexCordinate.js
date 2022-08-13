@@ -54,9 +54,8 @@ class hexCordinate {
   }
 
   //   Добавляем ID состоявляющие домен, сортируем на уникальность
-  addSubDomain(nodeId, index, hexID) {
+  addSubDomain(nodeId, index) {
     const oldState = this.arrDomains[index].groupCord;
-    this.arrDomains[index].hexsID.push(hexID);
     this.arrDomains[index].groupCord = [...new Set([...oldState, ...nodeId])];
   }
 

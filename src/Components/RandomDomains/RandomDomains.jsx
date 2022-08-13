@@ -30,10 +30,14 @@ const RandomDomains = observer(() => {
   }, [isRandom, arrElem]);
 
   React.useEffect(() => {
-    //  Стек ребер графа
-    const relationships = {};
+    //  Стек вершин графа
+    const vertex = [];
 
-    const arrHexID = [];
+    //  Стек доменов
+    const domain = [];
+
+    //  Стек ребер графа
+    const linkedList = [];
 
     arrElem.forEach((elemHex) => {
       const hexVert = Number(elemHex.getAttribute("vertical"));
@@ -41,71 +45,69 @@ const RandomDomains = observer(() => {
       const hexID = Number(elemHex.id);
       elemHex.style.fill = "red";
 
-      // Получаем кординаты соседий
+      // Получаем кординаты соседей
       const getNeighbors = hexCordinate.getNeighborsHex(hexVert, hexHoriz);
 
-      // Добавляем обьект с вершинами и ребрами в стек графа
-      relationships[hexID] = {
-        id: hexID,
-        edges: [...getNeighbors],
-      };
-
-      arrHexID.push(hexID);
+      // Добавляем обьект с вершинами и возможными связями в стек
+      vertex.push({ id: hexID, edges: [...getNeighbors] });
     });
 
-    //  Стек доменов
-    const domain = [];
+    //  Стартуем проверки для создания доменов
+    while (vertex.length > 0) {
+      checkGroup();
+    }
 
-    function checkDomain(hexID) {
-      let edges = null;
+    function checkGroup() {
+      const node = vertex.shift();
 
-      for (let key in relationships) {
-        if (relationships[key].id === hexID) {
-          edges = relationships[key].edges;
+      vertex.forEach((elem) => {
+        if (elem.edges.includes(node.id)) {
+          linkedList.push([node.id, elem.id]);
         }
-      }
-
-      const intersect = domain.findIndex((domain) => {
-        return domain.groupCord.includes(hexID);
       });
+      checkDomain();
+    }
 
-      // console.log("Пересечене " + intersect, "ID " + hexID);
+    //  Проверяем вхождение шруппы в домены
+    function checkDomain() {
+      const edges = linkedList.shift();
 
       if (domain.length === 0) {
-        createDomain(hexID, edges);
+        createDomain(edges);
       } else {
-        if (intersect !== -1) {
-          addSubDomain(intersect, hexID, edges);
-        } else {
-          createDomain(hexID, edges);
-        }
+        addSubDomain(edges);
       }
     }
 
-    function createDomain(hexID, edges) {
+    function addSubDomain(edges) {
+      if (edges) {
+        edges.forEach((idEdges) => {
+          const intersect = domain.findIndex((domain) => {
+            return domain.groupCord.includes(idEdges);
+          });
+
+          if (intersect !== -1) {
+            const oldState = domain[intersect].groupCord;
+            domain[intersect].groupCord = [...new Set([...oldState, ...edges])];
+          } else {
+            createDomain(edges);
+          }
+        });
+      }
+    }
+
+    function createDomain(edges) {
       const colorGroup = hexCordinate.randomColor();
 
-      //   Структура одной группы в стеке доменов
-      const objDomain = {
-        idDomain: colorGroup,
-        hexsID: [hexID],
-        groupCord: [...edges],
-      };
+      if (edges) {
+        const objDomain = {
+          idDomain: colorGroup,
+          groupCord: [...edges],
+        };
 
-      domain.push(objDomain);
+        domain.push(objDomain);
+      }
     }
-
-    function addSubDomain(intersect, hexID, edges) {
-      const arrCord = domain[intersect].groupCord;
-      const arrId = domain[intersect].hexsID;
-
-      arrCord.push(...edges);
-      arrId.push(hexID);
-    }
-
-    arrHexID.forEach((hexID) => {
-      checkDomain(hexID);
-    });
 
     console.log(domain);
   }, [arrElem]);

@@ -25,7 +25,6 @@ const Domain = observer(() => {
       // Структура одной группы в стеке доменов
       const objDomain = {
         idDomain: colorGroup,
-        hexsID: [hexID],
         groupCord: [...relationships],
       };
 
@@ -34,7 +33,7 @@ const Domain = observer(() => {
         if (intersectIndex !== -1) {
           const colorDomain = mainDomains[intersectIndex].idDomain;
           hex.style.fill = colorDomain;
-          hexCordinate.addSubDomain(relationships, intersectIndex, hexID);
+          hexCordinate.addSubDomain(relationships, intersectIndex);
         }
         //   Если нет создаем новый домен
         else {
