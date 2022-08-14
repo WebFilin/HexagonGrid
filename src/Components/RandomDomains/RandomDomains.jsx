@@ -36,9 +36,6 @@ const RandomDomains = observer(() => {
     //  Стек доменов
     const domain = [];
 
-    //  Стек ребер графа
-    const linkedList = [];
-
     arrElem.forEach((elemHex) => {
       const hexVert = Number(elemHex.getAttribute("vertical"));
       const hexHoriz = Number(elemHex.getAttribute("horizontal"));
@@ -50,24 +47,71 @@ const RandomDomains = observer(() => {
 
       // Добавляем обьект с вершинами и возможными связями в стек
       vertex.push({ id: hexID, edges: [...getNeighbors] });
-
-      checkGroup();
     });
 
-    // Создания списка смежности
-   //  while (vertex.length > 0) {
-   //    checkGroup();
-   //  }
-
-    function checkGroup() {
+    //  Получаем только ребра графа
+    while (vertex.length > 0) {
       const node = vertex.shift();
 
       vertex.forEach((elem) => {
         if (elem.edges.includes(node.id)) {
-          linkedList.push([node.id, elem.id]);
+          const edges = [node.id, elem.id];
+          checkDomain(node.id, edges);
         }
       });
     }
+
+    function checkDomain(id, edges) {
+      if (domain.length === 0) {
+        createDomain(edges);
+      } else {
+        checkSubDomain(id, edges);
+      }
+    }
+
+    function checkSubDomain(id, edges) {
+
+      // !офыьштубика в сортировке - нужно каждый раз перебирать все значения в ребре
+      const intersect = domain.findIndex((domain) => {
+        return domain.groupCord.includes(id);
+      });
+
+      if (intersect !== -1) {
+        const prevGroupCord = domain[intersect].groupCord;
+        domain[intersect].groupCord = [
+          ...new Set([...prevGroupCord, ...edges]),
+        ];
+      } else {
+        createDomain(edges);
+      }
+    }
+
+    function createDomain(edges) {
+      const colorGroup = hexCordinate.randomColor();
+
+      const objDomain = {
+        idDomain: colorGroup,
+        groupCord: [...edges],
+      };
+
+      domain.push(objDomain);
+    }
+
+    // Красим в цвета домена
+    domain.forEach((domain) => {
+      const colorHex = `${domain.idDomain}`;
+
+      arrElem.forEach((elem) => {
+        const idHex = Number(elem.id);
+
+        if (domain.groupCord.includes(idHex)) {
+          elem.style.fill = colorHex;
+          elem.style.fillOpacity = 0.8;
+        }
+      });
+    });
+
+    console.log(domain);
   }, [arrElem]);
 
   return <div></div>;
