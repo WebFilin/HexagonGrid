@@ -50,12 +50,14 @@ const RandomDomains = observer(() => {
 
       // Добавляем обьект с вершинами и возможными связями в стек
       vertex.push({ id: hexID, edges: [...getNeighbors] });
+
+      checkGroup();
     });
 
-    //  Стартуем проверки для создания доменов
-    while (vertex.length > 0) {
-      checkGroup();
-    }
+    // Создания списка смежности
+   //  while (vertex.length > 0) {
+   //    checkGroup();
+   //  }
 
     function checkGroup() {
       const node = vertex.shift();
@@ -65,51 +67,7 @@ const RandomDomains = observer(() => {
           linkedList.push([node.id, elem.id]);
         }
       });
-      checkDomain();
     }
-
-    //  Проверяем вхождение шруппы в домены
-    function checkDomain() {
-      const edges = linkedList.shift();
-
-      if (domain.length === 0) {
-        createDomain(edges);
-      } else {
-        addSubDomain(edges);
-      }
-    }
-
-    function addSubDomain(edges) {
-      if (edges) {
-        edges.forEach((idEdges) => {
-          const intersect = domain.findIndex((domain) => {
-            return domain.groupCord.includes(idEdges);
-          });
-
-          if (intersect !== -1) {
-            const oldState = domain[intersect].groupCord;
-            domain[intersect].groupCord = [...new Set([...oldState, ...edges])];
-          } else {
-            createDomain(edges);
-          }
-        });
-      }
-    }
-
-    function createDomain(edges) {
-      const colorGroup = hexCordinate.randomColor();
-
-      if (edges) {
-        const objDomain = {
-          idDomain: colorGroup,
-          groupCord: [...edges],
-        };
-
-        domain.push(objDomain);
-      }
-    }
-
-    console.log(domain);
   }, [arrElem]);
 
   return <div></div>;
