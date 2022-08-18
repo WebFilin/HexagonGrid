@@ -119,7 +119,7 @@ const RandomDomains = observer(() => {
 
     function checkDomain(domainGroup) {
       if (arrDomains.length === 0) {
-        createDomain(domainGroup);
+        createDomain(...domainGroup);
       } else {
         checkSubDomain(domainGroup);
       }
@@ -130,8 +130,8 @@ const RandomDomains = observer(() => {
 
       // Структура одной группы в стеке доменов
       const objDomain = {
-        idDomain: colorGroup,
-        groupCord: [...domainGroup],
+        id: colorGroup,
+        idDomain: [domainGroup],
       };
 
       arrDomains.push(objDomain);
@@ -140,7 +140,7 @@ const RandomDomains = observer(() => {
     function checkSubDomain(domainGroup) {
       // Получаем индекс домена в общем стейте
       const intersect = arrDomains.findIndex((domain) => {
-        return domain.groupCord.some((id) => {
+        return domain.idDomain.some((id) => {
           return domainGroup.includes(id);
         });
       });
@@ -148,18 +148,42 @@ const RandomDomains = observer(() => {
       // Обрабатываем элементы появляющиеся в хвосте графа
       // Обрезаем повтрения рекрусии
       if (intersect !== -1) {
-        const oldState = arrDomains[intersect].groupCord;
+        const oldState = arrDomains[intersect].idDomain;
 
-        arrDomains[intersect].groupCord = [
+        arrDomains[intersect].idDomain = [
           ...new Set([...oldState, ...domainGroup]),
         ];
       } else {
-        createDomain(domainGroup);
+        createDomain(...domainGroup);
       }
     }
 
     //  Вызываем цепочку построения доменов
     mainHexGraph(edgesGraph);
+
+    // Обрабатываем единичные домены
+    function handlerSingleNode() {
+      const allNodeID = [];
+
+      // Получаем все id из доменов
+      arrDomains.forEach((node) => {
+        allNodeID.push(...node.idDomain);
+      });
+
+      const singleNode = arrElemGraph.filter((node) => {
+        if (!allNodeID.includes(node.id)) {
+          return node;
+        }
+      });
+
+      if (singleNode.length > 0) {
+        singleNode.forEach((elem) => {
+          createDomain(elem.id);
+        });
+      }
+    }
+
+    handlerSingleNode();
 
     console.log(arrDomains);
   }, [arrElemGraph, arrDomains]);
