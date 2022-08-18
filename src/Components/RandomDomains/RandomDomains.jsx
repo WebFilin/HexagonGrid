@@ -54,11 +54,11 @@ const RandomDomains = observer(() => {
       }
     }
 
-    //  Формируем общий граф сетки
+    //  Формируем общий граф всей сетки
     function mainHexGraph(edges) {
       const nodeMap = {};
 
-      //Динамически получаем связи узлов в общем графе
+      //Динамически получаем связи подгрупп в общем графе
       edges.forEach((edge) => {
         let node1 = edge[0];
         let node2 = edge[1];
@@ -110,8 +110,8 @@ const RandomDomains = observer(() => {
       // Рекрусивно обходим граф
       for (let i = 0; i < nodeMap[startNode].length; i++) {
         // Собираем узлы
-        let connectedNode = nodeMap[startNode][i];
-        depthFirstSearch(connectedNode, nodeMap, domainGroup);
+        let linkNode = nodeMap[startNode][i];
+        depthFirstSearch(linkNode, nodeMap, domainGroup);
       }
 
       checkDomain(domainGroup);
@@ -170,6 +170,7 @@ const RandomDomains = observer(() => {
         allNodeID.push(...node.idDomain);
       });
 
+      // Ищем исключения
       const singleNode = arrElemGraph.filter((node) => {
         if (!allNodeID.includes(node.id)) {
           return node;
@@ -188,25 +189,25 @@ const RandomDomains = observer(() => {
     console.log(arrDomains);
   }, [arrElemGraph, arrDomains]);
 
-  //   Цвета доменов
+  // Раскрашиваем элементы в цвета доменов
   React.useEffect(() => {
     const collectionsHexs = toJS(hexCordinate.svgArea);
     const arrHexs = Array.from(collectionsHexs);
 
-    //  !Времянка для отладки
     arrHexs.forEach((hexElem) => {
       const hex = hexElem.firstChild;
+      const hexTxt = hexElem.lastChild;
+      const id = Number(hex.id);
+
+      // Сброс стилей хексов
       hex.style = { fill: null, fillOpacity: 0.3 };
-    });
+      hexTxt.textContent = null;
 
-    arrElemGraph.forEach((elem) => {
-      arrHexs.forEach((hexElem) => {
-        const hex = hexElem.firstChild;
-
-        const id = Number(hex.id);
-
-        if (elem.id === id) {
-          hex.style.fill = "red";
+      arrDomains.forEach((elem) => {
+        if (elem.idDomain.includes(id)) {
+          hex.style.fill = `${elem.id}`;
+          hex.style.fillOpacity = 0.8;
+          hexTxt.textContent = 1;
         }
       });
     });
