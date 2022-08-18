@@ -205,7 +205,7 @@ const RandomDomains = observer(() => {
 
       arrDomains.forEach((elem) => {
         if (elem.idDomain.includes(id)) {
-          hex.style.fill = `${elem.id}`;
+          hex.style.fill = elem.id;
           hex.style.fillOpacity = 0.8;
           hexTxt.textContent = 1;
         }
