@@ -91,6 +91,7 @@ class hexCordinate {
 
   //   Поиск соседий хекса
   getNeighborsHex(hexVert, hexHoriz) {
+
     const result = this.arrCoordinates.filter((elem) => {
       return (
         (elem.horizontal === hexHoriz - 1 && elem.vertical === hexVert) ||

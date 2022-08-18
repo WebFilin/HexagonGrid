@@ -6,8 +6,8 @@ import hexCordinate from "../../state/hexCordinate";
 const RandomDomains = observer(() => {
   const isRandom = hexCordinate.isRandom;
 
-  //   Массив элементов DOM
-  const arrElem = [];
+  //   Массив элементов для построения графов
+  const arrElemGraph = [];
 
   React.useEffect(() => {
     const ratio = toJS(hexCordinate.randomRatio);
@@ -24,27 +24,28 @@ const RandomDomains = observer(() => {
 
       if (Math.random() <= ratio) {
         //   hexTxt.textContent = hex.id;
-        arrElem.push(hex);
+
+        //   !Визуальная отметка - удалить
+        hex.style.fill = "red";
+        arrElemGraph.push(hex);
       }
     });
-  }, [isRandom, arrElem]);
+  }, [isRandom, arrElemGraph]);
 
   React.useEffect(() => {
     //  Стек вершин графа
     const vertex = [];
 
-    //  Стек доменов
-    const domain = [];
+    //  Ребра графа
+    const edgesGraph = [];
 
-    arrElem.forEach((elemHex) => {
+    arrElemGraph.forEach((elemHex) => {
       const hexVert = Number(elemHex.getAttribute("vertical"));
       const hexHoriz = Number(elemHex.getAttribute("horizontal"));
       const hexID = Number(elemHex.id);
-      elemHex.style.fill = "red";
 
       // Получаем кординаты соседей
       const getNeighbors = hexCordinate.getNeighborsHex(hexVert, hexHoriz);
-
       // Добавляем обьект с вершинами и возможными связями в стек
       vertex.push({ id: hexID, edges: [...getNeighbors] });
     });
@@ -56,63 +57,67 @@ const RandomDomains = observer(() => {
       vertex.forEach((elem) => {
         if (elem.edges.includes(node.id)) {
           const edges = [node.id, elem.id];
-          checkDomain(node.id, edges);
+          edgesGraph.push(edges);
         }
       });
     }
 
-    function checkDomain(id, edges) {
-      if (domain.length === 0) {
-        createDomain(edges);
-      } else {
-        checkSubDomain(id, edges);
-      }
-    }
+    //  Формируем общий граф сетки
+    function mainHexGraph(edges) {
+      let nodeMap = {};
 
-    function checkSubDomain(id, edges) {
+      //Динамически получаем связи узлов в общем графе
+      edges.forEach((edge) => {
+        let node1 = edge[0];
+        let node2 = edge[1];
 
-      // !офыьштубика в сортировке - нужно каждый раз перебирать все значения в ребре
-      const intersect = domain.findIndex((domain) => {
-        return domain.groupCord.includes(id);
+        if (!nodeMap[node1]) nodeMap[node1] = [node2];
+        else nodeMap[node1].push(node2);
+
+        if (!nodeMap[node2]) nodeMap[node2] = [node1];
+        else nodeMap[node2].push(node1);
       });
 
-      if (intersect !== -1) {
-        const prevGroupCord = domain[intersect].groupCord;
-        domain[intersect].groupCord = [
-          ...new Set([...prevGroupCord, ...edges]),
-        ];
-      } else {
-        createDomain(edges);
+      getNodesStart(nodeMap);
+    }
+
+    //  Точки входов в графы
+    function getNodesStart(nodeMap) {
+      let hexGraph = [];
+      let nodes = Object.keys(nodeMap);
+
+      // Крутимся пока все вершины не обработаны
+      while (true) {
+        // Стартовая точка обхода графа
+        let startNode = +nodes.find((node) => !nodeMap[node].visited);
+        //   Выходим если все вершины пройдены
+        if (isNaN(startNode)) break;
+
+        hexGraph.push(depthFirstSearch(startNode, nodeMap));
+      }
+
+      return hexGraph;
+    }
+
+    //Динамически собираем связанное дерево одного графа
+    function depthFirstSearch(startNode, nodeMap, domainsGroup = []) {
+      if (domainsGroup.includes(startNode)) return domainsGroup;
+
+      //Динамически собираем дерево графа
+      domainsGroup.push(startNode);
+
+      // Помечаем пройденую вершину графа
+      nodeMap[startNode].visited = true;
+
+      // Рекрусивно обходим граф
+      for (let i = 0; i < nodeMap[startNode].length; i++) {
+        // Собираем узлы
+        let connectedNode = nodeMap[startNode][i];
+        depthFirstSearch(connectedNode, nodeMap, domainsGroup);
       }
     }
-
-    function createDomain(edges) {
-      const colorGroup = hexCordinate.randomColor();
-
-      const objDomain = {
-        idDomain: colorGroup,
-        groupCord: [...edges],
-      };
-
-      domain.push(objDomain);
-    }
-
-    // Красим в цвета домена
-    domain.forEach((domain) => {
-      const colorHex = `${domain.idDomain}`;
-
-      arrElem.forEach((elem) => {
-        const idHex = Number(elem.id);
-
-        if (domain.groupCord.includes(idHex)) {
-          elem.style.fill = colorHex;
-          elem.style.fillOpacity = 0.8;
-        }
-      });
-    });
-
-    console.log(domain);
-  }, [arrElem]);
+    mainHexGraph(edgesGraph);
+  }, [arrElemGraph]);
 
   return <div></div>;
 });
