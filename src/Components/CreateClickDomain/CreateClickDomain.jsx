@@ -14,7 +14,7 @@ const Domain = observer(() => {
 
     if (hex) {
       const hexID = Number(hex.id);
-      const valueHex = Number(hex.getAttribute("value"));
+      // const valueHex = Number(hex.getAttribute("value"));
       const relationships = peakAndGroup.group;
       hex.style.fillOpacity = 0.8;
       hex.style.fill = colorGroup;

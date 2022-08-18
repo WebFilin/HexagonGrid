@@ -185,8 +185,6 @@ const RandomDomains = observer(() => {
     }
 
     handlerSingleNode();
-
-    console.log(arrDomains);
   }, [arrElemGraph, arrDomains]);
 
   // Раскрашиваем элементы в цвета доменов
