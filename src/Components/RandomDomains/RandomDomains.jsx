@@ -41,22 +41,22 @@ const RandomDomains = observer(() => {
       arrNodes.push({ id: elemHex.id, edges: [...getNeighbors] });
     });
 
-    //  Получаем только ребра графа
-    while (arrNodes.length > 0) {
-      const node = arrNodes.shift();
+    // Формируем список единичной смежностей узлов
+    for (let i = 0; i < arrNodes.length; i++) {
+      const prevID = arrNodes[i].id;
 
-      console.log(node);
-
-      arrNodes.forEach((elem) => {
-        if (elem.edges.includes(node.id)) {
-          edgesGraph.push([node.id, elem.id]);
+      for (let j = i + 1; j < arrNodes.length; j++) {
+        const edges = arrNodes[j].edges;
+        const currID = arrNodes[j].id;
+        if (edges.includes(prevID)) {
+          edgesGraph.push([prevID, currID]);
         }
-      });
+      }
     }
 
     //  Формируем общий граф сетки
     function mainHexGraph(edges) {
-      let nodeMap = {};
+      const nodeMap = {};
 
       //Динамически получаем связи узлов в общем графе
       edges.forEach((edge) => {
