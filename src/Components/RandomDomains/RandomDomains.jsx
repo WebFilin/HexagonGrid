@@ -9,6 +9,8 @@ const RandomDomains = observer(() => {
   //   Массив элементов для построения графов
   const arrElemGraph = [];
 
+  const arrDomains = [];
+
   React.useEffect(() => {
     const ratio = toJS(hexCordinate.randomRatio);
     const collectionsHexs = toJS(hexCordinate.svgArea);
@@ -34,7 +36,7 @@ const RandomDomains = observer(() => {
 
   React.useEffect(() => {
     //  Стек вершин графа
-    const vertex = [];
+    const arrNodes = [];
 
     //  Ребра графа
     const edgesGraph = [];
@@ -47,14 +49,14 @@ const RandomDomains = observer(() => {
       // Получаем кординаты соседей
       const getNeighbors = hexCordinate.getNeighborsHex(hexVert, hexHoriz);
       // Добавляем обьект с вершинами и возможными связями в стек
-      vertex.push({ id: hexID, edges: [...getNeighbors] });
+      arrNodes.push({ id: hexID, edges: [...getNeighbors] });
     });
 
     //  Получаем только ребра графа
-    while (vertex.length > 0) {
-      const node = vertex.shift();
+    while (arrNodes.length > 0) {
+      const node = arrNodes.shift();
 
-      vertex.forEach((elem) => {
+      arrNodes.forEach((elem) => {
         if (elem.edges.includes(node.id)) {
           const edges = [node.id, elem.id];
           edgesGraph.push(edges);
@@ -81,7 +83,7 @@ const RandomDomains = observer(() => {
       getNodesStart(nodeMap);
     }
 
-    //  Точки входов в графы
+    // Находим точки входов в графы динамически
     function getNodesStart(nodeMap) {
       let hexGraph = [];
       let nodes = Object.keys(nodeMap);
@@ -90,7 +92,6 @@ const RandomDomains = observer(() => {
       while (true) {
         // Стартовая точка обхода графа
         let startNode = +nodes.find((node) => !nodeMap[node].visited);
-        //   Выходим если все вершины пройдены
         if (isNaN(startNode)) break;
 
         hexGraph.push(depthFirstSearch(startNode, nodeMap));
@@ -100,11 +101,11 @@ const RandomDomains = observer(() => {
     }
 
     //Динамически собираем связанное дерево одного графа
-    function depthFirstSearch(startNode, nodeMap, domainsGroup = []) {
-      if (domainsGroup.includes(startNode)) return domainsGroup;
+    function depthFirstSearch(startNode, nodeMap, domainGroup = []) {
+      if (domainGroup.includes(startNode)) return domainGroup;
 
       //Динамически собираем дерево графа
-      domainsGroup.push(startNode);
+      domainGroup.push(startNode);
 
       // Помечаем пройденую вершину графа
       nodeMap[startNode].visited = true;
@@ -113,11 +114,58 @@ const RandomDomains = observer(() => {
       for (let i = 0; i < nodeMap[startNode].length; i++) {
         // Собираем узлы
         let connectedNode = nodeMap[startNode][i];
-        depthFirstSearch(connectedNode, nodeMap, domainsGroup);
+        depthFirstSearch(connectedNode, nodeMap, domainGroup);
+      }
+
+      checkDomain(domainGroup);
+    }
+
+    function checkDomain(domainGroup) {
+      if (arrDomains.length === 0) {
+        createDomain(domainGroup);
+      } else {
+        checkSubDomain(domainGroup);
       }
     }
+
+    function createDomain(domainGroup) {
+      const colorGroup = hexCordinate.randomColor();
+
+      // Структура одной группы в стеке доменов
+      const objDomain = {
+        idDomain: colorGroup,
+        groupCord: [...domainGroup],
+      };
+
+      arrDomains.push(objDomain);
+    }
+
+    function checkSubDomain(domainGroup) {
+      // Получаем индекс домена в общем стейте
+      const intersect = arrDomains.findIndex((domain) => {
+        return domain.groupCord.some((id) => {
+          return domainGroup.includes(id);
+        });
+      });
+
+      // Обрабатываем элементы появляющиеся в хвосте графа
+      // Обираем повтрения
+      if (intersect !== -1) {
+        const oldState = arrDomains[intersect].groupCord;
+
+        arrDomains[intersect].groupCord = [
+          ...new Set([...oldState, ...domainGroup]),
+        ];
+      } else {
+        createDomain(domainGroup);
+      }
+    }
+
+    //  Вызываем цепочку построения доменов
     mainHexGraph(edgesGraph);
-  }, [arrElemGraph]);
+
+    console.log(arrDomains);
+  }, [arrElemGraph, arrDomains]);
 
   return <div></div>;
 });
