@@ -32,11 +32,7 @@ function SvgHex({ id, x, y, vertical, horizontal }) {
             handlerClick(evHex);
           })}
         ></polygon>
-        <text className={style.hex_txt}>
-          {/* {id} */}
-
-          {isValue}
-        </text>
+        <text className={style.hex_txt}>{isValue}</text>
       </g>
     </>
   );
