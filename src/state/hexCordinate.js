@@ -2,8 +2,10 @@ import { makeAutoObservable } from "mobx";
 
 class hexCordinate {
   arrCoordinates = [];
-  peakAndGroup = {};
-  hexObj = null;
+  vertexLinksClick = [];
+  hexClick = null;
+  treeGraph = [];
+  vertexLinksRandom = [];
   arrDomains = [];
   svgArea = [];
   isRandom = false;
@@ -37,38 +39,22 @@ class hexCordinate {
 
   //   Получаем хекс клика
   getHex(checkHex) {
-    this.hexObj = checkHex;
+    this.hexClick = checkHex;
+  }
+
+  getHexGroup(peak) {
+    this.vertexLinksClick.push(peak);
   }
 
   getHexRandom(arrElem) {
+    this.arrHexRandom = null;
+    this.hexClick = null;
+
     this.arrHexRandom = arrElem;
   }
 
-  //   Находим элементы - соседи хекса
-  getHexGroup(hexGroup) {
-    this.peakAndGroup = hexGroup;
-  }
-
-  createDomen(hexDomain) {
-    this.arrDomains.push(hexDomain);
-  }
-
-  //   Добавляем ID состоявляющие домен, сортируем на уникальность
-  addSubDomain(nodeId, index) {
-    const oldState = this.arrDomains[index].groupCord;
-    this.arrDomains[index].groupCord = [...new Set([...oldState, ...nodeId])];
-  }
-
-  // Ищем пересечения в домене по ID
-  checkElemInDomain(hexID) {
-    return this.arrDomains.findIndex((domain) => {
-      return domain.groupCord.includes(hexID);
-    });
-  }
-
-  removeHexFromDomain(index, indexArrCord, indexArrHexId) {
-    this.arrDomains[index].hexsID.splice(indexArrHexId, 1);
-    this.arrDomains[index].groupCord.splice(indexArrCord, 1);
+  getVertexLinks(vertex) {
+    this.vertexLinksRandom = [...vertex];
   }
 
   //   Получаем все отрисованные хексы
@@ -87,6 +73,11 @@ class hexCordinate {
   handlerBtnRandom(ratio) {
     this.randomRatio = ratio;
     this.isRandom = !this.isRandom;
+  }
+
+  getTreeGraph(tree) {
+    //  console.log(tree);
+    this.treeGraph = tree;
   }
 
   //   Поиск соседий хекса

@@ -5,9 +5,9 @@ import hexCordinate from "../../state/hexCordinate";
 
 const GetHexGroup = observer(() => {
   //   Выбранный хекс получаем или при клике или рандомом
-  let hex = toJS(hexCordinate.hexObj);
+  let hex = toJS(hexCordinate.hexClick);
 
-  // Ищем соседий хекса
+  // Обработчик клика ищем его соседей
   React.useEffect(() => {
     if (hex) {
       const hexVert = Number(hex.getAttribute("vertical"));
@@ -15,10 +15,10 @@ const GetHexGroup = observer(() => {
       const hexID = Number(hex.id);
 
       // Ищем соседий выбранного узла
-      const elemHexagonGrid = hexCordinate.getNeighborsHex(hexVert, hexHoriz);
+      const getNeighbors = hexCordinate.getNeighborsHex(hexVert, hexHoriz);
 
       // Составляем узел графа
-      const peak = { id: hexID, group: elemHexagonGrid };
+      const peak = { id: hexID, group: [...getNeighbors] };
       hexCordinate.getHexGroup(peak);
     }
   }, [hex]);
