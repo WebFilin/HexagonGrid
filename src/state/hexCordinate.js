@@ -4,7 +4,6 @@ class hexCordinate {
   arrCoordinates = [];
   vertexLinksClick = [];
   hexClick = null;
-  treeGraph = [];
   vertexLinksRandom = [];
   arrDomains = [];
   svgArea = [];
@@ -66,6 +65,10 @@ class hexCordinate {
     this.hexAutoCheckObj = hexObj;
   }
 
+  getDomainsStack(domains) {
+    this.arrDomains = domains;
+  }
+
   setHexValue(value) {
     this.hexValueTxt = value;
   }
@@ -73,11 +76,6 @@ class hexCordinate {
   handlerBtnRandom(ratio) {
     this.randomRatio = ratio;
     this.isRandom = !this.isRandom;
-  }
-
-  getTreeGraph(tree) {
-    //  console.log(tree);
-    this.treeGraph = tree;
   }
 
   //   Поиск соседий хекса

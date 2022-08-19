@@ -6,8 +6,9 @@ import GetHexGroup from "../Components/GetHexGroup/GetHexGroup";
 import GetNeighborsHex from "../Components/GetNeighborsHex/GetNeighborsHex";
 import SetHexSideSize from "../Components/HexSideSize/SetHexSideSize";
 import RandomChange from "../Components/ControlsElem/RandomChange/RandomChange";
-import DFS from "../Components/DFS/DFS";
 import SplitDomains from "../Components/SplitDomains/SplitDomains";
+
+import ColorazeDomains from "../Components/ColorazeDomains/ColorazeDomains";
 import InfoTable from "../Components/InfoTable/InfoTable";
 
 function App() {
@@ -28,8 +29,8 @@ function App() {
       <MainHexagons />
       <GetHexGroup />
       <GetNeighborsHex />
-      <DFS />
       <SplitDomains />
+      <ColorazeDomains />
     </div>
   );
 }

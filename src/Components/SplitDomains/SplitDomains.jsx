@@ -1,16 +1,99 @@
-import React from "react";
-import hexCordinate from "../../state/hexCordinate";
 import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
+import React from "react";
+import hexCordinate from "../../state/hexCordinate";
 
 const SplitDomains = observer(() => {
-  const treeGraph = toJS(hexCordinate.treeGraph);
+  const arrVertexRandom = toJS(hexCordinate.vertexLinksRandom);
+  const arrVertexClick = toJS(hexCordinate.vertexLinksClick);
+
   React.useEffect(() => {
-    const arrVertexRandom = toJS(hexCordinate.vertexLinksRandom);
-    const arrVertexClick = toJS(hexCordinate.vertexLinksClick);
     const allVertex = [...arrVertexRandom, ...arrVertexClick];
 
+    //  Список смежности графа
+    let adjacencyList = [];
+
     const arrDomains = [];
+
+    function createAdjacencyList() {
+      adjacencyList = [];
+      // Формируем список смежности узлов
+      for (let i = 0; i < allVertex.length; i++) {
+        const prevID = allVertex[i].id;
+
+        for (let j = i + 1; j < allVertex.length; j++) {
+          const edges = allVertex[j].group;
+          const currID = allVertex[j].id;
+
+          if (edges.includes(prevID)) {
+            adjacencyList.push([prevID, currID]);
+          }
+        }
+      }
+    }
+
+    //Динамически получаем связи подгрупп в общем графе
+    function mainHexGraph(edges) {
+      const nodeMap = {};
+
+      edges.forEach((edge) => {
+        let node1 = edge[0];
+        let node2 = edge[1];
+
+        if (!nodeMap[node1]) {
+          nodeMap[node1] = [node2];
+        } else {
+          nodeMap[node1].push(node2);
+        }
+
+        if (!nodeMap[node2]) {
+          nodeMap[node2] = [node1];
+        } else {
+          nodeMap[node2].push(node1);
+        }
+      });
+
+      getNodesStart(nodeMap);
+    }
+
+    // Находим точки входов в графы
+    function getNodesStart(nodeMap) {
+      let hexGraph = [];
+      let nodes = Object.keys(nodeMap);
+
+      // Крутимся пока все вершины не обработаны
+      while (true) {
+        // Стартовая точка обхода графа - если не посещалась
+        let startNode = +nodes.find((node) => !nodeMap[node].visited);
+
+        if (isNaN(startNode)) break;
+
+        hexGraph.push(depthFirstSearch(startNode, nodeMap));
+      }
+
+      return hexGraph;
+    }
+
+    //Динамически собираем связанное дерево одного графа
+    function depthFirstSearch(startNode, nodeMap, domainGroup = []) {
+      if (domainGroup.includes(startNode)) return domainGroup;
+
+      //Динамически собираем дерево графа
+      domainGroup.push(startNode);
+
+      // Помечаем пройденую вершину графа
+      nodeMap[startNode].visited = true;
+
+      // Рекрусивно обходим граф
+      for (let i = 0; i < nodeMap[startNode].length; i++) {
+        // Собираем узлы
+        let linkNode = nodeMap[startNode][i];
+        depthFirstSearch(linkNode, nodeMap, domainGroup);
+      }
+
+      // Проверяем и раздиляем домены
+      checkDomain(domainGroup);
+    }
 
     //  ОБрабатываем разбиение на домены
     function checkDomain(domainGroup) {
@@ -75,32 +158,13 @@ const SplitDomains = observer(() => {
       }
     }
 
-    checkDomain(treeGraph);
+    //  Вызываем цепочку построения доменов
+    createAdjacencyList();
+    mainHexGraph(adjacencyList);
     handlerSingleNode();
 
-    console.log(arrDomains);
-
-    const collectionsHexs = toJS(hexCordinate.svgArea);
-    const arrHexs = Array.from(collectionsHexs);
-
-    arrHexs.forEach((hexElem) => {
-      const hex = hexElem.firstChild;
-      const hexTxt = hexElem.lastChild;
-      const id = Number(hex.id);
-
-      // Сброс стилей хексов
-      hex.style = { fill: null, fillOpacity: 0.3 };
-      // hexTxt.textContent = null;
-
-      arrDomains.forEach((elem) => {
-        if (elem.idDomain.includes(id)) {
-          hex.style.fill = elem.colorDomain;
-          hex.style.fillOpacity = 0.8;
-          //  hexTxt.textContent = 1;
-        }
-      });
-    });
-  }, [treeGraph]);
+    hexCordinate.getDomainsStack(arrDomains);
+  }, [arrVertexRandom, arrVertexClick]);
 
   return <div></div>;
 });
