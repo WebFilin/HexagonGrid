@@ -13,19 +13,11 @@ const MainHexagons = observer(() => {
 
     // Размеры сетки из инпутов
     const ofsetSide = toJS(hexCordinate.hexSideSize);
-    //  const L = ofsetSide.L;
-    //  const M = ofsetSide.M;
-    //  const N = ofsetSide.N;
-
-    //  ! Времянка
-    const L = 3;
-    const M = 3;
-    const N = 3;
 
     //  Стороны хекс контейнера
-    const axisQ = L - 1;
-    const axisY = L + M - 1;
-    const axisX = L + N - 1;
+    const axisQ = ofsetSide.L - 1;
+    const axisY = ofsetSide.L + ofsetSide.M - 1;
+    const axisX = ofsetSide.L + ofsetSide.N - 1;
 
     //  Расчитываем противоположную сторону
     const oppositeWidth = sideOfset * Math.sqrt(3);
@@ -38,8 +30,8 @@ const MainHexagons = observer(() => {
           (horizontal < axisQ &&
             vertical >= axisQ - horizontal &&
             vertical < axisX - (axisQ + 1 - axisY + horizontal)) ||
-          (horizontal >= axisQ && horizontal < M) ||
-          (horizontal >= M &&
+          (horizontal >= axisQ && horizontal < ofsetSide.M) ||
+          (horizontal >= ofsetSide.M &&
             vertical >= axisQ - horizontal &&
             vertical < axisX - (axisQ + 1 - axisY + horizontal))
         ) {
