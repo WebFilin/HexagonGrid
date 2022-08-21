@@ -5,7 +5,6 @@ class hexCordinate {
   vertexLinksClick = [];
   vertexLinksRandom = [];
   hexClick = null;
-  removeHexId = null;
   stackDomains = [];
   svgArea = [];
   isRandom = false;
@@ -71,8 +70,10 @@ class hexCordinate {
   }
 
   //   Удаляем хекс при клике по нему
-  getRemoveID(hexID) {
-    this.removeHexId = Number(hexID);
+  getRemoveID(hex) {
+    this.removeHexId = Number(hex.id);
+    hex.setAttribute("value", 0);
+    console.log(hex);
 
     const indexClick = this.vertexLinksClick.findIndex((elem) => {
       return elem.id === this.removeHexId;

@@ -23,9 +23,8 @@ const ColorazeDomains = observer(() => {
       if (elem.idDomain.includes(id)) {
         hex.style.fill = elem.colorDomain;
         hex.style.fillOpacity = 0.8;
-      //   hex.setAttribute("value", 1);
+        hex.setAttribute("value", 1);
         hexTxt.textContent = 1;
-        console.log(hex);
       }
     });
   });

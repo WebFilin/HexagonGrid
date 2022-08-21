@@ -7,8 +7,6 @@ const SplitDomains = observer(() => {
   const arrVertexRandom = toJS(hexCordinate.vertexLinksRandom);
   const arrVertexClick = toJS(hexCordinate.vertexLinksClick);
 
-  const removeHexID = toJS(hexCordinate.removeHexId);
-
   React.useEffect(() => {
     const allVertex = [...arrVertexRandom, ...arrVertexClick];
 
@@ -168,7 +166,7 @@ const SplitDomains = observer(() => {
     handlerSingleNode();
 
     hexCordinate.getDomainsStack(arrDomains);
-  }, [arrVertexRandom, arrVertexClick, removeHexID]);
+  }, [arrVertexRandom, arrVertexClick]);
 
   return <div></div>;
 });
