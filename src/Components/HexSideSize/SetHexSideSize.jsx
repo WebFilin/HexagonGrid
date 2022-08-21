@@ -45,7 +45,7 @@ function SetHexSideSize() {
         inc={1}
         dec={1}
         min={0}
-        max={29}
+        max={30}
       />
       <InputSizeSide
         title="N"
@@ -55,7 +55,7 @@ function SetHexSideSize() {
         inc={1}
         dec={1}
         min={0}
-        max={29}
+        max={30}
       />
 
       <button

@@ -5,7 +5,7 @@ import hexCordinate from "../../state/hexCordinate";
 import style from "./InfoTable.module.scss";
 
 const InfoTable = observer(() => {
-  const mainDomains = toJS(hexCordinate.arrDomains);
+  const mainDomains = toJS(hexCordinate.stackDomains);
   const allElem = toJS(hexCordinate.arrCoordinates);
 
   return (

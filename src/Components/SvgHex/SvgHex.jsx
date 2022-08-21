@@ -14,12 +14,12 @@ function SvgHex({ id, x, y, vertical, horizontal }) {
     setIsClick((currentValue) => (currentValue = !isClick));
 
     if (isClick) {
-      // setIsValue((currentValue) => (currentValue = 0));
+      setIsValue((currentValue) => (currentValue = 0));
+      hexCordinate.getRemoveID(hex.id);
     } else {
-      // setIsValue((currentValue) => (currentValue = 1));
+      setIsValue((currentValue) => (currentValue = 1));
+      hexCordinate.getHex(hex);
     }
-
-    hexCordinate.getHex(hex);
   }
 
   return (

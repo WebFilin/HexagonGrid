@@ -3,9 +3,10 @@ import { makeAutoObservable } from "mobx";
 class hexCordinate {
   arrCoordinates = [];
   vertexLinksClick = [];
-  hexClick = null;
   vertexLinksRandom = [];
-  arrDomains = [];
+  hexClick = null;
+  removeHexId = null;
+  stackDomains = [];
   svgArea = [];
   isRandom = false;
   isCreateMainhex = false;
@@ -66,11 +67,30 @@ class hexCordinate {
   }
 
   getDomainsStack(domains) {
-    this.arrDomains = domains;
+    this.stackDomains = domains;
   }
 
-  setHexValue(value) {
-    this.hexValueTxt = value;
+  //   Удаляем хекс при клике по нему
+  getRemoveID(hexID) {
+    this.removeHexId = Number(hexID);
+
+    const indexClick = this.vertexLinksClick.findIndex((elem) => {
+      return elem.id === this.removeHexId;
+    });
+
+    if (indexClick !== -1) {
+      this.vertexLinksClick.splice(indexClick, 1);
+    }
+
+    const indexRandom = this.vertexLinksRandom.findIndex((elem) => {
+      return elem.id === this.removeHexId;
+    });
+
+    if (indexRandom !== -1) {
+      this.vertexLinksRandom.splice(indexRandom, 1);
+    }
+
+    console.log(indexRandom);
   }
 
   handlerBtnRandom(ratio) {

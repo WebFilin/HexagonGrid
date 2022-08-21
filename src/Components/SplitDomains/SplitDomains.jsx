@@ -7,6 +7,8 @@ const SplitDomains = observer(() => {
   const arrVertexRandom = toJS(hexCordinate.vertexLinksRandom);
   const arrVertexClick = toJS(hexCordinate.vertexLinksClick);
 
+  const removeHexID = toJS(hexCordinate.removeHexId);
+
   React.useEffect(() => {
     const allVertex = [...arrVertexRandom, ...arrVertexClick];
 
@@ -32,7 +34,7 @@ const SplitDomains = observer(() => {
       }
     }
 
-    //Динамически получаем связи подгрупп в общем графе
+    //Получаем связи подгрупп в общем графе
     function mainHexGraph(edges) {
       const nodeMap = {};
 
@@ -74,11 +76,11 @@ const SplitDomains = observer(() => {
       return hexGraph;
     }
 
-    //Динамически собираем связанное дерево одного графа
+    //Собираем дерево графа
     function depthFirstSearch(startNode, nodeMap, domainGroup = []) {
       if (domainGroup.includes(startNode)) return domainGroup;
 
-      //Динамически собираем дерево графа
+      //Добавляем стартовые точки
       domainGroup.push(startNode);
 
       // Помечаем пройденую вершину графа
@@ -158,13 +160,15 @@ const SplitDomains = observer(() => {
       }
     }
 
+    //  removeHex();
+
     //  Вызываем цепочку построения доменов
     createAdjacencyList();
     mainHexGraph(adjacencyList);
     handlerSingleNode();
 
     hexCordinate.getDomainsStack(arrDomains);
-  }, [arrVertexRandom, arrVertexClick]);
+  }, [arrVertexRandom, arrVertexClick, removeHexID]);
 
   return <div></div>;
 });
