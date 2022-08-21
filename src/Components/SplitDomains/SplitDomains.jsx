@@ -4,12 +4,9 @@ import React from "react";
 import hexCordinate from "../../state/hexCordinate";
 
 const SplitDomains = observer(() => {
-  const arrVertexRandom = toJS(hexCordinate.vertexLinksRandom);
-  const arrVertexClick = toJS(hexCordinate.vertexLinksClick);
+  const arrVertexs = toJS(hexCordinate.arrVertexs);
 
   React.useEffect(() => {
-    const allVertex = [...arrVertexRandom, ...arrVertexClick];
-
     //  Список смежности графа
     let adjacencyList = [];
 
@@ -18,12 +15,12 @@ const SplitDomains = observer(() => {
     function createAdjacencyList() {
       adjacencyList = [];
       // Формируем список смежности узлов
-      for (let i = 0; i < allVertex.length; i++) {
-        const prevID = allVertex[i].id;
+      for (let i = 0; i < arrVertexs.length; i++) {
+        const prevID = arrVertexs[i].id;
 
-        for (let j = i + 1; j < allVertex.length; j++) {
-          const edges = allVertex[j].group;
-          const currID = allVertex[j].id;
+        for (let j = i + 1; j < arrVertexs.length; j++) {
+          const edges = arrVertexs[j].group;
+          const currID = arrVertexs[j].id;
 
           if (edges.includes(prevID)) {
             adjacencyList.push([prevID, currID]);
@@ -145,7 +142,7 @@ const SplitDomains = observer(() => {
       });
 
       // Ищем исключения
-      const singleNode = allVertex.filter((node) => {
+      const singleNode = arrVertexs.filter((node) => {
         if (!allNodeID.includes(node.id)) {
           return node;
         }
@@ -158,15 +155,14 @@ const SplitDomains = observer(() => {
       }
     }
 
-    //  removeHex();
-
     //  Вызываем цепочку построения доменов
     createAdjacencyList();
     mainHexGraph(adjacencyList);
+
     handlerSingleNode();
 
     hexCordinate.getDomainsStack(arrDomains);
-  }, [arrVertexRandom, arrVertexClick]);
+  }, [arrVertexs]);
 
   return <div></div>;
 });

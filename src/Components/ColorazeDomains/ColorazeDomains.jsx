@@ -17,14 +17,14 @@ const ColorazeDomains = observer(() => {
 
     // Сброс стилей хексов
     hex.style = { fill: null, fillOpacity: 0.3 };
-    hexTxt.textContent = null;
+   //  hexTxt.textContent = null;
 
     arrDomains.forEach((elem) => {
       if (elem.idDomain.includes(id)) {
         hex.style.fill = elem.colorDomain;
         hex.style.fillOpacity = 0.8;
         hex.setAttribute("value", 1);
-        hexTxt.textContent = 1;
+      //   hexTxt.textContent = 1;
       }
     });
   });

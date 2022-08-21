@@ -2,8 +2,7 @@ import { makeAutoObservable } from "mobx";
 
 class hexCordinate {
   arrCoordinates = [];
-  vertexLinksClick = [];
-  vertexLinksRandom = [];
+  arrVertexs = [];
   hexClick = null;
   stackDomains = [];
   svgArea = [];
@@ -42,18 +41,11 @@ class hexCordinate {
   }
 
   getHexGroup(peak) {
-    this.vertexLinksClick.push(peak);
-  }
-
-  getHexRandom(arrElem) {
-    this.arrHexRandom = null;
-    this.hexClick = null;
-
-    this.arrHexRandom = arrElem;
+    this.arrVertexs.push(peak);
   }
 
   getVertexLinks(vertex) {
-    this.vertexLinksRandom = [...vertex];
+    this.arrVertexs = [...vertex];
   }
 
   //   Получаем все отрисованные хексы
@@ -73,25 +65,14 @@ class hexCordinate {
   getRemoveID(hex) {
     this.removeHexId = Number(hex.id);
     hex.setAttribute("value", 0);
-    console.log(hex);
 
-    const indexClick = this.vertexLinksClick.findIndex((elem) => {
-      return elem.id === this.removeHexId;
-    });
-
-    if (indexClick !== -1) {
-      this.vertexLinksClick.splice(indexClick, 1);
-    }
-
-    const indexRandom = this.vertexLinksRandom.findIndex((elem) => {
+    const indexRandom = this.arrVertexs.findIndex((elem) => {
       return elem.id === this.removeHexId;
     });
 
     if (indexRandom !== -1) {
-      this.vertexLinksRandom.splice(indexRandom, 1);
+      this.arrVertexs.splice(indexRandom, 1);
     }
-
-    console.log(indexRandom);
   }
 
   handlerBtnRandom(ratio) {
