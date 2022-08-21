@@ -53,10 +53,6 @@ class hexCordinate {
     this.svgArea = area;
   }
 
-  getHexAutoCheckObj(hexObj) {
-    this.hexAutoCheckObj = hexObj;
-  }
-
   getDomainsStack(domains) {
     this.stackDomains = domains;
   }
