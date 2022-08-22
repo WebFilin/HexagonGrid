@@ -1,7 +1,7 @@
 import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import React from "react";
-import hexHandler from "../../state/hexHandler";
+import hexHandler from "../../store/hexHandler";
 
 const RandomDomains = observer(() => {
   // Кнопка авто

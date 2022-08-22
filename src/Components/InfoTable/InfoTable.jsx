@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { toJS } from "mobx";
-import hexHandler from "../../state/hexHandler";
+import hexHandler from "../../store/hexHandler";
 import style from "./InfoTable.module.scss";
 
 const InfoTable = observer(() => {

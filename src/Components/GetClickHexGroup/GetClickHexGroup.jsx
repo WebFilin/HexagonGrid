@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { toJS } from "mobx";
-import hexHandler from "../../state/hexHandler";
+import hexHandler from "../../store/hexHandler";
 
 const GetHexGroup = observer(() => {
   //   Выбранный хекс получаем или при клике или рандомом

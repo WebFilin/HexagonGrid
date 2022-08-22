@@ -1,21 +1,23 @@
 import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import React from "react";
-import hexHandler from "../../state/hexHandler";
+import hexHandler from "../../store/hexHandler";
 
 const SplitDomains = observer(() => {
   const arrVertexs = toJS(hexHandler.arrVertexs);
+
+  // Стек отсортированных подмножеств общего графа
+  const [arrTrees, setArrTrees] = React.useState([]);
 
   React.useEffect(() => {
     //  Список смежности графа
     let adjacencyList = [];
 
+    //  Стек готовых доменов
     const arrDomains = [];
 
     //  Стек всех найденных деревьев при рекрусии
     const arrSearchTree = [];
-
-    const arrGraph = [];
 
     function createAdjacencyList() {
       adjacencyList = [];

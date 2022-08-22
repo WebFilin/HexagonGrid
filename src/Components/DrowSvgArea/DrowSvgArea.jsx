@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./drowSvgArea.module.scss";
-import hexHandler from "../../state/hexHandler";
+import hexHandler from "../../store/hexHandler";
 import { observer } from "mobx-react-lite";
 import { toJS } from "mobx";
 import SvgHex from "../SvgHex/SvgHex";

@@ -1,7 +1,7 @@
 import React from "react";
 import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
-import hexHandler from "../../state/hexHandler";
+import hexHandler from "../../store/hexHandler";
 
 const MainHexagons = observer(() => {
   const createMainHex = hexHandler.isCreateMainhex;

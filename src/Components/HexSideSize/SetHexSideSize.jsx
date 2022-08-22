@@ -2,7 +2,7 @@ import React from "react";
 import style from "./setHexSizeSide.module.scss";
 import { action } from "mobx";
 import InputSizeSide from "../ControlsElem/InputSizeSide/InputSizeSide";
-import hexHandler from "../../state/hexHandler";
+import hexHandler from "../../store/hexHandler";
 
 function SetHexSideSize() {
   const [valueL, setValueL] = React.useState(3);

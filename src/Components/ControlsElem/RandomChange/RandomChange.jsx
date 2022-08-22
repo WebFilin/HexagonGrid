@@ -3,7 +3,7 @@ import React from "react";
 import InputSizeSide from "../InputSizeSide/InputSizeSide";
 import style from "./randomChange.module.scss";
 import { action } from "mobx";
-import hexHandler from "../../../state/hexHandler";
+import hexHandler from "../../../store/hexHandler";
 
 function RandomChange() {
   const [isValue, setIsValue] = React.useState(0.5);

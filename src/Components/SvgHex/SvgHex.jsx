@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./svgHex.module.scss";
-import hexHandler from "../../state/hexHandler";
+import hexHandler from "../../store/hexHandler";
 import { action } from "mobx";
 
 function SvgHex({ id, x, y, vertical, horizontal }) {
