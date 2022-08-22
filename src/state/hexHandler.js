@@ -1,4 +1,4 @@
-import { get, makeAutoObservable } from "mobx";
+import { makeAutoObservable } from "mobx";
 
 class hexCordinate {
   arrCoordinates = [];
@@ -20,14 +20,14 @@ class hexCordinate {
   }
 
   //   Управляем сторонами общей сетки
-getHexSideSize(axisL, axisM, axisN) {
+  getHexSideSize(axisL, axisM, axisN) {
     this.hexSideSize.L = axisL;
     this.hexSideSize.M = axisM;
     this.hexSideSize.N = axisN;
   }
 
-get  handlerCreateHex() {
- return   this.isCreateMainhex = !this.isCreateMainhex;
+  get handlerCreateHex() {
+    return (this.isCreateMainhex = !this.isCreateMainhex);
   }
 
   //   Массив коррдинат хексов
@@ -37,6 +37,7 @@ get  handlerCreateHex() {
 
   //   Получаем хекс клика
   getHex(checkHex) {
+    checkHex.setAttribute("value", 1);
     this.hexClick = checkHex;
   }
 
@@ -62,12 +63,12 @@ get  handlerCreateHex() {
     this.removeHexId = Number(hex.id);
     hex.setAttribute("value", 0);
 
-    const indexRandom = this.arrVertexs.findIndex((elem) => {
+    const index = this.arrVertexs.findIndex((elem) => {
       return elem.id === this.removeHexId;
     });
 
-    if (indexRandom !== -1) {
-      this.arrVertexs.splice(indexRandom, 1);
+    if (index !== -1) {
+      this.arrVertexs.splice(index, 1);
     }
   }
 

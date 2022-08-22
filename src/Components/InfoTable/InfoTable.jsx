@@ -1,12 +1,12 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { toJS } from "mobx";
-import hexCordinate from "../../state/hexCordinate";
+import hexHandler from "../../state/hexHandler";
 import style from "./InfoTable.module.scss";
 
 const InfoTable = observer(() => {
-  const mainDomains = toJS(hexCordinate.stackDomains);
-  const allElem = toJS(hexCordinate.arrCoordinates);
+  const mainDomains = toJS(hexHandler.stackDomains);
+  const allElem = toJS(hexHandler.arrCoordinates);
 
   return (
     <div className={style.wrapper}>

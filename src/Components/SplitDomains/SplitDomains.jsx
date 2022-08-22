@@ -1,16 +1,21 @@
 import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import React from "react";
-import hexCordinate from "../../state/hexCordinate";
+import hexHandler from "../../state/hexHandler";
 
 const SplitDomains = observer(() => {
-  const arrVertexs = toJS(hexCordinate.arrVertexs);
+  const arrVertexs = toJS(hexHandler.arrVertexs);
 
   React.useEffect(() => {
     //  Список смежности графа
     let adjacencyList = [];
 
     const arrDomains = [];
+
+    //  Стек всех найденных деревьев при рекрусии
+    const arrSearchTree = [];
+
+    const arrGraph = [];
 
     function createAdjacencyList() {
       adjacencyList = [];
@@ -89,7 +94,9 @@ const SplitDomains = observer(() => {
       }
 
       // Проверяем и раздиляем домены
-      checkDomain(domainGroup);
+      // checkDomain(domainGroup);
+
+      arrSearchTree.push(domainGroup);
     }
 
     //  ОБрабатываем разбиение на домены
@@ -152,11 +159,18 @@ const SplitDomains = observer(() => {
       }
     }
 
+    function removeRepeatsSearchTree() {
+      arrSearchTree.forEach((elem) => {
+        console.log(elem);
+      });
+    }
+
     //  Вызываем цепочку построения доменов
     createAdjacencyList();
     mainHexGraph(adjacencyList);
+    removeRepeatsSearchTree();
     handlerSingleNode();
-    hexCordinate.getDomainsStack(arrDomains);
+    hexHandler.getDomainsStack(arrDomains);
   }, [arrVertexs]);
 
   return <div></div>;

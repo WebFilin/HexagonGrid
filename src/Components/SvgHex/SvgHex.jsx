@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./svgHex.module.scss";
-import hexCordinate from "../../state/hexCordinate";
+import hexHandler from "../../state/hexHandler";
 import { action } from "mobx";
 
 function SvgHex({ id, x, y, vertical, horizontal }) {
@@ -10,9 +10,9 @@ function SvgHex({ id, x, y, vertical, horizontal }) {
     const valueHex = hex.getAttribute("value");
 
     if (valueHex === "1") {
-      hexCordinate.getRemoveID(hex);
+      hexHandler.getRemoveID(hex);
     } else {
-      hexCordinate.getHex(hex);
+      hexHandler.getHex(hex);
     }
   }
 

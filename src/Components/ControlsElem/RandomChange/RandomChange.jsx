@@ -3,7 +3,7 @@ import React from "react";
 import InputSizeSide from "../InputSizeSide/InputSizeSide";
 import style from "./randomChange.module.scss";
 import { action } from "mobx";
-import hexCordinate from "../../../state/hexCordinate";
+import hexHandler from "../../../state/hexHandler";
 
 function RandomChange() {
   const [isValue, setIsValue] = React.useState(0.5);
@@ -27,7 +27,7 @@ function RandomChange() {
         />
         <button
           className={style.btn_calc}
-          onClick={action(() => hexCordinate.handlerBtnRandom(isValue))}
+          onClick={action(() => hexHandler.handlerBtnRandom(isValue))}
         >
           АВТО
         </button>

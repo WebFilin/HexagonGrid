@@ -2,7 +2,7 @@ import React from "react";
 import style from "./setHexSizeSide.module.scss";
 import { action } from "mobx";
 import InputSizeSide from "../ControlsElem/InputSizeSide/InputSizeSide";
-import hexCordinate from "../../state/hexCordinate";
+import hexHandler from "../../state/hexHandler";
 
 function SetHexSideSize() {
   const [valueL, setValueL] = React.useState(3);
@@ -22,7 +22,7 @@ function SetHexSideSize() {
   };
 
   React.useEffect(() => {
-    hexCordinate.getHexSideSize(valueL, valueM, valueN);
+    hexHandler.getHexSideSize(valueL, valueM, valueN);
   }, [valueL, valueM, valueN]);
 
   return (
@@ -60,7 +60,7 @@ function SetHexSideSize() {
 
       <button
         className={style.btn_calc}
-        onClick={action(() => hexCordinate.handlerCreateHex())}
+        onClick={action(() => hexHandler.handlerCreateHex())}
       >
         СОЗДАТЬ
       </button>

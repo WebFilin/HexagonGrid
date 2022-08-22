@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./drowSvgArea.module.scss";
-import hexCordinate from "../../state/hexCordinate";
+import hexHandler from "../../state/hexHandler";
 import { observer } from "mobx-react-lite";
 import { toJS } from "mobx";
 import SvgHex from "../SvgHex/SvgHex";
@@ -10,7 +10,7 @@ const MainHexagons = observer(() => {
   const [viewBoxSize, setViewBoxSize] = React.useState(null);
 
   //   Получаем массив координат через mobx
-  const arrCordinatsHex = toJS(hexCordinate.arrCoordinates);
+  const arrCordinatsHex = toJS(hexHandler.arrCoordinates);
 
   //  Динамически управляем размером viewBox в svg
   React.useEffect(() => {
@@ -18,7 +18,7 @@ const MainHexagons = observer(() => {
     const boxSize = svgBox.current.getBBox();
     setViewBoxSize(boxSize);
 
-    hexCordinate.getSvgArea(svgArea);
+    hexHandler.getSvgArea(svgArea);
   }, [arrCordinatsHex.length]);
 
   //   Динамическое управление облатсью видимости SVG

@@ -2,14 +2,18 @@ import React from "react";
 
 import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
-import hexCordinate from "../../state/hexCordinate";
+import hexHandler from "../../state/hexHandler";
 
 const ColorazeDomains = observer(() => {
-  const arrDomains = toJS(hexCordinate.stackDomains);
+  const arrDomains = toJS(hexHandler.stackDomains);
 
   React.useEffect(() => {
-    const collectionsHexs = toJS(hexCordinate.svgArea);
+    const collectionsHexs = toJS(hexHandler.svgArea);
     const arrHexs = Array.from(collectionsHexs);
+
+    const colorRandom =
+      "#" +
+      (Math.random().toString(16) + "000000").substring(2, 8).toUpperCase();
 
     arrHexs.forEach((hexElem) => {
       const hex = hexElem.firstChild;
@@ -24,11 +28,7 @@ const ColorazeDomains = observer(() => {
       arrDomains.forEach((elem) => {
         // Задаем цвета доменов
         if (!elem.hasOwnProperty("colorDomain")) {
-          elem.colorDomain =
-            "#" +
-            (Math.random().toString(16) + "000000")
-              .substring(2, 8)
-              .toUpperCase();
+          elem.colorDomain = colorRandom;
         }
 
         if (elem.idDomain.includes(id)) {
