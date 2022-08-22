@@ -2,6 +2,7 @@ import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import hexHandler from "../../store/hexHandler";
+import CheckDomains from "../CheckDomains/CheckDomains";
 
 const SplitDomains = observer(() => {
   const arrVertexs = toJS(hexHandler.arrVertexs);
@@ -18,6 +19,9 @@ const SplitDomains = observer(() => {
 
     //  Стек всех найденных деревьев при рекрусии
     const arrSearchTree = [];
+
+    //  Результируюший стек деревьев графа
+    const resArrTree = [];
 
     function createAdjacencyList() {
       adjacencyList = [];
@@ -95,10 +99,24 @@ const SplitDomains = observer(() => {
         depthFirstSearch(linkNode, nodeMap, domainGroup);
       }
 
-      // Проверяем и раздиляем домены
-      // checkDomain(domainGroup);
-
       arrSearchTree.push(domainGroup);
+
+      // Проверяем и раздиляем домены
+      checkDomain(domainGroup);
+    }
+
+    //  Удаляем дубликаты деревьев после рекрусии
+    function removeDuplicatesTree(arrSearchTree) {
+      const arrString = arrSearchTree.map((elem) => elem.join(","));
+
+      const uniqueString = new Set(arrString);
+
+      uniqueString.forEach((elem) => {
+        const arrNum = elem.split(",").map((num) => {
+          return +num;
+        });
+        resArrTree.push(arrNum);
+      });
     }
 
     //  ОБрабатываем разбиение на домены
@@ -161,21 +179,19 @@ const SplitDomains = observer(() => {
       }
     }
 
-    function removeRepeatsSearchTree() {
-      arrSearchTree.forEach((elem) => {
-        console.log(elem);
-      });
-    }
-
     //  Вызываем цепочку построения доменов
     createAdjacencyList();
     mainHexGraph(adjacencyList);
-    removeRepeatsSearchTree();
+    removeDuplicatesTree(arrSearchTree);
     handlerSingleNode();
     hexHandler.getDomainsStack(arrDomains);
   }, [arrVertexs]);
 
-  return <div></div>;
+  return (
+    <div>
+      <CheckDomains treeGraph={""} />
+    </div>
+  );
 });
 
 export default SplitDomains;
