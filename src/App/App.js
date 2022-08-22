@@ -2,8 +2,8 @@ import React from "react";
 import style from "./app.module.scss";
 import MainHexagons from "../Components/MainHexagons/MainHexagons";
 import DrowSvgArea from "../Components/DrowSvgArea/DrowSvgArea";
-import GetHexGroup from "../Components/GetHexGroup/GetHexGroup";
-import GetNeighborsHex from "../Components/GetNeighborsHex/GetNeighborsHex";
+import GetClickHexGroup from "../Components/GetClickHexGroup/GetClickHexGroup";
+import GetRandomHexGroup from "../Components/GetRandomHexGroup/GetRandomHexGroup";
 import SetHexSideSize from "../Components/HexSideSize/SetHexSideSize";
 import RandomChange from "../Components/ControlsElem/RandomChange/RandomChange";
 import SplitDomains from "../Components/SplitDomains/SplitDomains";
@@ -26,8 +26,8 @@ function App() {
 
       <footer className={style.footer} />
       <MainHexagons />
-      <GetHexGroup />
-      <GetNeighborsHex />
+      <GetClickHexGroup />
+      <GetRandomHexGroup />
       <SplitDomains />
       <ColorazeDomains />
     </div>
