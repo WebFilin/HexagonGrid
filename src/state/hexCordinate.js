@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { get, makeAutoObservable } from "mobx";
 
 class hexCordinate {
   arrCoordinates = [];
@@ -20,14 +20,14 @@ class hexCordinate {
   }
 
   //   Управляем сторонами общей сетки
-  getHexSideSize(axisL, axisM, axisN) {
+getHexSideSize(axisL, axisM, axisN) {
     this.hexSideSize.L = axisL;
     this.hexSideSize.M = axisM;
     this.hexSideSize.N = axisN;
   }
 
-  handlerCreateHex() {
-    this.isCreateMainhex = !this.isCreateMainhex;
+get  handlerCreateHex() {
+ return   this.isCreateMainhex = !this.isCreateMainhex;
   }
 
   //   Массив коррдинат хексов
@@ -95,13 +95,6 @@ class hexCordinate {
     });
 
     return nodeID;
-  }
-
-  randomColor() {
-    return (
-      "#" +
-      (Math.random().toString(16) + "000000").substring(2, 8).toUpperCase()
-    );
   }
 }
 

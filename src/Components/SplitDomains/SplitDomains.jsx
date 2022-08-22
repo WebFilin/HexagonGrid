@@ -102,11 +102,8 @@ const SplitDomains = observer(() => {
     }
 
     function createDomain(domainGroup) {
-      const colorGroup = hexCordinate.randomColor();
-
       // Структура одной группы в стеке доменов
       const objDomain = {
-        colorDomain: colorGroup,
         idDomain: [domainGroup],
       };
 
@@ -158,9 +155,7 @@ const SplitDomains = observer(() => {
     //  Вызываем цепочку построения доменов
     createAdjacencyList();
     mainHexGraph(adjacencyList);
-
     handlerSingleNode();
-
     hexCordinate.getDomainsStack(arrDomains);
   }, [arrVertexs]);
 
