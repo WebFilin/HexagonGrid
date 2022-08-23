@@ -3,7 +3,9 @@ import { makeAutoObservable } from "mobx";
 class hexCordinate {
   arrCoordinates = [];
   arrVertexs = [];
+  hexVertex = null;
   hexClick = null;
+  arrGraphTree = [];
   stackDomains = [];
   svgArea = [];
   isRandom = false;
@@ -41,7 +43,9 @@ class hexCordinate {
     this.hexClick = checkHex;
   }
 
+  //   Получаем id и группу соседий хекса
   getHexGroup(peak) {
+    this.hexVertex = peak;
     this.arrVertexs.push(peak);
   }
 
@@ -75,6 +79,10 @@ class hexCordinate {
   handlerBtnRandom(ratio) {
     this.randomRatio = ratio;
     this.isRandom = !this.isRandom;
+  }
+
+  getGraphTree(arrTree) {
+    this.arrGraphTree = arrTree;
   }
 
   //   Поиск соседий хекса

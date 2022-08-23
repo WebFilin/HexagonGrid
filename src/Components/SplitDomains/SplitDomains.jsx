@@ -2,20 +2,13 @@ import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import hexHandler from "../../store/hexHandler";
-import CheckDomains from "../CheckDomains/CheckDomains";
 
 const SplitDomains = observer(() => {
   const arrVertexs = toJS(hexHandler.arrVertexs);
 
-  // Стек отсортированных подмножеств общего графа
-  const [arrTrees, setArrTrees] = React.useState([]);
-
   React.useEffect(() => {
     //  Список смежности графа
     let adjacencyList = [];
-
-    //  Стек готовых доменов
-    const arrDomains = [];
 
     //  Стек всех найденных деревьев при рекрусии
     const arrSearchTree = [];
@@ -23,9 +16,9 @@ const SplitDomains = observer(() => {
     //  Результируюший стек деревьев графа
     const resArrTree = [];
 
+    // Формируем список смежности узлов
     function createAdjacencyList() {
       adjacencyList = [];
-      // Формируем список смежности узлов
       for (let i = 0; i < arrVertexs.length; i++) {
         const prevID = arrVertexs[i].id;
 
@@ -73,12 +66,9 @@ const SplitDomains = observer(() => {
       while (true) {
         // Стартовая точка обхода графа - если не посещалась
         let startNode = +nodes.find((node) => !nodeMap[node].visited);
-
         if (isNaN(startNode)) break;
-
         hexGraph.push(depthFirstSearch(startNode, nodeMap));
       }
-
       return hexGraph;
     }
 
@@ -98,100 +88,29 @@ const SplitDomains = observer(() => {
         let linkNode = nodeMap[startNode][i];
         depthFirstSearch(linkNode, nodeMap, domainGroup);
       }
-
       arrSearchTree.push(domainGroup);
-
-      // Проверяем и раздиляем домены
-      checkDomain(domainGroup);
     }
 
     //  Удаляем дубликаты деревьев после рекрусии
     function removeDuplicatesTree(arrSearchTree) {
       const arrString = arrSearchTree.map((elem) => elem.join(","));
-
       const uniqueString = new Set(arrString);
-
       uniqueString.forEach((elem) => {
         const arrNum = elem.split(",").map((num) => {
-          return +num;
+          return Number(num);
         });
         resArrTree.push(arrNum);
       });
-    }
-
-    //  ОБрабатываем разбиение на домены
-    function checkDomain(domainGroup) {
-      if (arrDomains.length === 0) {
-        createDomain(...domainGroup);
-      } else {
-        checkSubDomain(domainGroup);
-      }
-    }
-
-    function createDomain(domainGroup) {
-      // Структура одной группы в стеке доменов
-      const objDomain = {
-        idDomain: [domainGroup],
-      };
-
-      arrDomains.push(objDomain);
-    }
-
-    function checkSubDomain(domainGroup) {
-      // Получаем индекс домена в общем стейте
-      const intersect = arrDomains.findIndex((domain) => {
-        return domain.idDomain.some((id) => {
-          return domainGroup.includes(id);
-        });
-      });
-
-      if (intersect !== -1) {
-        const oldState = arrDomains[intersect].idDomain;
-
-        arrDomains[intersect].idDomain = [
-          ...new Set([...oldState, ...domainGroup]),
-        ];
-      } else {
-        createDomain(...domainGroup);
-      }
-    }
-
-    // Обрабатываем единичные домены
-    function handlerSingleNode() {
-      const allNodeID = [];
-
-      // Получаем все id из доменов
-      arrDomains.forEach((node) => {
-        allNodeID.push(...node.idDomain);
-      });
-
-      // Ищем исключения
-      const singleNode = arrVertexs.filter((node) => {
-        if (!allNodeID.includes(node.id)) {
-          return node;
-        }
-      });
-
-      if (singleNode.length > 0) {
-        singleNode.forEach((elem) => {
-          createDomain(elem.id);
-        });
-      }
     }
 
     //  Вызываем цепочку построения доменов
     createAdjacencyList();
     mainHexGraph(adjacencyList);
     removeDuplicatesTree(arrSearchTree);
-    handlerSingleNode();
-    hexHandler.getDomainsStack(arrDomains);
+    hexHandler.getGraphTree(resArrTree);
   }, [arrVertexs]);
 
-  return (
-    <div>
-      <CheckDomains treeGraph={""} />
-    </div>
-  );
+  return <div></div>;
 });
 
 export default SplitDomains;

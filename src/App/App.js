@@ -8,6 +8,7 @@ import SetHexSideSize from "../Components/HexSideSize/SetHexSideSize";
 import RandomChange from "../Components/ControlsElem/RandomChange/RandomChange";
 import SplitDomains from "../Components/SplitDomains/SplitDomains";
 import ColorazeDomains from "../Components/ColorazeDomains/ColorazeDomains";
+import CheckDomains from "../Components/CheckDomains/CheckDomains";
 import InfoTable from "../Components/InfoTable/InfoTable";
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
       <GetClickHexGroup />
       <GetRandomHexGroup />
       <SplitDomains />
+      <CheckDomains />
       <ColorazeDomains />
     </div>
   );

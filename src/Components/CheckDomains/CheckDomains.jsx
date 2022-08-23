@@ -1,75 +1,100 @@
 import React from "react";
 import { toJS } from "mobx";
 import hexHandler from "../../store/hexHandler";
+import { observer } from "mobx-react-lite";
 
-function CheckDomains(treeGraph) {
+const CheckDomains = observer(() => {
   const arrVertexs = toJS(hexHandler.arrVertexs);
 
-  //  Стек готовых доменов
-  const arrDomains = [];
+  React.useEffect(() => {
+    // Подмножества графа
+    const treesGraph = toJS(hexHandler.arrGraphTree);
 
-  //  ОБрабатываем разбиение на домены
-  function checkDomain(domainGroup) {
-    if (arrDomains.length === 0) {
-      createDomain(...domainGroup);
-    } else {
-      checkSubDomain(domainGroup);
-    }
-  }
+    //  Узел выбранного хекса
+    const nodeHex = toJS(hexHandler.hexVertex);
 
-  function createDomain(domainGroup) {
-    // Структура одной группы в стеке доменов
-    const objDomain = {
-      idDomain: [domainGroup],
-    };
+    //  Стек готовых доменов
+    const arrDomains = [];
 
-    arrDomains.push(objDomain);
-  }
+    //  Создаем домены по полученным графам автоматически
+    if (treesGraph.length !== 0) {
+      treesGraph.map((tree) => {
+        const objDomain = {
+          idDomain: [...tree],
+        };
 
-  function checkSubDomain(domainGroup) {
-    // Получаем индекс домена в общем стейте
-    const intersect = arrDomains.findIndex((domain) => {
-      return domain.idDomain.some((id) => {
-        return domainGroup.includes(id);
+        return arrDomains.push(objDomain);
       });
-    });
-
-    if (intersect !== -1) {
-      const oldState = arrDomains[intersect].idDomain;
-
-      arrDomains[intersect].idDomain = [
-        ...new Set([...oldState, ...domainGroup]),
-      ];
-    } else {
-      createDomain(...domainGroup);
     }
-  }
 
-  // Обрабатываем единичные домены
-  function handlerSingleNode() {
-    const allNodeID = [];
-
-    // Получаем все id из доменов
-    arrDomains.forEach((node) => {
-      allNodeID.push(...node.idDomain);
-    });
-
-    // Ищем исключения
-    const singleNode = arrVertexs.filter((node) => {
-      if (!allNodeID.includes(node.id)) {
-        return node;
+    //  ОБрабатываем разбиение на домены
+    function checkDomain(hexNode) {
+      if (arrDomains.length === 0) {
+        createDomain(hexNode);
+      } else {
+        checkSubDomain(hexNode);
       }
-    });
-
-    if (singleNode.length > 0) {
-      singleNode.forEach((elem) => {
-        createDomain(elem.id);
-      });
     }
-  }
 
-  handlerSingleNode();
+    function checkSubDomain(hexNode) {
+      // Получаем индекс домена в общем стейте
+      const intersect = arrDomains.findIndex((domain) => {
+        return domain.idDomain.some((id) => {
+          return hexNode.group.includes(id);
+        });
+      });
+
+      if (intersect !== -1) {
+        const oldState = arrDomains[intersect].idDomain;
+
+        arrDomains[intersect].idDomain = [
+          ...new Set([...oldState, hexNode.id]),
+        ];
+      } else {
+        createDomain(hexNode);
+      }
+    }
+
+    // Обрабатываем появление единичных доменов
+    function handlerSingleNode() {
+      const allNodeID = [];
+
+      // Получаем все id из доменов
+      arrDomains.forEach((node) => {
+        allNodeID.push(...node.idDomain);
+      });
+
+      // Ищем исключения
+      const singleNode = arrVertexs.filter((node) => {
+        if (!allNodeID.includes(node.id)) {
+          return node;
+        }
+      });
+
+      if (singleNode.length > 0) {
+        singleNode.forEach((elem) => {
+          createDomain(elem);
+        });
+      }
+    }
+
+    //  Создаем новый домен при клике
+    function createDomain(hexID) {
+      const objDomain = {
+        idDomain: [hexID.id],
+      };
+      arrDomains.push(objDomain);
+    }
+
+    if (nodeHex !== null) {
+      checkDomain(nodeHex);
+    }
+    handlerSingleNode();
+
+    hexHandler.getDomainsStack(arrDomains);
+  }, [arrVertexs]);
+
   return <div></div>;
-}
+});
 
 export default CheckDomains;

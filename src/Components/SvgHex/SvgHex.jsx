@@ -27,6 +27,7 @@ function SvgHex({ id, x, y, vertical, horizontal }) {
           horizontal={horizontal}
           points="100,0 50,-87 -50,-87 -100,-0 -50,87 50,87"
           onClick={action((evHex) => {
+            evHex.preventDefault()
             handlerClick(evHex);
           })}
         ></polygon>
