@@ -11,10 +11,6 @@ const ColorazeDomains = observer(() => {
     const collectionsHexs = toJS(hexHandler.svgArea);
     const arrHexs = Array.from(collectionsHexs);
 
-    const colorRandom =
-      "#" +
-      (Math.random().toString(16) + "000000").substring(2, 8).toUpperCase();
-
     arrHexs.forEach((hexElem) => {
       const hex = hexElem.firstChild;
       const hexTxt = hexElem.lastChild;
@@ -28,7 +24,7 @@ const ColorazeDomains = observer(() => {
       arrDomains.forEach((elem) => {
         // Задаем цвета доменов
         if (!elem.hasOwnProperty("colorDomain")) {
-          elem.colorDomain = colorRandom;
+          elem.colorDomain = hexHandler.setDomainColor();
         }
 
         if (elem.idDomain.includes(id)) {
@@ -39,6 +35,8 @@ const ColorazeDomains = observer(() => {
         }
       });
     });
+
+    console.log(arrDomains);
   }, [arrDomains]);
 
   return <div></div>;
