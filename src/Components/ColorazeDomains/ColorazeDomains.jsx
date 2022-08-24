@@ -21,22 +21,23 @@ const ColorazeDomains = observer(() => {
       //  hexTxt.textContent = null;
       hex.setAttribute("value", 0);
 
-      arrDomains.forEach((elem) => {
+      arrDomains.forEach((elem, index) => {
         // Задаем цвета доменов
         if (!elem.hasOwnProperty("colorDomain")) {
-          elem.colorDomain = hexHandler.setDomainColor();
+          const colorDomain = hexHandler.setDomainColor();
+          elem.colorDomain = colorDomain;
+          hexHandler.getDomainColor(colorDomain);
         }
 
         if (elem.idDomain.includes(id)) {
-          hex.style.fill = elem.colorDomain;
+          const color = toJS(hexHandler.arrDomainsColor);
+          hex.style.fill = color[index];
           hex.style.fillOpacity = 0.8;
           hex.setAttribute("value", 1);
           //   hexTxt.textContent = 1;
         }
       });
     });
-
-    console.log(arrDomains);
   }, [arrDomains]);
 
   return <div></div>;

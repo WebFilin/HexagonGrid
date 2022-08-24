@@ -23,7 +23,7 @@ const CheckDomains = observer(() => {
           idDomain: [...tree],
         };
 
-        return arrDomains.push(objDomain);
+        arrDomains.push(objDomain);
       });
     }
 

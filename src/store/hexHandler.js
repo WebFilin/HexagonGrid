@@ -7,6 +7,7 @@ class hexCordinate {
   hexClick = null;
   arrGraphTree = [];
   stackDomains = [];
+  arrDomainsColor = [];
   svgArea = [];
   isRandom = false;
   isCreateMainhex = false;
@@ -67,6 +68,10 @@ class hexCordinate {
     this.removeHexId = Number(hex.id);
     hex.setAttribute("value", 0);
 
+    // Сброс стилей хексов
+    hex.style.fill = null;
+    hex.style.fillOpacity = 0.3;
+
     const index = this.arrVertexs.findIndex((elem) => {
       return elem.id === this.removeHexId;
     });
@@ -79,10 +84,19 @@ class hexCordinate {
   handlerBtnRandom(ratio) {
     this.randomRatio = ratio;
     this.isRandom = !this.isRandom;
+    this.clearDomaincolor();
   }
 
   getGraphTree(arrTree) {
     this.arrGraphTree = arrTree;
+  }
+
+  getDomainColor(color) {
+    this.arrDomainsColor.push(color);
+  }
+
+  clearDomaincolor() {
+    this.arrDomainsColor = [];
   }
 
   //   Поиск соседий хекса
