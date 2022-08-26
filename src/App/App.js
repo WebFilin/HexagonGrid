@@ -9,6 +9,8 @@ import RandomChange from "../Components/ControlsElem/RandomChange/RandomChange";
 import SplitDomains from "../Components/SplitDomains/SplitDomains";
 import ColorazeDomains from "../Components/ColorazeDomains/ColorazeDomains";
 import CheckDomains from "../Components/CheckDomains/CheckDomains";
+import NotSimplyConnectDomain from "../Components/NotSimplyConnectDomain/NotSimplyConnectDomain";
+
 import InfoTable from "../Components/InfoTable/InfoTable";
 
 function App() {
@@ -32,6 +34,7 @@ function App() {
       <SplitDomains />
       <CheckDomains />
       <ColorazeDomains />
+      <NotSimplyConnectDomain />
     </div>
   );
 }
