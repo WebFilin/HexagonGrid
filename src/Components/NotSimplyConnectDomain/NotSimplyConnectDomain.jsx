@@ -10,6 +10,8 @@ const NotSimplyConnectDomain = observer(() => {
   // массив графов
   const arrGraphTree = toJS(hexHandler.arrGraphTree);
 
+  console.log(toJS(hexHandler.arrVertexs));
+
   React.useEffect(() => {
     //   Все шестигранники сетки
     const arrCoordinates = toJS(hexHandler.arrCoordinates);
@@ -21,17 +23,15 @@ const NotSimplyConnectDomain = observer(() => {
       return !arrGraphTree.includes(elem.id);
     });
 
-    //  Все элементы с соседями по всем граням. Отсекаем карйнее хексы
+    //  Все хексы с соседями по всем граням. Отсекаем карйнее хексы и входящие в домены
     const vertexHexOut = hexOut
       .map((elem) => {
         const hexVert = elem.vertical;
         const hexHoriz = elem.horizontal;
         const vertex = hexHandler.getNeighborsHex(hexVert, hexHoriz);
 
-        const graphFlat = arrGraphTree.flat();
-
-        if (!graphFlat.includes(elem.id) && vertex.length === 6) {
-          return { id: elem.id, edges: [...vertex] };
+        if (!arrGraphTree.flat().includes(elem.id) && vertex.length === 6) {
+          return { id: elem.id };
         }
       })
       .filter(Boolean);

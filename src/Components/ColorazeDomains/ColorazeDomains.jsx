@@ -34,7 +34,7 @@ const ColorazeDomains = observer(() => {
           hex.style.fill = color[index];
           hex.style.fillOpacity = 0.8;
           hex.setAttribute("value", 1);
-          //   hexTxt.textContent = 1;
+          // hexTxt.textContent = 1;
         }
       });
     });
