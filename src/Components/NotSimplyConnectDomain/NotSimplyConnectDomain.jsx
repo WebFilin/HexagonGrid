@@ -7,14 +7,12 @@ const NotSimplyConnectDomain = observer(() => {
   // Кнопка авто
   const isRandom = hexHandler.isRandom;
 
-  // массив графов
-  const arrGraphTree = toJS(hexHandler.arrGraphTree);
-
-  console.log(toJS(hexHandler.arrVertexs));
-
   React.useEffect(() => {
     //   Все шестигранники сетки
     const arrCoordinates = toJS(hexHandler.arrCoordinates);
+
+    // массив графов
+    const arrGraphTree = toJS(hexHandler.arrGraphTree);
 
     const single = [];
 
@@ -29,9 +27,10 @@ const NotSimplyConnectDomain = observer(() => {
         const hexVert = elem.vertical;
         const hexHoriz = elem.horizontal;
         const vertex = hexHandler.getNeighborsHex(hexVert, hexHoriz);
+        const hexInDomain = !arrGraphTree.flat().includes(elem.id);
 
-        if (!arrGraphTree.flat().includes(elem.id) && vertex.length === 6) {
-          return { id: elem.id };
+        if (hexInDomain && vertex.length === 6) {
+          return { id: elem.id, vertex: [vertex] };
         }
       })
       .filter(Boolean);
@@ -40,7 +39,7 @@ const NotSimplyConnectDomain = observer(() => {
 
     //  console.log(vertexHexOut);
     //  console.log(arrGraphTree);
-  }, [isRandom, arrGraphTree]);
+  }, [isRandom]);
 
   return <div></div>;
 });

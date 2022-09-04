@@ -23,7 +23,7 @@ const RandomDomains = observer(() => {
 
     arrCordMainHex.forEach((hexElem) => {
       if (Math.random() <= ratio) {
-         //  randomElem.push(hexElem);
+        // randomElem.push(hexElem);
       }
     });
 
@@ -35,7 +35,6 @@ const RandomDomains = observer(() => {
       arrCordMainHex[11],
       arrCordMainHex[16],
       arrCordMainHex[25],
-      arrCordMainHex[18],
       arrCordMainHex[11],
       arrCordMainHex[16],
       arrCordMainHex[25],
