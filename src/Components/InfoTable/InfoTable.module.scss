@@ -1,5 +1,23 @@
 .wrapper {
-//   margin-left: 70px;
+  width: 95%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  border: solid 2px red;
+.table_body {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid black;
+}
+
+.table_title {
+  th {
+    padding: 5px;
+    border: 1px solid black;
+  }
+}
+
+.table_content {
 }
