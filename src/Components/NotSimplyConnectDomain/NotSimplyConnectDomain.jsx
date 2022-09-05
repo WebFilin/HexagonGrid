@@ -14,28 +14,19 @@ const NotSimplyConnectDomain = observer(() => {
     // массив графов
     const arrGraphTree = toJS(hexHandler.arrGraphTree);
 
-    const single = [];
-
-    //  Получаем хексы вне доменов
-    const hexOut = arrCoordinates.flat().filter((elem) => {
-      return !arrGraphTree.includes(elem.id);
-    });
-
-    //  Все хексы с соседями по всем граням. Отсекаем карйнее хексы и входящие в домены
-    const vertexHexOut = hexOut
+    //  Все хексы не входящие в домены
+    const vertexHexOut = arrCoordinates
       .map((elem) => {
         const hexVert = elem.vertical;
         const hexHoriz = elem.horizontal;
         const vertex = hexHandler.getNeighborsHex(hexVert, hexHoriz);
-        const hexInDomain = !arrGraphTree.flat().includes(elem.id);
+        const hexOutDomain = !arrGraphTree.flat().includes(elem.id);
 
-        if (hexInDomain && vertex.length === 6) {
-          return { id: elem.id, vertex: [vertex] };
+        if (hexOutDomain) {
+          return { id: elem.id, vertex: [...vertex] };
         }
       })
       .filter(Boolean);
-
-    console.log(vertexHexOut);
 
     //  console.log(vertexHexOut);
     //  console.log(arrGraphTree);

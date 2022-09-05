@@ -49,10 +49,12 @@ const RandomDomains = observer(() => {
       arrCordMainHex[21],
       arrCordMainHex[30],
       arrCordMainHex[39],
-      arrCordMainHex[40],
       arrCordMainHex[32],
       arrCordMainHex[23],
-      arrCordMainHex[14]
+      arrCordMainHex[14],
+      arrCordMainHex[41],
+      arrCordMainHex[48],
+      arrCordMainHex[56]
     );
 
     randomElem.forEach((elemHex) => {
