@@ -4,13 +4,12 @@ import MainHexagons from "../Components/MainHexagons/MainHexagons";
 import DrowSvgArea from "../Components/DrowSvgArea/DrowSvgArea";
 import GetClickHexGroup from "../Components/GetClickHexGroup/GetClickHexGroup";
 import GetRandomHexGroup from "../Components/GetRandomHexGroup/GetRandomHexGroup";
-import SetHexSideSize from "../Components/HexSideSize/SetHexSideSize";
+import SetHexSideSize from "../Components/SetHexSideSize/SetHexSideSize";
 import RandomChange from "../Components/ControlsElem/RandomChange/RandomChange";
 import SplitDomains from "../Components/SplitDomains/SplitDomains";
 import ColorazeDomains from "../Components/ColorazeDomains/ColorazeDomains";
 import CheckDomains from "../Components/CheckDomains/CheckDomains";
 import NotSimplyConnectDomain from "../Components/NotSimplyConnectDomain/NotSimplyConnectDomain";
-
 import InfoTable from "../Components/InfoTable/InfoTable";
 
 function App() {

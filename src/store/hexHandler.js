@@ -31,7 +31,7 @@ class hexCordinate {
     this.hexSideSize.N = axisN;
   }
 
-  get handlerCreateHex() {
+  getHandlerCreateHex() {
     return (this.isCreateMainhex = !this.isCreateMainhex);
   }
 

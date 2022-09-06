@@ -60,7 +60,7 @@ function SetHexSideSize() {
 
       <button
         className={style.btn_calc}
-        onClick={action(() => hexHandler.handlerCreateHex())}
+        onClick={action(() => hexHandler.getHandlerCreateHex())}
       >
         СОЗДАТЬ
       </button>
