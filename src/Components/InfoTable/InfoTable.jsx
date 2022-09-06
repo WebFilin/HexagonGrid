@@ -5,9 +5,9 @@ import hexHandler from "../../store/hexHandler";
 import style from "./InfoTable.module.scss";
 
 const InfoTable = observer(() => {
-  const mainDomains = toJS(hexHandler.stackDomains);
-  const allElem = toJS(hexHandler.arrCoordinates);
+  const infoTable = toJS(hexHandler.infoForTable);
 
+  console.log(infoTable);
   return (
     <div className={style.wrapper}>
       <table className={style.table_body}>
@@ -26,13 +26,18 @@ const InfoTable = observer(() => {
         </thead>
 
         <tbody className={style.table_content}>
-          <tr>
-            <td>Содержимое</td>
-          </tr>
+          {infoTable.map((elem, index) => (
+            <tr key={index}>
+              <td>{elem.random}</td>
+              <td>{elem.domains}</td>
+              <td>{elem.nonSimplyDomain}</td>
+              <td>
+                {elem.allHexs}({elem.aspectRatio}) {elem.valueOne}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
-      {/* <p> Создано доменов: {mainDomains.length}</p> */}
-      {/* <p> Элементов всего: {allElem.length}</p> */}
     </div>
   );
 });

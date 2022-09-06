@@ -18,6 +18,8 @@ class hexCordinate {
     N: 7,
   };
 
+  infoForTable = [];
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -85,6 +87,7 @@ class hexCordinate {
     this.randomRatio = ratio;
     this.isRandom = !this.isRandom;
     this.clearDomaincolor();
+    this.getInfoForTable();
   }
 
   getGraphTree(arrTree) {
@@ -97,6 +100,24 @@ class hexCordinate {
 
   clearDomaincolor() {
     this.arrDomainsColor = [];
+  }
+
+  getInfoForTable() {
+    const info = {
+      random: this.randomRatio.toFixed(2),
+      domains: this.stackDomains.length,
+      nonSimplyDomain: "Реализовать",
+      allHexs: this.arrCoordinates.length,
+      aspectRatio: `${this.hexSideSize.L}; ${this.hexSideSize.M}; ${this.hexSideSize.N}`,
+      valueOne: this.arrGraphTree.flat().length,
+    };
+
+    if (this.infoForTable.length < 10) {
+      this.infoForTable.push(info);
+    } else {
+      this.infoForTable.push(info);
+      this.infoForTable.shift();
+    }
   }
 
   //   Поиск соседий хекса
