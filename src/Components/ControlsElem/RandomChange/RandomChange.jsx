@@ -27,7 +27,9 @@ function RandomChange() {
         />
         <button
           className={style.btn_calc}
-          onClick={action(() => hexHandler.handlerBtnRandom(isValue))}
+          onClick={action(() => {
+            hexHandler.handlerBtnRandom(isValue);
+          })}
         >
           АВТО
         </button>

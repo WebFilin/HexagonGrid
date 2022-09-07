@@ -28,8 +28,10 @@ const NotSimplyConnectDomain = observer(() => {
       })
       .filter(Boolean);
 
-    //  console.log(vertexHexOut);
-    //  console.log(arrGraphTree);
+ 
+
+   //  console.log(vertexHexOut);
+   //  console.log(arrGraphTree);
   }, [isRandom]);
 
   return <div></div>;

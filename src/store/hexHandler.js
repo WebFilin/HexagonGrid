@@ -32,7 +32,7 @@ class hexCordinate {
   }
 
   getHandlerCreateHex() {
-    return (this.isCreateMainhex = !this.isCreateMainhex);
+    this.isCreateMainhex = !this.isCreateMainhex;
   }
 
   //   Массив коррдинат хексов
@@ -84,10 +84,9 @@ class hexCordinate {
   }
 
   handlerBtnRandom(ratio) {
+    this.arrDomainsColor = [];
     this.randomRatio = ratio;
     this.isRandom = !this.isRandom;
-    this.clearDomaincolor();
-    this.getInfoForTable();
   }
 
   getGraphTree(arrTree) {
@@ -98,25 +97,12 @@ class hexCordinate {
     this.arrDomainsColor.push(color);
   }
 
-  clearDomaincolor() {
-    this.arrDomainsColor = [];
-  }
-
-  getInfoForTable() {
-    const info = {
-      random: this.randomRatio.toFixed(2),
-      domains: this.stackDomains.length,
-      nonSimplyDomain: "Реализовать",
-      allHexs: this.arrCoordinates.length,
-      aspectRatio: `${this.hexSideSize.L}; ${this.hexSideSize.M}; ${this.hexSideSize.N}`,
-      valueOne: this.arrGraphTree.flat().length,
-    };
-
+  getInfoTable(info) {
     if (this.infoForTable.length < 10) {
       this.infoForTable.push(info);
     } else {
-      this.infoForTable.push(info);
       this.infoForTable.shift();
+      this.infoForTable.push(info);
     }
   }
 
