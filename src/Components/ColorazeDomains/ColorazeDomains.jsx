@@ -24,9 +24,8 @@ const ColorazeDomains = observer(() => {
       arrDomains.forEach((elem, index) => {
         // Задаем цвета доменов
         if (!elem.hasOwnProperty("colorDomain")) {
-          const colorDomain = hexHandler.setDomainColor();
-          elem.colorDomain = colorDomain;
-          hexHandler.getDomainColor(colorDomain);
+          elem.colorDomain = setDomainColor();
+          hexHandler.getDomainColor(elem.colorDomain);
         }
 
         if (elem.idDomain.includes(id)) {
@@ -34,10 +33,17 @@ const ColorazeDomains = observer(() => {
           hex.style.fill = color[index];
           hex.style.fillOpacity = 0.8;
           hex.setAttribute("value", 1);
-         //  hexTxt.textContent = 1;
+          //  hexTxt.textContent = 1;
         }
       });
     });
+
+    function setDomainColor() {
+      return (
+        "#" +
+        (Math.random().toString(16) + "000000").substring(2, 8).toUpperCase()
+      );
+    }
   }, [arrDomains]);
 
   return <div></div>;
