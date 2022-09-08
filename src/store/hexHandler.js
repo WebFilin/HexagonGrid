@@ -18,7 +18,8 @@ class hexCordinate {
     N: 7,
   };
 
-  infoForTable = [];
+  nonSimplyDomain = "Написать";
+  arrTable = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -87,6 +88,7 @@ class hexCordinate {
     this.arrDomainsColor = [];
     this.randomRatio = ratio;
     this.isRandom = !this.isRandom;
+    this.handlerInfoTable();
   }
 
   getGraphTree(arrTree) {
@@ -97,14 +99,28 @@ class hexCordinate {
     this.arrDomainsColor.push(color);
   }
 
-  getInfoTable(info) {
-    if (this.infoForTable.length < 10) {
-      this.infoForTable.push(info);
+  //   Управляем стеком для отображения таблицы доменов
+  handlerInfoTable() {
+    if (this.arrTable.length < 10) {
+      this.arrTable.push(this.infoForTable);
     } else {
-      this.infoForTable.shift();
-      this.infoForTable.push(info);
+      this.arrTable.shift();
+      this.arrTable.push(this.infoForTable);
     }
-    this.isDrowTable = false;
+  }
+
+  //  Вычисляем строку для добавления в таблицу
+  get infoForTable() {
+    const info = {
+      random: this.randomRatio.toFixed(2),
+      sumDomains: this.stackDomains.length,
+      nonSimplyDomain: this.nonSimplyDomain,
+      allHexs: this.arrCoordinates.length,
+      aspectRatio: `(${this.hexSideSize.L}; ${this.hexSideSize.M}; ${this.hexSideSize.N})`,
+      valueForOne: this.arrVertexs.flat().length,
+    };
+
+    return info;
   }
 
   //   Поиск соседий хекса
@@ -127,7 +143,6 @@ class hexCordinate {
 
     return nodeID;
   }
-
 }
 
 export default new hexCordinate();

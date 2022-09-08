@@ -10,7 +10,7 @@ import SplitDomains from "../Components/SplitDomains/SplitDomains";
 import ColorazeDomains from "../Components/ColorazeDomains/ColorazeDomains";
 import CheckDomains from "../Components/CheckDomains/CheckDomains";
 import NotSimplyConnectDomain from "../Components/NotSimplyConnectDomain/NotSimplyConnectDomain";
-import GetInfoTable from "../Components/GetInfoTable/GetInfoTable";
+import DrowInfoTable from "../Components/DrowInfoTable/DrowInfoTable";
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
         <div className={style.controls}>
           <SetHexSideSize />
           <RandomChange />
-          <GetInfoTable />
+          <DrowInfoTable />
         </div>
       </main>
 
