@@ -100,29 +100,26 @@ class hexCordinate {
 
   //   Управляем стеком для отображения таблицы доменов
   drowInfoTable() {
+    const info = {
+      random: this.randomRatio.toFixed(2),
+      sumDomains: this.stackDomains.length,
+      nonSimplyDomain: this.nonSimplyDomain,
+      allHexs: this.arrCoordinates.length,
+      aspectRatio: this.hexSideSize,
+      valueForOne: this.arrVertexs.flat().length,
+    };
+
     if (this.arrTable.length < 10) {
-      this.arrTable.push(this.infoForTable);
+      this.arrTable.push(info);
     } else {
       this.arrTable.shift();
-      this.arrTable.push(this.infoForTable);
+      this.arrTable.push(info);
     }
 
     console.log(this.stackDomains.length);
   }
 
   //  Вычисляем строку для добавления в таблицу
-  get infoForTable() {
-    const info = {
-      random: this.randomRatio.toFixed(2),
-      sumDomains: this.stackDomains.length,
-      nonSimplyDomain: this.nonSimplyDomain,
-      allHexs: this.arrCoordinates.length,
-      aspectRatio: `(${this.hexSideSize.L}; ${this.hexSideSize.M}; ${this.hexSideSize.N})`,
-      valueForOne: this.arrVertexs.flat().length,
-    };
-
-    return info;
-  }
 
   //   Поиск соседий хекса
   getNeighborsHex(hexVert, hexHoriz) {

@@ -30,7 +30,9 @@ const DrowInfoTable = observer(() => {
             <td>{elem.sumDomains}</td>
             <td>{elem.nonSimplyDomain}</td>
             <td>
-              {elem.allHexs}({elem.aspectRatio}) {elem.valueForOne}
+              {elem.allHexs}{" "}
+              {`(${elem.aspectRatio.L}; ${elem.aspectRatio.M}; ${elem.aspectRatio.N})`}{" "}
+              {elem.valueForOne}
             </td>
           </tr>
         ))}
