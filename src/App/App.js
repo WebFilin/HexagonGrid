@@ -5,7 +5,7 @@ import DrowSvgArea from "../Components/DrowSvgArea/DrowSvgArea";
 import GetClickHexGroup from "../Components/GetClickHexGroup/GetClickHexGroup";
 import GetRandomHexGroup from "../Components/GetRandomHexGroup/GetRandomHexGroup";
 import SetHexSideSize from "../Components/SetHexSideSize/SetHexSideSize";
-import RandomChange from "../Components/ControlsElem/RandomChange/RandomChange";
+import BtnRandomChange from "../Components/ControlsElem/BtnRandomChange/BtnRandomChange";
 import SplitDomains from "../Components/SplitDomains/SplitDomains";
 import ColorazeDomains from "../Components/ColorazeDomains/ColorazeDomains";
 import CheckDomains from "../Components/CheckDomains/CheckDomains";
@@ -21,7 +21,7 @@ function App() {
         <DrowSvgArea />
         <div className={style.controls}>
           <SetHexSideSize />
-          <RandomChange />
+          <BtnRandomChange />
           <DrowInfoTable />
         </div>
       </main>

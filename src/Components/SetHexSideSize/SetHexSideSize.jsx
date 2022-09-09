@@ -1,6 +1,5 @@
 import React from "react";
 import style from "./setHexSizeSide.module.scss";
-import { action } from "mobx";
 import InputSizeSide from "../ControlsElem/InputSizeSide/InputSizeSide";
 import hexHandler from "../../store/hexHandler";
 
@@ -20,6 +19,10 @@ function SetHexSideSize() {
   const handlerValueN = (value) => {
     setValueN(value);
   };
+
+  function clickHandler() {
+    hexHandler.getHandlerCreateHex();
+  }
 
   React.useEffect(() => {
     hexHandler.getHexSideSize(valueL, valueM, valueN);
@@ -58,10 +61,7 @@ function SetHexSideSize() {
         max={30}
       />
 
-      <button
-        className={style.btn_calc}
-        onClick={action(() => hexHandler.getHandlerCreateHex())}
-      >
+      <button className={style.btn_calc} onClick={clickHandler}>
         СОЗДАТЬ
       </button>
     </div>

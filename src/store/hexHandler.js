@@ -88,7 +88,6 @@ class hexCordinate {
     this.arrDomainsColor = [];
     this.randomRatio = ratio;
     this.isRandom = !this.isRandom;
-    this.handlerInfoTable();
   }
 
   getGraphTree(arrTree) {
@@ -100,13 +99,15 @@ class hexCordinate {
   }
 
   //   Управляем стеком для отображения таблицы доменов
-  handlerInfoTable() {
+  drowInfoTable() {
     if (this.arrTable.length < 10) {
       this.arrTable.push(this.infoForTable);
     } else {
       this.arrTable.shift();
       this.arrTable.push(this.infoForTable);
     }
+
+    console.log(this.stackDomains.length);
   }
 
   //  Вычисляем строку для добавления в таблицу

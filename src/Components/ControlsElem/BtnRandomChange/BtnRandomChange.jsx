@@ -1,7 +1,7 @@
 import React from "react";
 
 import InputSizeSide from "../InputSizeSide/InputSizeSide";
-import style from "./randomChange.module.scss";
+import style from "./btnRandomChange.module.scss";
 import { action } from "mobx";
 import hexHandler from "../../../store/hexHandler";
 
@@ -10,6 +10,11 @@ function RandomChange() {
 
   function handlerValue(value) {
     setIsValue(value);
+  }
+
+  function handlerClick() {
+    hexHandler.handlerBtnRandom(isValue);
+    hexHandler.drowInfoTable();
   }
 
   return (
@@ -25,12 +30,7 @@ function RandomChange() {
           min={0}
           max={0.99}
         />
-        <button
-          className={style.btn_calc}
-          onClick={action(() => {
-            hexHandler.handlerBtnRandom(isValue);
-          })}
-        >
+        <button className={style.btn_calc} onClick={handlerClick}>
           АВТО
         </button>
       </div>

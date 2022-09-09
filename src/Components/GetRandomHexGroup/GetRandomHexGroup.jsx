@@ -68,7 +68,6 @@ const RandomDomains = observer(() => {
     });
 
     hexHandler.getVertexLinks(arrNeighbors);
-   
   }, [isRandom]);
 
   return <div></div>;
