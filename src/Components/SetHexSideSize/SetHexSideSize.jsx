@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./setHexSizeSide.module.scss";
 import InputSizeSide from "../ControlsElem/InputSizeSide/InputSizeSide";
-import hexHandler from "../../store/hexHandler";
+import domainsStore from "../../store/domainsStore";
 
 function SetHexSideSize() {
   const [valueL, setValueL] = React.useState(3);
@@ -21,11 +21,11 @@ function SetHexSideSize() {
   };
 
   function clickHandler() {
-    hexHandler.getHandlerCreateHex();
+    domainsStore.getHandlerCreateHex();
   }
 
   React.useEffect(() => {
-    hexHandler.getHexSideSize(valueL, valueM, valueN);
+    domainsStore.getHexSideSize(valueL, valueM, valueN);
   }, [valueL, valueM, valueN]);
 
   return (

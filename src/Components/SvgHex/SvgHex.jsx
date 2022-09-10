@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./svgHex.module.scss";
-import hexHandler from "../../store/hexHandler";
+import domainsStore from "../../store/domainsStore";
 import { action } from "mobx";
 
 function SvgHex({ id, x, y, vertical, horizontal }) {
@@ -10,9 +10,9 @@ function SvgHex({ id, x, y, vertical, horizontal }) {
     const valueHex = hex.getAttribute("value");
 
     if (valueHex === "1") {
-      hexHandler.getRemoveID(hex);
+      domainsStore.getRemoveID(hex);
     } else {
-      hexHandler.getHex(hex);
+      domainsStore.getHex(hex);
     }
   }
 
@@ -27,7 +27,7 @@ function SvgHex({ id, x, y, vertical, horizontal }) {
           horizontal={horizontal}
           points="100,0 50,-87 -50,-87 -100,-0 -50,87 50,87"
           onClick={action((evHex) => {
-            evHex.preventDefault()
+            evHex.preventDefault();
             handlerClick(evHex);
           })}
         ></polygon>

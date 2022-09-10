@@ -115,11 +115,12 @@ class hexCordinate {
       this.arrTable.shift();
       this.arrTable.push(info);
     }
-
-    console.log(this.stackDomains.length);
   }
 
   //  Вычисляем строку для добавления в таблицу
+  get infoForTable() {
+    return this.stackDomains.length;
+  }
 
   //   Поиск соседий хекса
   getNeighborsHex(hexVert, hexHoriz) {

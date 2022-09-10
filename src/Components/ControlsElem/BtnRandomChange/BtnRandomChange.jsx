@@ -2,8 +2,7 @@ import React from "react";
 
 import InputSizeSide from "../InputSizeSide/InputSizeSide";
 import style from "./btnRandomChange.module.scss";
-import { action } from "mobx";
-import hexHandler from "../../../store/hexHandler";
+import domainsStore from "../../../store/domainsStore";
 
 function RandomChange() {
   const [isValue, setIsValue] = React.useState(0.5);
@@ -13,8 +12,8 @@ function RandomChange() {
   }
 
   function handlerClick() {
-    hexHandler.handlerBtnRandom(isValue);
-    hexHandler.drowInfoTable();
+    domainsStore.handlerBtnRandom(isValue);
+    domainsStore.drowInfoTable();
   }
 
   return (

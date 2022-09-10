@@ -1,10 +1,10 @@
 import React from "react";
 import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
-import hexHandler from "../../store/hexHandler";
+import domainsStore from "../../store/domainsStore";
 
 const MainHexagons = observer(() => {
-  const createMainHex = hexHandler.isCreateMainhex;
+  const createMainHex = domainsStore.isCreateMainhex;
 
   React.useEffect(() => {
     //кординаты и линии расположения хексов
@@ -12,7 +12,7 @@ const MainHexagons = observer(() => {
     const sideOfset = 100;
 
     // Размеры сетки из инпутов
-    const ofsetSide = toJS(hexHandler.hexSideSize);
+    const ofsetSide = toJS(domainsStore.hexSideSize);
 
     //  Стороны хекс контейнера
     const axisQ = ofsetSide.L - 1;
@@ -52,7 +52,7 @@ const MainHexagons = observer(() => {
       }
     }
 
-    hexHandler.getArrCoordinates(hexesPositions);
+    domainsStore.getArrCoordinates(hexesPositions);
   }, [createMainHex]);
 
   return <></>;
