@@ -1,10 +1,10 @@
 import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import React from "react";
-import domainsStore from "../../store/domainsStore";
+import DomainsStore from "../../store/DomainsStore";
 
 const SplitDomains = observer(() => {
-  const arrVertexs = toJS(domainsStore.arrVertexs);
+  const arrVertexs = toJS(DomainsStore.arrVertexs);
 
   React.useEffect(() => {
     //  Список смежности графа
@@ -107,7 +107,7 @@ const SplitDomains = observer(() => {
     createAdjacencyList();
     mainHexGraph(adjacencyList);
     removeDuplicatesTree(arrSearchTree);
-    domainsStore.getGraphTree(resArrTree);
+    DomainsStore.getGraphTree(resArrTree);
   }, [arrVertexs]);
 
   return <div></div>;

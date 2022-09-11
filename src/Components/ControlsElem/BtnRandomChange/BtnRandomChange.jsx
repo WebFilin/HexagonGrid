@@ -1,10 +1,11 @@
 import React from "react";
-
 import InputSizeSide from "../InputSizeSide/InputSizeSide";
 import style from "./btnRandomChange.module.scss";
-import domainsStore from "../../../store/domainsStore";
+import DomainsStore from "../../../store/DomainsStore";
+import { observer } from "mobx-react-lite";
+import StoreTable from "../../../store/StoreTable";
 
-function RandomChange() {
+const RandomChange = observer(() => {
   const [isValue, setIsValue] = React.useState(0.5);
 
   function handlerValue(value) {
@@ -12,8 +13,8 @@ function RandomChange() {
   }
 
   function handlerClick() {
-    domainsStore.handlerBtnRandom(isValue);
-    domainsStore.drowInfoTable();
+    DomainsStore.handlerBtnRandom(isValue);
+    StoreTable.drowInfoTable();
   }
 
   return (
@@ -35,6 +36,6 @@ function RandomChange() {
       </div>
     </div>
   );
-}
+});
 
 export default RandomChange;

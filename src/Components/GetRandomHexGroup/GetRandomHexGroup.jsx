@@ -1,16 +1,16 @@
 import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import React from "react";
-import domainsStore from "../../store/domainsStore";
+import DomainsStore from "../../store/DomainsStore";
 
 const RandomDomains = observer(() => {
   // Кнопка авто
-  const isRandom = domainsStore.isRandom;
+  const isRandom = DomainsStore.isRandom;
 
   //   Генерируем домены
   React.useEffect(() => {
     //   Коофициент рандома
-    const ratio = toJS(domainsStore.randomRatio);
+    const ratio = toJS(DomainsStore.randomRatio);
 
     // Стек элементов
     const randomElem = [];
@@ -19,7 +19,7 @@ const RandomDomains = observer(() => {
     const arrNeighbors = [];
 
     //Стек всех элементов сетки
-    const arrCordMainHex = toJS(domainsStore.arrCoordinates);
+    const arrCordMainHex = toJS(DomainsStore.arrCoordinates);
 
     arrCordMainHex.forEach((hexElem) => {
       if (Math.random() <= ratio) {
@@ -59,7 +59,7 @@ const RandomDomains = observer(() => {
 
     randomElem.forEach((elemHex) => {
       // Получаем кординаты соседей
-      const getNeighbors = domainsStore.getNeighborsHex(
+      const getNeighbors = DomainsStore.getNeighborsHex(
         elemHex.vertical,
         elemHex.horizontal
       );
@@ -67,7 +67,7 @@ const RandomDomains = observer(() => {
       arrNeighbors.push({ id: elemHex.id, group: [...getNeighbors] });
     });
 
-    domainsStore.getVertexLinks(arrNeighbors);
+    DomainsStore.getVertexLinks(arrNeighbors);
   }, [isRandom]);
 
   return <div></div>;

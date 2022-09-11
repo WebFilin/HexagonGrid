@@ -1,11 +1,11 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { toJS } from "mobx";
-import domainsStore from "../../store/domainsStore";
+import DomainsStore from "../../store/DomainsStore";
 
 const GetHexGroup = observer(() => {
   //   Выбранный хекс получаем или при клике или рандомом
-  let hex = toJS(domainsStore.hexClick);
+  let hex = toJS(DomainsStore.hexClick);
 
   // Обработчик клика ищем его соседей
   React.useEffect(() => {
@@ -15,11 +15,11 @@ const GetHexGroup = observer(() => {
       const hexID = Number(hex.id);
 
       // Ищем соседий выбранного узла
-      const getNeighbors = domainsStore.getNeighborsHex(hexVert, hexHoriz);
+      const getNeighbors = DomainsStore.getNeighborsHex(hexVert, hexHoriz);
 
       // Составляем узел графа
       const peak = { id: hexID, group: [...getNeighbors] };
-      domainsStore.getHexGroup(peak);
+      DomainsStore.getHexGroup(peak);
     }
   }, [hex]);
 

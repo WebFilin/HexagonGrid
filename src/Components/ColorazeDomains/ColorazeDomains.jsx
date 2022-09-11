@@ -1,14 +1,14 @@
 import React from "react";
-
 import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
-import domainsStore from "../../store/domainsStore";
+import DomainsStore from "../../store/DomainsStore";
+import StoreTable from "../../store/StoreTable";
 
 const ColorazeDomains = observer(() => {
-  const arrDomains = toJS(domainsStore.stackDomains);
+  const arrDomains = toJS(DomainsStore.stackDomains);
 
   React.useEffect(() => {
-    const collectionsHexs = toJS(domainsStore.svgArea);
+    const collectionsHexs = toJS(DomainsStore.svgArea);
     const arrHexs = Array.from(collectionsHexs);
 
     arrHexs.forEach((hexElem) => {
@@ -25,11 +25,11 @@ const ColorazeDomains = observer(() => {
         // Задаем цвета доменов
         if (!elem.hasOwnProperty("colorDomain")) {
           elem.colorDomain = setDomainColor();
-          domainsStore.getDomainColor(elem.colorDomain);
+          DomainsStore.getDomainColor(elem.colorDomain);
         }
 
         if (elem.idDomain.includes(id)) {
-          const color = toJS(domainsStore.arrDomainsColor);
+          const color = toJS(DomainsStore.arrDomainsColor);
           hex.style.fill = color[index];
           hex.style.fillOpacity = 0.8;
           hex.setAttribute("value", 1);
@@ -44,6 +44,7 @@ const ColorazeDomains = observer(() => {
         (Math.random().toString(16) + "000000").substring(2, 8).toUpperCase()
       );
     }
+    StoreTable.getAmountDomains( arrDomains);
   }, [arrDomains]);
 
   return <div></div>;

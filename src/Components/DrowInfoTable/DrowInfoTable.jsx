@@ -1,22 +1,18 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import { toJS } from "mobx";
-import domainsStore from "../../store/domainsStore";
+import { autorun, toJS } from "mobx";
+import DomainsStore from "../../store/DomainsStore";
+import StoreTable from "../../store/StoreTable";
 import style from "./drowInfoTable.module.scss";
 
 const DrowInfoTable = observer(() => {
-  const isRandom = domainsStore.isRandom;
-
-  //   console.log(isRandom);
-
-  React.useLayoutEffect(() => {
-   //  const arrTable = toJS(hexHandler.stackDomains.length);
-   // const info = 
-
-   //  console.log(arrTable);
-  }, [isRandom]);
-
-  //   const arrTable = toJS(hexHandler.arrTable.length);
+  const isRandom = DomainsStore.isRandom;
+  const Tab = StoreTable.amountDomains;
+  React.useEffect(() => {
+    autorun(() => {
+      console.log("Таблица " + Tab);
+    });
+  });
 
   //   const table = (
 
@@ -39,12 +35,12 @@ const DrowInfoTable = observer(() => {
   //      {arrTable.map((elem, index) => (
   //        <tr key={index}>
   //          <td>{elem.random}</td>
-  //          <td>{elem.sumDomains}</td>
+  //          <td>{elem.amountDomains}</td>
   //          <td>{elem.nonSimplyDomain}</td>
   //          <td>
   //            {elem.allHexs}{" "}
   //            {`(${elem.aspectRatio.L}; ${elem.aspectRatio.M}; ${elem.aspectRatio.N})`}{" "}
-  //            {elem.valueForOne}
+  //            {elem.amountValueOne}
   //          </td>
   //        </tr>
   //      ))}

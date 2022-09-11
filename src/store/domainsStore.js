@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 
-class hexCordinate {
+class DomainsStore {
   arrCoordinates = [];
   arrVertexs = [];
   hexVertex = null;
@@ -17,9 +17,6 @@ class hexCordinate {
     M: 5,
     N: 7,
   };
-
-  nonSimplyDomain = "Написать";
-  arrTable = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -98,30 +95,6 @@ class hexCordinate {
     this.arrDomainsColor.push(color);
   }
 
-  //   Управляем стеком для отображения таблицы доменов
-  drowInfoTable() {
-    const info = {
-      random: this.randomRatio.toFixed(2),
-      sumDomains: this.stackDomains.length,
-      nonSimplyDomain: this.nonSimplyDomain,
-      allHexs: this.arrCoordinates.length,
-      aspectRatio: this.hexSideSize,
-      valueForOne: this.arrVertexs.flat().length,
-    };
-
-    if (this.arrTable.length < 10) {
-      this.arrTable.push(info);
-    } else {
-      this.arrTable.shift();
-      this.arrTable.push(info);
-    }
-  }
-
-  //  Вычисляем строку для добавления в таблицу
-  get infoForTable() {
-    return this.stackDomains.length;
-  }
-
   //   Поиск соседий хекса
   getNeighborsHex(hexVert, hexHoriz) {
     const result = this.arrCoordinates.filter((elem) => {
@@ -144,4 +117,4 @@ class hexCordinate {
   }
 }
 
-export default new hexCordinate();
+export default new DomainsStore();

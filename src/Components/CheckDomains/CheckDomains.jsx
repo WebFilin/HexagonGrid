@@ -1,17 +1,17 @@
 import React from "react";
 import { toJS } from "mobx";
-import domainsStore from "../../store/domainsStore";
+import DomainsStore from "../../store/DomainsStore";
 import { observer } from "mobx-react-lite";
 
 const CheckDomains = observer(() => {
-  const arrVertexs = toJS(domainsStore.arrVertexs);
+  const arrVertexs = toJS(DomainsStore.arrVertexs);
 
   React.useEffect(() => {
     // Подмножества графа
-    const treesGraph = toJS(domainsStore.arrGraphTree);
+    const treesGraph = toJS(DomainsStore.arrGraphTree);
 
     //  Узел выбранного хекса
-    const nodeHex = toJS(domainsStore.hexVertex);
+    const nodeHex = toJS(DomainsStore.hexVertex);
 
     //  Стек готовых доменов
     const arrDomains = [];
@@ -91,7 +91,7 @@ const CheckDomains = observer(() => {
     }
     handlerSingleNode();
 
-    domainsStore.getDomainsStack(arrDomains);
+    DomainsStore.getDomainsStack(arrDomains);
   }, [arrVertexs]);
 
   return <div></div>;
