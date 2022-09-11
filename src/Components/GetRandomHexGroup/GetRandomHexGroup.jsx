@@ -5,7 +5,7 @@ import DomainsStore from "../../store/DomainsStore";
 
 const RandomDomains = observer(() => {
   // Кнопка авто
-  const isRandom = DomainsStore.isRandom;
+  const isBtnRandom = DomainsStore.isBtnRandom;
 
   //   Генерируем домены
   React.useEffect(() => {
@@ -68,7 +68,7 @@ const RandomDomains = observer(() => {
     });
 
     DomainsStore.getVertexLinks(arrNeighbors);
-  }, [isRandom]);
+  }, [isBtnRandom]);
 
   return <div></div>;
 });

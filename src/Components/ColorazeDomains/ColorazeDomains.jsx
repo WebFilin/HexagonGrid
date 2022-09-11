@@ -44,7 +44,7 @@ const ColorazeDomains = observer(() => {
         (Math.random().toString(16) + "000000").substring(2, 8).toUpperCase()
       );
     }
-    StoreTable.getAmountDomains( arrDomains);
+    StoreTable.getAmountDomains(arrDomains);
   }, [arrDomains]);
 
   return <div></div>;

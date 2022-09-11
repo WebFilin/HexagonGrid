@@ -7,14 +7,15 @@ import StoreTable from "../../../store/StoreTable";
 
 const RandomChange = observer(() => {
   const [isValue, setIsValue] = React.useState(0.5);
+  const [isBtnRandom, setIsBtnRandom] = React.useState(false);
 
   function handlerValue(value) {
     setIsValue(value);
   }
 
   function handlerClick() {
-    DomainsStore.handlerBtnRandom(isValue);
-    StoreTable.drowInfoTable();
+    setIsBtnRandom(!isBtnRandom);
+    DomainsStore.handlerBtnRandom(isValue, isBtnRandom);
   }
 
   return (

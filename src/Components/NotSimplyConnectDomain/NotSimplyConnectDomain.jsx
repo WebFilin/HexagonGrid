@@ -5,7 +5,7 @@ import DomainsStore from "../../store/DomainsStore";
 
 const NotSimplyConnectDomain = observer(() => {
   // Кнопка авто
-  const isRandom = DomainsStore.isRandom;
+  const isBtnRandom = DomainsStore.isBtnRandom;
 
   React.useEffect(() => {
     //   Все шестигранники сетки
@@ -30,7 +30,7 @@ const NotSimplyConnectDomain = observer(() => {
 
     //  console.log(vertexHexOut);
     //  console.log(arrGraphTree);
-  }, [isRandom]);
+  }, [isBtnRandom]);
 
   return <div></div>;
 });

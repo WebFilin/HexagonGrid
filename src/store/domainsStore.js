@@ -9,7 +9,7 @@ class DomainsStore {
   stackDomains = [];
   arrDomainsColor = [];
   svgArea = [];
-  isRandom = false;
+  isBtnRandom = false;
   isCreateMainhex = false;
   randomRatio = 0;
   hexSideSize = {
@@ -84,7 +84,7 @@ class DomainsStore {
   handlerBtnRandom(ratio) {
     this.arrDomainsColor = [];
     this.randomRatio = ratio;
-    this.isRandom = !this.isRandom;
+    this.isBtnRandom = !this.isBtnRandom;
   }
 
   getGraphTree(arrTree) {

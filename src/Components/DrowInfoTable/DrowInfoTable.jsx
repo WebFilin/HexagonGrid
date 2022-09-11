@@ -6,13 +6,14 @@ import StoreTable from "../../store/StoreTable";
 import style from "./drowInfoTable.module.scss";
 
 const DrowInfoTable = observer(() => {
-  const isRandom = DomainsStore.isRandom;
+  const isBtnRandom = DomainsStore.isBtnRandom;
   const Tab = StoreTable.amountDomains;
-  React.useEffect(() => {
-    autorun(() => {
-      console.log("Таблица " + Tab);
-    });
-  });
+
+  const infoRowForTable = toJS(StoreTable.infoRowForTable);
+
+  console.log(infoRowForTable);
+
+  //   console.log("Таблица " + Tab);
 
   //   const table = (
 
