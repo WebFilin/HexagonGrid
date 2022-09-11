@@ -1,19 +1,27 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import { autorun, toJS } from "mobx";
+import { toJS } from "mobx";
 import DomainsStore from "../../store/DomainsStore";
-import StoreTable from "../../store/StoreTable";
-import style from "./drowInfoTable.module.scss";
 
-const DrowInfoTable = observer(() => {
+const InfoTable = observer(() => {
   const isBtnRandom = DomainsStore.isBtnRandom;
-  const Tab = StoreTable.amountDomains;
+  const stackDomains = toJS(DomainsStore.stackDomains);
 
-  const infoRowForTable = toJS(StoreTable.infoRowForTable);
+  //   Хексы со значением 1
+  const sumValueOne = stackDomains.reduce((sum, current) => {
+    return sum + current.idDomain.length;
+  }, 0);
 
-  console.log(infoRowForTable);
+  const infoRow = {
+    random: DomainsStore.randomRatio.toFixed(2),
+    amountDomains: stackDomains.length,
+    nonSimplyDomain: "Написать",
+    allHexs: DomainsStore.arrCoordinates.length,
+    aspectRatio: `${DomainsStore.hexSideSize.L}; ${DomainsStore.hexSideSize.M}; ${DomainsStore.hexSideSize.N}`,
+    sumHexValueOne: sumValueOne,
+  };
 
-  //   console.log("Таблица " + Tab);
+  console.log(infoRow);
 
   //   const table = (
 
@@ -41,7 +49,7 @@ const DrowInfoTable = observer(() => {
   //          <td>
   //            {elem.allHexs}{" "}
   //            {`(${elem.aspectRatio.L}; ${elem.aspectRatio.M}; ${elem.aspectRatio.N})`}{" "}
-  //            {elem.amountValueOne}
+  //            {elem.sumHexValueOne}
   //          </td>
   //        </tr>
   //      ))}
@@ -49,13 +57,7 @@ const DrowInfoTable = observer(() => {
   //  </table>
   //   );
 
-  return (
-    <div className={style.wrapper}>
-      {/* {arrTable.length > 0 ? table : null} */}
-
-      {/* {arrTable} */}
-    </div>
-  );
+  return <></>;
 });
 
-export default DrowInfoTable;
+export default InfoTable;

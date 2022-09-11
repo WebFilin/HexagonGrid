@@ -2,7 +2,6 @@ import React from "react";
 import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import DomainsStore from "../../store/DomainsStore";
-import StoreTable from "../../store/StoreTable";
 
 const ColorazeDomains = observer(() => {
   const arrDomains = toJS(DomainsStore.stackDomains);
@@ -44,7 +43,6 @@ const ColorazeDomains = observer(() => {
         (Math.random().toString(16) + "000000").substring(2, 8).toUpperCase()
       );
     }
-    StoreTable.getAmountDomains(arrDomains);
   }, [arrDomains]);
 
   return <div></div>;

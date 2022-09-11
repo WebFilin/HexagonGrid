@@ -3,7 +3,6 @@ import InputSizeSide from "../InputSizeSide/InputSizeSide";
 import style from "./btnRandomChange.module.scss";
 import DomainsStore from "../../../store/DomainsStore";
 import { observer } from "mobx-react-lite";
-import StoreTable from "../../../store/StoreTable";
 
 const RandomChange = observer(() => {
   const [isValue, setIsValue] = React.useState(0.5);
