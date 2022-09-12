@@ -1,27 +1,35 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { toJS } from "mobx";
-import DomainsStore from "../../store/DomainsStore";
+import { infoTableStore } from "../../store/infoTableStore";
 
 const InfoTable = observer(() => {
-  const isBtnRandom = DomainsStore.isBtnRandom;
-  const stackDomains = toJS(DomainsStore.stackDomains);
+  //   console.log(isDrow);
 
-  //   Хексы со значением 1
-  const sumValueOne = stackDomains.reduce((sum, current) => {
-    return sum + current.idDomain.length;
-  }, 0);
+  //   const stackDomains = toJS(domainsStore.stackDomains);
 
-  const infoRow = {
-    random: DomainsStore.randomRatio.toFixed(2),
-    amountDomains: stackDomains.length,
-    nonSimplyDomain: "Написать",
-    allHexs: DomainsStore.arrCoordinates.length,
-    aspectRatio: `${DomainsStore.hexSideSize.L}; ${DomainsStore.hexSideSize.M}; ${DomainsStore.hexSideSize.N}`,
-    sumHexValueOne: sumValueOne,
-  };
+  //   //   Хексы со значением 1
+  //   const sumValueOne = stackDomains.reduce((sum, current) => {
+  //     return sum + current.idDomain.length;
+  //   }, 0);
 
-  console.log(infoRow);
+  //   const infoRow = React.useMemo(() => {
+  //    return {
+  //       random: domainsStore.randomRatio.toFixed(2),
+  //       amountDomains: stackDomains.length,
+  //       nonSimplyDomain: "Написать",
+  //       allHexs: domainsStore.arrCoordinates.length,
+  //       aspectRatio: `${domainsStore.hexSideSize.L}; ${domainsStore.hexSideSize.M}; ${domainsStore.hexSideSize.N}`,
+  //       sumHexValueOne: sumValueOne,
+  //     };
+
+  //   }, [stackDomains.length, sumValueOne]);
+
+  //   React.useEffect(() => {
+  //     console.log(infoRow);
+  //   }, [isBtnRandom, infoRow]);
+
+  //   console.log(infoRow);
 
   //   const table = (
 

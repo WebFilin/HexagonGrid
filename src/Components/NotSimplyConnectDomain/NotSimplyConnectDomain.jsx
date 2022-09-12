@@ -1,25 +1,25 @@
 import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import React from "react";
-import DomainsStore from "../../store/DomainsStore";
+import domainsStore from "../../store/domainsStore";
 
 const NotSimplyConnectDomain = observer(() => {
   // Кнопка авто
-  const isBtnRandom = DomainsStore.isBtnRandom;
+  const isBtnRandom = domainsStore.isBtnRandom;
 
   React.useEffect(() => {
     //   Все шестигранники сетки
-    const arrCoordinates = toJS(DomainsStore.arrCoordinates);
+    const arrCoordinates = toJS(domainsStore.arrCoordinates);
 
     // массив графов
-    const arrGraphTree = toJS(DomainsStore.arrGraphTree);
+    const arrGraphTree = toJS(domainsStore.arrGraphTree);
 
     //  Все хексы не входящие в домены
     const vertexHexOut = arrCoordinates
       .map((elem) => {
         const hexVert = elem.vertical;
         const hexHoriz = elem.horizontal;
-        const vertex = DomainsStore.getNeighborsHex(hexVert, hexHoriz);
+        const vertex = domainsStore.getNeighborsHex(hexVert, hexHoriz);
         const hexOutDomain = !arrGraphTree.flat().includes(elem.id);
 
         if (hexOutDomain) {

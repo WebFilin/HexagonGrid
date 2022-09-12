@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./svgHex.module.scss";
-import DomainsStore from "../../store/DomainsStore";
+import domainsStore from "../../store/domainsStore";
 import { action } from "mobx";
 
 function SvgHex({ id, x, y, vertical, horizontal }) {
@@ -10,9 +10,9 @@ function SvgHex({ id, x, y, vertical, horizontal }) {
     const valueHex = hex.getAttribute("value");
 
     if (valueHex === "1") {
-      DomainsStore.getRemoveID(hex);
+      domainsStore.getRemoveID(hex);
     } else {
-      DomainsStore.getHex(hex);
+      domainsStore.getHex(hex);
     }
   }
 

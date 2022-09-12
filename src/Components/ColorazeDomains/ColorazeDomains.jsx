@@ -1,13 +1,13 @@
 import React from "react";
 import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
-import DomainsStore from "../../store/DomainsStore";
+import domainsStore from "../../store/domainsStore";
 
 const ColorazeDomains = observer(() => {
-  const arrDomains = toJS(DomainsStore.stackDomains);
+  const arrDomains = toJS(domainsStore.stackDomains);
 
   React.useEffect(() => {
-    const collectionsHexs = toJS(DomainsStore.svgArea);
+    const collectionsHexs = toJS(domainsStore.svgArea);
     const arrHexs = Array.from(collectionsHexs);
 
     arrHexs.forEach((hexElem) => {
@@ -24,11 +24,11 @@ const ColorazeDomains = observer(() => {
         // Задаем цвета доменов
         if (!elem.hasOwnProperty("colorDomain")) {
           elem.colorDomain = setDomainColor();
-          DomainsStore.getDomainColor(elem.colorDomain);
+          domainsStore.getDomainColor(elem.colorDomain);
         }
 
         if (elem.idDomain.includes(id)) {
-          const color = toJS(DomainsStore.arrDomainsColor);
+          const color = toJS(domainsStore.arrDomainsColor);
           hex.style.fill = color[index];
           hex.style.fillOpacity = 0.8;
           hex.setAttribute("value", 1);

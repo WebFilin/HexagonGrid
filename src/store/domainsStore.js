@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 
-class DomainsStore {
+class domainsStore {
   arrCoordinates = [];
   arrVertexs = [];
   hexVertex = null;
@@ -9,7 +9,6 @@ class DomainsStore {
   stackDomains = [];
   arrDomainsColor = [];
   svgArea = [];
-  isBtnRandom = false;
   isCreateMainhex = false;
   randomRatio = 0;
   hexSideSize = {
@@ -17,6 +16,7 @@ class DomainsStore {
     M: 5,
     N: 7,
   };
+  isBtnRandom = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -109,12 +109,10 @@ class DomainsStore {
     });
 
     //  Отсекаем лишние формируем обьект c ID соседних узлов
-    const nodeID = result.map((elem) => {
+    return result.map((elem) => {
       return elem.id;
     });
-
-    return nodeID;
   }
 }
 
-export default new DomainsStore();
+export default new domainsStore();
