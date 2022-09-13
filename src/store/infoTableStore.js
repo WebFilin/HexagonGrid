@@ -1,5 +1,4 @@
 import { makeAutoObservable } from "mobx";
-import domainsStore from "./domainsStore";
 
 class infoTableStore {
   sumRandomID = 0;
@@ -13,8 +12,13 @@ class infoTableStore {
     this.sumRandomID = sumID;
   }
 
-  getInfoRowForTable(infoRow) {
-    this.arrTable.push(infoRow);
+  handlerInfoTable(infoRow) {
+    if (this.arrTable.length < 10) {
+      this.arrTable.push(infoRow);
+    } else {
+      this.arrTable.shift();
+      this.arrTable.push(infoRow);
+    }
   }
 }
 

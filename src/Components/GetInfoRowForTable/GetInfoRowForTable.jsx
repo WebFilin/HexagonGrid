@@ -9,7 +9,7 @@ function GetInfoRowForTable() {
 
   React.useEffect(() => {
     const sumDomains = domainsStore.stackDomains.length;
-    const randomRatio = domainsStore.randomRatio;
+    const randomRatio = domainsStore.randomRatio.toFixed(2);
     const nonSimplyDomain = infoTableStore.nonSimplyDomain;
     const allHexs = domainsStore.arrCoordinates.length;
     const sideRatio = toJS(domainsStore.hexSideSize);
@@ -24,7 +24,7 @@ function GetInfoRowForTable() {
     };
 
     if (sumRandomID > 0) {
-      infoTableStore.getInfoRowForTable(infoRow);
+      infoTableStore.handlerInfoTable(infoRow);
     }
   }, [sumRandomID]);
   return <div></div>;

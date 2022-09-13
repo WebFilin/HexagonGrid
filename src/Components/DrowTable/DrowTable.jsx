@@ -40,7 +40,9 @@ const DrowTable = observer(() => {
     </table>
   );
 
-  return <>{arrTable.length > 0 ? table : null}</>;
+  return (
+    <div className={style.wrapper}>{arrTable.length > 0 ? table : null}</div>
+  );
 });
 
 export default DrowTable;
