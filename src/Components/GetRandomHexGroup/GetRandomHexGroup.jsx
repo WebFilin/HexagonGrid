@@ -2,7 +2,7 @@ import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import domainsStore from "../../store/domainsStore";
-
+import infoTableStore from "../../store/infoTableStore";
 const RandomDomains = observer(() => {
   // Кнопка авто
   const isBtnRandom = domainsStore.isBtnRandom;
@@ -68,9 +68,10 @@ const RandomDomains = observer(() => {
     });
 
     domainsStore.getVertexLinks(arrNeighbors);
+    infoTableStore.getSumRandomId(arrNeighbors.length);
   }, [isBtnRandom]);
 
-  return <div></div>;
+  return <></>;
 });
 
 export default RandomDomains;

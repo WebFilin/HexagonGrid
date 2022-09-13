@@ -1,19 +1,21 @@
 import { makeAutoObservable } from "mobx";
 import domainsStore from "./domainsStore";
 
-export const infoTableStore = makeAutoObservable({
-  get infoRow() {
-    const sumValueOne = domainsStore.stackDomains.reduce((sum, current) => {
-      return sum + current.idDomain.length;
-    }, 0);
+class infoTableStore {
+  sumRandomID = 0;
+  nonSimplyDomain = "Расчитать";
+  arrTable = [];
+  constructor() {
+    makeAutoObservable(this);
+  }
 
-    return {
-      amountDomains: domainsStore.stackDomains.length,
-      sumHexValueOne: sumValueOne,
-    };
-  },
+  getSumRandomId(sumID) {
+    this.sumRandomID = sumID;
+  }
 
-  addRowForTable: () => {
-    console.log(infoTableStore.infoRow);
-  },
-});
+  getInfoRowForTable(infoRow) {
+    this.arrTable.push(infoRow);
+  }
+}
+
+export default new infoTableStore();

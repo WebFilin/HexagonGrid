@@ -3,7 +3,7 @@ import InputSizeSide from "../InputSizeSide/InputSizeSide";
 import style from "./btnRandomChange.module.scss";
 import domainsStore from "../../../store/domainsStore";
 import { observer } from "mobx-react-lite";
-import { infoTableStore } from "../../../store/infoTableStore";
+
 const RandomChange = observer(() => {
   const [isValue, setIsValue] = React.useState(0.5);
 
@@ -13,7 +13,6 @@ const RandomChange = observer(() => {
 
   function handlerClick() {
     domainsStore.handlerBtnRandom(isValue);
-    infoTableStore.addRowForTable();
   }
 
   return (
