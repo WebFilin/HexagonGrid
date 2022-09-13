@@ -3,9 +3,14 @@ import { observer } from "mobx-react-lite";
 import React from "react";
 import domainsStore from "../../store/domainsStore";
 import infoTableStore from "../../store/infoTableStore";
+import GetInfoRowForTable from "../GetInfoRowForTable/GetInfoRowForTable";
+import NotSimplyConnectDomain from "../NotSimplyConnectDomain/NotSimplyConnectDomain";
 const RandomDomains = observer(() => {
   // Кнопка авто
   const isBtnRandom = domainsStore.isBtnRandom;
+
+  // Тригер для статистики - количество рандомных элементов
+  const sumRandomID = infoTableStore.sumRandomID;
 
   //   Генерируем домены
   React.useEffect(() => {
@@ -71,7 +76,12 @@ const RandomDomains = observer(() => {
     infoTableStore.getSumRandomId(arrNeighbors.length);
   }, [isBtnRandom]);
 
-  return <></>;
+  return (
+    <>
+      {sumRandomID > 0 ? <NotSimplyConnectDomain /> : null}
+      <GetInfoRowForTable />
+    </>
+  );
 });
 
 export default RandomDomains;

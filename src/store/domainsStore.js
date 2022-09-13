@@ -17,6 +17,7 @@ class domainsStore {
     N: 7,
   };
   isBtnRandom = false;
+  arrStartNodeGraph = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -63,24 +64,6 @@ class domainsStore {
     this.stackDomains = domains;
   }
 
-  //   Удаляем хекс при клике по нему
-  getRemoveID(hex) {
-    this.removeHexId = Number(hex.id);
-    hex.setAttribute("value", 0);
-
-    // Сброс стилей хексов
-    hex.style.fill = null;
-    hex.style.fillOpacity = 0.3;
-
-    const index = this.arrVertexs.findIndex((elem) => {
-      return elem.id === this.removeHexId;
-    });
-
-    if (index !== -1) {
-      this.arrVertexs.splice(index, 1);
-    }
-  }
-
   handlerBtnRandom(ratio) {
     this.arrDomainsColor = [];
     this.randomRatio = ratio;
@@ -93,6 +76,10 @@ class domainsStore {
 
   getDomainColor(color) {
     this.arrDomainsColor.push(color);
+  }
+
+  getStartNodeGraph(nodeStart) {
+    this.arrStartNodeGraph = nodeStart;
   }
 
   //   Поиск соседий хекса
@@ -112,6 +99,24 @@ class domainsStore {
     return result.map((elem) => {
       return elem.id;
     });
+  }
+
+  //   Удаляем хекс при клике по нему
+  getRemoveID(hex) {
+    this.removeHexId = Number(hex.id);
+    hex.setAttribute("value", 0);
+
+    // Сброс стилей хексов
+    hex.style.fill = null;
+    hex.style.fillOpacity = 0.3;
+
+    const index = this.arrVertexs.findIndex((elem) => {
+      return elem.id === this.removeHexId;
+    });
+
+    if (index !== -1) {
+      this.arrVertexs.splice(index, 1);
+    }
   }
 }
 

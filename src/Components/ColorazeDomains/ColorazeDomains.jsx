@@ -2,7 +2,6 @@ import React from "react";
 import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import domainsStore from "../../store/domainsStore";
-import GetInfoRowForTable from "../GetInfoRowForTable/GetInfoRowForTable";
 
 const ColorazeDomains = observer(() => {
   const arrDomains = toJS(domainsStore.stackDomains);
@@ -46,11 +45,7 @@ const ColorazeDomains = observer(() => {
     }
   }, [arrDomains]);
 
-  return (
-    <>
-      <GetInfoRowForTable />
-    </>
-  );
+  return <></>;
 });
 
 export default ColorazeDomains;

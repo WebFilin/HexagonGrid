@@ -7,8 +7,6 @@ import style from "./drowTable.module.scss";
 const DrowTable = observer(() => {
   const arrTable = toJS(infoTableStore.arrTable);
 
-  console.log(arrTable);
-
   const table = (
     <table className={style.table_body}>
       <thead className={style.table_title}>

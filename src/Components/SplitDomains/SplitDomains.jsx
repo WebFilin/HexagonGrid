@@ -53,7 +53,6 @@ const SplitDomains = observer(() => {
           nodeMap[node2].push(node1);
         }
       });
-
       getNodesStart(nodeMap);
     }
 
@@ -62,10 +61,9 @@ const SplitDomains = observer(() => {
       let hexGraph = [];
       let nodes = Object.keys(nodeMap);
 
-      // Крутимся пока все вершины не обработаны
       while (true) {
         // Стартовая точка обхода графа - если не посещалась
-        let startNode = +nodes.find((node) => !nodeMap[node].visited);
+        const startNode = +nodes.find((node) => !nodeMap[node].visited);
         if (isNaN(startNode)) break;
         hexGraph.push(depthFirstSearch(startNode, nodeMap));
       }
@@ -110,7 +108,7 @@ const SplitDomains = observer(() => {
     domainsStore.getGraphTree(resArrTree);
   }, [arrVertexs]);
 
-  return <div></div>;
+  return <></>;
 });
 
 export default SplitDomains;

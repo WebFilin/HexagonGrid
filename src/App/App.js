@@ -9,7 +9,6 @@ import BtnRandomChange from "../Components/ControlsElem/BtnRandomChange/BtnRando
 import SplitDomains from "../Components/SplitDomains/SplitDomains";
 import ColorazeDomains from "../Components/ColorazeDomains/ColorazeDomains";
 import CheckDomains from "../Components/CheckDomains/CheckDomains";
-import NotSimplyConnectDomain from "../Components/NotSimplyConnectDomain/NotSimplyConnectDomain";
 import DrowTable from "../Components/DrowTable/DrowTable";
 
 function App() {
@@ -33,7 +32,6 @@ function App() {
       <SplitDomains />
       <CheckDomains />
       <ColorazeDomains />
-      <NotSimplyConnectDomain />
     </div>
   );
 }

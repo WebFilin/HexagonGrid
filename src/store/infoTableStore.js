@@ -2,7 +2,7 @@ import { makeAutoObservable } from "mobx";
 
 class infoTableStore {
   sumRandomID = 0;
-  nonSimplyDomain = "Расчитать";
+  nonSimplyDomain = "Раcсчитать";
   arrTable = [];
   constructor() {
     makeAutoObservable(this);
@@ -10,6 +10,10 @@ class infoTableStore {
 
   getSumRandomId(sumID) {
     this.sumRandomID = sumID;
+  }
+
+  getSumNonSimplyDomain() {
+    this.nonSimplyDomain = "ТАКИ LD";
   }
 
   handlerInfoTable(infoRow) {

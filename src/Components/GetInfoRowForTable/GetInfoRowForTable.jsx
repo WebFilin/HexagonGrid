@@ -2,8 +2,9 @@ import React from "react";
 import infoTableStore from "../../store/infoTableStore";
 import domainsStore from "../../store/domainsStore";
 import { toJS } from "mobx";
-
-function GetInfoRowForTable() {
+import { observer } from "mobx-react-lite";
+// import NotSimplyConnectDomain from "../NotSimplyConnectDomain/NotSimplyConnectDomain";
+const GetInfoRowForTable = observer(() => {
   // Тригер для статистики - количество рандомных элементов
   const sumRandomID = infoTableStore.sumRandomID;
 
@@ -27,7 +28,7 @@ function GetInfoRowForTable() {
       infoTableStore.handlerInfoTable(infoRow);
     }
   }, [sumRandomID]);
-  return <div></div>;
-}
+  return <>{/* {sumRandomID > 0 ? <NotSimplyConnectDomain /> : null} */}</>;
+});
 
 export default GetInfoRowForTable;
