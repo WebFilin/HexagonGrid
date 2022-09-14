@@ -12,8 +12,8 @@ class infoTableStore {
     this.sumRandomID = sumID;
   }
 
-  getSumNonSimplyDomain() {
-    this.nonSimplyDomain = "ТАКИ LD";
+  getSumNonSimplyDomain(value) {
+    this.nonSimplyDomain = value;
   }
 
   handlerInfoTable(infoRow) {

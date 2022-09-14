@@ -17,7 +17,6 @@ class domainsStore {
     N: 7,
   };
   isBtnRandom = false;
-  arrStartNodeGraph = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -76,10 +75,6 @@ class domainsStore {
 
   getDomainColor(color) {
     this.arrDomainsColor.push(color);
-  }
-
-  getStartNodeGraph(nodeStart) {
-    this.arrStartNodeGraph = nodeStart;
   }
 
   //   Поиск соседий хекса

@@ -23,8 +23,9 @@ const ColorazeDomains = observer(() => {
       arrDomains.forEach((elem, index) => {
         // Задаем цвета доменов
         if (!elem.hasOwnProperty("colorDomain")) {
-          elem.colorDomain = setDomainColor();
-          domainsStore.getDomainColor(elem.colorDomain);
+          const getColor = setDomainColor();
+          elem.colorDomain = getColor;
+          domainsStore.getDomainColor(getColor);
         }
 
         if (elem.idDomain.includes(id)) {
