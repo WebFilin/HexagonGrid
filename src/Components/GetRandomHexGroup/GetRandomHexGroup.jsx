@@ -26,20 +26,11 @@ const RandomDomains = observer(() => {
     //Стек всех элементов сетки
     const arrCordMainHex = toJS(domainsStore.arrCoordinates);
 
-    arrCordMainHex.forEach((hexElem) => {
-      if (Math.random() <= ratio) {
-        //   randomElem.push(hexElem);
-      }
-    });
-
     //  ! Тестовое убрать
     randomElem.push(
       arrCordMainHex[8],
       arrCordMainHex[9],
       arrCordMainHex[10],
-      arrCordMainHex[11],
-      arrCordMainHex[16],
-      arrCordMainHex[25],
       arrCordMainHex[11],
       arrCordMainHex[16],
       arrCordMainHex[25],
@@ -61,6 +52,12 @@ const RandomDomains = observer(() => {
       arrCordMainHex[48],
       arrCordMainHex[56]
     );
+
+    arrCordMainHex.forEach((hexElem) => {
+      if (Math.random() <= ratio) {
+        randomElem.push(hexElem);
+      }
+    });
 
     randomElem.forEach((elemHex) => {
       // Получаем кординаты соседей

@@ -5,76 +5,83 @@ import domainsStore from "../../store/domainsStore";
 import infoTableStore from "../../store/infoTableStore";
 const NotSimplyConnectDomain = observer(() => {
   const stackDomains = toJS(domainsStore.stackDomains);
+  // Тригер для статистики - количество рандомных элементов
+  //  const sumRandomID = infoTableStore.sumRandomID;
+
+  //  console.log(sumRandomID)
   React.useEffect(() => {
+    // const stackDomains = toJS(domainsStore.stackDomains);
     const arrHexRandom = toJS(domainsStore.arrVertexs);
-    const arrCoordinates = toJS(domainsStore.arrCoordinates);
 
-    //  Получаем массив для анализа повтора связей
-    //  const arrFlatNeighbors = arrHexRandom
-    //    .map((elem) => {
-    //      return elem.group;
-    //    })
-    //    .flat();
+    //Стек всех элементов сетки
+    const arrCordMainHex = toJS(domainsStore.arrCoordinates);
 
-    //  const arrRepeats = arrFlatNeighbors.reduce(function (acc, el) {
-    //    acc[el] = (acc[el] || 0) + 1;
-    //    return acc;
-    //  }, {});
+    //  Массив отсортированных доменов с соедями
+    const arrNeighborsDomains = [];
 
-    //  console.log(arrRepeats);
-
-    //  console.log(arrFlatNeighbors);
-
-    //  console.log(arrCoordinates);
-
-    const arrNeighborsGraph = [];
+    //  ID входящие в домен
+    const arrIdDomains = [];
 
     //  Отсекаем меленькие домены
     stackDomains.map((elem) => {
       const domain = elem.idDomain;
       if (domain.length >= 6) {
-        getNeighbors(domain);
+        getNeighborsDomain(domain);
+        arrIdDomains.push(...domain);
       }
     });
 
-    //  Получаем список соседей отсортированных графов
-    function getNeighbors(domain) {
+    //  Получаем список соседей для отсортированных доменов
+    function getNeighborsDomain(domain) {
       const arrNeighbors = [];
-      domain.map((idInDomain) => {
+
+      // Получаем соседей хексов в домене
+      domain.forEach((idInDomain) => {
         return arrHexRandom.filter((elem) => {
           if (elem.id === idInDomain) {
             return arrNeighbors.push(elem);
           }
         });
       });
-      arrNeighborsGraph.push(arrNeighbors);
+      arrNeighborsDomains.push(arrNeighbors);
     }
 
-    console.log(arrNeighborsGraph);
+    function getHexConnectDomains() {
+      // Находим количество пересечений сторон у хексов
+      const arrRepeats = arrNeighborsDomains.map((domain) => {
+        const arrNeighbors = domain.map((elem) => {
+          return elem.group;
+        });
 
-    //  infoTableStore.getSumNonSimplyDomain("Таки да");
+        const repeats = arrNeighbors.flat().reduce((acc, elem) => {
+          acc[elem] = (acc[elem] || 0) + 1;
+          return acc;
+        }, {});
+
+        return repeats;
+      });
+
+      // Хексы вне домена и с пересечением домена 4 и больше
+      arrRepeats.forEach((objRepeats) => {
+        for (let key of Object.keys(objRepeats)) {
+          if (!arrIdDomains.includes(Number(key)) && objRepeats[key] >= 4) {
+            getSimplyConnect(Number(key));
+          }
+        }
+      });
+    }
+
+    //  Проверяем недосвязную область домена
+    function getSimplyConnect(id) {
+      const hexCord = arrCordMainHex.find((elem) => {
+        return elem.id === id;
+      });
+      console.log(hexCord);
+    }
+
+    getHexConnectDomains();
+    //   infoTableStore.getSumNonSimplyDomain("Таки да");
   }, [stackDomains]);
-
-  React.useEffect(() => {
-    //   Все шестигранники сетки
-    //  const arrCoordinates = toJS(domainsStore.arrCoordinates);
-    // массив графов
-    //  const arrGraphTree = toJS(domainsStore.arrGraphTree);
-    //  Все хексы не входящие в домены
-    //  const vertexHexOut = arrCoordinates
-    //    .map((elem) => {
-    //      const hexVert = elem.vertical;
-    //      const hexHoriz = elem.horizontal;
-    //      const vertex = domainsStore.getNeighborsHex(hexVert, hexHoriz);
-    //      const hexOutDomain = !arrGraphTree.flat().includes(elem.id);
-    //      if (hexOutDomain) {
-    //        return { id: elem.id, vertex: [...vertex] };
-    //      }
-    //    })
-    //    .filter(Boolean);
-    // console.log(vertexHexOut);
-    // console.log(arrGraphTree);
-  }, []);
 
   return <div></div>;
 });
