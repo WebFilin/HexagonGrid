@@ -22,6 +22,10 @@ const NotSimplyConnectDomain = observer(() => {
     //  ID входящие в домен
     const arrIdDomains = [];
 
+    const emptyArea = [];
+
+    const sumSimplyConnect = [];
+
     //  Отсекаем меленькие домены
     stackDomains.map((elem) => {
       const domain = elem.idDomain;
@@ -46,8 +50,8 @@ const NotSimplyConnectDomain = observer(() => {
       arrNeighborsDomains.push(arrNeighbors);
     }
 
+    // Находим количество пересечений сторон с доменом у хексов
     function getHexConnectDomains() {
-      // Находим количество пересечений сторон у хексов
       const arrRepeats = arrNeighborsDomains.map((domain) => {
         const arrNeighbors = domain.map((elem) => {
           return elem.group;
@@ -57,14 +61,15 @@ const NotSimplyConnectDomain = observer(() => {
           acc[elem] = (acc[elem] || 0) + 1;
           return acc;
         }, {});
-
         return repeats;
       });
 
-      // Хексы вне домена и с пересечением домена 4 и больше
+      // Хексы вне домена но со связями в домене от 3
       arrRepeats.forEach((objRepeats) => {
         for (let key of Object.keys(objRepeats)) {
-          if (!arrIdDomains.includes(Number(key)) && objRepeats[key] >= 4) {
+          const intersect = arrIdDomains.includes(Number(key));
+          const repeats = objRepeats[key];
+          if (!intersect && repeats >= 3) {
             getSimplyConnect(Number(key));
           }
         }
@@ -76,11 +81,30 @@ const NotSimplyConnectDomain = observer(() => {
       const hexCord = arrCordMainHex.find((elem) => {
         return elem.id === id;
       });
-      console.log(hexCord);
+
+      // Ищем соседий выбранного узла
+      const getNeighbors = domainsStore.getNeighborsHex(
+        hexCord.vertical,
+        hexCord.horizontal
+      );
+
+      if (getNeighbors.length > 4) {
+        emptyArea.push({ id: id, group: [...getNeighbors] });
+      }
+    }
+
+    // Проверяем пустые области
+    function checkEmptyArea() {
+      console.log(stackDomains);
+      emptyArea.forEach((elem) => {
+        const elemNeighbors = elem.group;
+        console.log(elemNeighbors);
+      });
     }
 
     getHexConnectDomains();
-    //   infoTableStore.getSumNonSimplyDomain("Таки да");
+    checkEmptyArea();
+    infoTableStore.getSumNonSimplyDomain("-");
   }, [stackDomains]);
 
   return <div></div>;

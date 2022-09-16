@@ -27,19 +27,20 @@ const RandomDomains = observer(() => {
     const arrCordMainHex = toJS(domainsStore.arrCoordinates);
 
     //  ! Тестовое убрать
-    randomElem.push(
+    const test = [
       arrCordMainHex[8],
+      arrCordMainHex[7],
       arrCordMainHex[9],
       arrCordMainHex[10],
-      arrCordMainHex[11],
       arrCordMainHex[16],
-      arrCordMainHex[25],
-      arrCordMainHex[34],
-      arrCordMainHex[35],
+      arrCordMainHex[24],
+      arrCordMainHex[33],
       arrCordMainHex[36],
       arrCordMainHex[28],
       arrCordMainHex[19],
-
+      arrCordMainHex[42],
+      arrCordMainHex[44],
+      arrCordMainHex[43],
       // Второй домен
       arrCordMainHex[13],
       arrCordMainHex[21],
@@ -50,12 +51,14 @@ const RandomDomains = observer(() => {
       arrCordMainHex[14],
       arrCordMainHex[41],
       arrCordMainHex[48],
-      arrCordMainHex[56]
-    );
+      arrCordMainHex[56],
+    ];
+
+    randomElem.push(...test);
 
     arrCordMainHex.forEach((hexElem) => {
       if (Math.random() <= ratio) {
-        randomElem.push(hexElem);
+         //  randomElem.push(hexElem);
       }
     });
 

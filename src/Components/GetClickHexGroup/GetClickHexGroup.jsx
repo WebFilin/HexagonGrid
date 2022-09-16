@@ -23,11 +23,7 @@ const GetHexGroup = observer(() => {
     }
   }, [hex]);
 
-  return <>
-  
-  
-  
-  </>;
+  return <></>;
 });
 
 export default GetHexGroup;
