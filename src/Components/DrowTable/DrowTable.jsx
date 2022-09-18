@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React from "react";
+import React, { useMemo } from "react";
 import { toJS } from "mobx";
 import infoTableStore from "../../store/infoTableStore";
 import style from "./drowTable.module.scss";
@@ -7,7 +7,7 @@ import style from "./drowTable.module.scss";
 const DrowTable = observer(() => {
   const arrTable = toJS(infoTableStore.arrTable);
 
-  const table = (
+  const tableDrow = (
     <table className={style.table_body}>
       <thead className={style.table_title}>
         <tr>
@@ -39,7 +39,9 @@ const DrowTable = observer(() => {
   );
 
   return (
-    <div className={style.wrapper}>{arrTable.length > 0 ? table : null}</div>
+    <div className={style.wrapper}>
+      {arrTable.length > 0 ? tableDrow : null}
+    </div>
   );
 });
 

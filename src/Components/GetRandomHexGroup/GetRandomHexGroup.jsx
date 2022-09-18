@@ -9,9 +9,6 @@ const RandomDomains = observer(() => {
   // Кнопка авто
   const isBtnRandom = domainsStore.isBtnRandom;
 
-  // Тригер для статистики - количество рандомных элементов
-  //   const sumRandomID = infoTableStore.sumRandomID;
-
   //   Генерируем домены
   React.useEffect(() => {
     //   Коофициент рандома
