@@ -10,7 +10,7 @@ const RandomDomains = observer(() => {
   const isBtnRandom = domainsStore.isBtnRandom;
 
   // Тригер для статистики - количество рандомных элементов
-  const sumRandomID = infoTableStore.sumRandomID;
+  //   const sumRandomID = infoTableStore.sumRandomID;
 
   //   Генерируем домены
   React.useEffect(() => {
@@ -32,7 +32,7 @@ const RandomDomains = observer(() => {
       arrCordMainHex[7],
       arrCordMainHex[9],
       arrCordMainHex[10],
-      arrCordMainHex[16],
+      arrCordMainHex[15],
       arrCordMainHex[24],
       arrCordMainHex[33],
       arrCordMainHex[36],
@@ -68,10 +68,18 @@ const RandomDomains = observer(() => {
       arrCordMainHex[12],
       arrCordMainHex[21],
       arrCordMainHex[29],
+
+      //
+      arrCordMainHex[56],
+      arrCordMainHex[55],
+      arrCordMainHex[47],
+      arrCordMainHex[39],
+      arrCordMainHex[40],
+      arrCordMainHex[49],
     ];
 
-    //  randomElem.push(...test2);
-    //   randomElem.push(...test);
+    randomElem.push(...test2);
+    //  randomElem.push(...test);
 
     arrCordMainHex.forEach((hexElem) => {
       if (Math.random() <= ratio) {
@@ -90,13 +98,12 @@ const RandomDomains = observer(() => {
     });
 
     domainsStore.getVertexLinks(arrNeighbors);
-    infoTableStore.getSumRandomId(arrNeighbors.length);
   }, [isBtnRandom]);
 
   return (
     <>
-      {sumRandomID > 0 ? <NotSimplyConnectDomain /> : null}
-      <GetInfoRowForTable />
+      {<NotSimplyConnectDomain isBtnRandom={isBtnRandom} />}
+      <GetInfoRowForTable isBtnRandom={isBtnRandom} />
     </>
   );
 });

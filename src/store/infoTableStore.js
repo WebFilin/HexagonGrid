@@ -8,10 +8,6 @@ class infoTableStore {
     makeAutoObservable(this);
   }
 
-  getSumRandomId(sumID) {
-    this.sumRandomID = sumID;
-  }
-
   getSumNonSimplyDomain(value) {
     this.nonSimplyDomain = value;
   }

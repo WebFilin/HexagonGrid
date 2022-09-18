@@ -12,6 +12,7 @@ import CheckDomains from "../Components/CheckDomains/CheckDomains";
 import DrowTable from "../Components/DrowTable/DrowTable";
 
 function App() {
+
   return (
     <div className={style.wrapper}>
       <header className={style.header}> </header>
@@ -21,7 +22,7 @@ function App() {
         <div className={style.controls}>
           <SetHexSideSize />
           <BtnRandomChange />
-          {/* <DrowTable /> */}
+          <DrowTable />
         </div>
       </main>
 

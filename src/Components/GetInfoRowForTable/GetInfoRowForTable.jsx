@@ -3,30 +3,32 @@ import infoTableStore from "../../store/infoTableStore";
 import domainsStore from "../../store/domainsStore";
 import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
-const GetInfoRowForTable = observer(() => {
-  // Тригер для статистики - количество рандомных элементов
-  const sumRandomID = infoTableStore.sumRandomID;
-
+const GetInfoRowForTable = observer((isBtnRandom) => {
   React.useEffect(() => {
-    const sumDomains = domainsStore.stackDomains.length;
+    const allDomains = toJS(domainsStore.stackDomains);
     const randomRatio = domainsStore.randomRatio.toFixed(2);
     const nonSimplyDomain = infoTableStore.nonSimplyDomain;
     const allHexs = domainsStore.arrCoordinates.length;
     const sideRatio = toJS(domainsStore.hexSideSize);
+    const sumHexValueOne = allDomains
+      .map((elem) => {
+        return elem.idDomain;
+      })
+      .flat();
 
     const infoRow = {
       random: randomRatio,
-      amountDomains: sumDomains,
+      amountDomains: allDomains.length,
       nonSimplyDomain: nonSimplyDomain,
       allHexs: allHexs,
       aspectRatio: `(${sideRatio.L}; ${sideRatio.M}; ${sideRatio.N})`,
-      sumHexValueOne: sumRandomID,
+      sumHexValueOne: sumHexValueOne.length,
     };
 
-    if (sumRandomID > 0) {
+    if (allDomains.length > 0) {
       infoTableStore.handlerInfoTable(infoRow);
     }
-  }, [sumRandomID]);
+  }, [isBtnRandom]);
   return <></>;
 });
 

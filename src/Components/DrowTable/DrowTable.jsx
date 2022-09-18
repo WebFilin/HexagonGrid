@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { useMemo } from "react";
+import React from "react";
 import { toJS } from "mobx";
 import infoTableStore from "../../store/infoTableStore";
 import style from "./drowTable.module.scss";

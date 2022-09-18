@@ -3,14 +3,10 @@ import { observer } from "mobx-react-lite";
 import React from "react";
 import domainsStore from "../../store/domainsStore";
 import infoTableStore from "../../store/infoTableStore";
-const NotSimplyConnectDomain = observer(() => {
-  const stackDomains = toJS(domainsStore.stackDomains);
-  // Тригер для статистики - количество рандомных элементов
-  //  const sumRandomID = infoTableStore.sumRandomID;
-
+const NotSimplyConnectDomain = observer(({ isBtnRandom }) => {
   //  console.log(sumRandomID)
   React.useEffect(() => {
-    // const stackDomains = toJS(domainsStore.stackDomains);
+    const stackDomains = toJS(domainsStore.stackDomains);
     const arrHexRandom = toJS(domainsStore.arrVertexs);
 
     //Стек всех элементов сетки
@@ -19,21 +15,20 @@ const NotSimplyConnectDomain = observer(() => {
     //  Массив отсортированных доменов с соcедями
     const arrNeighborsDomains = [];
 
-    //  ID входящие в домен
-    const arrIdDomains = [];
-
     //  Список связности
     let adjacencyListEmptyArea = [];
 
     // Все недосвязные домены
     const sumEmptyAreas = [];
 
-    //  Отсекаем меленькие домены
-    stackDomains.forEach((elem) => {
+    //  ID входящие в домен
+    const arrIdDomains = stackDomains.map((elem) => {
       const domain = elem.idDomain;
+
+      //  Отсекаем меленькие домены
       if (domain.length >= 6) {
         getNeighborsDomain(domain);
-        arrIdDomains.push(...domain);
+        return domain;
       }
     });
 
@@ -49,13 +44,15 @@ const NotSimplyConnectDomain = observer(() => {
           }
         });
       });
+
       arrNeighborsDomains.push(arrNeighbors);
     }
 
     // Находим количество пересечений сторон с доменом у свободных хексов
     function getHexConnectDomains() {
       // Стек всех соседий домена
-      let neighborsGroup = [];
+      const neighborsGroup = [];
+      // const uniqueElem = [...new Set(neighborsGroup)];
 
       const arrRepeats = arrNeighborsDomains.map((domain) => {
         const arrNeighbors = domain.map((elem) => {
@@ -67,91 +64,101 @@ const NotSimplyConnectDomain = observer(() => {
           return acc;
         }, {});
 
-        neighborsGroup.push(...arrNeighbors.flat());
+        neighborsGroup.push([...new Set(arrNeighbors.flat())]);
+
+        //   neighborsGroup.push(...arrNeighbors.flat());
 
         return repeats;
       });
 
+      console.log(neighborsGroup);
+
       // Хексы вне домена но со связями c доменом от 3
       arrRepeats.forEach((objRepeats) => {
-        const stackEmptyHexId = [];
-
         for (let prop in objRepeats) {
           const intersect = arrIdDomains.includes(Number(prop));
           const repeats = objRepeats[prop];
 
           if (!intersect && repeats >= 3) {
+            // Если 6 пересечений у пустого элемента то домен недосвязный
             if (repeats === 6) {
               checkSixIntersect(Number(prop));
             } else {
-              stackEmptyHexId.push(Number(prop));
+              checkDomainBorder(Number(prop));
             }
           }
         }
 
-        // Если 6 пересечений у элемента то домен недосвязный
+        function checkDomainBorder(id) {
+          //  console.log(id);
+        }
+
         function checkSixIntersect(id) {
-          const uniqueElem = [...new Set(neighborsGroup)];
-          if (sumEmptyAreas.length > 0 && uniqueElem.includes(id)) {
+          //  const uniqueElem = [...new Set(neighborsGroup)];
+          if (sumEmptyAreas.length > 0 && neighborsGroup.includes(id)) {
             return false;
           } else {
             sumEmptyAreas.push(id);
           }
         }
-
-        getHexConnect(stackEmptyHexId);
+        //   getHexConnect(stackEmptyHexId);
       });
-
       console.log(sumEmptyAreas);
     }
 
     // Получаем всех соседий недосвязных хексов
-    function getHexConnect(stackEmptyHexId) {
-      const emptyNeighbors = [];
+    //  function getHexConnect(stackEmptyHexId) {
+    //    const emptyNeighbors = stackEmptyHexId.map((id) => {
+    //      const hexCord = arrCordMainHex.find((elem) => {
+    //        return elem.id === id;
+    //      });
 
-      stackEmptyHexId.forEach((id) => {
-        const hexCord = arrCordMainHex.find((elem) => {
-          return elem.id === id;
-        });
+    //      // Ищем соседий выбранного узла
+    //      const getNeighbors = domainsStore.getNeighborsHex(
+    //        hexCord.vertical,
+    //        hexCord.horizontal
+    //      );
+    //      return { id: id, group: [...getNeighbors] };
+    //    });
 
-        // Ищем соседий выбранного узла
-        const getNeighbors = domainsStore.getNeighborsHex(
-          hexCord.vertical,
-          hexCord.horizontal
-        );
-        emptyNeighbors.push({ id: id, group: [...getNeighbors] });
-      });
-      checkEmptyArea(emptyNeighbors);
-    }
+    // checkEmptyArea(emptyNeighbors);
+    //  }
 
-    function checkEmptyArea(emptyNeighbors) {
-      // console.log(emptyNeighbors);
+    //  function checkEmptyArea(emptyNeighbors) {
+    //  Форируем список смежности пустой области внутри домена
+    //  Структура данных  в массиве emptyNeighbors
 
-      // Форируем список связности пустой области внутри домена
-      adjacencyListEmptyArea = [];
+    // emptyNeighbors =[
+    //   id: 15, group: [7,16,24]
+    //   id: 17, group: [8, 9, 16, 18, 25, 26]
 
-      for (let i = 0; i < emptyNeighbors.length; i++) {
-        const prevID = emptyNeighbors[i].id;
+    // ]
 
-        for (let j = i + 1; j < emptyNeighbors.length; j++) {
-          const group = emptyNeighbors[j].group;
-          const currID = emptyNeighbors[j].id;
+    // adjacencyListEmptyArea = [];
 
-          if (group.includes(prevID)) {
-            adjacencyListEmptyArea.push([prevID, currID]);
-          }
-        }
-      }
+    // for (let i = 0; i < emptyNeighbors.length; i++) {
+    //   const prevID = emptyNeighbors[i].id;
 
-      const emptyArea = [...new Set(adjacencyListEmptyArea.flat())];
+    //   for (let j = i + 1; j < emptyNeighbors.length; j++) {
+    //     const group = emptyNeighbors[j].group;
+    //     const currID = emptyNeighbors[j].id;
 
-      // console.log(emptyArea);
-    }
+    //     if (group.includes(prevID)) {
+    //       adjacencyListEmptyArea.push([prevID, currID]);
+    //     }
+    //   }
+    // }
+
+    // const emptyArea = [...new Set(adjacencyListEmptyArea.flat())];
+
+    // console.log(adjacencyListEmptyArea);
+    // console.log(emptyNeighbors);
+    //   }
 
     getHexConnectDomains();
 
     infoTableStore.getSumNonSimplyDomain("-");
-  }, [stackDomains]);
+  }, [isBtnRandom]);
 
   return <div></div>;
 });
