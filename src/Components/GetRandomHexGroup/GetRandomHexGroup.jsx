@@ -61,10 +61,14 @@ const RandomDomains = observer(() => {
       arrCordMainHex[28],
       arrCordMainHex[36],
       arrCordMainHex[35],
-      arrCordMainHex[11],
+
+      //
+      arrCordMainHex[6],
+      arrCordMainHex[5],
       arrCordMainHex[12],
       arrCordMainHex[21],
-      arrCordMainHex[29],
+      arrCordMainHex[22],
+      arrCordMainHex[14],
 
       //
       arrCordMainHex[56],
@@ -75,12 +79,12 @@ const RandomDomains = observer(() => {
       arrCordMainHex[49],
     ];
 
-    randomElem.push(...test2);
-    //  randomElem.push(...test);
+   //  randomElem.push(...test2);
+    randomElem.push(...test);
 
     arrCordMainHex.forEach((hexElem) => {
       if (Math.random() <= ratio) {
-        //  randomElem.push(hexElem);
+        //   randomElem.push(hexElem);
       }
     });
 
