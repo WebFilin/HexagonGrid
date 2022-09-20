@@ -14,11 +14,11 @@ const NotSimplyConnectDomain = observer(({ isBtnRandom }) => {
     //  Массив отсортированных доменов с соcедями
     const arrNeighborsDomains = [];
 
-    //  Список связности
-    let adjacencyListEmptyArea = [];
+    //  Список свободных элементов в домене
+    let areaInDomain = [];
 
     // Все недосвязные домены
-    const sumEmptyAreas = [];
+    const sumEmptyAreasDomains = [];
 
     //  ID входящие в домен
     const domainsLong = stackDomains.map((elem) => {
@@ -66,6 +66,9 @@ const NotSimplyConnectDomain = observer(({ isBtnRandom }) => {
 
       // Хексы вне домена но со связями c доменом от 3
       arrRepeats.forEach((objRepeats, index) => {
+        // Результирующий массив пустых элементов
+        const resAreaInDomains = [];
+
         for (let prop in objRepeats) {
           const hexInDomain = domainsLong.includes(Number(prop));
           const connect = objRepeats[prop];
@@ -73,19 +76,20 @@ const NotSimplyConnectDomain = observer(({ isBtnRandom }) => {
           if (!hexInDomain && connect >= 3) {
             const emptyHex = { id: Number(prop), numDomain: index };
 
-            // Если связей 6 - то домен недосвязный
+            // Сортируем по количеству связей
             if (connect === 6) {
               checkSixIntersect(emptyHex);
-
-              //   Если меньше но связи от 3х
             } else {
-              checkThreeIntersect(emptyHex);
+              const emptyArea = checkOtherIntersect(emptyHex);
+              resAreaInDomains.push(...emptyArea);
             }
           }
         }
+        areaInDomain.push(resAreaInDomains);
       });
     }
 
+    // Если связей 6 - то домен недосвязный
     function checkSixIntersect(emptyHex) {
       if (emptyHex) {
         check();
@@ -93,73 +97,97 @@ const NotSimplyConnectDomain = observer(({ isBtnRandom }) => {
 
       function check() {
         // Добавляем стартовый элемент в стек
-        if (sumEmptyAreas.length === 0) {
-          sumEmptyAreas.push(emptyHex);
+        if (sumEmptyAreasDomains.length === 0) {
+          sumEmptyAreasDomains.push(emptyHex);
 
-          //  Проверяем повторы, добавляем если нет
+          //  Проверяем повторы доменов, добавляем если нет
         } else {
           const repeatedDomain = checkRepeatedDomain(emptyHex);
 
           if (!repeatedDomain) {
-            sumEmptyAreas.push(emptyHex);
+            sumEmptyAreasDomains.push(emptyHex);
           }
         }
       }
-
-      console.log(sumEmptyAreas);
     }
 
-    function checkThreeIntersect(emptyHex) {
+    //  ОБрабатываем другие хексы со связями меньше 6, получаем связи в пустых зонах
+    function checkOtherIntersect(emptyHex) {
+      //Хекс пустой области со связями
+      let arrResHex = [];
+
       if (emptyHex) {
-        check();
+        check(emptyHex);
       }
 
-      //  const repeatedDomain = checkRepeatedDomain(emptyHex);
-      // if (sumEmptyAreas.length === 0) {}
-      function check() {
-        const hexAlone = checkHexAlone(emptyHex);
+      function check(emptyHex) {
+        const objHex = { ...emptyHex };
 
-        //   console.log(emptyHex);
+        //   Номер домена в стеке
+        const numDomain = objHex.numDomain;
+        const idHex = objHex.id;
+
+        //   Добавляем соседий к элементу
+        objHex.group = [...getNeighbors(idHex)];
+
+        //   Хексы не входящие в домен
+        const emptyHexInDomain = !domainsLong[numDomain].includes(objHex.id);
+
+        if (emptyHexInDomain) {
+          //Отсекаем элементы по краям решетки
+          if (objHex.group.length > 4) {
+            // Связи внутри свободной области домена
+            const connectID = emptyConnect(objHex, numDomain);
+            arrResHex.push({
+              id: objHex.id,
+              numDomain: numDomain,
+              group: connectID,
+            });
+          }
+        }
       }
+      return arrResHex;
     }
 
-    //  Отсекаем автономные хексы по краям решетки
-    function checkHexAlone(emptyHex) {
-      const numDomain = emptyHex.numDomain;
-
-      const hexCord = arrCordMainHex.find((elem) => {
-        return elem.id === emptyHex.id;
+    //  Ищем связи у свободных элементов которые не ограничены элементами домена
+    function emptyConnect(objHex, numDomain) {
+      //   Все пересчения с доменом
+      const intersectDomain = domainsLong[numDomain].filter((id) => {
+        return objHex.group.includes(id);
       });
 
-      // Находим всех соседий свободного хекса
+      //   Находим связанные свободные элементы вне домена
+      const emptyConnect = objHex.group.filter(
+        (id) => !intersectDomain.includes(id)
+      );
+
+      return emptyConnect;
+    }
+
+    //  Соседи связанных но не в домене элементов
+    function getNeighbors(id) {
+      const hexCord = arrCordMainHex.find((elem) => {
+        return elem.id === id;
+      });
+
+      // Находим всех соседий хекса
       const hexConnect = domainsStore.getNeighborsHex(
         hexCord.vertical,
         hexCord.horizontal
       );
-
-      const intersect = domainsLong[numDomain].filter((id) => {
-        return hexConnect.includes(id);
-      });
-
-      // console.log(intersect);
-
-      if (hexConnect.length <= 4 && intersect.length >= 4) {
-        console.log(emptyHex);
-      }
-
-      // console.log(domainsLong[numDomain]);
-      // console.log(hexConnect);
+      return hexConnect;
     }
 
     //  Проверяем повторение недосвязных доменов при добавлении в общий стек
     function checkRepeatedDomain(objEmptyHex) {
-      return sumEmptyAreas.some((elem) => {
+      return sumEmptyAreasDomains.some((elem) => {
         return elem.numDomain === objEmptyHex.numDomain;
       });
     }
 
     getHexConnectDomains();
-    console.log(sumEmptyAreas);
+    console.log(areaInDomain);
+    console.log(sumEmptyAreasDomains);
     infoTableStore.getSumNonSimplyDomain("-");
   }, [isBtnRandom]);
 
