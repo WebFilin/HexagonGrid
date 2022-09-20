@@ -80,8 +80,8 @@ const NotSimplyConnectDomain = observer(({ isBtnRandom }) => {
             if (connect === 6) {
               checkSixIntersect(emptyHex);
             } else {
-              const emptyArea = checkOtherIntersect(emptyHex);
-              resAreaInDomains.push(...emptyArea);
+              const emptyNode = checkOtherIntersect(emptyHex);
+              resAreaInDomains.push(...emptyNode);
             }
           }
         }
@@ -114,7 +114,7 @@ const NotSimplyConnectDomain = observer(({ isBtnRandom }) => {
     //  ОБрабатываем другие хексы со связями меньше 6, получаем связи в пустых зонах
     function checkOtherIntersect(emptyHex) {
       //Хекс пустой области со связями
-      let arrResHex = [];
+      let resHexs = [];
 
       if (emptyHex) {
         check(emptyHex);
@@ -138,7 +138,7 @@ const NotSimplyConnectDomain = observer(({ isBtnRandom }) => {
           if (objHex.group.length > 4) {
             // Связи внутри свободной области домена
             const connectID = emptyConnect(objHex, numDomain);
-            arrResHex.push({
+            resHexs.push({
               id: objHex.id,
               numDomain: numDomain,
               group: connectID,
@@ -146,7 +146,16 @@ const NotSimplyConnectDomain = observer(({ isBtnRandom }) => {
           }
         }
       }
-      return arrResHex;
+      return resHexs;
+    }
+
+    //  Проверяем пустую зону домена на связность и выход на границу решетки
+    function checEmptyArea() {
+      const outOfBorder = areaInDomain.map((elem) => {
+        elem.forEach((hex) => {
+          console.log(hex);
+        });
+      });
     }
 
     //  Ищем связи у свободных элементов которые не ограничены элементами домена
@@ -160,7 +169,6 @@ const NotSimplyConnectDomain = observer(({ isBtnRandom }) => {
       const emptyConnect = objHex.group.filter(
         (id) => !intersectDomain.includes(id)
       );
-
       return emptyConnect;
     }
 
@@ -186,8 +194,9 @@ const NotSimplyConnectDomain = observer(({ isBtnRandom }) => {
     }
 
     getHexConnectDomains();
-    console.log(areaInDomain);
-    console.log(sumEmptyAreasDomains);
+    checEmptyArea();
+    //  console.log(areaInDomain);
+    //  console.log(sumEmptyAreasDomains);
     infoTableStore.getSumNonSimplyDomain("-");
   }, [isBtnRandom]);
 
