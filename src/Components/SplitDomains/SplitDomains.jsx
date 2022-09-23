@@ -11,10 +11,7 @@ const SplitDomains = observer(() => {
     let adjacencyList = [];
 
     //  Стек всех найденных деревьев при рекрусии
-    const arrSearchTree = [];
-
-    //  Результируюший стек деревьев графа
-    const resArrTree = [];
+    const arrSearchTree = new Set();
 
     // Формируем список смежности узлов
     function createAdjacencyList() {
@@ -86,26 +83,12 @@ const SplitDomains = observer(() => {
         let linkNode = nodeMap[startNode][i];
         depthFirstSearch(linkNode, nodeMap, domainGroup);
       }
-      arrSearchTree.push(domainGroup);
+      arrSearchTree.add(domainGroup);
     }
 
-    //  Удаляем дубликаты деревьев после рекрусии
-    function removeDuplicatesTree(arrSearchTree) {
-      const arrString = arrSearchTree.map((elem) => elem.join(","));
-      const uniqueString = new Set(arrString);
-      uniqueString.forEach((elem) => {
-        const arrNum = elem.split(",").map((num) => {
-          return Number(num);
-        });
-        resArrTree.push(arrNum);
-      });
-    }
-
-    //  Вызываем цепочку построения доменов
     createAdjacencyList();
     mainHexGraph(adjacencyList);
-    removeDuplicatesTree(arrSearchTree);
-    domainsStore.getGraphTree(resArrTree);
+    domainsStore.getGraphTree([...arrSearchTree]);
   }, [arrVertexs]);
 
   return <></>;

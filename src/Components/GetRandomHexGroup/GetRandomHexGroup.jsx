@@ -87,7 +87,7 @@ const RandomDomains = observer(() => {
       arrCordMainHex[49],
     ];
 
-    //   randomElem.push(...test2);
+    // randomElem.push(...test2);
     randomElem.push(...test);
 
     arrCordMainHex.forEach((hexElem) => {

@@ -114,18 +114,18 @@ const NotSimplyConnectDomain = observer(({ isBtnRandom }) => {
       function checOtherHex() {
         // Соседи каждого элемента
         const neighbors = getNeighbors(emptyHex.id);
-        //   Проверяем элементы края решетки
-        if (neighbors.length >= 4) {
-          const inDomains = checkHexInStack(neighbors, currDomain);
+        //   //   Проверяем элементы края решетки
+        //   if (neighbors.length >= 4) {
+        //     const inDomains = checkHexInStack(neighbors, currDomain);
 
-          if (inDomains.length >= 2) {
-            emptyHexs.add(emptyHex.id, ...inDomains);
-          }
+        //     if (inDomains.length >= 2) {
+        //       emptyHexs.add(emptyHex.id, ...inDomains);
+        //     }
 
-          console.log(emptyHexs);
-          //  console.log(inDomains);
-          //  console.log(emptyHex.id, neighbors);
-        }
+        //     console.log(emptyHexs);
+        //    //   console.log(inDomains);
+        //    //   console.log(emptyHex.id, neighbors);
+        //   }
       }
     }
 
