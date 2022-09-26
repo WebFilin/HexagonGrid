@@ -60,7 +60,7 @@ const SplitDomains = observer(() => {
 
       while (true) {
         // Стартовая точка обхода графа - если не посещалась
-        const startNode = +nodes.find((node) => !nodeMap[node].visited);
+        const startNode = Number(nodes.find((node) => !nodeMap[node].visited));
         if (isNaN(startNode)) break;
         hexGraph.push(depthFirstSearch(startNode, nodeMap));
       }
@@ -77,7 +77,7 @@ const SplitDomains = observer(() => {
       // Помечаем пройденую вершину графа
       nodeMap[startNode].visited = true;
 
-      // Рекрусивно обходим граф
+      // обходим граф
       for (let i = 0; i < nodeMap[startNode].length; i++) {
         // Собираем узлы
         let linkNode = nodeMap[startNode][i];
