@@ -4,7 +4,8 @@ import React from "react";
 import domainsStore from "../../store/domainsStore";
 import infoTableStore from "../../store/infoTableStore";
 import GetInfoRowForTable from "../GetInfoRowForTable/GetInfoRowForTable";
-import NotSimplyConnectDomain from "../NotSimplyConnectDomain/NotSimplyConnectDomain";
+import CheckHexConnectDomains from "../CheckHexConnectDomains/CheckHexConnectDomains";
+
 const RandomDomains = observer(() => {
   // Кнопка авто
   const isBtnRandom = domainsStore.isBtnRandom;
@@ -35,7 +36,7 @@ const RandomDomains = observer(() => {
       arrCordMainHex[33],
 
       arrCordMainHex[45],
-      // arrCordMainHex[28],
+      arrCordMainHex[28],
       arrCordMainHex[19],
       arrCordMainHex[37],
       arrCordMainHex[42],
@@ -113,7 +114,7 @@ const RandomDomains = observer(() => {
 
   return (
     <>
-      {<NotSimplyConnectDomain isBtnRandom={isBtnRandom} />}
+      <CheckHexConnectDomains isBtnRandom={isBtnRandom} />
       <GetInfoRowForTable isBtnRandom={isBtnRandom} />
     </>
   );
