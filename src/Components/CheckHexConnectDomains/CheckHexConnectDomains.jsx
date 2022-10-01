@@ -6,12 +6,13 @@ import GetEmptyAreaInDomain from "../GetEmptyAreaInDomain/GetEmptyAreaInDomain";
 
 const CheckHexConnectDomains = observer(({ isBtnRandom }) => {
   // Обьект для передачи связей
-  const [objHexConnect, setObjHexConnect] = React.useState([]);
+  const [arrHexConnect, setArrHexConnect] = React.useState([]);
 
   React.useEffect(() => {
     const stackDomains = toJS(domainsStore.stackDomains);
     const arrHexRandom = toJS(domainsStore.arrVertexs);
 
+    //  Стек связей доменов
     const stackConnect = [];
 
     //  ID входящие в домен
@@ -45,24 +46,51 @@ const CheckHexConnectDomains = observer(({ isBtnRandom }) => {
         .flat();
 
       // Получаем количество связей между хексами и доменом
-      const intersectHexs = neighborID.reduce((acc, id) => {
+      const objIntersectHexs = neighborID.reduce((acc, id) => {
         acc[id] = (acc[id] || 0) + 1;
         return acc;
       }, {});
 
+      // Собираем узлы хексов вокруг домена
+      const arrIntersectHexs = Object.entries(objIntersectHexs).map(
+        ([key, value]) => {
+          const idHex = Number(key);
+
+          //  Соседи элементов
+          const neighbors = getNeighbors(idHex);
+          return { id: idHex, link: value, neighbors: neighbors };
+        }
+      );
+
       stackConnect.push({
-        hexs: intersectHexs,
+        hexLink: arrIntersectHexs,
         currDomain: currDomain,
         numDomain: numDomain,
       });
 
-      setObjHexConnect(stackConnect);
+      setArrHexConnect(stackConnect);
+    }
+
+    function getNeighbors(id) {
+      //Стек всех элементов сетки
+      const arrCordMainHex = toJS(domainsStore.arrCoordinates);
+
+      const hexCord = arrCordMainHex.find((hex) => {
+        return hex.id === id;
+      });
+
+      // Находим всех соседий хекса
+      const hexConnect = domainsStore.getNeighborsHex(
+        hexCord.vertical,
+        hexCord.horizontal
+      );
+      return hexConnect;
     }
   }, [isBtnRandom]);
 
   return (
     <div>
-      <GetEmptyAreaInDomain hexConnect={objHexConnect} />
+      <GetEmptyAreaInDomain hexConnect={arrHexConnect} />
     </div>
   );
 });

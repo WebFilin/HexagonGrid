@@ -2,7 +2,6 @@ import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import domainsStore from "../../store/domainsStore";
-import infoTableStore from "../../store/infoTableStore";
 import GetInfoRowForTable from "../GetInfoRowForTable/GetInfoRowForTable";
 import CheckHexConnectDomains from "../CheckHexConnectDomains/CheckHexConnectDomains";
 
@@ -32,17 +31,16 @@ const RandomDomains = observer(() => {
       arrCordMainHex[10],
       arrCordMainHex[15],
       arrCordMainHex[24],
-
       arrCordMainHex[33],
-
       arrCordMainHex[45],
+      //
       arrCordMainHex[28],
-      arrCordMainHex[19],
+      // arrCordMainHex[19],
+      //
       arrCordMainHex[37],
-      arrCordMainHex[42],
       arrCordMainHex[44],
       arrCordMainHex[43],
-      arrCordMainHex[51],
+      arrCordMainHex[42],
 
       // arrCordMainHex[52],
       // arrCordMainHex[45],
@@ -54,10 +52,12 @@ const RandomDomains = observer(() => {
       arrCordMainHex[30],
       arrCordMainHex[39],
       arrCordMainHex[32],
-      arrCordMainHex[23],
+      // arrCordMainHex[23],
       arrCordMainHex[14],
       arrCordMainHex[41],
       arrCordMainHex[48],
+      arrCordMainHex[49],
+
       //
     ];
 
@@ -90,12 +90,12 @@ const RandomDomains = observer(() => {
       arrCordMainHex[49],
     ];
 
-    // randomElem.push(...test2);
+    //   randomElem.push(...test2);
     randomElem.push(...test);
 
     arrCordMainHex.forEach((hexElem) => {
       if (Math.random() <= ratio) {
-        //   randomElem.push(hexElem);
+        //  randomElem.push(hexElem);
       }
     });
 
