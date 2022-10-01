@@ -21,7 +21,7 @@ function App() {
         <div className={style.controls}>
           <SetHexSideSize />
           <BtnRandomChange />
-          {/* <DrowTable /> */}
+          <DrowTable />
         </div>
       </main>
 

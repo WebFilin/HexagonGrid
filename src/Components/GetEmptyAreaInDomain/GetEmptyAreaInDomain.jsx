@@ -1,8 +1,6 @@
 import { observer } from "mobx-react-lite";
-import { toJS } from "mobx";
 import React from "react";
 import infoTableStore from "../../store/infoTableStore";
-import domainsStore from "../../store/domainsStore";
 
 const getEmptyAreaInDomain = observer(({ hexConnect }) => {
   React.useEffect(() => {
@@ -10,25 +8,43 @@ const getEmptyAreaInDomain = observer(({ hexConnect }) => {
     const sumEmptyAreasDomains = [];
 
     hexConnect.forEach((domain) => {
-      checkDomain(domain);
+      checkDomains(domain);
     });
 
-    function checkDomain({ hexLink, currDomain, numDomain }) {
-      // console.log(hexLink);
-      // console.log(currDomain);
+    function checkDomains({ hexLink, currDomain, numDomain }) {
+      // Проверяем наличие хекса с 6 пересечениями с доменом
+      const intersectSix = hexLink.filter(({ link }) => {
+        return link === 6;
+      });
 
-      // Домен с 6 связями с доменом
-      // checkSixIntersect(params)
-
-      //Домен с произвольным количеством связей больше 2х
-      checkOtherIntersect(hexLink, currDomain);
+      if (intersectSix.length !== 0) {
+        checkSixIntersect(intersectSix, currDomain, numDomain);
+      } else {
+        checkOtherIntersect(hexLink, currDomain, numDomain);
+      }
     }
 
-    //  Обрабатываем сразу 6 связей с доменом
-    function checkSixIntersect(params) {}
+    //  Если хекс c 6 пересечениями - сразу пушим в стек
+    function checkSixIntersect(intersectSix, currDomain, numDomain) {
+      // Проверяем если хекс не в домене
+      const outDomain = intersectSix.some((elem) => {
+        return !currDomain.includes(elem.id);
+      });
+
+      if (outDomain) {
+        sumEmptyAreasDomains.push({
+          aaa: intersectSix,
+          id: [...currDomain],
+          numDomain: numDomain,
+        });
+      }
+
+      console.log("6");
+      console.log(sumEmptyAreasDomains);
+    }
 
     //  ОБрабатываем другие хексы со связями меньше 6, получаем связи в пустых зонах
-    function checkOtherIntersect(hexLink, currDomain) {
+    function checkOtherIntersect(hexLink, currDomain, numDomain) {
       // Получаем пустую область в домене
       const hexLinkDomain = hexLink
         .map(({ id, link, neighbors }) => {
@@ -63,15 +79,18 @@ const getEmptyAreaInDomain = observer(({ hexConnect }) => {
 
       // Если домен имеет закрытую область - добавляем в стек
       if (checkBorder.length === 0) {
-        sumEmptyAreasDomains.push([...emptyArea]);
+        sumEmptyAreasDomains.push({
+          id: [...currDomain],
+          numDomain: numDomain,
+        });
       } else {
         return;
       }
     }
-
+    console.log("Другое ");
     console.log(sumEmptyAreasDomains);
 
-    infoTableStore.getSumNonSimplyDomain("-");
+    infoTableStore.getSumNonSimplyDomain(sumEmptyAreasDomains.length);
   }, [hexConnect]);
 
   return <div></div>;
