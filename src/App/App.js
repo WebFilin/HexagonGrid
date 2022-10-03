@@ -9,7 +9,7 @@ import BtnRandomChange from "../Components/ControlsElem/BtnRandomChange/BtnRando
 import SplitDomains from "../Components/SplitDomains/SplitDomains";
 import ColorazeDomains from "../Components/ColorazeDomains/ColorazeDomains";
 import CheckDomains from "../Components/CheckDomains/CheckDomains";
-import DrowTable from "../Components/DrowTable/DrowTable";
+import Table from "../Components/Table/Table";
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
         <div className={style.controls}>
           <SetHexSideSize />
           <BtnRandomChange />
-          <DrowTable />
+          <Table />
         </div>
       </main>
 

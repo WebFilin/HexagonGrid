@@ -1,11 +1,14 @@
+import { toJS } from "mobx";
+import { observer } from "mobx-react-lite";
 import React from "react";
 import infoTableStore from "../../store/infoTableStore";
 import domainsStore from "../../store/domainsStore";
-import { toJS } from "mobx";
-import { observer } from "mobx-react-lite";
-const GetInfoRowForTable = observer((isBtnRandom) => {
+import DrowTable from "../DrowTable/DrowTable";
+
+const TableHandler = observer(() => {
+  const allDomains = toJS(domainsStore.stackDomains);
+
   React.useEffect(() => {
-    const allDomains = toJS(domainsStore.stackDomains);
     const randomRatio = domainsStore.randomRatio.toFixed(2);
     const nonSimplyDomain = infoTableStore.nonSimplyDomain;
     const allHexs = domainsStore.arrCoordinates.length;
@@ -28,8 +31,13 @@ const GetInfoRowForTable = observer((isBtnRandom) => {
     if (allDomains.length > 0) {
       infoTableStore.handlerInfoTable(infoRow);
     }
-  }, [isBtnRandom]);
-  return <></>;
+  }, [allDomains]);
+
+  return (
+    <div>
+      <DrowTable />
+    </div>
+  );
 });
 
-export default GetInfoRowForTable;
+export default TableHandler;

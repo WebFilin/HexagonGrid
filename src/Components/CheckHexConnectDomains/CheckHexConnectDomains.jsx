@@ -5,7 +5,7 @@ import domainsStore from "../../store/domainsStore";
 import GetEmptyAreaInDomain from "../GetEmptyAreaInDomain/GetEmptyAreaInDomain";
 
 const CheckHexConnectDomains = observer(({ isBtnRandom }) => {
-  // Обьект для передачи связей
+  // Стек для передачи связей
   const [arrHexConnect, setArrHexConnect] = React.useState([]);
 
   React.useEffect(() => {
@@ -16,9 +16,7 @@ const CheckHexConnectDomains = observer(({ isBtnRandom }) => {
     const stackConnect = [];
 
     //  ID входящие в домен
-    stackDomains.forEach((elem, numDomain) => {
-      const domain = elem.idDomain;
-
+    stackDomains.forEach((domain, numDomain) => {
       //  Отсекаем короткие домены
       if (domain.length >= 6) {
         getNeighborsDomain(domain, numDomain);

@@ -2,7 +2,7 @@ import { makeAutoObservable } from "mobx";
 
 class infoTableStore {
   sumRandomID = 0;
-  nonSimplyDomain = "Раcсчитать";
+  nonSimplyDomain = null;
   arrTable = [];
   constructor() {
     makeAutoObservable(this);

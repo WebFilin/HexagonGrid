@@ -28,7 +28,7 @@ const ColorazeDomains = observer(() => {
           domainsStore.getDomainColor(getColor);
         }
 
-        if (elem.idDomain.includes(id)) {
+        if (elem.includes(id)) {
           const color = toJS(domainsStore.arrDomainsColor);
           hex.style.fill = color[index];
           hex.style.fillOpacity = 0.8;

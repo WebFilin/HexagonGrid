@@ -38,9 +38,6 @@ const getEmptyAreaInDomain = observer(({ hexConnect }) => {
           numDomain: numDomain,
         });
       }
-
-      console.log("6");
-      console.log(sumEmptyAreasDomains);
     }
 
     //  ОБрабатываем другие хексы со связями меньше 6, получаем связи в пустых зонах
@@ -87,12 +84,10 @@ const getEmptyAreaInDomain = observer(({ hexConnect }) => {
         return;
       }
     }
-    console.log("Другое ");
     console.log(sumEmptyAreasDomains);
 
     infoTableStore.getSumNonSimplyDomain(sumEmptyAreasDomains.length);
   }, [hexConnect]);
-
   return <div></div>;
 });
 

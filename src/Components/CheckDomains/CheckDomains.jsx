@@ -18,12 +18,8 @@ const CheckDomains = observer(() => {
 
     //  Создаем домены по полученным графам автоматически
     if (treesGraph.length !== 0) {
-      treesGraph.map((tree) => {
-        const objDomain = {
-          idDomain: [...tree],
-        };
-
-        arrDomains.push(objDomain);
+      treesGraph.forEach((tree) => {
+        arrDomains.push([...tree]);
       });
     }
 
@@ -38,17 +34,15 @@ const CheckDomains = observer(() => {
 
     function checkSubDomain(hexNode) {
       // Получаем индекс домена в общем стейте
-      const intersect = arrDomains.findIndex((domain) => {
-        return domain.idDomain.some((id) => {
+      const intersectIndex = arrDomains.findIndex((domain) => {
+        return domain.some((id) => {
           return hexNode.group.includes(id);
         });
       });
 
-      if (intersect !== -1) {
-        const oldState = arrDomains[intersect].idDomain;
-
-        arrDomains[intersect].idDomain = [
-          ...new Set([...oldState, hexNode.id]),
+      if (intersectIndex !== -1) {
+        arrDomains[intersectIndex] = [
+          ...new Set([...arrDomains[intersectIndex], hexNode.id]),
         ];
       } else {
         createDomain(hexNode);
@@ -61,7 +55,7 @@ const CheckDomains = observer(() => {
 
       // Получаем все id из доменов
       arrDomains.forEach((node) => {
-        allNodeID.push(...node.idDomain);
+        allNodeID.push(...node);
       });
 
       // Ищем исключения
@@ -80,10 +74,7 @@ const CheckDomains = observer(() => {
 
     //  Создаем новый домен при клике
     function createDomain(hexID) {
-      const objDomain = {
-        idDomain: [hexID.id],
-      };
-      arrDomains.push(objDomain);
+      arrDomains.push([hexID.id]);
     }
 
     if (nodeHex !== null) {

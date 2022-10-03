@@ -2,7 +2,6 @@ import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import domainsStore from "../../store/domainsStore";
-import GetInfoRowForTable from "../GetInfoRowForTable/GetInfoRowForTable";
 import CheckHexConnectDomains from "../CheckHexConnectDomains/CheckHexConnectDomains";
 
 const RandomDomains = observer(() => {
@@ -90,8 +89,8 @@ const RandomDomains = observer(() => {
       arrCordMainHex[49],
     ];
 
-   //   randomElem.push(...test2);
-   //   randomElem.push(...test);
+    //   randomElem.push(...test2);
+    //  randomElem.push(...test);
 
     arrCordMainHex.forEach((hexElem) => {
       if (Math.random() <= ratio) {
@@ -115,7 +114,6 @@ const RandomDomains = observer(() => {
   return (
     <>
       <CheckHexConnectDomains isBtnRandom={isBtnRandom} />
-      <GetInfoRowForTable isBtnRandom={isBtnRandom} />
     </>
   );
 });
