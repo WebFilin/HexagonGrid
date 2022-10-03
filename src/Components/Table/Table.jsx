@@ -4,9 +4,11 @@ import React from "react";
 import infoTableStore from "../../store/infoTableStore";
 import domainsStore from "../../store/domainsStore";
 import DrowTable from "../DrowTable/DrowTable";
+import CheckHexConnectDomains from "../CheckHexConnectDomains/CheckHexConnectDomains";
 
 const TableHandler = observer(() => {
   const allDomains = toJS(domainsStore.stackDomains);
+  const isBtnRandom = domainsStore.isBtnRandom;
 
   React.useEffect(() => {
     const randomRatio = domainsStore.randomRatio.toFixed(2);
@@ -35,6 +37,7 @@ const TableHandler = observer(() => {
 
   return (
     <div>
+      <CheckHexConnectDomains isBtnRandom={isBtnRandom} />
       <DrowTable />
     </div>
   );

@@ -11,21 +11,21 @@ const getEmptyAreaInDomain = observer(({ hexConnect }) => {
       checkDomains(domain);
     });
 
-    function checkDomains({ hexLink, currDomain, numDomain }) {
+    function checkDomains({ hexLink, currDomain }) {
       // Проверяем наличие хекса с 6 пересечениями с доменом
       const intersectSix = hexLink.filter(({ link }) => {
         return link === 6;
       });
 
       if (intersectSix.length !== 0) {
-        checkSixIntersect(intersectSix, currDomain, numDomain);
+        checkSixIntersect(intersectSix, currDomain);
       } else {
-        checkOtherIntersect(hexLink, currDomain, numDomain);
+        checkOtherIntersect(hexLink, currDomain);
       }
     }
 
     //  Если хекс c 6 пересечениями - сразу пушим в стек
-    function checkSixIntersect(intersectSix, currDomain, numDomain) {
+    function checkSixIntersect(intersectSix, currDomain) {
       // Проверяем если хекс не в домене
       const outDomain = intersectSix.some((elem) => {
         return !currDomain.includes(elem.id);
@@ -35,13 +35,12 @@ const getEmptyAreaInDomain = observer(({ hexConnect }) => {
         sumEmptyAreasDomains.push({
           aaa: intersectSix,
           id: [...currDomain],
-          numDomain: numDomain,
         });
       }
     }
 
     //  ОБрабатываем другие хексы со связями меньше 6, получаем связи в пустых зонах
-    function checkOtherIntersect(hexLink, currDomain, numDomain) {
+    function checkOtherIntersect(hexLink, currDomain) {
       // Получаем пустую область в домене
       const hexLinkDomain = hexLink
         .map(({ id, link, neighbors }) => {
@@ -78,7 +77,6 @@ const getEmptyAreaInDomain = observer(({ hexConnect }) => {
       if (checkBorder.length === 0) {
         sumEmptyAreasDomains.push({
           id: [...currDomain],
-          numDomain: numDomain,
         });
       } else {
         return;
@@ -86,7 +84,7 @@ const getEmptyAreaInDomain = observer(({ hexConnect }) => {
     }
     console.log(sumEmptyAreasDomains);
 
-    infoTableStore.getSumNonSimplyDomain(sumEmptyAreasDomains.length);
+    //  infoTableStore.getSumNonSimplyDomain(sumEmptyAreasDomains.length);
   }, [hexConnect]);
   return <div></div>;
 });

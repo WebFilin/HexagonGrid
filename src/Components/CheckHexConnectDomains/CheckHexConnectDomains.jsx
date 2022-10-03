@@ -8,6 +8,8 @@ const CheckHexConnectDomains = observer(({ isBtnRandom }) => {
   // Стек для передачи связей
   const [arrHexConnect, setArrHexConnect] = React.useState([]);
 
+  console.log(isBtnRandom);
+
   React.useEffect(() => {
     const stackDomains = toJS(domainsStore.stackDomains);
     const arrHexRandom = toJS(domainsStore.arrVertexs);
@@ -67,6 +69,7 @@ const CheckHexConnectDomains = observer(({ isBtnRandom }) => {
       });
 
       setArrHexConnect(stackConnect);
+      console.log(stackConnect);
     }
 
     function getNeighbors(id) {
