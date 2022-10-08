@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { toJS } from "mobx";
-import domainsStore from "../../store/domainsStore";
+import domainsStore from "../../store/DomainsStore";
 
 const GetHexGroup = observer(() => {
   //   Выбранный хекс получаем или при клике или рандомом

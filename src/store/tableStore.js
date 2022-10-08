@@ -1,6 +1,7 @@
 import { makeAutoObservable } from "mobx";
+import DomainsStore from "./DomainsStore";
 
-class tableStore {
+class TableStore {
   nonSimplyDomain = null;
   arrTable = [];
   isDrowTable = false;
@@ -22,16 +23,18 @@ class tableStore {
   handlerInfoTable() {
     this.isDrowTable = !this.isDrowTable;
 
-    //     const allDomains = domainsStore.stackDomains;
-    //     const allHexs = domainsStore.arrCoordinates.length;
-    //     const sideRatio = domainsStore.hexSideSize;
+    console.log(DomainsStore.arrGraphTree);
+
+    //     const allDomains = DomainsStore.stackDomains;
+    //     const allHexs = DomainsStore.arrCoordinates.length;
+    //     const sideRatio = DomainsStore.hexSideSize;
     //     const sumHexValueOne = allDomains
     //       .map((elem) => {
     //         return elem.idDomain;
     //       })
     //       .flat();
     //     const infoRow = {
-    //       random: domainsStore.randomRatio.toFixed(2),
+    //       random: DomainsStore.randomRatio.toFixed(2),
     //       amountDomains: allDomains.length,
     //       nonSimplyDomain: this.nonSimplyDomain,
     //       allHexs: allHexs,
@@ -47,4 +50,4 @@ class tableStore {
   }
 }
 
-export default new tableStore();
+export default new TableStore();

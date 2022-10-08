@@ -1,13 +1,11 @@
 import { makeAutoObservable } from "mobx";
-import domainsStore from "./domainsStore";
-import tableStore from "./tableStore";
+import DomainsStore from "./DomainsStore";
+import TableStore from "./TableStore";
 
 class mainStore {
   constructor() {
-    makeAutoObservable(
-      (this.domainsStore = new domainsStore()),
-      (this.tableStore = new tableStore())
-    );
+    this.DomainsStore = new DomainsStore(this);
+    this.tableStore = new TableStore(this);
   }
 }
 

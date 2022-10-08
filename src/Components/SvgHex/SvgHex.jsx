@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./svgHex.module.scss";
-import domainsStore from "../../store/domainsStore";
+import domainsStore from "../../store/DomainsStore";
 import { action } from "mobx";
 
 function SvgHex({ id, x, y, vertical, horizontal }) {

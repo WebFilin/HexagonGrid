@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 
-class domainsStore {
+class DomainsStore {
   arrCoordinates = [];
   arrVertexs = [];
   hexVertex = null;
@@ -70,8 +70,6 @@ class domainsStore {
     this.arrDomainsColor = [];
     this.randomRatio = ratio;
     this.isBtnRandom = !this.isBtnRandom;
-
-    console.log(this.stackDomains);
   }
 
   getGraphTree(arrTree) {
@@ -120,4 +118,4 @@ class domainsStore {
   }
 }
 
-export default new domainsStore();
+export default new DomainsStore();

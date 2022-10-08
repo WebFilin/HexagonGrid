@@ -1,9 +1,9 @@
 import React from "react";
 import InputSizeSide from "../InputSizeSide/InputSizeSide";
 import style from "./btnRandomChange.module.scss";
-import domainsStore from "../../../store/domainsStore";
+import DomainsStore from "../../../store/DomainsStore";
 import { observer } from "mobx-react-lite";
-import tableStore from "../../../store/tableStore";
+import TableStore from "../../../store/TableStore";
 
 const RandomChange = observer(() => {
   const [isValue, setIsValue] = React.useState(0.5);
@@ -15,9 +15,9 @@ const RandomChange = observer(() => {
   //   infoTableStore.handlerInfoTable();
   function handlerClick() {
     // Генерация случайных доменов
-    domainsStore.handlerBtnRandom(isValue);
+    DomainsStore.handlerBtnRandom(isValue);
     //  Отрисовка таблицы
-    tableStore.handlerInfoTable();
+    TableStore.handlerInfoTable();
   }
 
   return (

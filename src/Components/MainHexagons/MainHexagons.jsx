@@ -1,7 +1,7 @@
 import React from "react";
 import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
-import domainsStore from "../../store/domainsStore";
+import domainsStore from "../../store/DomainsStore";
 
 const MainHexagons = observer(() => {
   const createMainHex = domainsStore.isCreateMainHex;

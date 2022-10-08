@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./drowSvgArea.module.scss";
-import domainsStore from "../../store/domainsStore";
+import domainsStore from "../../store/DomainsStore";
 import { observer } from "mobx-react-lite";
 import { toJS } from "mobx";
 import SvgHex from "../SvgHex/SvgHex";

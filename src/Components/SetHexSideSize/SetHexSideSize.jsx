@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./setHexSizeSide.module.scss";
 import InputSizeSide from "../ControlsElem/InputSizeSide/InputSizeSide";
-import domainsStore from "../../store/domainsStore";
+import domainsStore from "../../store/DomainsStore";
 
 function SetHexSideSize() {
   const [valueL, setValueL] = React.useState(3);

@@ -6,6 +6,7 @@ function InputSizeSide({ title, value, onChange, text, inc, dec, min, max }) {
   const [isValid, setIsValid] = React.useState(true);
 
   function inputHandler(ev) {
+    ev.preventDefault();
     const input = Number(ev.target.value);
     if (input >= min && input <= max) {
       setIsValid(true);
