@@ -21,7 +21,7 @@ function SetHexSideSize() {
   };
 
   function clickHandler() {
-    domainsStore.getHandlerCreateHex();
+    domainsStore.getHandlerCreateMainHex();
   }
 
   React.useEffect(() => {

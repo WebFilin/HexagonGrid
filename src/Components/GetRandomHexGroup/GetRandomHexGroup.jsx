@@ -113,7 +113,7 @@ const RandomDomains = observer(() => {
 
   return (
     <>
-      {/* <CheckHexConnectDomains isBtnRandom={isBtnRandom} /> */}
+      <CheckHexConnectDomains isBtnRandom={isBtnRandom} />
     </>
   );
 });

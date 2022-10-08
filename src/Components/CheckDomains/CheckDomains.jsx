@@ -80,6 +80,7 @@ const CheckDomains = observer(() => {
     if (nodeHex !== null) {
       checkDomain(nodeHex);
     }
+
     handlerSingleNode();
 
     domainsStore.getDomainsStack(arrDomains);

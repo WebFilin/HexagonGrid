@@ -9,7 +9,7 @@ class domainsStore {
   stackDomains = [];
   arrDomainsColor = [];
   svgArea = [];
-  isCreateMainhex = false;
+  isCreateMainHex = false;
   randomRatio = 0;
   hexSideSize = {
     L: 3,
@@ -17,6 +17,8 @@ class domainsStore {
     N: 7,
   };
   isBtnRandom = false;
+  nonSimplyDomain = null;
+  arrTable = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -29,8 +31,9 @@ class domainsStore {
     this.hexSideSize.N = axisN;
   }
 
-  getHandlerCreateHex() {
-    this.isCreateMainhex = !this.isCreateMainhex;
+  //Создать общую сетку по заданнам размерам
+  getHandlerCreateMainHex() {
+    this.isCreateMainHex = !this.isCreateMainHex;
   }
 
   //   Массив коррдинат хексов
@@ -67,6 +70,8 @@ class domainsStore {
     this.arrDomainsColor = [];
     this.randomRatio = ratio;
     this.isBtnRandom = !this.isBtnRandom;
+
+    console.log(this.stackDomains);
   }
 
   getGraphTree(arrTree) {

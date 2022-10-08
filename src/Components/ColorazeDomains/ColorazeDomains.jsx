@@ -17,7 +17,7 @@ const ColorazeDomains = observer(() => {
 
       // Сброс стилей хексов
       hex.style = { fill: null, fillOpacity: 0.3 };
-      //  hexTxt.textContent = null;
+      // hexTxt.textContent = null;
       hex.setAttribute("value", 0);
 
       arrDomains.forEach((elem, index) => {
@@ -44,6 +44,7 @@ const ColorazeDomains = observer(() => {
         (Math.random().toString(16) + "000000").substring(2, 8).toUpperCase()
       );
     }
+
   }, [arrDomains]);
 
   return <></>;

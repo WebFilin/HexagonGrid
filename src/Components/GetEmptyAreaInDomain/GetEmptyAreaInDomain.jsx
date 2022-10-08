@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import infoTableStore from "../../store/infoTableStore";
+import tableStore from "../../store/tableStore";
 
 const getEmptyAreaInDomain = observer(({ hexConnect }) => {
   React.useEffect(() => {
@@ -82,9 +82,6 @@ const getEmptyAreaInDomain = observer(({ hexConnect }) => {
         return;
       }
     }
-    console.log(sumEmptyAreasDomains);
-
-    //  infoTableStore.getSumNonSimplyDomain(sumEmptyAreasDomains.length);
   }, [hexConnect]);
   return <div></div>;
 });

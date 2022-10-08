@@ -1,11 +1,19 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { toJS } from "mobx";
-import infoTableStore from "../../store/infoTableStore";
+import tableStore from "../../store/tableStore";
+import domainsStore from "../../store/domainsStore";
 import style from "./drowTable.module.scss";
 
 const DrowTable = observer(() => {
-  const arrTable = toJS(infoTableStore.arrTable);
+  const arrTable = toJS(tableStore.arrTable);
+  const isTable = tableStore.isDrowTable;
+
+  console.log(isTable);
+
+  React.useLayoutEffect(() => {
+    console.log(toJS(tableStore.tableRow));
+  }, [isTable]);
 
   const tableDrow = (
     <table className={style.table_body}>
@@ -37,6 +45,8 @@ const DrowTable = observer(() => {
       </tbody>
     </table>
   );
+
+  React.useLayoutEffect(() => {}, []);
 
   return (
     <div className={style.wrapper}>

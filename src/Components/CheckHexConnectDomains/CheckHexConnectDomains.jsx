@@ -8,8 +8,6 @@ const CheckHexConnectDomains = observer(({ isBtnRandom }) => {
   // Стек для передачи связей
   const [arrHexConnect, setArrHexConnect] = React.useState([]);
 
-  console.log(isBtnRandom);
-
   React.useEffect(() => {
     const stackDomains = toJS(domainsStore.stackDomains);
     const arrHexRandom = toJS(domainsStore.arrVertexs);
@@ -69,25 +67,24 @@ const CheckHexConnectDomains = observer(({ isBtnRandom }) => {
       });
 
       setArrHexConnect(stackConnect);
-      console.log(stackConnect);
-    }
-
-    function getNeighbors(id) {
-      //Стек всех элементов сетки
-      const arrCordMainHex = toJS(domainsStore.arrCoordinates);
-
-      const hexCord = arrCordMainHex.find((hex) => {
-        return hex.id === id;
-      });
-
-      // Находим всех соседий хекса
-      const hexConnect = domainsStore.getNeighborsHex(
-        hexCord.vertical,
-        hexCord.horizontal
-      );
-      return hexConnect;
     }
   }, [isBtnRandom]);
+
+  function getNeighbors(id) {
+    //Стек всех элементов сетки
+    const arrCordMainHex = toJS(domainsStore.arrCoordinates);
+
+    const hexCord = arrCordMainHex.find((hex) => {
+      return hex.id === id;
+    });
+
+    // Находим всех соседий хекса
+    const hexConnect = domainsStore.getNeighborsHex(
+      hexCord.vertical,
+      hexCord.horizontal
+    );
+    return hexConnect;
+  }
 
   return (
     <div>

@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import domainsStore from "../../store/domainsStore";
 
 const MainHexagons = observer(() => {
-  const createMainHex = domainsStore.isCreateMainhex;
+  const createMainHex = domainsStore.isCreateMainHex;
 
   React.useEffect(() => {
     //кординаты и линии расположения хексов
