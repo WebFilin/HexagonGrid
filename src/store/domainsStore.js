@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, autorun } from "mobx";
 
 class DomainsStore {
   arrCoordinates = [];
@@ -16,8 +16,9 @@ class DomainsStore {
     M: 5,
     N: 7,
   };
-  isBtnRandom = false;
-  nonSimplyDomain = null;
+  isBtnAuto = false;
+
+  //   nonSimplyDomain = null;
   arrTable = [];
 
   constructor() {
@@ -53,7 +54,7 @@ class DomainsStore {
     this.arrVertexs.push(peak);
   }
 
-  getVertexLinks(vertex) {
+  getVertexLinksRandom(vertex) {
     this.arrVertexs = [...vertex];
   }
 
@@ -69,7 +70,9 @@ class DomainsStore {
   handlerBtnRandom(ratio) {
     this.arrDomainsColor = [];
     this.randomRatio = ratio;
-    this.isBtnRandom = !this.isBtnRandom;
+    this.isBtnAuto = !this.isBtnAuto;
+    //  this.infoTable();
+    //  console.log(this.infoTable);
   }
 
   getGraphTree(arrTree) {
@@ -78,6 +81,17 @@ class DomainsStore {
 
   getDomainColor(color) {
     this.arrDomainsColor.push(color);
+  }
+
+  infoTable(aaa) {
+   console.log(aaa)
+    // const disposer = autorun(() => {
+    //   return {
+    //     sumDomains: this.stackDomains.length,
+    //     sumHexInDomains: this.stackDomains.flat().length,
+    //   };
+    // });
+    // console.log(disposer);
   }
 
   //   Поиск соседий хекса

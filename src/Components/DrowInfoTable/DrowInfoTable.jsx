@@ -1,12 +1,25 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { toJS } from "mobx";
-// import tableStore from "../../store/tableStore";
-// import DomainsStore from "../../store/DomainsStore";
+import DomainsStore from "../../store/DomainsStore";
 import style from "./drowTable.module.scss";
-// import { mainStore } from "../../store/mainStore";
 
-const DrowTable = observer(() => {
+const DrowInfoTable = observer(() => {
+  //   console.log(DomainsStore.stackDomains);
+
+  const isBtnRandom = DomainsStore.isBtnRandom;
+
+  console.log(DomainsStore.stackDomains);
+
+  //   React.useEffect(() => {
+  //     console.log(DomainsStore.stackDomains);
+  //   }, [DomainsStore.stackDomains]);
+
+  //   const arrDomains = toJS(DomainsStore.stackDomains);
+  //   console.log(DomainsStore.stackDomains);
+
+  //   console.log( isBtnRandom)
+
   //   const arrTable = toJS(tableStore.arrTable);
   //   const isTable = tableStore.isDrowTable;
 
@@ -49,8 +62,6 @@ const DrowTable = observer(() => {
   //     </table>
   //   );
 
-  React.useLayoutEffect(() => {}, []);
-
   return (
     <div className={style.wrapper}>
       {/* {arrTable.length > 0 ? tableDrow : null} */}
@@ -58,4 +69,4 @@ const DrowTable = observer(() => {
   );
 });
 
-export default DrowTable;
+export default DrowInfoTable;

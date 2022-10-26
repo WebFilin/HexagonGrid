@@ -6,7 +6,7 @@ import CheckHexConnectDomains from "../CheckHexConnectDomains/CheckHexConnectDom
 
 const RandomDomains = observer(() => {
   // Кнопка авто
-  const isBtnRandom = domainsStore.isBtnRandom;
+  const isBtnAuto = domainsStore.isBtnAuto;
 
   //   Генерируем домены
   React.useEffect(() => {
@@ -108,12 +108,12 @@ const RandomDomains = observer(() => {
       arrNeighbors.push({ id: elemHex.id, group: [...getNeighbors] });
     });
 
-    domainsStore.getVertexLinks(arrNeighbors);
-  }, [isBtnRandom]);
+    domainsStore.getVertexLinksRandom(arrNeighbors);
+  }, [isBtnAuto]);
 
   return (
     <>
-      <CheckHexConnectDomains isBtnRandom={isBtnRandom} />
+      <CheckHexConnectDomains isBtnAuto={isBtnAuto} />
     </>
   );
 });

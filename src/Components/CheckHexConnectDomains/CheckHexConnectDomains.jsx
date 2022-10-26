@@ -4,7 +4,7 @@ import React from "react";
 import domainsStore from "../../store/DomainsStore";
 import GetEmptyAreaInDomain from "../GetEmptyAreaInDomain/GetEmptyAreaInDomain";
 
-const CheckHexConnectDomains = observer(({ isBtnRandom }) => {
+const CheckHexConnectDomains = observer(({ isBtnAuto }) => {
   // Стек для передачи связей
   const [arrHexConnect, setArrHexConnect] = React.useState([]);
 
@@ -54,9 +54,7 @@ const CheckHexConnectDomains = observer(({ isBtnRandom }) => {
         ([key, value]) => {
           const idHex = Number(key);
 
-          //  Соседи элементов
-          const neighbors = getNeighbors(idHex);
-          return { id: idHex, link: value, neighbors: neighbors };
+          return { id: idHex, link: value, neighbors: getNeighbors(idHex) };
         }
       );
 
@@ -68,7 +66,7 @@ const CheckHexConnectDomains = observer(({ isBtnRandom }) => {
 
       setArrHexConnect(stackConnect);
     }
-  }, [isBtnRandom]);
+  }, [isBtnAuto]);
 
   function getNeighbors(id) {
     //Стек всех элементов сетки
@@ -83,6 +81,7 @@ const CheckHexConnectDomains = observer(({ isBtnRandom }) => {
       hexCord.vertical,
       hexCord.horizontal
     );
+
     return hexConnect;
   }
 

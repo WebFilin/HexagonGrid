@@ -1,23 +1,19 @@
 import React from "react";
 import InputSizeSide from "../InputSizeSide/InputSizeSide";
-import style from "./btnRandomChange.module.scss";
+import style from "./btnAutoChange.module.scss";
 import DomainsStore from "../../../store/DomainsStore";
 import { observer } from "mobx-react-lite";
-import TableStore from "../../../store/TableStore";
 
-const RandomChange = observer(() => {
+const BtnAutoChange = observer(() => {
   const [isValue, setIsValue] = React.useState(0.5);
 
   function handlerValue(value) {
     setIsValue(value);
   }
 
-  //   infoTableStore.handlerInfoTable();
   function handlerClick() {
     // Генерация случайных доменов
     DomainsStore.handlerBtnRandom(isValue);
-    //  Отрисовка таблицы
-    TableStore.handlerInfoTable();
   }
 
   return (
@@ -41,4 +37,4 @@ const RandomChange = observer(() => {
   );
 });
 
-export default RandomChange;
+export default BtnAutoChange;

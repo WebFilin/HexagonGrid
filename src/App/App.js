@@ -5,11 +5,12 @@ import DrowSvgArea from "../Components/DrowSvgArea/DrowSvgArea";
 import GetClickHexGroup from "../Components/GetClickHexGroup/GetClickHexGroup";
 import GetRandomHexGroup from "../Components/GetRandomHexGroup/GetRandomHexGroup";
 import SetHexSideSize from "../Components/SetHexSideSize/SetHexSideSize";
-import BtnRandomChange from "../Components/ControlsElem/BtnRandomChange/BtnRandomChange";
+import BtnAutoChange from "../Components/ControlsElem/BtnAutoChange/BtnAutoChange";
 import SplitDomains from "../Components/SplitDomains/SplitDomains";
 import ColorazeDomains from "../Components/ColorazeDomains/ColorazeDomains";
 import CheckDomains from "../Components/CheckDomains/CheckDomains";
-import DrowTable from "../Components/DrowTable/DrowTable";
+import GetInfoForTable from "../Components/GetInfoForTable/GetInfoForTable";
+import DrowInfoTable from "../Components/DrowInfoTable/DrowInfoTable";
 
 function App() {
   return (
@@ -20,8 +21,8 @@ function App() {
         <DrowSvgArea />
         <div className={style.controls}>
           <SetHexSideSize />
-          <BtnRandomChange />
-          <DrowTable />
+          <BtnAutoChange />
+          <DrowInfoTable/>
         </div>
       </main>
 
@@ -32,6 +33,7 @@ function App() {
       <SplitDomains />
       <CheckDomains />
       <ColorazeDomains />
+      <GetInfoForTable />
     </div>
   );
 }

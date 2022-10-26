@@ -1,6 +1,5 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import TableStore from "../../store/TableStore";
 
 const getEmptyAreaInDomain = observer(({ hexConnect }) => {
   React.useEffect(() => {
