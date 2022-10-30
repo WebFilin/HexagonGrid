@@ -1,23 +1,21 @@
-import { toJS, autorun } from "mobx";
+import { autorun, when } from "mobx";
+import { observer, useLocalObservable } from "mobx-react-lite";
 import React from "react";
 import DomainsStore from "../../store/DomainsStore";
+import DrowInfoTable from "../DrowInfoTable/DrowInfoTable";
 
-const GetInfoForTable = () => {
+const GetInfoForTable = observer(() => {
   const isBtnAuto = DomainsStore.isBtnAuto;
 
-  React.useEffect(() => {
-    const disposer = autorun(() => {
-      const tableRow = DomainsStore.stackDomains;
+    console.log(DomainsStore.stackDomains.length);
 
-      DomainsStore.infoTable(tableRow);
-    });
+  React.useEffect(() => {}, []);
 
-    return () => {
-      disposer();
-    };
-  }, [isBtnAuto]);
-
-  return <div></div>;
-};
+  return (
+    <div>
+      <DrowInfoTable />
+    </div>
+  );
+});
 
 export default GetInfoForTable;

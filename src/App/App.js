@@ -10,19 +10,17 @@ import SplitDomains from "../Components/SplitDomains/SplitDomains";
 import ColorazeDomains from "../Components/ColorazeDomains/ColorazeDomains";
 import CheckDomains from "../Components/CheckDomains/CheckDomains";
 import GetInfoForTable from "../Components/GetInfoForTable/GetInfoForTable";
-import DrowInfoTable from "../Components/DrowInfoTable/DrowInfoTable";
 
 function App() {
   return (
     <div className={style.wrapper}>
       <header className={style.header}> </header>
-
       <main className={style.body}>
         <DrowSvgArea />
         <div className={style.controls}>
           <SetHexSideSize />
           <BtnAutoChange />
-          <DrowInfoTable/>
+          <GetInfoForTable />
         </div>
       </main>
 
@@ -33,7 +31,6 @@ function App() {
       <SplitDomains />
       <CheckDomains />
       <ColorazeDomains />
-      <GetInfoForTable />
     </div>
   );
 }
