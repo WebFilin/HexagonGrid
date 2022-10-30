@@ -1,5 +1,6 @@
 import React from "react";
 import style from "./InputSizeSide.module.scss";
+import { action } from "mobx";
 
 function InputSizeSide({ title, value, onChange, text, inc, dec, min, max }) {
   const [valueInput, setValueInput] = React.useState(value);
@@ -16,7 +17,8 @@ function InputSizeSide({ title, value, onChange, text, inc, dec, min, max }) {
     }
   }
 
-  function increment() {
+  function increment(ev) {
+    ev.preventDefault();
     if (valueInput < max) {
       setIsValid(true);
       return setValueInput((currentValue) => currentValue + inc);
@@ -25,7 +27,8 @@ function InputSizeSide({ title, value, onChange, text, inc, dec, min, max }) {
     }
   }
 
-  function decrement() {
+  function decrement(ev) {
+    ev.preventDefault();
     if (valueInput > min) {
       setIsValid(true);
       return setValueInput((currentValue) => currentValue - dec);
@@ -34,7 +37,8 @@ function InputSizeSide({ title, value, onChange, text, inc, dec, min, max }) {
     }
   }
 
-  function inputClear() {
+  function inputClear(ev) {
+    ev.preventDefault();
     return setValueInput("");
   }
 
@@ -46,7 +50,7 @@ function InputSizeSide({ title, value, onChange, text, inc, dec, min, max }) {
     <div className={style.wrapper}>
       <h3 className={style.title}>{title}</h3>
       <div className={style.body}>
-        <button className={style.bt_minus} onClick={decrement}>
+        <button className={style.bt_minus} onClick={action(decrement)}>
           <svg viewBox="0 0 24 24">
             <line x1="5" y1="12" x2="19" y2="12"></line>
           </svg>
@@ -55,12 +59,10 @@ function InputSizeSide({ title, value, onChange, text, inc, dec, min, max }) {
           className={style.quantity}
           type="number"
           value={value}
-          onChange={(ev) => {
-            inputHandler(ev);
-          }}
-          onClick={inputClear}
+          onChange={action(inputHandler)}
+          onClick={action(inputClear)}
         />
-        <button className={style.bt_plus} onClick={increment}>
+        <button className={style.bt_plus} onClick={action(increment)}>
           <svg viewBox="0 0 24 24">
             <line x1="12" y1="5" x2="12" y2="19"></line>
             <line x1="5" y1="12" x2="19" y2="12"></line>
