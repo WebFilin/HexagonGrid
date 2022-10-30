@@ -69,15 +69,18 @@ class DomainsStore {
   handlerBtnRandom(ratio) {
     this.arrDomainsColor = [];
     this.randomRatio = ratio;
-    this.isBtnAuto = !this.isBtnAuto;
+     this.isBtnAuto = !this.isBtnAuto;
     //   this.getInfoForTable();
-   //  console.log(this.rowTable);
+    //  console.log(this.rowTable);
   }
 
-//   getInfoForTable(row) {
-//    console.log(row)
-//     this.rowTable = row;
-//   }
+  getInfo() {
+    console.log(this.stackDomains.length);
+  }
+  //   getInfoForTable(row) {
+  //    console.log(row)
+  //     this.rowTable = row;
+  //   }
 
   getGraphTree(arrTree) {
     this.arrGraphTree = arrTree;

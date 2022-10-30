@@ -7,9 +7,11 @@ import DrowInfoTable from "../DrowInfoTable/DrowInfoTable";
 const GetInfoForTable = observer(() => {
   const isBtnAuto = DomainsStore.isBtnAuto;
 
-    console.log(DomainsStore.stackDomains.length);
+  //  console.log(DomainsStore.stackDomains.length);
 
-  React.useEffect(() => {}, []);
+  React.useEffect(() => {
+    DomainsStore.getInfo();
+  }, [isBtnAuto]);
 
   return (
     <div>

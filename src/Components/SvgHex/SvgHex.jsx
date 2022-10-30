@@ -6,6 +6,7 @@ import { action } from "mobx";
 function SvgHex({ id, x, y, vertical, horizontal }) {
   //   Выбираем хекс передаем в mobx
   function handlerClick(evHex) {
+    evHex.preventDefault();
     const hex = evHex.target;
     const valueHex = hex.getAttribute("value");
 
@@ -26,10 +27,7 @@ function SvgHex({ id, x, y, vertical, horizontal }) {
           vertical={vertical}
           horizontal={horizontal}
           points="100,0 50,-87 -50,-87 -100,-0 -50,87 50,87"
-          onClick={action((evHex) => {
-            evHex.preventDefault();
-            handlerClick(evHex);
-          })}
+          onClick={action(handlerClick)}
         ></polygon>
         <text className={style.hex_txt}>{id}</text>
       </g>
