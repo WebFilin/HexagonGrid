@@ -23,7 +23,7 @@ const BtnAutoChange = observer(() => {
         <InputSizeSide
           title="Вероятность"
           value={isValue}
-          onChange={action(handlerValue)}
+          valueChange={action(handlerValue)}
           text="От 0.01 до 0.99"
           inc={0.01}
           dec={0.01}

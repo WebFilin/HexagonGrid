@@ -2,7 +2,16 @@ import React from "react";
 import style from "./InputSizeSide.module.scss";
 import { action } from "mobx";
 
-function InputSizeSide({ title, value, onChange, text, inc, dec, min, max }) {
+function InputSizeSide({
+  title,
+  value,
+  valueChange,
+  text,
+  inc,
+  dec,
+  min,
+  max,
+}) {
   const [valueInput, setValueInput] = React.useState(value);
   const [isValid, setIsValid] = React.useState(true);
 
@@ -43,8 +52,8 @@ function InputSizeSide({ title, value, onChange, text, inc, dec, min, max }) {
   }
 
   React.useEffect(() => {
-    onChange(valueInput);
-  }, [valueInput, onChange]);
+    valueChange(valueInput);
+  }, [valueInput, valueChange]);
 
   return (
     <div className={style.wrapper}>
