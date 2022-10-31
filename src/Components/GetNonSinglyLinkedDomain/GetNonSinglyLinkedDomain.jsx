@@ -5,6 +5,7 @@ import DomainsStore from "../../store/DomainsStore";
 
 const GetNonSinglyLinkedDomain = observer(() => {
   const isBtnAuto = DomainsStore.isBtnAuto;
+  const arrCoordinates = toJS(DomainsStore.arrCoordinates);
 
   React.useEffect(() => {
     const stackDomains = toJS(DomainsStore.stackDomains);
@@ -34,10 +35,27 @@ const GetNonSinglyLinkedDomain = observer(() => {
     //  Стартовый хекс для поиска свободной зоны
     const startHexId = Number(arrHex[0]);
 
-    console.log(startHexId);
+    const neighborsHex = getEmptyNeighbors(startHexId, domain);
+    console.log(neighborsHex);
+  }
 
-    //  console.log(sumConnect);
-    //  console.log(domain);
+  //   Получаем свободных соседий хекса
+  function getEmptyNeighbors(startHexId, domain) {
+    console.log(arrCoordinates);
+
+    const findeHex = arrCoordinates.find((elem) => {
+      return elem.id === startHexId;
+    });
+
+    const neighbors = DomainsStore.getNeighborsHex(
+      findeHex.vertical,
+      findeHex.horizontal
+    );
+
+    //  Хексы не входящие в массив
+    const emptyHexs = neighbors.filter((id) => !domain.includes(id));
+
+    return emptyHexs;
   }
 
   //   Находим количество связей хексов с доменом
