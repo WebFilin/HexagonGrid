@@ -72,8 +72,12 @@ class DomainsStore {
   }
 
   handlerInfoTable(rowTable) {
-    console.log(rowTable);
-    this.stackTable.push(rowTable);
+    if (this.stackTable.length < 10) {
+      this.stackTable.push(rowTable);
+    } else {
+      this.stackTable.shift();
+      this.stackTable.push(rowTable);
+    }
   }
 
   getGraphTree(arrTree) {

@@ -5,7 +5,6 @@ import DomainsStore from "../../store/DomainsStore";
 import style from "./drowTable.module.scss";
 
 const DrowTable = observer(() => {
-  
   const arrTable = toJS(DomainsStore.stackTable);
 
   const tableDrow = (
