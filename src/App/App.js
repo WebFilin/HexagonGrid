@@ -10,6 +10,7 @@ import SplitDomains from "../Components/SplitDomains/SplitDomains";
 import ColorazeDomains from "../Components/ColorazeDomains/ColorazeDomains";
 import CheckDomains from "../Components/CheckDomains/CheckDomains";
 import GetInfoForTable from "../Components/GetInfoForTable/GetInfoForTable";
+import DrowTable from "../Components/DrowTable/DrowTable";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
         <div className={style.controls}>
           <SetHexSideSize />
           <BtnAutoChange />
-          <GetInfoForTable />
+          <DrowTable />
         </div>
       </main>
 
@@ -31,6 +32,7 @@ function App() {
       <SplitDomains />
       <CheckDomains />
       <ColorazeDomains />
+      <GetInfoForTable />
     </div>
   );
 }

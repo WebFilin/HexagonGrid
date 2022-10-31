@@ -27,7 +27,7 @@ function SetHexSideSize() {
   }
 
   React.useEffect(() => {
-    domainsStore.getHexSideSize(valueL, valueM, valueN);
+    domainsStore.getHexSideSize(valueL, valueN, valueM);
   }, [valueL, valueM, valueN]);
 
   return (
@@ -43,9 +43,9 @@ function SetHexSideSize() {
         max={30}
       />
       <InputSizeSide
-        title="M"
-        value={valueM}
-        valueChange={handlerValueM}
+        title="N"
+        value={valueN}
+        valueChange={handlerValueN}
         text="От 0 до 30"
         inc={1}
         dec={1}
@@ -53,9 +53,9 @@ function SetHexSideSize() {
         max={30}
       />
       <InputSizeSide
-        title="N"
-        value={valueN}
-        valueChange={handlerValueN}
+        title="M"
+        value={valueM}
+        valueChange={handlerValueM}
         text="От 0 до 30"
         inc={1}
         dec={1}

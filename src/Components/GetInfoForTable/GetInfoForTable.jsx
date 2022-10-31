@@ -1,23 +1,35 @@
-import { autorun, when } from "mobx";
-import { observer, useLocalObservable } from "mobx-react-lite";
+import { autorun } from "mobx";
+import { observer } from "mobx-react-lite";
 import React from "react";
 import DomainsStore from "../../store/DomainsStore";
-import DrowInfoTable from "../DrowInfoTable/DrowInfoTable";
 
-const GetInfoForTable = observer(() => {
+const GetInfoForTable = React.memo(() => {
+  const [tableRow, setTableRow] = React.useState({});
   const isBtnAuto = DomainsStore.isBtnAuto;
 
-  //  console.log(DomainsStore.stackDomains.length);
+  //   Собираем строку таблицы
+  React.useEffect(() => {
+    return autorun(() =>
+      setTableRow({
+        random: null,
+        amountDomains: DomainsStore.stackDomains.length,
+        nonSimplyDomain: "Написать",
+        allHexs: DomainsStore.arrCoordinates.length,
+        hexGridRatio: `(${DomainsStore.hexSideSize.L}; ${DomainsStore.hexSideSize.N}; ${DomainsStore.hexSideSize.M})`,
+        sumHexValueOne: DomainsStore.stackDomains.flat().length,
+      })
+    );
+  }, []);
 
   React.useEffect(() => {
-    DomainsStore.getInfo();
+    if (tableRow.hasOwnProperty("amountDomains")) {
+      // Только такое добавление не блокирует вычисление  amountDomains в autorun
+      tableRow.random = DomainsStore.randomRatio;
+      DomainsStore.handlerInfoTable(tableRow);
+    }
   }, [isBtnAuto]);
 
-  return (
-    <div>
-      <DrowInfoTable />
-    </div>
-  );
+  return <></>;
 });
 
 export default GetInfoForTable;

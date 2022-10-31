@@ -10,14 +10,13 @@ class DomainsStore {
   arrDomainsColor = [];
   svgArea = [];
   isCreateMainHex = false;
-  randomRatio = 0;
+  randomRatio = null;
   hexSideSize = {
     L: 3,
     M: 5,
     N: 7,
   };
   isBtnAuto = false;
-  rowTable = {};
   stackTable = [];
 
   constructor() {
@@ -25,10 +24,10 @@ class DomainsStore {
   }
 
   //   Управляем сторонами общей сетки
-  getHexSideSize(axisL, axisM, axisN) {
-    this.hexSideSize.L = axisL;
-    this.hexSideSize.M = axisM;
-    this.hexSideSize.N = axisN;
+  getHexSideSize(valueL, valueN, valueM) {
+    this.hexSideSize.L = valueL;
+    this.hexSideSize.M = valueM;
+    this.hexSideSize.N = valueN;
   }
 
   //Создать общую сетку по заданнам размерам
@@ -69,18 +68,13 @@ class DomainsStore {
   handlerBtnRandom(ratio) {
     this.arrDomainsColor = [];
     this.randomRatio = ratio;
-     this.isBtnAuto = !this.isBtnAuto;
-    //   this.getInfoForTable();
-    //  console.log(this.rowTable);
+    this.isBtnAuto = !this.isBtnAuto;
   }
 
-  getInfo() {
-    console.log(this.stackDomains.length);
+  handlerInfoTable(rowTable) {
+    console.log(rowTable);
+    this.stackTable.push(rowTable);
   }
-  //   getInfoForTable(row) {
-  //    console.log(row)
-  //     this.rowTable = row;
-  //   }
 
   getGraphTree(arrTree) {
     this.arrGraphTree = arrTree;
