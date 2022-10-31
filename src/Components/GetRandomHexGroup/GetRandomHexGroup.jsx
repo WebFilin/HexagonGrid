@@ -2,7 +2,6 @@ import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import domainsStore from "../../store/DomainsStore";
-import CheckHexConnectDomains from "../CheckHexConnectDomains/CheckHexConnectDomains";
 
 const RandomDomains = observer(() => {
   // Кнопка авто
@@ -56,7 +55,7 @@ const RandomDomains = observer(() => {
       arrCordMainHex[41],
       arrCordMainHex[48],
       arrCordMainHex[49],
-
+      arrCordMainHex[31],
       //
     ];
 
@@ -89,12 +88,12 @@ const RandomDomains = observer(() => {
       arrCordMainHex[49],
     ];
 
-    //   randomElem.push(...test2);
-    //  randomElem.push(...test);
+    //  randomElem.push(...test2);
+    randomElem.push(...test);
 
     arrCordMainHex.forEach((hexElem) => {
       if (Math.random() <= ratio) {
-        randomElem.push(hexElem);
+        //   randomElem.push(hexElem);
       }
     });
 
@@ -111,11 +110,7 @@ const RandomDomains = observer(() => {
     domainsStore.getVertexLinksRandom(arrNeighbors);
   }, [isBtnAuto]);
 
-  return (
-    <>
-      <CheckHexConnectDomains isBtnAuto={isBtnAuto} />
-    </>
-  );
+  return <></>;
 });
 
 export default RandomDomains;

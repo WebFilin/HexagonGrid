@@ -1,5 +1,5 @@
 import React from "react";
-import { autorun, toJS } from "mobx";
+import { toJS } from "mobx";
 import DomainsStore from "../../store/DomainsStore";
 import { observer } from "mobx-react-lite";
 
