@@ -12,10 +12,33 @@ const GetNonSinglyLinkedDomain = observer(() => {
     stackDomains.forEach((domain) => {
       // Отсекаем мелкие домены
       if (domain.length >= 6) {
-        getSumConnectDomains(domain);
+        const sumConnect = getSumConnectDomains(domain);
+
+        // Если есть шесть пересечений - домен не может быть недосвязным, отбрасываем
+        const sixIntersect = Object.values(sumConnect).includes(6);
+
+        if (!sixIntersect) {
+          checkEmptyArea(sumConnect, domain);
+        }
       }
     });
   }, [isBtnAuto]);
+
+  //   Получаем свободную область в домене
+  function checkEmptyArea(sumConnect, domain) {
+    // Получаем хекс с пересечением с доменом от трех
+    const arrHex = Object.entries(sumConnect).find(([key, value]) => {
+      return value >= 3;
+    });
+
+    //  Стартовый хекс для поиска свободной зоны
+    const startHexId = Number(arrHex[0]);
+
+    console.log(startHexId);
+
+    //  console.log(sumConnect);
+    //  console.log(domain);
+  }
 
   //   Находим количество связей хексов с доменом
   function getSumConnectDomains(currDomain) {
@@ -45,15 +68,15 @@ const GetNonSinglyLinkedDomain = observer(() => {
     });
 
     // Получаем количество связей между хексами и доменом
-    const numIntersectsHexDomain = emptyHex.reduce((acc, id) => {
+    const sumIntersectsHexDomain = emptyHex.reduce((acc, id) => {
       acc[id] = (acc[id] || 0) + 1;
       return acc;
     }, {});
 
-    console.log(numIntersectsHexDomain);
+    return sumIntersectsHexDomain;
   }
 
-  return <div></div>;
+  return <></>;
 });
 
 export default GetNonSinglyLinkedDomain;
