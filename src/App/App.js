@@ -22,7 +22,7 @@ function App() {
         <div className={style.controls}>
           <SetHexSideSize />
           <BtnAutoChange />
-          {/* <DrowTable /> */}
+          <DrowTable />
         </div>
       </main>
 

@@ -23,7 +23,6 @@ const GetInfoForTable = React.memo(() => {
 
   React.useEffect(() => {
     if (tableRow.hasOwnProperty("amountDomains")) {
-      // Только такое добавление не блокирует вычисление  amountDomains в autorun
       tableRow.random = DomainsStore.randomRatio;
       DomainsStore.handlerInfoTable(tableRow);
     }

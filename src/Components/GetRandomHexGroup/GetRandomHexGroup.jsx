@@ -59,11 +59,11 @@ const RandomDomains = observer(() => {
       //
     ];
 
-    randomElem.push(...test);
+    //  randomElem.push(...test);
 
     arrCordMainHex.forEach((hexElem) => {
       if (Math.random() <= ratio) {
-        //   randomElem.push(hexElem);
+        randomElem.push(hexElem);
       }
     });
 

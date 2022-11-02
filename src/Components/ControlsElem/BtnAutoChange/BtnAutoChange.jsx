@@ -30,7 +30,7 @@ const BtnAutoChange = observer(() => {
           min={0}
           max={0.99}
         />
-        <button className={style.btn_calc} onClick={handlerClick}>
+        <button className={style.btn_calc} onClick={action(handlerClick)}>
           АВТО
         </button>
       </div>
