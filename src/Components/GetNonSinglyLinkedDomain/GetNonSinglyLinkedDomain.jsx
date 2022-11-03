@@ -25,21 +25,42 @@ const GetNonSinglyLinkedDomain = observer(() => {
 
   //   Получаем пустую область в домене
   function getEmptyArea(startHex, domain, sumConnect) {
-    // Получаем соседей хекса
-    const neighbors = getNeighbors(startHex);
+    function depthFirstSearch(hex, emptyArea = []) {
+      // Добавляем стартовый хекс в массив
+      if (emptyArea.includes(hex)) return emptyArea;
+      emptyArea.push({ hex: hex, visited: false });
 
-    //  Количество связей каждого хекса с доменом
-    const hexLink = getHexLinkInDomain(startHex, sumConnect);
+      for (let i = 0; i < emptyArea.length; i++) {
+        const emptyHex = emptyArea[i].hex;
+        let isVisited = emptyArea[i].visited;
 
-    // Не входит в домен
-    const emptyNeighbors = getEmptyNeighbors(neighbors, domain);
+        //   Если вершина не посещалась то идем дальше
+        if (!isVisited) {
+          // Получаем соседей хекса
+          const neighbors = getNeighbors(emptyHex);
 
-    if (neighbors.length >= 4 && hexLink > 1) {
-      console.log(emptyNeighbors);
-      console.log(startHex, neighbors);
-      console.log(hexLink);
-      // console.log(sumConnect);
+          //  Количество связей каждого хекса с доменом
+          const hexLink = getHexLinkInDomain(emptyHex, sumConnect);
+
+          if (neighbors.length > 4 && hexLink > 1) {
+            // Отмечаем узел как пройденный
+            isVisited = true;
+
+            // Соседи хекса не входящие в домен
+            const emptyNeighbors = getEmptyNeighbors(neighbors, domain);
+
+            emptyNeighbors.forEach((elem) => {
+              //   depthFirstSearch(elem, emptyArea);
+              console.log(elem);
+            });
+          } else {
+            return false;
+          }
+        }
+      }
     }
+
+    depthFirstSearch(startHex);
   }
 
   // Соседи хексов не входящие в домен

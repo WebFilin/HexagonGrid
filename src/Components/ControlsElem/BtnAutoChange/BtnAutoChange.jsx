@@ -9,12 +9,12 @@ const BtnAutoChange = observer(() => {
   const [isValue, setIsValue] = React.useState(0.5);
 
   function handlerValue(value) {
-    setIsValue(value);
+    setIsValue(Number(value.toFixed(2)));
   }
 
+  // Генерация случайных доменов
   function handlerClick() {
-    // Генерация случайных доменов
-    DomainsStore.handlerBtnRandom(isValue);
+    DomainsStore.handlerBtnAuto(isValue);
   }
 
   return (

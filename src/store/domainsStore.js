@@ -65,7 +65,7 @@ class DomainsStore {
     this.stackDomains = domains;
   }
 
-  handlerBtnRandom(ratio) {
+  handlerBtnAuto(ratio) {
     this.arrDomainsColor = [];
     this.randomRatio = ratio;
     this.isBtnAuto = !this.isBtnAuto;

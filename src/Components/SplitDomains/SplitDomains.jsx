@@ -71,7 +71,7 @@ const SplitDomains = observer(() => {
     function depthFirstSearch(startNode, nodeMap, domainGroup = []) {
       if (domainGroup.includes(startNode)) return domainGroup;
 
-      //Добавляем стартовые точки
+      //Добавляем стартовую точку
       domainGroup.push(startNode);
 
       // Помечаем пройденую вершину графа
