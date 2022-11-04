@@ -62,13 +62,13 @@ const SplitDomains = observer(() => {
         // Стартовая точка обхода графа - если не посещалась
         const startNode = Number(nodes.find((node) => !nodeMap[node].visited));
         if (isNaN(startNode)) break;
-        hexGraph.push(depthFirstSearch(startNode, nodeMap));
+        hexGraph.push(DFS(startNode, nodeMap));
       }
       return hexGraph;
     }
 
     //Собираем дерево графа
-    function depthFirstSearch(startNode, nodeMap, domainGroup = []) {
+    function DFS(startNode, nodeMap, domainGroup = []) {
       if (domainGroup.includes(startNode)) return domainGroup;
 
       //Добавляем стартовую точку
@@ -81,14 +81,14 @@ const SplitDomains = observer(() => {
       for (let i = 0; i < nodeMap[startNode].length; i++) {
         // Собираем узлы
         let linkNode = nodeMap[startNode][i];
-        depthFirstSearch(linkNode, nodeMap, domainGroup);
+        DFS(linkNode, nodeMap, domainGroup);
       }
       arrSearchTree.add(domainGroup);
     }
 
     createAdjacencyList();
     mainHexGraph(adjacencyList);
-    domainsStore.getGraphTree([...arrSearchTree]);
+    domainsStore.getGraphTree(arrSearchTree);
   }, [arrVertexs]);
 
   return <></>;

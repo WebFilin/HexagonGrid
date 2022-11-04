@@ -17,6 +17,7 @@ class DomainsStore {
     N: 7,
   };
   isBtnAuto = false;
+  sumNonSingleLinkedDomain = 0;
   stackTable = [];
 
   constructor() {
@@ -69,6 +70,10 @@ class DomainsStore {
     this.arrDomainsColor = [];
     this.randomRatio = ratio;
     this.isBtnAuto = !this.isBtnAuto;
+  }
+
+  getNonLinkedDomains(nonLinked) {
+    this.sumNonSingleLinkedDomain = nonLinked;
   }
 
   handlerInfoTable(rowTable) {

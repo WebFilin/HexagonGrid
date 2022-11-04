@@ -13,7 +13,7 @@ const GetInfoForTable = React.memo(() => {
       setTableRow({
         random: null,
         amountDomains: DomainsStore.stackDomains.length,
-        nonSimplyDomain: "Написать",
+        nonSimplyDomain: null,
         allHexs: DomainsStore.arrCoordinates.length,
         hexGridRatio: `(${DomainsStore.hexSideSize.L}; ${DomainsStore.hexSideSize.N}; ${DomainsStore.hexSideSize.M})`,
         sumHexValueOne: DomainsStore.stackDomains.flat().length,
@@ -24,6 +24,7 @@ const GetInfoForTable = React.memo(() => {
   React.useEffect(() => {
     if (tableRow.hasOwnProperty("amountDomains")) {
       tableRow.random = DomainsStore.randomRatio;
+      tableRow.nonSimplyDomain = DomainsStore.sumNonSingleLinkedDomain;
       DomainsStore.handlerInfoTable(tableRow);
     }
   }, [isBtnAuto]);
