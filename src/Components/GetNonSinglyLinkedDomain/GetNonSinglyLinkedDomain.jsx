@@ -14,46 +14,79 @@ const GetNonSinglyLinkedDomain = observer(() => {
     const nonLinkedDomain = stackDomains
       .map((domain) => {
         // Количество связей свободных хексов с доменом
-        const sumConnect = getSumConnectDomains(domain);
+        const allConnectDomain = getAllConnectDomains(domain);
 
         //   Если есть 6 пересечений - домен недосвязный, возврашаем сразу
-        const sixLinks = checkSixLinks(sumConnect);
+        const sixLinks = checkSixLinks(allConnectDomain);
 
         if (sixLinks) {
           return Number(sixLinks[0]);
         } else {
-          return getEmptyArea(sumConnect);
+          return getEmptyArea(allConnectDomain, domain);
         }
       })
       .filter(Boolean);
 
-    function getEmptyArea(sumConnect) {
+    function getEmptyArea(allConnectDomain, domain) {
       // Старотовый хекс области
-      const startHex = getStartHex(sumConnect);
-      return "fffffff";
+      const startHex = getStartHex(allConnectDomain);
+
+      // Проверяем количество связей с доменом конкретного хекса
+      // если 1 - домен разомкнут и не является недосвязным
+      const checkedLinksForHex = checkHexLink(startHex, allConnectDomain);
+      console.log(checkedLinksForHex);
+
+      const neighborsHex = getEmptyNeighbors(startHex, domain);
+      console.log(neighborsHex);
+      // function checkArea(hex, emptyArea = []) {}
+
+      // checkArea(startHex);
+
+      // console.log(startHex + " || " + neighborsHex);
     }
 
-    console.log("Недосвязанный домены");
-    console.log(nonLinkedDomain);
+    //  console.log("Недосвязанный домены");
+    //  console.log(nonLinkedDomain);
     // DomainsStore.getNonLinkedDomains(nonLinkedDomain.length);
   }, [isBtnAuto]);
 
-  //   Проверяем наличие 6 пересечений
-  function checkSixLinks(sumConnect) {
-    return Object.entries(sumConnect).find(([key, value]) => {
+  // Количество связей каждого найденного хекса соседа в свободной области
+  function checkHexLink(idHex, allConnectDomain) {
+    const arrNode = allConnectDomain.find(([key, value]) => {
+      return Number(key) === idHex;
+    });
+    return arrNode[1];
+  }
+
+  //   Проверяем наличие 6 пересечений в области
+  function checkSixLinks(allConnectDomain) {
+    return allConnectDomain.find(([key, value]) => {
       return value === 6;
     });
   }
 
   //   Стартовый хекс пустой области
-  function getStartHex(sumConnect) {
-    return Object.entries(sumConnect).find(([key, value]) => {
+  function getStartHex(allConnectDomain) {
+    const arrNode = allConnectDomain.find(([key, value]) => {
       return value >= 4;
     });
+    return arrNode[0];
+  }
+
+  //   Получаем соседей хекса внутри области
+  function getEmptyNeighbors(startHex, domain) {
+    const hexCord = arrCoordinates.find((hex) => {
+      return hex.id === startHex;
+    });
+    const neighbors = DomainsStore.getNeighborsHex(
+      hexCord.vertical,
+      hexCord.horizontal
+    );
+    return neighbors.filter((id) => !domain.includes(id));
   }
 
   //   Находим количество связей хексов с доменом
-  function getSumConnectDomains(currDomain) {
+  function getAllConnectDomains(currDomain) {
     const arrHexRandom = toJS(DomainsStore.arrVertexs);
 
     // Получаем хексы домена с его соседями
@@ -84,7 +117,17 @@ const GetNonSinglyLinkedDomain = observer(() => {
       return acc;
     }, {});
 
-    return sumIntersectsHexDomain;
+    //  console.log(
+    //    Object.entries(sumIntersectsHexDomain).map(([key, value]) => [
+    //      Number(key),
+    //      value,
+    //    ])
+    //  );
+
+    return Object.entries(sumIntersectsHexDomain).map(([key, value]) => [
+      Number(key),
+      value,
+    ]);
   }
 
   return <></>;
