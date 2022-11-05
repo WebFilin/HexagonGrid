@@ -60,6 +60,7 @@ const SplitDomains = observer(() => {
       while (true) {
         // Стартовая точка обхода графа - если не посещалась
         const startNode = Number(nodes.find((node) => !nodeMap[node].visited));
+
         if (isNaN(startNode)) break;
         createGraph(startNode, nodeMap);
       }

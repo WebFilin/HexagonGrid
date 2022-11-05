@@ -28,27 +28,38 @@ const GetNonSinglyLinkedDomain = observer(() => {
       .filter(Boolean);
 
     function getEmptyArea(allConnectDomain, domain) {
-      // Стек для области
-      const hexGraph = [];
+      //  Стартовая точка обхода области
+      const startNode = getStartHex(allConnectDomain);
 
+      // Получаем пустую область
+      console.log(checkArea(startNode, domain, allConnectDomain));
+    }
 
-// while (true) {
-//         //  Стартовая точка обхода области
-//         const startNode = getStartHex(allConnectDomain);
-//       }
+    function checkArea(startNode, domain, allConnectDomain, domainGroup = []) {
+      if (domainGroup.includes(startNode)) return domainGroup;
 
-      // hexGraph.push(checkArea(startNode, nodeMap));
-}
+      //Добавляем стартовую точку
+      domainGroup.push(startNode);
 
- 
+      domainGroup.forEach((elem) => {
+        const linksForHex = checkHexLink(elem, allConnectDomain);
 
-    // const linksForHex = checkHexLink(hex, allConnectDomain);
-    // const neighborsHex = getEmptyNeighbors(hex, domain);
+        console.log(elem + " || " + linksForHex);
 
-    function checkArea(hex, domain, allConnectDomain) {}
+        if (linksForHex >= 2) {
+          const neighborsHex = getEmptyNeighbors(elem, domain);
+
+          neighborsHex.forEach((id) => {
+            checkArea(id, domain, allConnectDomain, domainGroup);
+          });
+        }
+      });
+
+      return domainGroup;
+    }
 
     //  console.log("Недосвязанный домены");
-    //  console.log(nonLinkedDomain);
+    //   console.log(nonLinkedDomain);
     // DomainsStore.getNonLinkedDomains(nonLinkedDomain.length);
   }, [isBtnAuto]);
 
@@ -57,7 +68,9 @@ const GetNonSinglyLinkedDomain = observer(() => {
     const arrNode = allConnectDomain.find(([key, value]) => {
       return key === idHex;
     });
-    return arrNode[1];
+    if (arrNode) {
+      return arrNode[1];
+    }
   }
 
   //   Проверяем наличие 6 пересечений в области
