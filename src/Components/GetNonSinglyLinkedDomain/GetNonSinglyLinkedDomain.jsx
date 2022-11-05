@@ -28,22 +28,24 @@ const GetNonSinglyLinkedDomain = observer(() => {
       .filter(Boolean);
 
     function getEmptyArea(allConnectDomain, domain) {
-      // Старотовый хекс области
-      const startHex = getStartHex(allConnectDomain);
+      // Стек для области
+      const hexGraph = [];
 
-      // Проверяем количество связей с доменом конкретного хекса
-      // если 1 - домен разомкнут и не является недосвязным
-      const checkedLinksForHex = checkHexLink(startHex, allConnectDomain);
-      console.log(checkedLinksForHex);
 
-      const neighborsHex = getEmptyNeighbors(startHex, domain);
-      console.log(neighborsHex);
-      // function checkArea(hex, emptyArea = []) {}
+// while (true) {
+//         //  Стартовая точка обхода области
+//         const startNode = getStartHex(allConnectDomain);
+//       }
 
-      // checkArea(startHex);
+      // hexGraph.push(checkArea(startNode, nodeMap));
+}
 
-      // console.log(startHex + " || " + neighborsHex);
-    }
+ 
+
+    // const linksForHex = checkHexLink(hex, allConnectDomain);
+    // const neighborsHex = getEmptyNeighbors(hex, domain);
+
+    function checkArea(hex, domain, allConnectDomain) {}
 
     //  console.log("Недосвязанный домены");
     //  console.log(nonLinkedDomain);
@@ -53,7 +55,7 @@ const GetNonSinglyLinkedDomain = observer(() => {
   // Количество связей каждого найденного хекса соседа в свободной области
   function checkHexLink(idHex, allConnectDomain) {
     const arrNode = allConnectDomain.find(([key, value]) => {
-      return Number(key) === idHex;
+      return key === idHex;
     });
     return arrNode[1];
   }
@@ -116,13 +118,6 @@ const GetNonSinglyLinkedDomain = observer(() => {
       acc[id] = (acc[id] || 0) + 1;
       return acc;
     }, {});
-
-    //  console.log(
-    //    Object.entries(sumIntersectsHexDomain).map(([key, value]) => [
-    //      Number(key),
-    //      value,
-    //    ])
-    //  );
 
     return Object.entries(sumIntersectsHexDomain).map(([key, value]) => [
       Number(key),

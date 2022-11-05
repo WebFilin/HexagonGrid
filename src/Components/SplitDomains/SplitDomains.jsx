@@ -55,16 +55,14 @@ const SplitDomains = observer(() => {
 
     // Находим точки входов в графы
     function getNodesStart(nodeMap) {
-      let hexGraph = [];
-      let nodes = Object.keys(nodeMap);
+      const nodes = Object.keys(nodeMap);
 
       while (true) {
         // Стартовая точка обхода графа - если не посещалась
         const startNode = Number(nodes.find((node) => !nodeMap[node].visited));
         if (isNaN(startNode)) break;
-        hexGraph.push(createGraph(startNode, nodeMap));
+        createGraph(startNode, nodeMap);
       }
-      return hexGraph;
     }
 
     //Собираем дерево графа
