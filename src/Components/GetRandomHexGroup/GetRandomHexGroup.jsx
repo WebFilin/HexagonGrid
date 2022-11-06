@@ -42,6 +42,7 @@ const RandomDomains = observer(() => {
       // arrCordMainHex[44],
       arrCordMainHex[43],
       arrCordMainHex[42],
+      // arrCordMainHex[44],
 
       //
       // arrCordMainHex[32],
