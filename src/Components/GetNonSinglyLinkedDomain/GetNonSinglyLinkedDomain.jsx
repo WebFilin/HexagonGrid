@@ -23,58 +23,50 @@ const GetNonSinglyLinkedDomain = observer(() => {
           return Number(sixLinks[0]);
         } else {
           // Если есть пустая область проверяем домен на разомкнутость
-          return getEmptyArea(allConnectDomain, domain);
+          return console.log(getEmptyArea(allConnectDomain, domain));
         }
       })
       .filter(Boolean);
 
-    function getEmptyArea(allConnectDomain, domain) {
+    function getEmptyArea(allConnectDomain, domain, emptyArea = []) {
       //  Стартовая точка обхода области в домене
       const startNode = getStartHex(allConnectDomain);
 
-      // Получаем пустую область
-      console.log(checkArea(startNode, domain, allConnectDomain));
-    }
+      // Очередь узлов области
+      let queueNode = [];
+      queueNode.push(startNode);
 
-    function checkArea(hexId, domain, allConnectDomain, emptyArea = []) {
-      // Проверяем повторы в emptyArea
-      const checkRepeat = emptyArea.some((elem) => {
-        return elem.hex === hexId;
-      });
+      while (queueNode.length > 0) {
+        const currentHex = queueNode.shift();
 
-      // Если элемент уже в массиве возврашаем домен сразу - база рекрусии
-      if (checkRepeat) {
-        return emptyArea;
-      }
+        // Проверяем количество связей хекса с доменом
+        const linksForHex = checkHexLink(currentHex, allConnectDomain);
 
-      // Проверяем количество связей хекса с доменом
-      const linksForHex = checkHexLink(hexId, allConnectDomain);
+        // Если связь с доменом 1 то область в домене открытая, прерываем цикл
+        if (linksForHex === 1) {
+          queueNode = [];
 
-      // Если связей больше 1 формируем узел графа свободной области домена
-      if (linksForHex > 1) {
-        emptyArea.push({ hex: hexId, visited: false });
-      } else {
-        return;
-      }
-
-      emptyArea.forEach((elem) => {
-        if (!elem.visited) {
-          // Получаем соседей хекса вне домена
-          const neighborsHex = getEmptyNeighbors(elem.hex, domain);
+          //  Если связей больше или они есть продолжаем проверку
+        } else if (linksForHex) {
+          emptyArea.push(currentHex);
+          const neighborsHex = getEmptyNeighbors(currentHex, domain);
 
           neighborsHex.forEach((id) => {
+            // Если хекс не обрабатывался - добавляем в цикл
+            if (!emptyArea.includes(id)) {
+              return queueNode.push(id);
+            }
 
-
-            
-            checkArea(id, domain, allConnectDomain, emptyArea);
+            //Если обрабатывался - прерываем цикл
+            else {
+              queueNode = [];
+            }
           });
         }
-        //   Отмечаем посешенные узлы
-        elem.visited = true;
-      });
-
-      return emptyArea;
+        console.log(linksForHex + " | " + currentHex);
+      }
     }
+
     //  console.log("Недосвязанный домены");
     //   console.log(nonLinkedDomain);
     // DomainsStore.getNonLinkedDomains(nonLinkedDomain.length);
@@ -114,6 +106,7 @@ const GetNonSinglyLinkedDomain = observer(() => {
       hexCord.vertical,
       hexCord.horizontal
     );
+
     return neighbors.filter((id) => !domain.includes(id));
   }
 

@@ -33,16 +33,16 @@ const RandomDomains = observer(() => {
       arrCordMainHex[15],
       arrCordMainHex[24],
       arrCordMainHex[33],
-      arrCordMainHex[45],
+      // arrCordMainHex[45],
       //
       arrCordMainHex[28],
       arrCordMainHex[19],
       //
-      arrCordMainHex[37],
+      // arrCordMainHex[37],
       // arrCordMainHex[44],
       arrCordMainHex[43],
       arrCordMainHex[42],
-      // arrCordMainHex[44],
+      arrCordMainHex[44],
 
       //
       // arrCordMainHex[32],
