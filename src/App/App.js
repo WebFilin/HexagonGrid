@@ -1,4 +1,5 @@
 import React from "react";
+import { observer } from "mobx-react-lite";
 import style from "./app.module.scss";
 import MainHexagons from "../Components/MainHexagons/MainHexagons";
 import DrowSvgArea from "../Components/DrowSvgArea/DrowSvgArea";
@@ -9,11 +10,10 @@ import BtnAutoChange from "../Components/ControlsElem/BtnAutoChange/BtnAutoChang
 import SplitDomains from "../Components/SplitDomains/SplitDomains";
 import ColorazeDomains from "../Components/ColorazeDomains/ColorazeDomains";
 import CheckDomains from "../Components/CheckDomains/CheckDomains";
-import GetInfoForTable from "../Components/GetInfoForTable/GetInfoForTable";
 import DrowTable from "../Components/DrowTable/DrowTable";
 import GetNonSinglyLinkedDomain from "../Components/GetNonSinglyLinkedDomain/GetNonSinglyLinkedDomain";
 
-function App() {
+const App = observer(() => {
   return (
     <div className={style.wrapper}>
       <header className={style.header}> </header>
@@ -22,7 +22,7 @@ function App() {
         <div className={style.controls}>
           <SetHexSideSize />
           <BtnAutoChange />
-          {/* <DrowTable /> */}
+          <DrowTable />
         </div>
       </main>
 
@@ -34,9 +34,8 @@ function App() {
       <CheckDomains />
       <ColorazeDomains />
       <GetNonSinglyLinkedDomain />
-      <GetInfoForTable />
     </div>
   );
-}
+});
 
 export default App;

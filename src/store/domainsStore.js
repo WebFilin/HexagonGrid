@@ -1,4 +1,4 @@
-import { autorun, makeAutoObservable, reaction, when } from "mobx";
+import { autorun, makeAutoObservable, reaction } from "mobx";
 
 class DomainsStore {
   arrCoordinates = [];
@@ -70,19 +70,25 @@ class DomainsStore {
     this.arrDomainsColor = [];
     this.randomRatio = ratio;
     this.isBtnAuto = !this.isBtnAuto;
+    this.handlerInfoTable();
   }
 
   getNonLinkedDomains(nonLinked) {
     this.sumNonSingleLinkedDomain = nonLinked;
   }
 
-  handlerInfoTable(rowTable) {
-    if (this.stackTable.length < 10) {
-      this.stackTable.push(rowTable);
-    } else {
-      this.stackTable.shift();
-      this.stackTable.push(rowTable);
-    }
+  handlerInfoTable(tableRow) {
+    //  autorun(() => {
+    //    console.log(this.sumDomains);
+    //    console.log(this.randomRatio);
+    //  });
+
+    // if (this.stackTable.length < 10) {
+    //   this.stackTable.push(tableRow);
+    // } else {
+    //   this.stackTable.shift();
+    //   this.stackTable.push(tableRow);
+    // }
   }
 
   getGraphTree(arrTree) {

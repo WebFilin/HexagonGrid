@@ -7,7 +7,6 @@ import { action } from "mobx";
 
 const BtnAutoChange = observer(() => {
   const [isValue, setIsValue] = React.useState(0.5);
-  
 
   function handlerValue(value) {
     setIsValue(Number(value.toFixed(2)));

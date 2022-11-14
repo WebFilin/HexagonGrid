@@ -5,13 +5,12 @@ import domainsStore from "../../store/DomainsStore";
 
 const SplitDomains = observer(() => {
   const arrVertexs = toJS(domainsStore.arrVertexs);
-
   React.useEffect(() => {
     //  Список смежности графа
     let adjacencyList = [];
 
-    //  Стек всех найденных деревьев при рекрусии
-    const arrSearchTree = new Set();
+    //  Стек всех полученных графов
+    const arrSearchTree = [];
 
     // Формируем список смежности узлов
     function createAdjacencyList() {
@@ -62,7 +61,7 @@ const SplitDomains = observer(() => {
         const startNode = Number(nodes.find((node) => !nodeMap[node].visited));
 
         if (isNaN(startNode)) break;
-        createGraph(startNode, nodeMap);
+        arrSearchTree.push(createGraph(startNode, nodeMap));
       }
     }
 
@@ -82,7 +81,7 @@ const SplitDomains = observer(() => {
         let linkNode = nodeMap[startNode][i];
         createGraph(linkNode, nodeMap, domainGroup);
       }
-      arrSearchTree.add(domainGroup);
+      return domainGroup;
     }
 
     createAdjacencyList();

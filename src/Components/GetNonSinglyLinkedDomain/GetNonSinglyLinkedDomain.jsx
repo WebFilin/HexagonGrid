@@ -5,9 +5,12 @@ import DomainsStore from "../../store/DomainsStore";
 
 const GetNonSinglyLinkedDomain = observer(() => {
   const isBtnAuto = DomainsStore.isBtnAuto;
-  const arrCoordinates = toJS(DomainsStore.arrCoordinates);
 
   React.useEffect(() => {
+    // Кординаты рештки хексов
+    const arrCoordinates = toJS(DomainsStore.arrCoordinates);
+
+    //  Сформированные домены в решетке
     const stackDomains = toJS(DomainsStore.stackDomains);
 
     //  Проверяем наличие пустой области в домене
@@ -23,12 +26,17 @@ const GetNonSinglyLinkedDomain = observer(() => {
           return [Number(sixLinks[0])];
         } else {
           // Проверяем область домена на разомкнутость
+
           return getEmptyArea(allConnectDomain, domain);
         }
       })
-      .filter(Boolean);
-
-    console.log(nonLinkedDomain);
+      .filter((arr) => {
+        if (arr.length > 0) {
+          return arr.some((elem) => {
+            return !isNaN(elem);
+          });
+        }
+      });
 
     function getEmptyArea(allConnectDomain, domain) {
       //  Стартовая точка обхода области в домене
@@ -51,20 +59,29 @@ const GetNonSinglyLinkedDomain = observer(() => {
         // Проверяем количество связей хекса с доменом
         const linksForHex = checkHexLink(currentHex, allConnectDomain);
 
+        // Получаем всех соседей хекса
+        const neighborsHex = getEmptyNeighbors(currentHex, domain);
+
         // Если связь с доменом 1 то область в домене открытая, прерываем цикл
         if (linksForHex === 1) {
-          queueNode = [];
-          return [];
+          return (queueNode = []);
           //  Если связей больше или они есть продолжаем проверку
-        } else if (linksForHex && checkReapets) {
+        } else if (linksForHex > 1 && checkReapets) {
+          // Если соседей  <= 4 - выход в край рещетки
+          if (neighborsHex.length <= 4) {
+            return (queueNode = []);
+          }
+
+          //  Хексы не входящие в домен
+          const emptyNeighbors = neighborsHex.filter(
+            (id) => !domain.includes(id)
+          );
+
           // Добавляем хекс в контрольный массив для исключения повторов
           repeatStackHexId.push(currentHex);
 
-          //  Получаем соседей хекса
-          const neighborsHex = getEmptyNeighbors(currentHex, domain);
-
-          neighborsHex.forEach((id) => {
-            // Добавляем в очередь каждого соседа
+          // Добавляем в очередь на проверку каждого соседа
+          emptyNeighbors.forEach((id) => {
             return queueNode.push(id);
           });
         }
@@ -73,12 +90,25 @@ const GetNonSinglyLinkedDomain = observer(() => {
       return repeatStackHexId;
     }
 
-    //  console.log("Недосвязанный домены");
-    //   console.log(nonLinkedDomain);
-    // DomainsStore.getNonLinkedDomains(nonLinkedDomain.length);
+    //   Получаем соседей хекса внутри области
+    function getEmptyNeighbors(startHex) {
+      if (startHex) {
+        const hexCord = arrCoordinates.find((hex) => {
+          return hex.id === startHex;
+        });
+
+        const neighbors = DomainsStore.getNeighborsHex(
+          hexCord.vertical,
+          hexCord.horizontal
+        );
+        return neighbors;
+      }
+    }
+
+    DomainsStore.getNonLinkedDomains(nonLinkedDomain.length);
   }, [isBtnAuto]);
 
-  // Количество связей каждого найденного хекса соседа в свободной области
+  // Количество связей каждого найденного хекса - соседа в свободной области
   function checkHexLink(idHex, allConnectDomain) {
     const arrNode = allConnectDomain.find(([key, value]) => {
       return key === idHex;
@@ -104,20 +134,6 @@ const GetNonSinglyLinkedDomain = observer(() => {
     if (arrNode) {
       return arrNode[0];
     }
-  }
-
-  //   Получаем соседей хекса внутри области
-  function getEmptyNeighbors(startHex, domain) {
-    const hexCord = arrCoordinates.find((hex) => {
-      return hex.id === startHex;
-    });
-    const neighbors = DomainsStore.getNeighborsHex(
-      hexCord.vertical,
-      hexCord.horizontal
-    );
-
-    // Возвращаем соседей вне домена
-    return neighbors.filter((id) => !domain.includes(id));
   }
 
   //   Находим количество связей хексов с доменом
