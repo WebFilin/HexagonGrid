@@ -5,33 +5,25 @@ import DomainsStore from "../../store/DomainsStore";
 import style from "./drowTable.module.scss";
 
 const DrowTable = observer(() => {
-  const isBtnAuto = DomainsStore.isBtnAuto;
+  const arrTable = DomainsStore.stackTable;
 
-  React.useEffect(() => {
-    setTimeout(() => {
-      console.log(DomainsStore.stackDomains);
-      console.log(DomainsStore.sumNonSingleLinkedDomain);
-    }, 0);
-  }, [isBtnAuto]);
+  const tableDrow = (
+    <table className={style.table_body}>
+      <thead className={style.table_title}>
+        <tr>
+          <th rowSpan="2">Вероятность</th>
+          <th colSpan="2">Количество доменов в решётке</th>
+          <th rowSpan="2">
+            Количество ячеек в решётке (L;N;M), из них имеющих значение 1
+          </th>
+        </tr>
+        <tr>
+          <th>Всего</th>
+          <th>Из них неодносвязных</th>
+        </tr>
+      </thead>
 
-  //   const tableDrow = (
-  //     <table className={style.table_body}>
-  //       <thead className={style.table_title}>
-  //         <tr>
-  //           <th rowSpan="2">Вероятность</th>
-  //           <th colSpan="2">Количество доменов в решётке</th>
-  //           <th rowSpan="2">
-  //             Количество ячеек в решётке (L;N;M), из них имеющих значение 1
-  //           </th>
-  //         </tr>
-  //         <tr>
-  //           <th>Всего</th>
-  //           <th>Из них неодносвязных</th>
-  //         </tr>
-  //       </thead>
-
-  //   {
-  /* <tbody className={style.table_content}>
+      <tbody className={style.table_content}>
         {arrTable.map((elem, index) => (
           <tr key={index}>
             <td>{elem.random}</td>
@@ -43,13 +35,12 @@ const DrowTable = observer(() => {
           </tr>
         ))}
       </tbody>
-    </table> */
-  //   }
-  //   );
+    </table>
+  );
 
   return (
     <div className={style.wrapper}>
-      {/* {arrTable.length > 0 ? tableDrow : null} */}
+      {arrTable.length > 0 ? tableDrow : null}
     </div>
   );
 });

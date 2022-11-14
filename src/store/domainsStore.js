@@ -70,7 +70,6 @@ class DomainsStore {
     this.arrDomainsColor = [];
     this.randomRatio = ratio;
     this.isBtnAuto = !this.isBtnAuto;
-    this.handlerInfoTable();
   }
 
   getNonLinkedDomains(nonLinked) {
@@ -78,17 +77,14 @@ class DomainsStore {
   }
 
   handlerInfoTable(tableRow) {
-    //  autorun(() => {
-    //    console.log(this.sumDomains);
-    //    console.log(this.randomRatio);
-    //  });
-
-    // if (this.stackTable.length < 10) {
-    //   this.stackTable.push(tableRow);
-    // } else {
-    //   this.stackTable.shift();
-    //   this.stackTable.push(tableRow);
-    // }
+    if (this.stackDomains.length > 0) {
+      if (this.stackTable.length < 10) {
+        this.stackTable.push(tableRow);
+      } else {
+        this.stackTable.shift();
+        this.stackTable.push(tableRow);
+      }
+    }
   }
 
   getGraphTree(arrTree) {

@@ -12,8 +12,9 @@ import ColorazeDomains from "../Components/ColorazeDomains/ColorazeDomains";
 import CheckDomains from "../Components/CheckDomains/CheckDomains";
 import DrowTable from "../Components/DrowTable/DrowTable";
 import GetNonSinglyLinkedDomain from "../Components/GetNonSinglyLinkedDomain/GetNonSinglyLinkedDomain";
+import InfoForTable from "../Components/InfoForTable/InfoForTable";
 
-const App = observer(() => {
+const App = () => {
   return (
     <div className={style.wrapper}>
       <header className={style.header}> </header>
@@ -34,8 +35,9 @@ const App = observer(() => {
       <CheckDomains />
       <ColorazeDomains />
       <GetNonSinglyLinkedDomain />
+      <InfoForTable />
     </div>
   );
-});
+};
 
 export default App;

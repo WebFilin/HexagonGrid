@@ -26,7 +26,6 @@ const GetNonSinglyLinkedDomain = observer(() => {
           return [Number(sixLinks[0])];
         } else {
           // Проверяем область домена на разомкнутость
-
           return getEmptyArea(allConnectDomain, domain);
         }
       })
@@ -104,7 +103,6 @@ const GetNonSinglyLinkedDomain = observer(() => {
         return neighbors;
       }
     }
-
     DomainsStore.getNonLinkedDomains(nonLinkedDomain.length);
   }, [isBtnAuto]);
 
