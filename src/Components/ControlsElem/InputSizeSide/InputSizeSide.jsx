@@ -3,7 +3,7 @@ import style from "./InputSizeSide.module.scss";
 import { action } from "mobx";
 import { observer } from "mobx-react-lite";
 
-const InputSizeSide = React.memo(
+const InputSizeSide = observer(
   ({ title, value, valueChange, text, inc, dec, min, max }) => {
     const [valueInput, setValueInput] = React.useState(value);
     const [isValid, setIsValid] = React.useState(true);
@@ -11,37 +11,38 @@ const InputSizeSide = React.memo(
     function inputHandler(ev) {
       ev.preventDefault();
       const input = Number(ev.target.value);
+
       if (input >= min && input <= max) {
-        setIsValid(true);
-        return setValueInput(input);
+        setIsValid((currentValue) => (currentValue = true));
+        return setValueInput((currentValue) => (currentValue = input));
       } else {
-        setIsValid(false);
+        setIsValid((currentValue) => (currentValue = false));
       }
     }
 
     function increment(ev) {
       ev.preventDefault();
       if (valueInput < max) {
-        setIsValid(true);
+        setIsValid((currentValue) => (currentValue = true));
         return setValueInput((currentValue) => currentValue + inc);
       } else {
-        setIsValid(false);
+        setIsValid((currentValue) => (currentValue = false));
       }
     }
 
     function decrement(ev) {
       ev.preventDefault();
       if (valueInput > min) {
-        setIsValid(true);
+        setIsValid((currentValue) => (currentValue = true));
         return setValueInput((currentValue) => currentValue - dec);
       } else {
-        setIsValid(false);
+        setIsValid((currentValue) => (currentValue = false));
       }
     }
 
     function inputClear(ev) {
       ev.preventDefault();
-      return setValueInput("");
+      setValueInput((currentValue) => (currentValue = ""));
     }
 
     React.useEffect(() => {

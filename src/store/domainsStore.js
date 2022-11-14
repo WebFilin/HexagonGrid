@@ -1,4 +1,4 @@
-import { autorun, makeAutoObservable, reaction } from "mobx";
+import { makeAutoObservable } from "mobx";
 
 class DomainsStore {
   arrCoordinates = [];

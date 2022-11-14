@@ -4,7 +4,6 @@ import React from "react";
 import DomainsStore from "../../store/DomainsStore";
 
 const RandomDomains = observer(() => {
-  // Кнопка авто
   const isBtnAuto = DomainsStore.isBtnAuto;
 
   //   Генерируем хексы
@@ -12,28 +11,23 @@ const RandomDomains = observer(() => {
     //   Коофициент рандома
     const ratio = toJS(DomainsStore.randomRatio);
 
-    // Стек элементов
-    const randomElem = [];
-
-    // Стек готовых узлов
-    const arrNeighbors = [];
-
     //Стек всех элементов сетки
     const arrCordMainHex = toJS(DomainsStore.arrCoordinates);
 
-    arrCordMainHex.forEach((hexElem) => {
-      if (Math.random() <= ratio) {
-        randomElem.push(hexElem);
-      }
-    });
-    randomElem.forEach((elemHex) => {
+    // Стек элементов
+    const randomElem = arrCordMainHex
+      .map((hexElem) => {
+        return Math.random() <= ratio ? hexElem : null;
+      })
+      .filter(Boolean);
+
+    // Стек готовых узлов
+    const arrNeighbors = randomElem.map(({ id, vertical, horizontal }) => {
       // Получаем кординаты соседей
-      const getNeighbors = DomainsStore.getNeighborsHex(
-        elemHex.vertical,
-        elemHex.horizontal
-      );
+      const getNeighbors = DomainsStore.getNeighborsHex(vertical, horizontal);
+
       // Добавляем обьект с вершинами и возможными связями в стек
-      arrNeighbors.push({ id: elemHex.id, group: [...getNeighbors] });
+      return { id: id, group: [...getNeighbors] };
     });
 
     DomainsStore.getVertexLinksRandom(arrNeighbors);

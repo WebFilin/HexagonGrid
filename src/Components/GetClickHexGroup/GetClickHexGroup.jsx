@@ -14,10 +14,10 @@ const GetHexGroup = observer(() => {
       const hexHoriz = Number(hex.getAttribute("horizontal"));
       const hexID = Number(hex.id);
 
-      // Ищем соседий выбранного узла
+      // Ищем соседий хекса
       const getNeighbors = domainsStore.getNeighborsHex(hexVert, hexHoriz);
 
-      // Составляем узел графа
+      // Составляем узел
       const peak = { id: hexID, group: [...getNeighbors] };
       domainsStore.getHexGroup(peak);
     }

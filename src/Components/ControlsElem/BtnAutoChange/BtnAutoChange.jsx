@@ -9,12 +9,12 @@ const BtnAutoChange = observer(() => {
   const [isValue, setIsValue] = React.useState(0.5);
 
   function handlerValue(value) {
-    setIsValue(Number(value.toFixed(2)));
+    setIsValue(value);
   }
 
   // Генерация случайных доменов
-  function handlerClick() {
-    DomainsStore.handlerBtnAuto(isValue);
+  function handlerBtnAuto() {
+    DomainsStore.handlerBtnAuto(isValue.toFixed(2));
   }
 
   return (
@@ -30,7 +30,7 @@ const BtnAutoChange = observer(() => {
           min={0}
           max={0.99}
         />
-        <button className={style.btn_calc} onClick={action(handlerClick)}>
+        <button className={style.btn_calc} onClick={action(handlerBtnAuto)}>
           АВТО
         </button>
       </div>

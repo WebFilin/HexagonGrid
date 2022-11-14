@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./svgHex.module.scss";
-import domainsStore from "../../store/DomainsStore";
+import DomainsStore from "../../store/DomainsStore";
 import { action } from "mobx";
 
 function SvgHex({ id, x, y, vertical, horizontal }) {
@@ -11,9 +11,9 @@ function SvgHex({ id, x, y, vertical, horizontal }) {
     const valueHex = hex.getAttribute("value");
 
     if (valueHex === "1") {
-      domainsStore.getRemoveID(hex);
+      DomainsStore.getRemoveID(hex);
     } else {
-      domainsStore.getHex(hex);
+      DomainsStore.getHex(hex);
     }
   }
 
@@ -30,6 +30,7 @@ function SvgHex({ id, x, y, vertical, horizontal }) {
           onClick={action(handlerClick)}
         ></polygon>
         <text className={style.hex_txt}>{id}</text>
+        {/* <text className={style.hex_txt}></text> */}
       </g>
     </>
   );

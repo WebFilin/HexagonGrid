@@ -9,7 +9,7 @@ const MainHexagons = observer(() => {
   const svgBox = React.useRef();
   const [viewBoxSize, setViewBoxSize] = React.useState(null);
 
-  //   Получаем массив координат через mobx
+  //   Получаем массив координат
   const arrCordinatsHex = toJS(DomainsStore.arrCoordinates);
 
   //  Динамически управляем размером viewBox в svg
