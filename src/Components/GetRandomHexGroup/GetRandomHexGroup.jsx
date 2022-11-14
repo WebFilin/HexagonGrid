@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import React from "react";
 import DomainsStore from "../../store/DomainsStore";
 
-const RandomDomains = observer(() => {
+const GetRandomHexGroup = observer(() => {
   const isBtnAuto = DomainsStore.isBtnAuto;
 
   //   Генерируем хексы
@@ -14,21 +14,18 @@ const RandomDomains = observer(() => {
     //Стек всех элементов сетки
     const arrCordMainHex = toJS(DomainsStore.arrCoordinates);
 
-    // Стек элементов
-    const randomElem = arrCordMainHex
-      .map((hexElem) => {
-        return Math.random() <= ratio ? hexElem : null;
+    const arrNeighbors = arrCordMainHex
+      .map(({ id, vertical, horizontal }) => {
+        if (Math.random() <= ratio) {
+          const getNeighbors = DomainsStore.getNeighborsHex(
+            vertical,
+            horizontal
+          );
+
+          return { id: id, group: [...getNeighbors] };
+        }
       })
       .filter(Boolean);
-
-    // Стек готовых узлов
-    const arrNeighbors = randomElem.map(({ id, vertical, horizontal }) => {
-      // Получаем кординаты соседей
-      const getNeighbors = DomainsStore.getNeighborsHex(vertical, horizontal);
-
-      // Добавляем обьект с вершинами и возможными связями в стек
-      return { id: id, group: [...getNeighbors] };
-    });
 
     DomainsStore.getVertexLinksRandom(arrNeighbors);
   }, [isBtnAuto]);
@@ -36,4 +33,4 @@ const RandomDomains = observer(() => {
   return <></>;
 });
 
-export default RandomDomains;
+export default GetRandomHexGroup;
