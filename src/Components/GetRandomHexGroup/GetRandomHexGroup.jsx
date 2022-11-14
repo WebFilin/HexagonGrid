@@ -21,7 +21,6 @@ const GetRandomHexGroup = observer(() => {
             vertical,
             horizontal
           );
-
           return { id: id, group: [...getNeighbors] };
         }
       })

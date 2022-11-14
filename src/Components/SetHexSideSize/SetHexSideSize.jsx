@@ -10,18 +10,18 @@ function SetHexSideSize() {
   const [valueN, setValueN] = React.useState(7);
 
   const handlerValueL = (value) => {
-    setValueL(value);
+    setValueL((currentValue) => (currentValue = value));
   };
 
   const handlerValueM = (value) => {
-    setValueM(value);
+    setValueM((currentValue) => (currentValue = value));
   };
 
   const handlerValueN = (value) => {
-    setValueN(value);
+    setValueN((currentValue) => (currentValue = value));
   };
 
-  function clickHandler(ev) {
+  function handlerBtnCreate(ev) {
     ev.preventDefault();
     domainsStore.getHandlerCreateMainHex();
   }
@@ -63,7 +63,7 @@ function SetHexSideSize() {
         max={30}
       />
 
-      <button className={style.btn_calc} onClick={action(clickHandler)}>
+      <button className={style.btn_calc} onClick={action(handlerBtnCreate)}>
         СОЗДАТЬ
       </button>
     </div>

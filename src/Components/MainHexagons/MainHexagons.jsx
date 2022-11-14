@@ -3,6 +3,7 @@ import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import domainsStore from "../../store/DomainsStore";
 
+// Создаем координатную сетку решетки
 const MainHexagons = observer(() => {
   const createMainHex = domainsStore.isCreateMainHex;
 

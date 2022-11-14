@@ -1,10 +1,10 @@
 import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import React from "react";
-import domainsStore from "../../store/DomainsStore";
+import DomainsStore from "../../store/DomainsStore";
 
 const SplitDomains = observer(() => {
-  const arrVertexs = toJS(domainsStore.arrVertexs);
+  const arrVertexs = toJS(DomainsStore.arrVertexs);
   React.useEffect(() => {
     //  Список смежности графа
     let adjacencyList = [];
@@ -14,7 +14,6 @@ const SplitDomains = observer(() => {
 
     // Формируем список смежности узлов
     function createAdjacencyList() {
-      adjacencyList = [];
       for (let i = 0; i < arrVertexs.length; i++) {
         const prevID = arrVertexs[i].id;
 
@@ -49,6 +48,7 @@ const SplitDomains = observer(() => {
           nodeMap[node2].push(node1);
         }
       });
+
       getNodesStart(nodeMap);
     }
 
@@ -67,6 +67,7 @@ const SplitDomains = observer(() => {
 
     //Собираем дерево графа
     function createGraph(startNode, nodeMap, domainGroup = []) {
+      // База рекрусии
       if (domainGroup.includes(startNode)) return domainGroup;
 
       //Добавляем стартовую точку
@@ -86,7 +87,7 @@ const SplitDomains = observer(() => {
 
     createAdjacencyList();
     mainHexGraph(adjacencyList);
-    domainsStore.getGraphTree(arrSearchTree);
+    DomainsStore.getGraphTree(arrSearchTree);
   }, [arrVertexs]);
 
   return <></>;

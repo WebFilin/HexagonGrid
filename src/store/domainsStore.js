@@ -131,6 +131,13 @@ class DomainsStore {
       this.arrVertexs.splice(index, 1);
     }
   }
+
+  setColor() {
+    return (
+      "#" +
+      (Math.random().toString(16) + "000000").substring(2, 8).toUpperCase()
+    );
+  }
 }
 
 export default new DomainsStore();
