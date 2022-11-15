@@ -62,16 +62,13 @@ const GetNonSinglyLinkedDomain = observer(() => {
         const neighborsHex = getEmptyNeighbors(currentHex, domain);
 
         // Если связь с доменом 1 то область в домене открытая, прерываем цикл
-        if (linksForHex === 1) {
+        // Если соседей  <= 4 - выход в край рещетки
+        if (linksForHex === 1 && neighborsHex.length <= 4) {
           return (queueNode = []);
-          //  Если связей больше или они есть продолжаем проверку
-        } else if (linksForHex > 1 && checkReapets) {
-          // Если соседей  <= 4 - выход в край рещетки
-          if (neighborsHex.length <= 4) {
-            return (queueNode = []);
-          }
+        }
 
-          //  Хексы не входящие в домен
+        //  Если связей больше и хекс не повторялся продолжаем проверку
+        else if (checkReapets && neighborsHex) {
           const emptyNeighbors = neighborsHex.filter(
             (id) => !domain.includes(id)
           );

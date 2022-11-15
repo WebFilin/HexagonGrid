@@ -17,7 +17,7 @@ const ColorazeDomains = observer(() => {
 
       // Сброс стилей хексов
       hex.style = { fill: null, fillOpacity: 0.3 };
-      hexTxt.textContent = null;
+      // hexTxt.textContent = null;
       hex.setAttribute("value", 0);
 
       arrDomains.forEach((elem, index) => {
@@ -33,7 +33,7 @@ const ColorazeDomains = observer(() => {
           hex.style.fill = color[index];
           hex.style.fillOpacity = 0.8;
           hex.setAttribute("value", 1);
-          hexTxt.textContent = 1;
+          //  hexTxt.textContent = 1;
         }
       });
     });
