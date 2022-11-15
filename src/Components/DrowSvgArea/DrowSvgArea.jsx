@@ -31,14 +31,14 @@ const MainHexagons = observer(() => {
     <div className={style.wrapper}>
       <svg className={style.body} ref={svgBox} viewBox={sizeBox}>
         {/* Выводим хексы, смещаем их по сетке координат */}
-        {arrCordinatsHex.map((elem) => (
+        {arrCordinatsHex.map(({ id, x, y, vertical, horizontal }) => (
           <SvgHex
-            key={elem.id}
-            id={elem.id}
-            x={elem.x}
-            y={elem.y}
-            vertical={elem.vertical}
-            horizontal={elem.horizontal}
+            key={id}
+            id={id}
+            x={x}
+            y={y}
+            vertical={vertical}
+            horizontal={horizontal}
           />
         ))}
       </svg>
