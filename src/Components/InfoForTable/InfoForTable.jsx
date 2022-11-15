@@ -17,7 +17,7 @@ const InfoForTable = observer(() => {
         hexGridRatio: `${gridRatio.L}; ${gridRatio.N}; ${gridRatio.M};`,
         sumHexValueOne: DomainsStore.arrVertexs.length,
       });
-    });
+    }, 0);
   }, [isBtnAuto]);
 
   return <div></div>;

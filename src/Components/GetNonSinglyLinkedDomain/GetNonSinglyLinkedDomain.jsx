@@ -62,13 +62,17 @@ const GetNonSinglyLinkedDomain = observer(() => {
         const neighborsHex = getEmptyNeighbors(currentHex, domain);
 
         // Если связь с доменом 1 то область в домене открытая, прерываем цикл
-        // Если соседей  <= 4 - выход в край рещетки
-        if (linksForHex === 1 && neighborsHex.length <= 4) {
+        if (linksForHex === 1) {
           return (queueNode = []);
         }
 
-        //  Если связей больше и хекс не повторялся продолжаем проверку
+        //  Если связей больше, есть соседи и хекс не повторялся продолжаем проверку
         else if (checkReapets && neighborsHex) {
+          // Если соседей  <= 4 - выход в край рещетки- домен открытый
+          if (neighborsHex.length <= 4) {
+            return (queueNode = []);
+          }
+
           const emptyNeighbors = neighborsHex.filter(
             (id) => !domain.includes(id)
           );
@@ -100,6 +104,7 @@ const GetNonSinglyLinkedDomain = observer(() => {
         return neighbors;
       }
     }
+
     DomainsStore.getNonLinkedDomains(nonLinkedDomain.length);
   }, [isBtnAuto]);
 
