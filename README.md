@@ -1,4 +1,4 @@
-![Image alt](https://github.com/WebFilin/HexagonGrid/blob/main/screenshot/screenshot_1.jpg)
+![Image alt](https://github.com/WebFilin/HexagonGrid/blob/main/screenshot_1.jpg)
 
 
 # Hexagons Grid
