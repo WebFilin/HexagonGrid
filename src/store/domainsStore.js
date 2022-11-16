@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, toJS } from "mobx";
 
 class DomainsStore {
   arrCoordinates = [];
@@ -97,21 +97,22 @@ class DomainsStore {
 
   //   Поиск соседий хекса
   getNeighborsHex(hexVert, hexHoriz) {
-    const result = this.arrCoordinates.filter((elem) => {
-      return (
-        (elem.horizontal === hexHoriz - 1 && elem.vertical === hexVert) ||
-        (elem.horizontal === hexHoriz - 1 && elem.vertical === hexVert + 1) ||
-        (elem.vertical === hexVert + 1 && elem.horizontal === hexHoriz) ||
-        (elem.horizontal === hexHoriz + 1 && elem.vertical === hexVert) ||
-        (elem.horizontal === hexHoriz + 1 && elem.vertical === hexVert - 1) ||
-        (elem.vertical === hexVert - 1 && elem.horizontal === hexHoriz)
-      );
+    const stackID = [];
+
+    this.arrCoordinates.filter(({ id, horizontal, vertical }) => {
+      if (
+        (horizontal === hexHoriz - 1 && vertical === hexVert) ||
+        (horizontal === hexHoriz - 1 && vertical === hexVert + 1) ||
+        (vertical === hexVert + 1 && horizontal === hexHoriz) ||
+        (horizontal === hexHoriz + 1 && vertical === hexVert) ||
+        (horizontal === hexHoriz + 1 && vertical === hexVert - 1) ||
+        (vertical === hexVert - 1 && horizontal === hexHoriz)
+      ) {
+        stackID.push(id);
+      }
     });
 
-    //  Отсекаем лишние формируем обьект c ID соседних узлов
-    return result.map((elem) => {
-      return elem.id;
-    });
+    return stackID;
   }
 
   //   Удаляем хекс при клике по нему
