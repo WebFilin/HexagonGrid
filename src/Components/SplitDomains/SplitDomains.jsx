@@ -14,18 +14,13 @@ const SplitDomains = observer(() => {
 
     // Формируем список смежности узлов
     function createAdjacencyList() {
-      for (let i = 0; i < arrVertexs.length; i++) {
-        const prevID = arrVertexs[i].id;
-
-        for (let j = i + 1; j < arrVertexs.length; j++) {
-          const edges = arrVertexs[j].group;
-          const currID = arrVertexs[j].id;
-
-          if (edges.includes(prevID)) {
-            adjacencyList.push([prevID, currID]);
+      arrVertexs.forEach(({ id }) => {
+        arrVertexs.filter((elem) => {
+          if (elem.group.includes(id)) {
+            adjacencyList.push([id, elem.id]);
           }
-        }
-      }
+        });
+      });
     }
 
     //Получаем связи подгрупп в общем графе
@@ -48,7 +43,6 @@ const SplitDomains = observer(() => {
           nodeMap[node2].push(node1);
         }
       });
-
       getNodesStart(nodeMap);
     }
 

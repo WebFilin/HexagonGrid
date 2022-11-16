@@ -7,7 +7,7 @@ const CheckDomains = observer(() => {
   const arrVertexs = toJS(DomainsStore.arrVertexs);
 
   React.useEffect(() => {
-    // Подмножества графа
+    // Подмножества графа - сгрупированные домены
     const treesGraph = toJS(DomainsStore.arrGraphTree);
 
     //  Стек готовых доменов
