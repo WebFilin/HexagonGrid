@@ -10,75 +10,20 @@ const CheckDomains = observer(() => {
     // Подмножества графа
     const treesGraph = toJS(DomainsStore.arrGraphTree);
 
-    //  Узел выбранного хекса
-    const nodeHex = toJS(DomainsStore.hexVertex);
-
     //  Стек готовых доменов
-    const arrDomains = [];
-
-    //  Создаем домены по полученным графам
-    if (treesGraph.length !== 0) {
-      treesGraph.forEach((tree) => {
-        arrDomains.push([...tree]);
-      });
-    }
-
-    //  ОБрабатываем разбиение на домены
-    function checkDomain(hexNode) {
-      if (arrDomains.length === 0) {
-        createDomain(hexNode);
-      } else {
-        checkSubDomain(hexNode);
-      }
-    }
-
-    function checkSubDomain(hexNode) {
-      // Получаем индекс домена в общем стейте
-      const intersectIndex = arrDomains.findIndex((domain) => {
-        return domain.some((id) => {
-          return hexNode.group.includes(id);
-        });
-      });
-
-      if (intersectIndex !== -1) {
-        arrDomains[intersectIndex] = [
-          ...new Set([...arrDomains[intersectIndex], hexNode.id]),
-        ];
-      } else {
-        createDomain(hexNode);
-      }
-    }
+    const arrDomains = [...treesGraph];
 
     // Обрабатываем появление единичных доменов
     function handlerSingleNode() {
-      const allNodeID = [];
-
-      // Получаем все id из доменов
-      arrDomains.forEach((node) => {
-        allNodeID.push(...node);
-      });
+      const allNodeID = arrDomains.flat();
 
       // Ищем исключения
-      const singleNode = arrVertexs.filter((node) => {
-        if (!allNodeID.includes(node.id)) {
-          return node;
+      arrVertexs.filter(({ id }) => {
+        if (!allNodeID.includes(id)) {
+          //  Создаем новый домен
+          arrDomains.push([id]);
         }
       });
-
-      if (singleNode.length > 0) {
-        singleNode.forEach((elem) => {
-          createDomain(elem);
-        });
-      }
-    }
-
-    //  Создаем новый домен при клике
-    function createDomain(hexID) {
-      arrDomains.push([hexID.id]);
-    }
-
-    if (nodeHex !== null) {
-      checkDomain(nodeHex);
     }
 
     handlerSingleNode();
