@@ -1,4 +1,4 @@
-![Image alt](https://github.com/WebFilin/HexagonGrid/blob/main/screenshot/screenshot_1.jpg)
+![Image alt](https://github.com/WebFilin/HexagonGrid/blob/main/screenshot_1.jpg)
 
 
 # Hexagons Grid
@@ -22,7 +22,7 @@
 
 После каждого автоматического заполнения и расчета количества доменов в полученной решётке добавлять строку в таблице (внизу страницы) следующего вида:
 
-![Image alt](https://github.com/WebFilin/HexagonGrid/blob/main/screenshot/table.jpg)
+![Image alt](https://github.com/WebFilin/HexagonGrid/blob/main/table.jpg)
 
 *неодносвязным является домен, обладающий нетривиальной фундаментальной группой, если рассматривать домен как топологическое пространство.
 
