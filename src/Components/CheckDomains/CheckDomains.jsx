@@ -21,7 +21,9 @@ const CheckDomains = observer(() => {
     });
 
     // Передаем стек всех доменов, с множеством элементов в графе так и одиночных
-    DomainsStore.getDomainsStack([...singleDomains, ...treesGraph]);
+    const allDomains = [...singleDomains, ...treesGraph];
+
+    DomainsStore.getDomainsStack(allDomains);
   }, [arrVertexs]);
 
   return <></>;

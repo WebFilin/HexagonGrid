@@ -5,6 +5,7 @@ import DomainsStore from "../../store/DomainsStore";
 
 const SplitDomains = observer(() => {
   const arrVertexs = toJS(DomainsStore.arrVertexs);
+
   React.useEffect(() => {
     //  Список смежности графа
     let adjacencyList = [];
@@ -14,6 +15,8 @@ const SplitDomains = observer(() => {
 
     // Формируем список смежности узлов
     function createAdjacencyList() {
+      const stacPairs = [];
+
       arrVertexs.forEach(({ id }) => {
         arrVertexs.filter((elem) => {
           if (elem.group.includes(id)) {
@@ -81,6 +84,7 @@ const SplitDomains = observer(() => {
 
     createAdjacencyList();
     mainHexGraph(adjacencyList);
+
     DomainsStore.getGraphTree(arrSearchTree);
   }, [arrVertexs]);
 

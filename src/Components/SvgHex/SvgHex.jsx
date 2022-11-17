@@ -1,9 +1,10 @@
 import React from "react";
 import style from "./svgHex.module.scss";
 import DomainsStore from "../../store/DomainsStore";
-import { action } from "mobx";
+import { action, toJS } from "mobx";
+import { observer } from "mobx-react-lite";
 
-function SvgHex({ id, x, y, vertical, horizontal }) {
+const SvgHex = observer(({ id, x, y, vertical, horizontal }) => {
   //   Выбираем хекс передаем в mobx
   function handlerClick(evHex) {
     evHex.preventDefault();
@@ -33,6 +34,6 @@ function SvgHex({ id, x, y, vertical, horizontal }) {
       </g>
     </>
   );
-}
+});
 
 export default SvgHex;
