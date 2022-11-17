@@ -10,24 +10,18 @@ const CheckDomains = observer(() => {
     // Подмножества графа - сгрупированные домены
     const treesGraph = toJS(DomainsStore.arrGraphTree);
 
-    //  Стек готовых доменов
-    const arrDomains = [...treesGraph];
+    const allNodeID = treesGraph.flat();
 
-    // Обрабатываем появление единичных доменов
-    function handlerSingleNode() {
-      const allNodeID = arrDomains.flat();
+    //  Одиночные домены
+    const singleDomains = [];
 
-      // Ищем исключения
-      arrVertexs.filter(({ id }) => {
-        if (!allNodeID.includes(id)) {
-          //  Создаем новый домен
-          arrDomains.push([id]);
-        }
-      });
-    }
+    // Ищем исключения
+    arrVertexs.filter(({ id }) => {
+      return !allNodeID.includes(id) ? singleDomains.push([id]) : false;
+    });
 
-    handlerSingleNode();
-    DomainsStore.getDomainsStack(arrDomains);
+    // Передаем стек всех доменов, с множеством элементов в графе так и одиночных
+    DomainsStore.getDomainsStack([...singleDomains, ...treesGraph]);
   }, [arrVertexs]);
 
   return <></>;
