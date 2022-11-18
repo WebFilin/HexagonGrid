@@ -1,11 +1,11 @@
 import React from "react";
 import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
-import domainsStore from "../../store/DomainsStore";
+import DomainsStore from "../../store/DomainsStore";
 
 // Создаем координатную сетку решетки
 const MainHexagons = observer(() => {
-  const createMainHex = domainsStore.isCreateMainHex;
+  const createMainHex = DomainsStore.isCreateMainHex;
 
   React.useEffect(() => {
     //кординаты и линии расположения хексов
@@ -13,7 +13,7 @@ const MainHexagons = observer(() => {
     const sideOfset = 100;
 
     // Размеры сетки из инпутов
-    const ofsetSide = toJS(domainsStore.hexSideSize);
+    const ofsetSide = toJS(DomainsStore.hexSideSize);
 
     //  Стороны хекс контейнера
     const axisQ = ofsetSide.L - 1;
@@ -53,7 +53,8 @@ const MainHexagons = observer(() => {
       }
     }
 
-    domainsStore.getArrCoordinates(hexesPositions);
+    DomainsStore.handlerLoader(false);
+    DomainsStore.getArrCoordinates(hexesPositions);
   }, [createMainHex]);
 
   return <></>;

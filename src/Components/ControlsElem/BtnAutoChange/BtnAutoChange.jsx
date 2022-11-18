@@ -15,6 +15,7 @@ const BtnAutoChange = observer(() => {
   // Генерация случайных доменов
   function handlerBtnAuto() {
     DomainsStore.handlerBtnAuto(isValue.toFixed(2));
+    DomainsStore.handlerLoader(true);
   }
 
   return (

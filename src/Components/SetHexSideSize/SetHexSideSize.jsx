@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./setHexSizeSide.module.scss";
 import InputSizeSide from "../ControlsElem/InputSizeSide/InputSizeSide";
-import domainsStore from "../../store/DomainsStore";
+import DomainsStore from "../../store/DomainsStore";
 import { action } from "mobx";
 
 function SetHexSideSize() {
@@ -23,11 +23,12 @@ function SetHexSideSize() {
 
   function handlerBtnCreate(ev) {
     ev.preventDefault();
-    domainsStore.getHandlerCreateMainHex();
+    DomainsStore.handlerLoader(true);
+    DomainsStore.getHandlerCreateMainHex();
   }
 
   React.useEffect(() => {
-    domainsStore.getHexSideSize(valueL, valueN, valueM);
+    DomainsStore.getHexSideSize(valueL, valueN, valueM);
   }, [valueL, valueM, valueN]);
 
   return (

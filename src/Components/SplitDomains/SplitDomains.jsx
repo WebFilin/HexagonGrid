@@ -15,12 +15,10 @@ const SplitDomains = observer(() => {
 
     // Формируем список смежности узлов
     function createAdjacencyList() {
-      const stacPairs = [];
-
-      arrVertexs.forEach(({ id }) => {
-        arrVertexs.filter((elem) => {
-          if (elem.group.includes(id)) {
-            adjacencyList.push([id, elem.id]);
+      arrVertexs.forEach((prev) => {
+        arrVertexs.filter((curr) => {
+          if (curr.group.includes(prev.id)) {
+            adjacencyList.push([prev.id, curr.id]);
           }
         });
       });
@@ -79,6 +77,7 @@ const SplitDomains = observer(() => {
         let linkNode = nodeMap[startNode][i];
         createGraph(linkNode, nodeMap, domainGroup);
       }
+
       return domainGroup;
     }
 

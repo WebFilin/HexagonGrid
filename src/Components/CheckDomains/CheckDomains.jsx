@@ -23,6 +23,8 @@ const CheckDomains = observer(() => {
     // Передаем стек всех доменов, с множеством элементов в графе так и одиночных
     const allDomains = [...singleDomains, ...treesGraph];
 
+    //  Преключаем прелоадер
+    DomainsStore.handlerLoader(false);
     DomainsStore.getDomainsStack(allDomains);
   }, [arrVertexs]);
 

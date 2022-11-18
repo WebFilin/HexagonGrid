@@ -19,6 +19,7 @@ class DomainsStore {
   isBtnAuto = false;
   sumNonSingleLinkedDomain = 0;
   stackTable = [];
+  isLoader = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -93,6 +94,10 @@ class DomainsStore {
 
   getDomainColor(color) {
     this.arrDomainsColor.push(color);
+  }
+
+  handlerLoader(value) {
+    this.isLoader = value;
   }
 
   //   Поиск соседий хекса

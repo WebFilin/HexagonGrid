@@ -1,6 +1,7 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 import style from "./app.module.scss";
+import DomainsStore from "../store/DomainsStore";
 import MainHexagons from "../Components/MainHexagons/MainHexagons";
 import DrowSvgArea from "../Components/DrowSvgArea/DrowSvgArea";
 import GetClickHexGroup from "../Components/GetClickHexGroup/GetClickHexGroup";
@@ -13,13 +14,17 @@ import CheckDomains from "../Components/CheckDomains/CheckDomains";
 import DrowTable from "../Components/DrowTable/DrowTable";
 import GetNonSinglyLinkedDomain from "../Components/GetNonSinglyLinkedDomain/GetNonSinglyLinkedDomain";
 import InfoForTable from "../Components/InfoForTable/InfoForTable";
+import Preloader from "../Components/Preloader/Preloader";
 
-const App = () => {
+const App = observer(() => {
+  const isLoader = DomainsStore.isLoader;
+
   return (
     <div className={style.wrapper}>
       <header className={style.header}> </header>
       <main className={style.body}>
-        <DrowSvgArea />
+        {isLoader ? <Preloader /> : <DrowSvgArea />}
+
         <div className={style.controls}>
           <SetHexSideSize />
           <BtnAutoChange />
@@ -27,7 +32,6 @@ const App = () => {
         </div>
       </main>
 
-      <footer className={style.footer} />
       <MainHexagons />
       <GetClickHexGroup />
       <GetRandomHexGroup />
@@ -36,8 +40,10 @@ const App = () => {
       <ColorazeDomains />
       <GetNonSinglyLinkedDomain />
       <InfoForTable />
+
+      <footer className={style.footer} />
     </div>
   );
-};
+});
 
 export default App;

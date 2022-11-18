@@ -4,6 +4,7 @@ import DomainsStore from "../../store/DomainsStore";
 import { observer } from "mobx-react-lite";
 import { toJS } from "mobx";
 import SvgHex from "../SvgHex/SvgHex";
+import Preloader from "../Preloader/Preloader";
 
 const MainHexagons = observer(() => {
   const svgBox = React.useRef();

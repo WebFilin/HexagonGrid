@@ -1,20 +1,3 @@
-// Отменяем стрелочки у инпутов
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none; // Yeah, yeah everybody write about it
-}
-
-input[type="number"],
-input[type="number"]:hover,
-input[type="number"]:focus {
-  appearance: none;
-  -moz-appearance: textfield;
-}
-
-input {
-  outline: none;
-}
-
 .wrapper {
   width: 100vw;
   height: 100vh;
@@ -26,6 +9,7 @@ input {
 }
 
 .body {
+  height: 96vh;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -39,13 +23,13 @@ input {
 }
 
 .footer {
-  height: 6vh;
+  height: 3vh;
   width: 100vw;
   background: #337ab7;
 }
 
 .header {
-  height: 6vh;
+  height: 3vh;
   width: 100vw;
   background: #337ab7;
 }
