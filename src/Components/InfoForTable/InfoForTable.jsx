@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import DomainsStore from "../../store/DomainsStore";
+import DomainsStore from "../../Store/DomainsStore";
 
 const InfoForTable = observer(() => {
   const isBtnAuto = DomainsStore.isBtnAuto;

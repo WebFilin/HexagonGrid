@@ -1,7 +1,7 @@
 import React from "react";
 import InputSizeSide from "../InputSizeSide/InputSizeSide";
 import style from "./btnAutoChange.module.scss";
-import DomainsStore from "../../../store/DomainsStore";
+import DomainsStore from "../../../Store/DomainsStore";
 import { observer } from "mobx-react-lite";
 import { action } from "mobx";
 
@@ -14,8 +14,8 @@ const BtnAutoChange = observer(() => {
 
   // Генерация случайных доменов
   function handlerBtnAuto() {
-    DomainsStore.handlerBtnAuto(isValue.toFixed(2));
     DomainsStore.handlerLoader(true);
+    DomainsStore.handlerBtnAuto(isValue.toFixed(2));
   }
 
   return (

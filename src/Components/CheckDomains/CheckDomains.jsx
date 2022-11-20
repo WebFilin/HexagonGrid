@@ -1,6 +1,6 @@
 import React from "react";
 import { toJS } from "mobx";
-import DomainsStore from "../../store/DomainsStore";
+import DomainsStore from "../../Store/DomainsStore";
 import { observer } from "mobx-react-lite";
 
 const CheckDomains = observer(() => {

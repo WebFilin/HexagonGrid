@@ -1,10 +1,9 @@
 import React from "react";
 import style from "./drowSvgArea.module.scss";
-import DomainsStore from "../../store/DomainsStore";
+import DomainsStore from "../../Store/DomainsStore";
 import { observer } from "mobx-react-lite";
 import { toJS } from "mobx";
 import SvgHex from "../SvgHex/SvgHex";
-import Preloader from "../Preloader/Preloader";
 
 const MainHexagons = observer(() => {
   const svgBox = React.useRef();

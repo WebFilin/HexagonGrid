@@ -1,7 +1,7 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 import style from "./app.module.scss";
-import DomainsStore from "../store/DomainsStore";
+import DomainsStore from "../Store/DomainsStore";
 import MainHexagons from "../Components/MainHexagons/MainHexagons";
 import DrowSvgArea from "../Components/DrowSvgArea/DrowSvgArea";
 import GetClickHexGroup from "../Components/GetClickHexGroup/GetClickHexGroup";

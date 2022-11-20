@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./svgHex.module.scss";
-import DomainsStore from "../../store/DomainsStore";
-import { action, toJS } from "mobx";
+import DomainsStore from "../../Store/DomainsStore";
+import { action } from "mobx";
 import { observer } from "mobx-react-lite";
 
 const SvgHex = observer(({ id, x, y, vertical, horizontal }) => {
