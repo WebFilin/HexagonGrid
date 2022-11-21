@@ -30,7 +30,7 @@ const SvgHex = observer(({ id, x, y, vertical, horizontal }) => {
           points="100,0 50,-87 -50,-87 -100,-0 -50,87 50,87"
           onClick={action(handlerClick)}
         ></polygon>
-        <text className={style.hex_txt}>{id}</text>
+        <text className={style.hex_txt}></text>
       </g>
     </>
   );
