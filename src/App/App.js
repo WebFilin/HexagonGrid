@@ -22,15 +22,19 @@ const App = observer(() => {
   return (
     <div className={style.wrapper}>
       <header className={style.header}> </header>
-      <main className={style.body}>
-        {isLoader ? <Preloader /> : <DrowSvgArea />}
 
-        <div className={style.controls}>
-          <SetHexSideSize />
-          <BtnAutoChange />
-          <DrowTable />
-        </div>
-      </main>
+      {isLoader ? (
+        <Preloader />
+      ) : (
+        <main className={style.body}>
+          <DrowSvgArea />
+          <div className={style.controls}>
+            <SetHexSideSize />
+            <BtnAutoChange />
+            <DrowTable />
+          </div>
+        </main>
+      )}
 
       <MainHexagons />
       <GetClickHexGroup />

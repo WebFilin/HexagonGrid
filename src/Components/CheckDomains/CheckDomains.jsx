@@ -24,8 +24,8 @@ const CheckDomains = observer(() => {
     const allDomains = [...singleDomains, ...treesGraph];
 
     //  Преключаем прелоадер
-    DomainsStore.handlerLoader(false);
     DomainsStore.getDomainsStack(allDomains);
+    DomainsStore.handlerLoader(false);
   }, [arrVertexs]);
 
   return <></>;

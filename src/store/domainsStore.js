@@ -19,7 +19,7 @@ class DomainsStore {
   isBtnAuto = false;
   sumNonSingleLinkedDomain = 0;
   stackTable = [];
-  isLoader = false;
+  isLoader = true;
 
   constructor() {
     makeAutoObservable(this);
