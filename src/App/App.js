@@ -28,9 +28,11 @@ const App = observer(() => {
       ) : (
         <main className={style.body}>
           <DrowSvgArea />
-          <div className={style.controls}>
-            <SetHexSideSize />
-            <BtnAutoChange />
+          <div className={style.controls_wrapper}>
+            <div className={style.controls_body}>
+              <SetHexSideSize />
+              <BtnAutoChange />
+            </div>
             <DrowTable />
           </div>
         </main>

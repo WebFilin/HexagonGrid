@@ -17,6 +17,7 @@
   outline: 0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.2);
   font-weight: bold;
+
   &:hover {
     color: #fff;
     transition: 0.5s;
@@ -25,4 +26,23 @@
   &:active {
     box-shadow: 0 0px 0px;
   }
+}
+
+/* Large desktops and laptops */
+@media (min-width: 1200px) {
+}
+/* Landscape tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+}
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {
+}
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+}
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+}
+/* Iphone 5 */
+@media (max-width: 320px) {
 }
