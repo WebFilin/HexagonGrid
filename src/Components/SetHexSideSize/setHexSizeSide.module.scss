@@ -1,10 +1,9 @@
 .wrapper {
-  padding: 0px 10px;
-  width: 50vw;
-
+  margin: 5px;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  margin: 5px;
 }
 
 .btn_calc {
@@ -28,20 +27,62 @@
   }
 }
 
-/* Large desktops and laptops */
-@media (min-width: 1200px) {
+.input_size_side__wraper {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
-/* Landscape tablets and medium desktops */
-@media (min-width: 992px) and (max-width: 1199px) {
-}
+
 /* Portrait tablets and small desktops */
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 768px) and (max-width: 820px) {
+  .btn_calc {
+    padding: 7px;
+    margin-left: 3px;
+  }
 }
 /* Landscape phones and portrait tablets */
 @media (max-width: 767px) {
+  .btn_calc {
+    padding: 5px;
+    margin-left: 3px;
+    margin-top: -4px;
+  }
 }
+
+@media (max-width: 580px) {
+  .btn_calc {
+    padding: 8px;
+    margin-left: 3px;
+    margin-top: -6px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 460px) {
+  .btn_calc {
+    padding: 6px;
+    margin-left: 3px;
+    margin-top: -70px;
+    font-size: 12px;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 /* Portrait phones and smaller */
 @media (max-width: 480px) {
+  .btn_calc {
+    padding: 8px;
+    margin-left: 3px;
+    margin-top: -7px;
+    font-size: 14px;
+  }
 }
 /* Iphone 5 */
 @media (max-width: 320px) {

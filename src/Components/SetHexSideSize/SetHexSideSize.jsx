@@ -33,40 +33,44 @@ function SetHexSideSize() {
 
   return (
     <div className={style.wrapper}>
-      <InputSizeSide
-        title="L"
-        value={valueL}
-        valueChange={handlerValueL}
-        text="От 0 до 30"
-        inc={1}
-        dec={1}
-        min={0}
-        max={30}
-      />
-      <InputSizeSide
-        title="N"
-        value={valueN}
-        valueChange={handlerValueN}
-        text="От 0 до 30"
-        inc={1}
-        dec={1}
-        min={0}
-        max={30}
-      />
-      <InputSizeSide
-        title="M"
-        value={valueM}
-        valueChange={handlerValueM}
-        text="От 0 до 30"
-        inc={1}
-        dec={1}
-        min={0}
-        max={30}
-      />
+      <div className={style.input_size_side__wraper}>
+        <InputSizeSide
+          title="L"
+          value={valueL}
+          valueChange={handlerValueL}
+          text="От 0 до 30"
+          inc={1}
+          dec={1}
+          min={0}
+          max={30}
+        />
+        <InputSizeSide
+          title="N"
+          value={valueN}
+          valueChange={handlerValueN}
+          text="От 0 до 30"
+          inc={1}
+          dec={1}
+          min={0}
+          max={30}
+        />
+        <InputSizeSide
+          title="M"
+          value={valueM}
+          valueChange={handlerValueM}
+          text="От 0 до 30"
+          inc={1}
+          dec={1}
+          min={0}
+          max={30}
+        />
+      </div>
 
-      <button className={style.btn_calc} onClick={action(handlerBtnCreate)}>
-        СОЗДАТЬ
-      </button>
+      <div className={style.btn_calc__wraper}>
+        <button className={style.btn_calc} onClick={action(handlerBtnCreate)}>
+          СОЗДАТЬ
+        </button>
+      </div>
     </div>
   );
 }

@@ -25,7 +25,7 @@ const CheckDomains = observer(() => {
 
     //  Преключаем прелоадер
     DomainsStore.getDomainsStack(allDomains);
-    DomainsStore.handlerLoader(false);
+   //  DomainsStore.handlerLoader(false);
   }, [arrVertexs]);
 
   return <></>;

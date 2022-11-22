@@ -1,12 +1,11 @@
 .wrapper {
-  //   width: 100%;
-
-  //   border: 2px solid red;
+  margin: 5px;
+  width: 87%;
 }
 
 .body {
   display: flex;
-  //  justify-content: center;
+  justify-content: center;
   align-items: center;
 }
 
@@ -31,21 +30,58 @@
   }
 }
 
-/* Large desktops and laptops */
-@media (min-width: 1200px) {
-}
-/* Landscape tablets and medium desktops */
-@media (min-width: 992px) and (max-width: 1199px) {
-}
 /* Portrait tablets and small desktops */
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 768px) and (max-width: 820px) {
+  .btn_calc {
+    padding: 7px;
+    margin-left: 10px;
+  }
 }
 /* Landscape phones and portrait tablets */
 @media (max-width: 767px) {
+  .btn_calc {
+    padding: 7px;
+    margin-left: 10px;
+  }
 }
+
+@media (max-width: 690px) {
+  .btn_calc {
+    padding: 5px;
+    margin-left: 5px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 580px) {
+  .btn_calc {
+    padding: 6px;
+    margin-left: 5px;
+    font-size: 16px;
+    margin-top: -10px;
+  }
+
+  .body {
+    justify-content: space-around;
+  }
+}
+
 /* Portrait phones and smaller */
 @media (max-width: 480px) {
+  .btn_calc {
+    padding: 6px;
+    margin-left: 3px;
+    margin-top: -7px;
+    font-size: 12px;
+  }
+
+  .body {
+    justify-content: space-around;
+  }
 }
 /* Iphone 5 */
 @media (max-width: 320px) {
+  .body {
+    justify-content: space-around;
+  }
 }

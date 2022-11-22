@@ -51,13 +51,6 @@
   margin-bottom: -5px;
 }
 
-.bt_minus {
-  @extend %body-styles;
-  svg {
-    @extend %svg-styles;
-  }
-}
-
 .text_error {
   margin-top: -5px;
   color: red;
@@ -77,5 +70,149 @@
   @extend %body-styles;
   svg {
     @extend %svg-styles;
+  }
+}
+
+.bt_minus {
+  @extend %body-styles;
+  svg {
+    @extend %svg-styles;
+  }
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 820px) {
+  .quantity {
+    width: 45px;
+    height: 30px;
+    font-size: 20px;
+  }
+  .title {
+    font-size: 18px;
+    font-weight: normal;
+    margin-bottom: -5px;
+  }
+
+  .bt_plus {
+    width: 35px;
+    height: 35px;
+  }
+
+  .bt_minus {
+    width: 35px;
+    height: 35px;
+  }
+}
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+  .quantity {
+    width: 40px;
+    height: 30px;
+    font-size: 20px;
+  }
+  .title {
+    font-size: 18px;
+    font-weight: normal;
+    margin-bottom: -5px;
+  }
+
+  .bt_plus {
+    width: 35px;
+    height: 35px;
+  }
+
+  .bt_minus {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+@media (max-width: 690px) {
+  .quantity {
+    width: 30px;
+    height: 25px;
+    font-size: 14px;
+  }
+  .title {
+    font-size: 16px;
+    font-weight: normal;
+    margin-bottom: -5px;
+  }
+
+  .bt_plus {
+    width: 30px;
+    height: 30px;
+  }
+
+  .bt_minus {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (max-width: 580px) {
+  .quantity {
+    width: 42px;
+    height: 31px;
+    font-size: 18px;
+  }
+  .title {
+    font-size: 16px;
+    margin-bottom: -8px;
+  }
+
+  .bt_plus {
+    width: 40px;
+    height: 40px;
+  }
+
+  .bt_minus {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+  .quantity {
+    width: 35px;
+    height: 30px;
+    font-size: 18px;
+  }
+  .title {
+    font-size: 16px;
+    margin-bottom: -8px;
+  }
+
+  .bt_plus {
+    width: 35px;
+    height: 35px;
+  }
+
+  .bt_minus {
+    width: 35px;
+    height: 35px;
+  }
+}
+/* Iphone 5 */
+@media (max-width: 370px) {
+  .quantity {
+    width: 25px;
+    height: 25px;
+    font-size: 16px;
+  }
+  .title {
+    font-size: 14px;
+    margin-bottom: -8px;
+  }
+
+  .bt_plus {
+    width: 32px;
+    height: 32px;
+  }
+
+  .bt_minus {
+    width: 32px;
+    height: 32px;
   }
 }
