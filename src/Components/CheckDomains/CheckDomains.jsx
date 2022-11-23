@@ -10,14 +10,12 @@ const CheckDomains = observer(() => {
     // Подмножества графа - сгрупированные домены
     const treesGraph = toJS(DomainsStore.arrGraphTree);
 
-    const allNodeID = treesGraph.flat();
-
     //  Одиночные домены
     const singleDomains = [];
 
     // Ищем исключения
     arrVertexs.filter(({ id }) => {
-      return !allNodeID.includes(id) ? singleDomains.push([id]) : false;
+      return !treesGraph.flat().includes(id) ? singleDomains.push([id]) : false;
     });
 
     // Передаем стек всех доменов, с множеством элементов в графе так и одиночных
