@@ -4,6 +4,7 @@ import style from "./btnAutoChange.module.scss";
 import DomainsStore from "../../../Store/DomainsStore";
 import { observer } from "mobx-react-lite";
 import { action } from "mobx";
+import InputProbabilityValue from "./InputProbabilityValue/InputProbabilityValue";
 
 const BtnAutoChange = observer(() => {
   const [isValue, setIsValue] = React.useState(0.5);
@@ -15,13 +16,18 @@ const BtnAutoChange = observer(() => {
   // Генерация случайных доменов
   function handlerBtnAuto() {
     DomainsStore.handlerLoader(true);
-    DomainsStore.handlerBtnAuto(isValue.toFixed(2));
+    DomainsStore.handlerBtnAuto(isValue);
   }
 
   return (
     <div className={style.wrapper}>
       <div className={style.body}>
-        <InputSizeSide
+        <InputProbabilityValue
+          value={isValue}
+          valueChange={action(handlerValue)}
+        />
+
+        {/* <InputSizeSide
           title="Вероятность"
           value={isValue}
           valueChange={action(handlerValue)}
@@ -30,7 +36,7 @@ const BtnAutoChange = observer(() => {
           dec={0.01}
           min={0}
           max={0.99}
-        />
+        /> */}
         <button className={style.btn_calc} onClick={action(handlerBtnAuto)}>
           АВТО
         </button>

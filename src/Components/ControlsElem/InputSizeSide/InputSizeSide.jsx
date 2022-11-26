@@ -4,7 +4,7 @@ import { action } from "mobx";
 import { observer } from "mobx-react-lite";
 
 const InputSizeSide = observer(
-  ({ title, value, valueChange, text, inc, dec, min, max }) => {
+  ({title, value, valueChange, text, inc, dec, min, max}) => {
     const [valueInput, setValueInput] = React.useState(value);
     const [isValid, setIsValid] = React.useState(true);
 
