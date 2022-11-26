@@ -36,7 +36,6 @@
 
   .body__hex_area {
     width: 100vw;
-    //   height: 75vh;
   }
 
   .wrapper_controls {
@@ -68,7 +67,7 @@
   @include sizeMixin;
 
   .body_controls {
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;

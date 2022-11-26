@@ -53,6 +53,7 @@ const MainHexagons = observer(() => {
       }
     }
 
+
     DomainsStore.handlerLoader(false);
     DomainsStore.getArrCoordinates(hexesPositions);
   }, [createMainHex]);
