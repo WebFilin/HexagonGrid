@@ -21,19 +21,23 @@ const App = observer(() => {
 
   return (
     <div className={style.wrapper}>
-      <header className={style.header}> </header>
-
       {isLoader ? (
         <Preloader />
       ) : (
         <main className={style.body}>
-          <DrowSvgArea />
-          <div className={style.controls_wrapper}>
-            <div className={style.controls_body}>
+          <div className={style.body__hex_area}>
+            <DrowSvgArea />
+          </div>
+
+          <div className={style.wrapper_controls}>
+            <div className={style.body_controls}>
               <SetHexSideSize />
               <BtnAutoChange />
             </div>
-            <DrowTable />
+
+            <div className={style.body_table}>
+              <DrowTable />
+            </div>
           </div>
         </main>
       )}
@@ -46,8 +50,6 @@ const App = observer(() => {
       <ColorazeDomains />
       <GetNonSinglyLinkedDomain />
       <InfoForTable />
-
-      <footer className={style.footer} />
     </div>
   );
 });

@@ -59,7 +59,7 @@ const GetNonSinglyLinkedDomain = observer(() => {
         const linksForHex = checkHexLink(currentHex, allConnectDomain);
 
         // Получаем всех соседей хекса
-        const neighborsHex = getEmptyNeighbors(currentHex, domain);
+        const neighborsHex = getEmptyNeighbors(currentHex);
 
         // Если связь с доменом 1 то область в домене открытая, прерываем цикл
         if (linksForHex === 1) {
