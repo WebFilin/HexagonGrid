@@ -4,7 +4,7 @@ import { action } from "mobx";
 import { observer } from "mobx-react-lite";
 
 const InputSizeSide = observer(
-  ({title, value, valueChange, text, inc, dec, min, max}) => {
+  ({ title, value, valueChange, text, inc, dec, min, max }) => {
     const [valueInput, setValueInput] = React.useState(value);
     const [isValid, setIsValid] = React.useState(true);
 
@@ -14,7 +14,7 @@ const InputSizeSide = observer(
 
       if (input >= min && input <= max) {
         setIsValid((currentValue) => (currentValue = true));
-        return setValueInput((currentValue) => (currentValue = input));
+        setValueInput((currentValue) => (currentValue = input));
       } else {
         setIsValid((currentValue) => (currentValue = false));
       }
@@ -24,7 +24,12 @@ const InputSizeSide = observer(
       ev.preventDefault();
       if (valueInput < max) {
         setIsValid((currentValue) => (currentValue = true));
-        return setValueInput((currentValue) => currentValue + inc);
+        setValueInput((currentValue) => currentValue + inc);
+
+        //   После очистки возврашаем поле в тип number
+        if (typeof valueInput === "string") {
+          setValueInput(Number(inc));
+        }
       } else {
         setIsValid((currentValue) => (currentValue = false));
       }
@@ -34,7 +39,12 @@ const InputSizeSide = observer(
       ev.preventDefault();
       if (valueInput > min) {
         setIsValid((currentValue) => (currentValue = true));
-        return setValueInput((currentValue) => currentValue - dec);
+        setValueInput((currentValue) => currentValue - dec);
+
+        //   После очистки возврашаем поле в тип number
+        if (typeof valueInput === "string") {
+          setValueInput(Number(inc));
+        }
       } else {
         setIsValid((currentValue) => (currentValue = false));
       }

@@ -10,7 +10,7 @@ class DomainsStore {
   arrDomainsColor = [];
   svgArea = [];
   isCreateMainHex = false;
-  randomRatio = null;
+  randomRatio = 0;
   hexSideSize = {
     L: 3,
     M: 5,

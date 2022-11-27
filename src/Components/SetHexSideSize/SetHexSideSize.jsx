@@ -5,20 +5,29 @@ import DomainsStore from "../../Store/DomainsStore";
 import { action } from "mobx";
 
 function SetHexSideSize() {
-  const [valueL, setValueL] = React.useState(3);
-  const [valueM, setValueM] = React.useState(5);
-  const [valueN, setValueN] = React.useState(7);
+  const [valueL, setValueL] = React.useState(DomainsStore.hexSideSize.L);
+  const [valueM, setValueM] = React.useState(DomainsStore.hexSideSize.M);
+  const [valueN, setValueN] = React.useState(DomainsStore.hexSideSize.N);
 
   const handlerValueL = (value) => {
     setValueL((currentValue) => (currentValue = value));
-  };
 
-  const handlerValueM = (value) => {
-    setValueM((currentValue) => (currentValue = value));
+    let currentValue = value;
+    DomainsStore.getHexSideSize(currentValue, valueN, valueM);
   };
 
   const handlerValueN = (value) => {
     setValueN((currentValue) => (currentValue = value));
+
+    let currentValue = value;
+    DomainsStore.getHexSideSize(valueL, currentValue, valueM);
+  };
+
+  const handlerValueM = (value) => {
+    setValueM((currentValue) => (currentValue = value));
+
+    let currentValue = value;
+    DomainsStore.getHexSideSize(valueL, valueN, currentValue);
   };
 
   function handlerBtnCreate(ev) {
@@ -26,10 +35,6 @@ function SetHexSideSize() {
     DomainsStore.handlerLoader(true);
     DomainsStore.getHandlerCreateMainHex();
   }
-
-  React.useEffect(() => {
-    DomainsStore.getHexSideSize(valueL, valueN, valueM);
-  }, [valueL, valueM, valueN]);
 
   return (
     <div className={style.wrapper}>
