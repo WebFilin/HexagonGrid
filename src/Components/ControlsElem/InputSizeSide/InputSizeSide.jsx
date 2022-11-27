@@ -22,14 +22,10 @@ const InputSizeSide = observer(
 
     function increment(ev) {
       ev.preventDefault();
+
       if (valueInput < max) {
         setIsValid((currentValue) => (currentValue = true));
         setValueInput((currentValue) => currentValue + inc);
-
-        //   После очистки возврашаем поле в тип number
-        if (typeof valueInput === "string") {
-          setValueInput(Number(inc));
-        }
       } else {
         setIsValid((currentValue) => (currentValue = false));
       }
@@ -37,25 +33,29 @@ const InputSizeSide = observer(
 
     function decrement(ev) {
       ev.preventDefault();
+
       if (valueInput > min) {
         setIsValid((currentValue) => (currentValue = true));
         setValueInput((currentValue) => currentValue - dec);
-
-        //   После очистки возврашаем поле в тип number
-        if (typeof valueInput === "string") {
-          setValueInput(Number(inc));
-        }
       } else {
         setIsValid((currentValue) => (currentValue = false));
       }
     }
 
+    //  Очищаем поле ввода
     function inputClear(ev) {
       ev.preventDefault();
       setValueInput((currentValue) => (currentValue = ""));
     }
 
     React.useEffect(() => {
+      // Округляем значение до 2х знаков после запятой
+      if (Number.isFinite(valueInput)) {
+        setValueInput(
+          (currentValue) => (currentValue = Number(valueInput.toFixed(2)))
+        );
+      }
+
       valueChange(valueInput);
     }, [valueInput, valueChange]);
 

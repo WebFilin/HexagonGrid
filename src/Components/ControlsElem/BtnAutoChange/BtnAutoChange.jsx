@@ -4,35 +4,27 @@ import style from "./btnAutoChange.module.scss";
 import DomainsStore from "../../../Store/DomainsStore";
 import { observer } from "mobx-react-lite";
 import { action } from "mobx";
-import InputProbabilityValue from "./InputProbabilityValue/InputProbabilityValue";
 
 const BtnAutoChange = observer(() => {
-  const [isValue, setIsValue] = React.useState(DomainsStore.randomRatio);
+  const [isValue, setIsValue] = React.useState(
+    DomainsStore.randomRatio === 0 ? 0.5 : DomainsStore.randomRatio
+  );
 
   function handlerValue(value) {
-    //   Если поле тип number округляем знаки
-    if (Number.isFinite(value)) {
-      // setIsValue(value.toFixed(2));
-      // Нет очишаем поля
-    } else {
-      // setIsValue(value);
-    }
+    setIsValue(value);
   }
 
   // Генерация случайных доменов
   function handlerBtnAuto() {
     DomainsStore.handlerLoader(true);
     DomainsStore.handlerBtnAuto(isValue);
+
+    setIsValue(DomainsStore.randomRatio);
   }
 
   return (
     <div className={style.wrapper}>
       <div className={style.body}>
-        {/* <InputProbabilityValue
-          value={isValue}
-          valueChange={action(handlerValue)}
-        /> */}
-
         <InputSizeSide
           title="Вероятность"
           value={isValue}
@@ -40,7 +32,7 @@ const BtnAutoChange = observer(() => {
           text="От 0.01 до 0.99"
           inc={0.01}
           dec={0.01}
-          min={0.01}
+          min={0}
           max={0.99}
         />
         <button className={style.btn_calc} onClick={action(handlerBtnAuto)}>
