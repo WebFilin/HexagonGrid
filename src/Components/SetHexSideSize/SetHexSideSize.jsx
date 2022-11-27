@@ -9,25 +9,19 @@ function SetHexSideSize() {
   const [valueM, setValueM] = React.useState(DomainsStore.hexSideSize.M);
   const [valueN, setValueN] = React.useState(DomainsStore.hexSideSize.N);
 
-  const handlerValueL = (value) => {
-    setValueL((currentValue) => (currentValue = value));
-
-    let currentValue = value;
-    DomainsStore.getHexSideSize(currentValue, valueN, valueM);
+  const handlerValueL = (getValue) => {
+    setValueL((currentValue) => (currentValue = getValue));
+    DomainsStore.getHexSideSize(getValue, valueN, valueM);
   };
 
-  const handlerValueN = (value) => {
-    setValueN((currentValue) => (currentValue = value));
-
-    let currentValue = value;
-    DomainsStore.getHexSideSize(valueL, currentValue, valueM);
+  const handlerValueN = (getValue) => {
+    setValueN((currentValue) => (currentValue = getValue));
+    DomainsStore.getHexSideSize(valueL, getValue, valueM);
   };
 
-  const handlerValueM = (value) => {
-    setValueM((currentValue) => (currentValue = value));
-
-    let currentValue = value;
-    DomainsStore.getHexSideSize(valueL, valueN, currentValue);
+  const handlerValueM = (getValue) => {
+    setValueM((currentValue) => (currentValue = getValue));
+    DomainsStore.getHexSideSize(valueL, valueN, getValue);
   };
 
   function handlerBtnCreate(ev) {
