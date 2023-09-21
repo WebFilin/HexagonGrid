@@ -12,7 +12,7 @@ const SvgHex = observer(({ id, x, y, vertical, horizontal }) => {
     const valueHex = hex.getAttribute("value");
 
     if (valueHex === "1") {
-      DomainsStore.getRemoveID(hex);
+      DomainsStore.handlerRemoveID(hex);
     } else {
       DomainsStore.handlerClickHex(hex);
     }
@@ -20,7 +20,7 @@ const SvgHex = observer(({ id, x, y, vertical, horizontal }) => {
 
   return (
     <>
-      <g transform={`translate(${x}, ${y})`}>
+      <g transform={`translate(${x}, ${y})`} onClick={action(handlerClick)}>
         <polygon
           className={style.hex}
           id={id}
@@ -28,7 +28,6 @@ const SvgHex = observer(({ id, x, y, vertical, horizontal }) => {
           vertical={vertical}
           horizontal={horizontal}
           points="100,0 50,-87 -50,-87 -100,-0 -50,87 50,87"
-          onClick={action(handlerClick)}
         ></polygon>
         <text className={style.hex_txt}></text>
       </g>

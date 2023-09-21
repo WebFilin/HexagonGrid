@@ -18,11 +18,13 @@ const ColorazeDomains = observer(() => {
         });
 
         const hex = svgHex.firstChild;
+        const hexTxt = svgHex.lastChild;
+
         const colorDomain = stackDomainsColor[index].color;
         const colorOpacity = 0.8;
 
         hex.style.cssText = `fill:${colorDomain}; fill-opacity: ${colorOpacity};`;
-        //   hexTxt.textContent = 1;
+      //   hexTxt.textContent = 1;
       });
     });
   }, [arrDomains]);

@@ -65,8 +65,6 @@ class DomainsStore {
 
   getDomainsStack(domains) {
     this.stackDomains = domains;
-
-    //  !не забыть удалить
     this.handlerDomainColor();
   }
 
@@ -105,11 +103,6 @@ class DomainsStore {
         this.stackDomainsColor.push({ id: index, color: this.createColor() });
       }
     });
-
-    //  console.log(this.stackDomains);
-    //  console.log(this.stackDomainsColor);
-
-    //  this.arrDomainsColor.push(color);
   }
 
   handlerLoader(value) {
@@ -137,7 +130,7 @@ class DomainsStore {
   }
 
   //   Удаляем хекс при клике по нему
-  getRemoveID(hex) {
+  handlerRemoveID(hex) {
     this.removeHexId = Number(hex.id);
     hex.setAttribute("value", 0);
 
