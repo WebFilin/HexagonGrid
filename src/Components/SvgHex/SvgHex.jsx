@@ -14,7 +14,7 @@ const SvgHex = observer(({ id, x, y, vertical, horizontal }) => {
     if (valueHex === "1") {
       DomainsStore.getRemoveID(hex);
     } else {
-      DomainsStore.getHex(hex);
+      DomainsStore.handlerClickHex(hex);
     }
   }
 

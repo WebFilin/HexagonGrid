@@ -7,7 +7,7 @@ class DomainsStore {
   hexClick = null;
   arrGraphTree = [];
   stackDomains = [];
-  arrDomainsColor = [];
+  stackDomainsColor = [];
   svgArea = [];
   isCreateMainHex = false;
   randomRatio = 0;
@@ -43,7 +43,7 @@ class DomainsStore {
   }
 
   //   Получаем хекс клика
-  getHex(checkHex) {
+  handlerClickHex(checkHex) {
     checkHex.setAttribute("value", 1);
     this.hexClick = checkHex;
   }
@@ -65,10 +65,13 @@ class DomainsStore {
 
   getDomainsStack(domains) {
     this.stackDomains = domains;
+
+    //  !не забыть удалить
+    this.handlerDomainColor();
   }
 
   handlerBtnAuto(ratio) {
-    this.arrDomainsColor = [];
+    this.stackDomainsColor = [];
     this.randomRatio = ratio;
     this.isBtnAuto = !this.isBtnAuto;
   }
@@ -92,8 +95,21 @@ class DomainsStore {
     this.arrGraphTree = arrTree;
   }
 
-  getDomainColor(color) {
-    this.arrDomainsColor.push(color);
+  handlerDomainColor() {
+    this.stackDomains.forEach((elem, index) => {
+      const checkColor = this.stackDomainsColor.findIndex(({ id }) => {
+        return id === index;
+      });
+
+      if (checkColor === -1) {
+        this.stackDomainsColor.push({ id: index, color: this.createColor() });
+      }
+    });
+
+    //  console.log(this.stackDomains);
+    //  console.log(this.stackDomainsColor);
+
+    //  this.arrDomainsColor.push(color);
   }
 
   handlerLoader(value) {
@@ -138,7 +154,7 @@ class DomainsStore {
     }
   }
 
-  setColor() {
+  createColor() {
     return (
       "#" +
       (Math.random().toString(16) + "000000").substring(2, 8).toUpperCase()
